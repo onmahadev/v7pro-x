@@ -3784,24 +3784,37 @@ def new_alhlete2():
 def set_op_now(id='0'):
     global SN
     global CJ
-    ex_upd = 'v7pro-SET-OP now!'
-    ex_upd=att.update({att.op:0})
-    ex_upd.execute()
-    ex_upd=att.update({att.op:id})
-    ex_upd.execute()    
-    # & (att.s2ig.is_null(1)) & (att.s3ig.is_null(1))
-    # & (att.j1ig.is_null(1)) & (att.j2ig.is_null(1))
-    # & (att.j3ig.is_null(1)))
-    # ex_upd.execute()
-
-    print("v7 c0rE job! = in SET_OP_NOW FUNC#")
-
-    x,y  = get_approach()
-    # FlowGetter = get_approach()
-    print(f'***-> APP NOW IS: {x}, type: {type(x)}')
-    print(f'****-> APP NOW COUNT IS: {y}, type: {type(y)}')
+    # if(id==0):
+    #     print(f'set_op_now(id=0) DO NOTHING !!!')
+    #     ex_upd = '0'
+    
 
 
+    # if(id!=0):
+    #     print(f'set_op_now(id ==): { id } | DO this >>>')        
+    #     ex_upd = 'v7pro-SET-OP now!'
+    #     ex_upd=att.update({att.op:0})
+    #     ex_upd.execute()
+    #     ex_upd=att.update({att.op:id})
+    #     ex_upd.execute()    
+
+    #     print("v7 c0rE job! = in SET_OP_NOW FUNC#")
+    #     x,y  = get_approach()
+    #     # FlowGetter = get_approach()
+    #     print(f'***-> APP NOW IS: {x}, type: {type(x)}')
+    #     print(f'****-> APP NOW COUNT IS: {y}, type: {type(y)}')
+        
+    s1 = get_id_min_w_s1()
+    s2 = get_id_min_w_s2()
+    s3 = get_id_min_w_s3()
+    ic(s1)
+    ic(s2)
+    ic(s3) #12,24,0
+    ic('################# sop_id = sel_op_id(s1, s2, s3) ######################')
+    sop_id = sel_op_id(s1, s2, s3)
+    ic(sop_id)
+    ic('################# sop_id = sel_op_id(s1, s2, s3) ######################')
+    ex_upd = sop_id
 
 
 
@@ -4865,6 +4878,7 @@ def sel_op_id(s1,s2,s3):
     #print(f"a1={s1w} s2={s2w} s3={s3w}, min={minest} app={app}")
     #get_w_s2(s2) = 0
             print(f"ids-ZZZXXXX: {s1}, {s2}, {s3}")
+            # return s2 ?????
             if(SN is False):
                 print('SN is None, now CLEAN&JERK !!!######')
 
