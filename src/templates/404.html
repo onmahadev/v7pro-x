@@ -1,0 +1,63 @@
+<html>
+<head>
+<title>Page Not Found</title>
+<link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel=" stylesheet">
+<script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
+
+<script language="JavaScript" type="text/javascript">
+
+var seconds =7;
+// countdown timer. took 6 because page takes approx 1 sec to load
+  
+var url="{{url_for('index')}}";
+// variable for index.html url
+  
+function redirect(){
+ if (seconds <=0){
+  
+ // redirect to new url after counter  down.
+  window.location = url;
+ } else {
+  seconds--;
+  document.getElementById("pageInfo").innerHTML="Направим Вас на Главную страницу через "
++seconds+" секунд"
+  setTimeout("redirect()", 1000)
+ }
+}
+</script>
+
+<style>
+    .blink {
+        animation: blinker 2.1s linear infinite;
+        font-family: sans-serif;
+    }
+    @keyframes blinker {
+        50% {
+            opacity: 0.4;
+        }
+    }
+</style>
+
+</head>
+
+{% block body %}
+   
+ <body onload="redirect()">
+
+  
+<section class="bg-black dark:bg-gray-900 h-full">
+    <div class="py-8 px-4 mx-auto max-w-screen-xl h-fulllg:py-16 lg:px-6">
+        <div class="mx-auto max-w-screen-sm text-center">
+            <p id="pageInfo" class="blink text-center text-lg text-white"></p>
+            <h1 class="mb-4 text-7xl tracking-tight font-extrabold lg:text-9xl text-white dark:text-primary-500">404</h1>
+            <p class="mb-4 text-3xl tracking-tight font-bold text-white md:text-4xl dark:text-white">Неверный адрес</p>
+            <p class="mb-4 text-lg font-light text-gray-500 dark:text-gray-400">Этого не существует в действительноси. </p>
+            <a href="/">
+            <button class="bg-white text-black rounded-md px-8 py-2 text-base font-medium hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-green-100" 
+            id="back2home">Вернуться домой</button></a>
+        </div>   
+    </div>
+</section>
+  
+{% endblock %}
+</html>

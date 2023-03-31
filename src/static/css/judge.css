@@ -1,0 +1,26 @@
+.tabs_page {
+    color: white;
+}
+
+.jBtnz
+{
+  text-shadow: 5px 5px 5px rgb(75, 74, 78);
+  font-weight: bold;
+}
+
+  /* Toggle A */
+input:checked ~ .dot {
+    transform: translateX(100%);
+    background-color: #48bb78;
+  }
+  
+  /* Toggle B */
+  input:checked ~ .dot {
+    transform: translateX(100%);
+    background-color: #48bb78;
+  }
+  
+  .pica {
+    display: flex;
+    flex-direction: row;
+  }

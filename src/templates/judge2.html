@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="ru" class="antialiased">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v7: Судейство -  II Судья </title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel=" stylesheet">
+    <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
+    <script src="https://unpkg.com/flowbite@1.5.1/dist/datepicker.js"></script>
+    <script src="{{url_for('static', filename = 'js/socket.io.min.js')}}"></script>
+    
+    <script src="{{url_for('static', filename = 'js/ovmenu.js')}}"></script>
+    <!-- <script defer src="{{url_for('static', filename = 'js/alpine3.10.2.min.js')}}"></script> -->
+
+
+    <script src="{{url_for('static', filename = 'js/jquery-3.6.0.min.js')}}"></script>
+
+    <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/ovmenu.css') }}">
+    
+    <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/judge.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='/favicon_io/j2/favicon.ico') }}">
+    <!--Replace with your tailwind.css once created-->
+
+
+<style>
+.spinner2 {
+   width: 56px;
+   height: 56px;
+   border-radius: 50%;
+   background: radial-gradient(farthest-side,#474bff 94%,#0000) top/9px 9px no-repeat,
+          conic-gradient(#0000 30%,#474bff);
+   -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 9px),#000 0);
+   animation: spinner-c7wet2 1s infinite linear;
+}
+
+@keyframes spinner-c7wet2 {
+   100% {
+      transform: rotate(1turn);
+   }
+}
+
+.custom-loader {
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  padding:1px;
+  background:conic-gradient(#0000 10%,#FFFFFF) content-box;
+  -webkit-mask:
+    repeating-conic-gradient(#0000 0deg,#000 1deg 20deg,#0000 21deg 36deg),
+    radial-gradient(farthest-side,#0000 calc(100% - 9px),#000 calc(100% - 8px));
+  -webkit-mask-composite: destination-in;
+  mask-composite: intersect;
+  animation:s4 1s infinite steps(10);
+}
+@keyframes s4 {to{transform: rotate(1turn)}}
+
+
+@keyframes spinner {
+  to {transform: rotate(360deg);}
+}
+ 
+.spinner:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top-color: #07d;
+  border-bottom-color: #07d;
+  animation: spinner .8s ease infinite;
+}
+
+
+.loader {
+  font-size: 10px;
+  margin: 50px auto;
+  text-indent: -9999em;
+  width: 11em;
+  height: 11em;
+  border-radius: 50%;
+  background: #ffffff;
+  background: -moz-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+  background: -webkit-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+  background: -o-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+  background: -ms-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+  background: linear-gradient(to right, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+  position: relative;
+  -webkit-animation: load3 1.4s infinite linear;
+  animation: load3 1.4s infinite linear;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+}
+.loader:before {
+  width: 50%;
+  height: 50%;
+  background: #ffffff;
+  border-radius: 100% 0 0 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '';
+}
+.loader:after {
+  background: #fcbf24;
+  width: 75%;
+  height: 75%;
+  border-radius: 50%;
+  content: '';
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+@-webkit-keyframes load3 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes load3 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+
+body {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+  -webkit-touch-callout: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+}
+
+
+.tenb {
+  filter: drop-shadow(2px 4px 5px rgb(66, 66, 66));
+}
+
+</style>
+
+</head>
+
+
+<body class="bg-opacity-25 leading-normal">
+    <!-- Sudarshana Chkra-->
+    <span class="f7_main_sc" onclick="pCancel(); j2Vote(29)">
+        <div id="pica" class="pica mt-1 ml-1">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9"></path></svg>
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9"></path></svg>
+        </div>
+    </span>
+
+<div class="float-left">
+    <!-- Slider MENU-->
+    {% include 'nav-clean.html' %}
+    <!-- Slider MENU-->
+</div>
+
+
+
+
+
+
+<div id="invite_id" class="py-2 px-4 hidden">Судья, Вас ПРИГЛАШАЮТ на дискуссию...<br> Подойдите к <b>Главному Маршалу</b> СЕЙЧАС! <br><br><br><i style="color: black;">[ * ПЕРЕРЫВ 5 минут * ]</i></div>
+
+
+<div class="min-h-screen bg-yellow-400 py-5">
+    <div id="spinner_div" class="mt-40 pt-12 loader hidden">Loading...</div>
+
+    <div id="btn_panel" class="border-2 px-0.5 mx-9 bg-gray-400">
+        <div class="w-80 mx-auto mt-1 p-7">
+            <button class="bg-white border-dotted flex justify-center border-2 border-red-500 w-full h-48 text-red-500 rounded-md px-2 py-2 text-base font-medium hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-red-300" 
+                    id="jx1" onclick="pYes(); j2Vote(21)">
+                    <svg class="w-40 h-40 tenb" fill="none" stroke="#000000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            </button>
+        </div>
+
+        <div class="w-80 mx-auto mt-1 p-7">
+            <button class="bg-red-500 border-dotted flex justify-center border-2 border-white w-full h-48 text-white rounded-md px-2 py-2 text-base font-medium hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300" 
+                    id="jx0" onclick="pNo(); j2Vote(20)">
+                    <svg class="w-40 h-40 tenb" fill="none" stroke="#000000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            </button>
+        </div>
+    </div>
+
+
+<!--Overlay Effect-->
+<div
+	class="fixed hidden inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"
+	id="my-modal">
+
+<!--modal content-->
+<div
+	class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white"
+>
+	<div class="mt-3 text-center">
+		<div
+			class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100"
+		>
+			<svg
+				class="h-6 w-6 text-green-600"
+				fill="none"
+				stroke="currentColor"
+				viewBox="0 0 24 24"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M5 13l4 4L19 7"
+				></path>
+			</svg>
+		</div>
+		<h3 class="text-lg leading-6 font-medium text-gray-900">Успешно!</h3>
+		<div class="mt-2 px-7 py-3">
+			<p class="text-sm text-gray-500">
+				Атлет добавлен!
+			</p>
+		</div>
+		<div class="items-center px-4 py-3">
+			<button
+				id="ok-btn"
+				class="px-4 py-2 bg-green-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300"
+			>
+				OK
+			</button>
+		</div>
+	</div>
+</div>
+
+</div>
+
+
+
+
+
+
+    </div>
+
+    
+
+
+<script>
+
+function pYes() {
+    console.warn('vote YES!!!');
+    var yaudio = new Audio('../static/snd/j_yes_btn.mp3');
+    yaudio.play();
+}
+
+function pNo() {
+    console.warn('vote NO!!!');
+    var naudio = new Audio('../static/snd/j_not_btn.mp3');
+    naudio.play();
+}
+
+function pCancel() {
+    console.warn('vote CANCEL!!!');
+    var caudio = new Audio('../static/snd/j_cancel_btn.mp3');
+    caudio.play();
+}
+
+function j2Vote(votez) {
+    
+
+    $(document).ready(function() {
+        // Connect to the Socket.IO server.
+        // The connection URL has the following format, relative to the current page:
+        //     http[s]://<domain>:<port>[/<namespace>]
+        var app_ip = "{{appHost}}";
+        var app_port = "{{appPort}}";
+        var clean_app_ip = app_ip.substring(5);
+        var clean_app_ip = clean_app_ip.slice(0, -5);
+        var socket = io('ws://'+clean_app_ip+':'+app_port+'/',{
+        transports: ["websocket", "polling"] // use WebSocket first, if available
+        });
+        socket.on('my_response', function(msg, cb) {
+            // $('#log').append('<br>' + $('<div/>').text('Received #' + msg.count + ': ' + msg.data).html());
+            if (msg.data==21) {
+                //
+                vibrateYes();
+                // document.getElementById("broadcast_data").value = 1;
+                //document.getElementById("broadcast").submit();
+                // socket.emit('my_broadcast_event', {data: "1"});
+                socket.emit('my_broadcast_event', {data: 21});
+                // $('#j1-2').css("background-color","white");
+                // $('#j1-3').css("background-color","white");                
+                //$('#log').append('<br>' + $('<div/>').text('is ONE!#' + msg.count + ': ' + msg.data).html());
+            }
+            if (msg.data==20) {
+                vibrateNot();
+                //
+                // document.getElementById("broadcast_data").value = "0";
+                // document.getElementById("broadcast").submit();
+                socket.emit('my_broadcast_event', {data: 20});                
+                // $('#j1-2').css("background-color","red");
+                // $('#j1-3').css("background-color","red");
+                $('#log').append('<br>' + $('<div/>').text('is ONE!#' + msg.count + ': ' + msg.data).html());
+            }
+            if (msg.data==29) {
+                vibrateReset();
+                socket.emit('my_broadcast_event', {data: 29});
+                // $('#j1-2').css("background-color","blue");
+                // $('#j1-3').css("background-color","blue");
+                // $('#j1-2').css("background-color","gray");
+                console.log('99');
+                $('#log').append('<br>' + $('<div/>').text('is ONE!#' + msg.count + ': ' + msg.data).html());
+            }
+
+            // socket.emit('my_broadcast_event', {data: 1});
+
+
+            // calling judge!!!
+
+            if (msg.data==17) {
+                // pCancel();
+                socket.emit('my_broadcast_event', {data: 17});
+                // $('#j1-2').css("background-color","blue");
+                // $('#j1-3').css("background-color","blue");
+                console.log('inviting YOU!');
+                
+                $('#log').append('<br>' + $('<div/>').text('is ONE!#' + msg.count + ': ' + msg.data).html());
+            }
+            if (msg.data==27) {
+                // pCancel();
+                socket.emit('my_broadcast_event', {data: 27});
+                // $('#j1-2').css("background-color","blue");
+                // $('#j1-3').css("background-color","blue");
+                document.getElementById("invite_id").classList.remove('hidden');
+                document.getElementById("invite_id").classList.add('visible');  
+                console.log('inviting YOU! 27');
+                
+                $('#log').append('<br>' + $('<div/>').text('is 27#' + msg.count + ': ' + msg.data).html());
+            }                                    
+            if (msg.data==37) {
+                // pCancel();
+                socket.emit('my_broadcast_event', {data: 37});
+                // $('#j1-2').css("background-color","blue");
+                // $('#j1-3').css("background-color","blue");
+                console.log('inviting YOU! 37');
+                
+                $('#log').append('<br>' + $('<div/>').text('is 37#' + msg.count + ': ' + msg.data).html());
+            }                    
+
+        });
+
+
+
+
+
+
+
+        
+    });
+
+
+    var queryParams = new URLSearchParams(window.location.search);
+    queryParams.set("vote", votez);
+    history.replaceState(null, null, "?"+queryParams.toString());
+    s1jbtns1 = document.getElementById("jx1");
+    s1jbtns0 = document.getElementById("jx0");
+    spinner = document.getElementById("spinner");
+
+    //ws:::cdd
+    
+    
+    pan_btn  = document.getElementById("btn_panel");
+    console.log('j2 VOTE: ', votez);
+    //
+    // ws://
+    //
+        var app_ip = "{{appHost}}";
+        var app_port = "{{appPort}}";
+        var clean_app_ip = app_ip.substring(5);
+        var clean_app_ip = clean_app_ip.slice(0, -5);
+        var socket = io('ws://'+clean_app_ip+':'+app_port+'/',{
+        transports: ["websocket", "polling"] // use WebSocket first, if available
+        });    
+    socket.emit('my_broadcast_event', {data: votez});
+    
+    
+    // document.getElementById("broadcast").submit();
+
+    // document.getElementById("broadcast_data").value = '1';
+    // document.getElementById("sub_btn").click();
+
+    //socket.emit('my_broadcast_event', {data: 33 });
+    // document.getElementById("broadcast_data").value = '1';
+    // document.getElementById("broadcast").submit();
+    
+    
+    s1jbtns1.style.display = 'none';
+    pan_btn.style.display = 'none';
+    s1jbtns0.style.display = 'none';
+    
+    document.getElementById("spinner_div").classList.remove('hidden');
+    document.getElementById("spinner_div").classList.add('visible');
+
+    setTimeout(function(){
+            window.location.reload(true)
+            //window.location = window.location.host;
+         }, 1234);    
+    
+
+
+
+         if (msg.data==27) {
+                // pCancel();
+                socket.emit('my_broadcast_event', {data: 27});
+                // $('#j1-2').css("background-color","blue");
+                // $('#j1-3').css("background-color","blue");
+                document.getElementById("invite_id").classList.remove('hidden');
+                document.getElementById("invite_id").classList.add('visible');  
+                console.log('inviting YOU! 27');
+                
+                $('#log').append('<br>' + $('<div/>').text('is 27#' + msg.count + ': ' + msg.data).html());
+            }                                    
+
+         //document.getElementById("broadcast").submit();   
+}
+
+</script>
+
+
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function() {
+        // Connect to the Socket.IO server.
+        // The connection URL has the following format, relative to the current page:
+        //     http[s]://<domain>:<port>[/<namespace>]
+        var app_ip = "{{appHost}}";
+        var app_port = "{{appPort}}";
+        var clean_app_ip = app_ip.substring(5);
+        var clean_app_ip = clean_app_ip.slice(0, -5);
+        var socket = io('ws://'+clean_app_ip+':'+app_port+'/',{
+        transports: ["websocket", "polling"] // use WebSocket first, if available
+        });
+
+        
+
+        // Event handler for new connections.
+        // The callback function is invoked when a connection with the
+        // server is established.
+        socket.on('connect', function() {
+            socket.emit('my_event', {data: 'I\'m connected!'});
+        });
+
+        // Event handler for server sent data.
+        // The callback function is invoked whenever the server emits data
+        // to the client. The data is then displayed in the "Received"
+        // section of the page.
+        socket.on('my_response', 
+        
+        
+        
+        
+        function(msg, cb) {
+          
+          if (msg.data==27) {
+                // pCancel();
+                socket.emit('my_broadcast_event', {data: 27});
+                // $('#j1-2').css("background-color","blue");
+                // $('#j1-3').css("background-color","blue");
+                console.log('inviting YOU! 27');
+                
+                $('#log').append('<br>' + $('<div/>').text('is 27#' + msg.count + ': ' + msg.data).html());
+            }   
+
+            // $('#log').append('<br>' + $('<div/>').text('Received #' + msg.count + ': ' + msg.data).html());
+            // if (msg.data==1) {
+            //     $('#log').append('<br>' + $('<div/>').text('is ONE!#' + msg.count + ': ' + msg.data).html());
+            // }
+        });
+
+        // Interval function that tests message latency by sending a "ping"
+        // message. The server then responds with a "pong" message and the
+        // round trip time is measured.
+        var ping_pong_times = [];
+        var start_time;
+        window.setInterval(function() {
+            start_time = (new Date).getTime();
+            $('#transport').text(socket.io.engine.transport.name);
+            socket.emit('my_ping');
+        }, 1000);
+
+        // Handler for the "pong" message. When the pong is received, the
+        // time from the ping is stored, and the average of the last 30
+        // samples is average and displayed.
+        socket.on('my_pong', function() {
+            // var latency = (new Date).getTime() - start_time;
+            // ping_pong_times.push(latency);
+            // ping_pong_times = ping_pong_times.slice(-30); // keep last 30 samples
+            // var sum = 0;
+            // for (var i = 0; i < ping_pong_times.length; i++)
+            //     sum += ping_pong_times[i];
+            $('#ping-pong').text('j2-txt');
+        });
+
+
+
+
+        
+        // Handlers for the different forms in the page.
+        // These accept data from the user and send it to the server in a
+        // variety of ways
+        $('form#emit').submit(function(event) {
+            socket.emit('my_event', {data: $('#emit_data').val()});
+            return false;
+        });
+        $('form#broadcast').submit(function(event) {
+            socket.emit('my_broadcast_event', {data: $('#broadcast_data').val()});
+            return false;
+        });
+        $('form#join').submit(function(event) {
+            socket.emit('join', {room: $('#join_room').val()});
+            return false;
+        });
+        $('form#leave').submit(function(event) {
+            socket.emit('leave', {room: $('#leave_room').val()});
+            return false;
+        });
+        $('form#send_room').submit(function(event) {
+            socket.emit('my_room_event', {room: $('#room_name').val(), data: $('#room_data').val()});
+            return false;
+        });
+        $('form#close').submit(function(event) {
+            socket.emit('close_room', {room: $('#close_room').val()});
+            return false;
+        });
+        $('form#disconnect').submit(function(event) {
+            socket.emit('disconnect_request');
+            return false;
+        });
+    });
+</script>
+
+
+<div class="hidden">
+    <p>
+      Current transport is: <b><span id="transport"></span></b><br>
+      Average ping/pong latency: <b><span id="ping-pong"></span>ms</b>
+    </p>
+    <h2>Send:</h2>
+    <form id="broadcast" method="POST">
+        <input type="text" name="broadcast_data" id="broadcast_data" placeholder="Message">
+        <input id="sub_btn" type="submit" value="Broadcast">
+    </form>
+
+    <!-- <form id="disconnect" method="POST" action="#">
+        <input type="submit" value="Disconnect">
+    </form> -->
+
+    <h2>Receive:</h2>
+    <div id="log"></div>    
+</div>
+
+
+<script>
+
+function vibrateYes() {
+    try {
+    navigator.vibrate([700, 250, 700]);
+    }
+    catch(err) {
+    console.log('not Vibratoz');
+    }
+  }
+  function vibrateNot() {
+    try {
+    navigator.vibrate([500]);
+    }
+    catch(err) {
+    console.log('not Vibratoz');
+    }
+  }
+  function vibrateReset() {
+    try {
+    navigator.vibrate([300, 150, 300, 150, 300, 150]);
+    }
+    catch(err) {
+    console.log('not Vibratoz');
+    }
+  }
+  </script>
+</body>
+
+</html>

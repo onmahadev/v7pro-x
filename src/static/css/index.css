@@ -1,0 +1,21 @@
+:root {
+  --kblue:  rgba(22,107,191,0.9);
+  --green: #4caf50;
+  --double-bg: rgba(49, 46, 129, 1);
+  --small-padding: 5px 10px; 
+  --large-padding: 20px 40px;
+  --small-font: 12px;
+  --large-font: 25px;
+}
+
+.main_index {
+  background-color: var(--kblue);
+}
+.main_card:hover {
+  font-weight: bolder;
+  color: #fff;
+  cursor: pointer;
+}
+.main_card_wrapper {
+  padding-top: 2.25rem;
+}

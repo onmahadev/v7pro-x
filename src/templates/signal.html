@@ -1,0 +1,1630 @@
+<!DOCTYPE html>
+<html lang="ru" class="antialiased">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>f7-Vishnu :: Сигнал</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <!-- <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel=" stylesheet"> -->
+    <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/production_v7.css') }}">
+    
+
+    <!-- <script src="{{url_for('static', filename = 'js/faker.min.js')}}"></script> -->
+
+    <script src="{{url_for('static', filename = 'js/flowbite.js')}}"></script>
+    
+    <script src="{{url_for('static', filename = 'js/datepicker.js')}}"></script>
+
+    <script src="{{url_for('static', filename = 'js/socket.io.min.js')}}"></script>
+    
+    <script src="{{url_for('static', filename = 'js/ovmenu.js')}}"></script>
+    <!-- <script defer src="{{url_for('static', filename = 'js/alpine3.10.2.min.js')}}"></script> -->
+
+    <script src="{{url_for('static', filename = 'js/jquery-3.6.0.min.js')}}"></script>
+
+        
+
+    <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/ovmenu.css') }}">
+    <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/flow.css') }}">
+    <!-- <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/jquery-editable.css') }}"> -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <!--Replace with your tailwind.css once created-->
+
+
+
+    <script>
+      var seconds = 300;
+      // countdown timer. took 48 because page takes approx 48 sec to load
+      var url="{{url_for('flow')}}";        
+      function redirect(){
+       if (seconds <=0){
+        
+       // redirect to new url after counter  down.
+        window.location = url;
+       } else {
+        seconds--;
+        document.getElementById("pageInfo").innerHTML=" Оспаривание результата "
+      +seconds+" секунд"
+        setTimeout("redirect()", 1000)
+       }
+      }
+      </script>
+      
+
+<style>
+          .blink {
+              animation: blinker 2.1s linear infinite;
+              font-family: sans-serif;
+          }
+          @keyframes blinker {
+              50% {
+                  opacity: 0.4;
+              }
+          }
+.content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 160px;
+  overflow: hidden;
+  font-family: "Lato", sans-serif;
+  font-size: 35px;
+  line-height: 40px;
+  color: #ecf0f1;
+}
+.content__container {
+  font-weight: 600;
+  overflow: hidden;
+  height: 40px;
+  padding: 0 40px;
+}
+.content__container:before {
+  content: "[";
+  left: 0;
+}
+.content__container:after {
+  content: "]";
+  position: absolute;
+  right: 0;
+}
+.content__container:after, .content__container:before {
+  position: absolute;
+  top: 0;
+  color: #a01616;
+  font-size: 42px;
+  line-height: 40px;
+  -webkit-animation-name: opacity;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  animation-name: opacity;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+.content__container__text {
+  display: inline;
+  float: left;
+  margin: 0;
+}
+.content__container__list {
+  margin-top: 0;
+  padding-left: 110px;
+  text-align: left;
+  list-style: none;
+  -webkit-animation-name: change;
+  -webkit-animation-duration: 10s;
+  -webkit-animation-iteration-count: infinite;
+  animation-name: change;
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+}
+.content__container__list__item {
+  line-height: 40px;
+  margin: 0;
+}
+
+@-webkit-keyframes opacity {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes change {
+  0%, 12.66%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  16.66%, 29.32% {
+    transform: translate3d(0, -25%, 0);
+  }
+  33.32%, 45.98% {
+    transform: translate3d(0, -50%, 0);
+  }
+  49.98%, 62.64% {
+    transform: translate3d(0, -75%, 0);
+  }
+  66.64%, 79.3% {
+    transform: translate3d(0, -50%, 0);
+  }
+  83.3%, 95.96% {
+    transform: translate3d(0, -25%, 0);
+  }
+}
+@keyframes opacity {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes change {
+  0%, 12.66%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  16.66%, 29.32% {
+    transform: translate3d(0, -25%, 0);
+  }
+  33.32%, 45.98% {
+    transform: translate3d(0, -50%, 0);
+  }
+  49.98%, 62.64% {
+    transform: translate3d(0, -75%, 0);
+  }
+  66.64%, 79.3% {
+    transform: translate3d(0, -50%, 0);
+  }
+  83.3%, 95.96% {
+    transform: translate3d(0, -25%, 0);
+  }
+}  
+
+
+.ats[att_sex1="1"] {
+  margin: 40px;
+  background: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+
+
+
+
+select option[value="29"] {
+  background: rgba(154, 25, 25, 0.3);
+}
+
+select option[value="31"] {
+  background: rgba(16, 174, 71, 0.3);
+}
+
+select option[value="33"] {
+  background: rgba(200, 200, 200, 0.3);
+}
+
+select option[value="35"] {
+  background: rgba(163, 29, 145, 0.3);
+}
+
+
+</style>
+
+</head>
+
+<body class="bg-opacity-25 leading-normal" onload="updAllTable(); redirect();">
+  
+
+
+
+
+    <!-- Sudarshana Chkra-->
+    <span class="f7_main_sc">
+      <a href="/quit">
+        <div id="pica" class="pica">
+            <img src="static/img/v7-tilaka-white.png" alt="f7v-logo"
+                class="shadow rounded-full mt-4 ml-4 h-9 align-middle border-none" />
+        </div>
+      </a>
+    </span>
+
+
+
+
+
+
+
+
+    <!-- Slider MENU-->
+    {% include 'nav.html' %}
+    <!-- Slider MENU-->
+
+
+
+
+
+
+
+
+
+
+
+
+<div>
+    <!-- Rest of the HTML -->
+
+  </div>
+
+
+
+
+
+
+
+
+<div class="min-h-screen bg-gray-900 py-5 topper">
+
+
+
+
+<!-- toast BOX OK/GREEN / Alert box -->
+<!-- toast BOX OK/GREEN / Alert box -->
+<!-- toast BOX OK/GREEN / Alert box -->
+<div id="app-succsess01" class="flex p-4 mb-4 bg-green-100 border-t-4 border-green-500 dark:bg-green-200 animated snake" role="alert">
+  <svg class="flex-shrink-0 w-5 h-5 text-green-700" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+  <div class="ml-3 text-sm font-medium text-green-700 animated snake">
+    ожидание судейства  # <b> <span id="idnumz" class="animated snake"></span> </b> организованно успешно!
+    <script>
+      let xnum = (Math.random() * 9999999);
+      document.getElementById("idnumz").innerHTML = Math.ceil(xnum);
+    </script>
+  </div>
+  <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-green-100 dark:bg-green-200 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 dark:hover:bg-green-300 inline-flex h-8 w-8" data-dismiss-target="#alert-border-3" aria-label="Close">
+    <span class="sr-only">close</span>
+    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+  </button>
+</div>
+<!-- toast BOX OK/GREEN / Alert box -->
+<!-- toast BOX OK/GREEN / Alert box -->
+<!-- toast BOX OK/GREEN / Alert box -->
+
+
+  
+    <div class='overflow-x-auto w-full'>
+
+        </div>
+
+
+
+<div>.</div>
+
+
+
+
+
+
+
+
+
+  <!-- Trigger/Open The Modal -->
+
+
+
+
+
+
+    
+
+
+
+
+</div>
+
+<div>.</div>
+<div id="idBtnFS" class="float-right p-16 mx-5 inline-block border-white border-0">
+  <button   onclick="openFullscreen()" type="button" class=" hover:border-white border-transparent border-2 focus:border-white text-gray-500 bg-transparent font-medium rounded-lg text-sm px-2 py-2 mb-2 dark:bg-transparent dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+            
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M13 3H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-3"></path>
+        <path d="M8 21h8"></path>
+        <path d="M12 17v4"></path>
+        <path d="m17 8 5-5"></path>
+        <path d="M17 3h5v5"></path>
+      </svg>
+
+</button>
+</div>
+<div>.</div>
+
+<div id="wr_info_div" class="hidden overflow-x-auto shadow-md sm:rounded-lg pl-12">
+  <table class="w-9/12 text-sm text-left text-gray-500 dark:text-gray-400">
+    <thead class="text-xs text-gray-700 uppercase bg-opacity-15 bg-gray-400 dark:bg-gray-700 dark:text-gray-400">
+      <tr>
+        <th scope="col" class="py-3 px-6">
+          ВЕС КАТ
+        </th>
+        <th scope="col" class="py-3 px-6">
+          мастер
+        </th>
+        <th scope="col" class="py-3 px-6">
+          кмс
+        </th>
+        <th scope="col" class="py-3 px-6">
+          1-ый разряд
+        </th>
+        <th scope="col" class="py-3 px-6">
+          2-ой разряд
+        </th>
+        <th scope="col" class="py-3 px-6">
+          3-ий разряд
+        </th>
+        <th scope="col" class="py-3 px-6 inline-flex">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9">
+            </path>
+          </svg>&nbsp;&nbsp;&nbsp;кГ
+        </th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="bg-white bg-opacity-25 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+        {% for data in attopdata %}
+        <th scope="row" class="py-4 px-6 text-2xl font-bold text-gray-900 whitespace-nowrap dark:text-white">
+
+          {% if data.op == 1 %}
+          {{data.cat.lwcat}}
+        </th>
+
+        <td class="py-4 px-6 text-2xl font-bold text-gray-900 dark:text-white">
+          {{data.ranks.r_ms}}
+        </td>
+        <td class="py-4 px-6 text-2xl font-bold text-gray-900 dark:text-white">
+          {{data.ranks.r_kms}}
+        </td>
+        <td class="py-4 px-6 text-2xl font-bold text-gray-900 dark:text-white">
+          {{data.ranks.r_r1}}
+        </td>
+        <td class="py-4 px-6 text-2xl font-bold text-gray-900 dark:text-white">
+          {{data.ranks.r_r2}}
+        <td class="py-4 px-6 text-2xl font-bold text-gray-900 dark:text-white">
+          {{data.ranks.r_r3}}
+        </td>
+
+        <td class="py-4 px-6 font-bold text-gray-900 dark:text-white">
+          <p class="text-2xl text-center font-bold text-gray-900 text-blue-800">
+            {{data.ranks.wr if data.ranks.wr is not none}}</p>
+          <p class="text-2xl text-center font-bold text-red-700 ">
+            {{data.ranks.wr_who if data.ranks.wr_who is not none}}</p>
+          <p class="text-xl text-left font-semibold text-gray-600">
+            {{data.ranks.wr_when if data.ranks.wr_when is not none}}</p>
+          <p class="text-xl text-right font-semibold text-gray-600">
+            {{data.ranks.wr_where if data.ranks.wr_where is not none}}</p>
+        </td>
+        {% endif%}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+
+
+
+
+  <script>
+function toggle_wr_info() {
+    var x = document.getElementById("wr_info_div");    
+    var tbx = document.getElementById("toggleBTN_WR");    
+    if (x.className.includes("hidden")) {
+        x.classList.remove("hidden");
+        tbx.classList.remove("text-gray-400");
+        tbx.classList.add("text-gray-100");
+    } else {
+        x.classList.add("hidden");
+        tbx.classList.remove("text-gray-100");
+        tbx.classList.add("text-gray-400");
+    }
+}
+
+function toggle_ws_info() {
+    var x = document.getElementById("ws_info_div");    
+    var tbx = document.getElementById("toggleBTN");    
+    if (x.className.includes("hidden")) {
+        x.classList.remove("hidden");
+        tbx.classList.remove("text-gray-400");
+        tbx.classList.add("text-gray-100");
+    } else {
+        x.classList.add("hidden");
+        tbx.classList.remove("text-gray-100");
+        tbx.classList.add("text-gray-400");
+    }
+}
+
+
+    function closeAlert(event){
+      let element = event.target;
+      while(element.nodeName !== "BUTTON"){
+        element = element.parentNode;
+      }
+      element.parentNode.parentNode.removeChild(element.parentNode);
+    }
+
+
+
+    var alert_del = document.querySelectorAll('.alert-del');
+  alert_del.forEach((x) =>
+    x.addEventListener('click', function () {
+      x.parentElement.classList.add('hidden');
+    })
+  );    
+  </script>
+
+  
+
+
+
+
+
+
+{% include 'modals.html' %}
+
+
+
+
+
+<!-- toast BOX / Alert box -->
+<!-- <div id="alert-border-3" class="flex p-4 mb-4 bg-green-100 border-t-4 border-green-500 dark:bg-green-200" role="alert">
+  <svg class="flex-shrink-0 w-5 h-5 text-green-700" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+  <div class="ml-3 text-sm font-medium text-green-700">
+    A simple success alert with an <a href="#" class="font-semibold underline hover:text-green-800">example link</a>. Give it a click if you like.
+  </div>
+  <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-green-100 dark:bg-green-200 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 dark:hover:bg-green-300 inline-flex h-8 w-8" data-dismiss-target="#alert-border-3" aria-label="Close">
+    <span class="sr-only">Dismiss</span>
+    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+  </button>
+</div> -->
+
+<div class="hidden">
+<div id="alert-border-1" class="flex p-4 mb-4 bg-blue-100 border-t-4 border-blue-500 dark:bg-blue-200" role="alert">
+    <svg class="flex-shrink-0 w-5 h-5 text-blue-700" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+    <div class="ml-3 text-sm font-medium text-blue-700">
+      A simple info alert with an <a href="#" class="font-semibold underline hover:text-blue-800">example link</a>. Give it a click if you like.
+    </div>
+    <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-blue-100 dark:bg-blue-200 text-blue-500 rounded-lg focus:ring-2 focus:ring-blue-400 p-1.5 hover:bg-blue-200 dark:hover:bg-blue-300 inline-flex h-8 w-8" data-dismiss-target="#alert-border-1" aria-label="Close">
+      <span class="sr-only">Dismiss</span>
+      <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+    </button>
+</div>
+<div id="alert-border-2" class="flex p-4 mb-4 bg-red-100 border-t-4 border-red-500 dark:bg-red-200" role="alert">
+    <svg class="flex-shrink-0 w-5 h-5 text-red-700" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+    <div class="ml-3 text-sm font-medium text-red-700">
+      A simple danger alert with an <a href="#" class="font-semibold underline hover:text-red-800">example link</a>. Give it a click if you like.
+    </div>
+    <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-red-100 dark:bg-red-200 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 dark:hover:bg-red-300 inline-flex h-8 w-8" data-dismiss-target="#alert-border-2" aria-label="Close">
+      <span class="sr-only">Dismiss</span>
+      <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+    </button>
+</div>
+<div id="alert-border-3" class="flex p-4 mb-4 bg-green-100 border-t-4 border-green-500 dark:bg-green-200" role="alert">
+    <svg class="flex-shrink-0 w-5 h-5 text-green-700" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+    <div class="ml-3 text-sm font-medium text-green-700">
+      A simple success alert with an <a href="#" class="font-semibold underline hover:text-green-800">example link</a>. Give it a click if you like.
+    </div>
+    <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-green-100 dark:bg-green-200 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 dark:hover:bg-green-300 inline-flex h-8 w-8" data-dismiss-target="#alert-border-3" aria-label="Close">
+      <span class="sr-only">Dismiss</span>
+      <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+    </button>
+</div>
+<div id="alert-border-4" class="flex p-4 mb-4 bg-yellow-100 border-t-4 border-yellow-500 dark:bg-yellow-200" role="alert">
+    <svg class="flex-shrink-0 w-5 h-5 text-yellow-700" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+    <div class="ml-3 text-sm font-medium text-yellow-700">
+      A simple danger alert with an <a href="#" class="font-semibold underline hover:text-yellow-800">example link</a>. Give it a click if you like.
+    </div>
+    <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-yellow-100 dark:bg-yellow-200 text-yellow-500 rounded-lg focus:ring-2 focus:ring-yellow-400 p-1.5 hover:bg-yellow-200 dark:hover:bg-yellow-300 inline-flex h-8 w-8" data-dismiss-target="#alert-border-4" aria-label="Close">
+      <span class="sr-only">Dismiss</span>
+      <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+    </button>
+</div>
+<div id="alert-border-5" class="flex p-4 bg-gray-100 border-t-4 border-gray-500 dark:bg-gray-700" role="alert">
+    <svg class="flex-shrink-0 w-5 h-5 text-gray-700 dark:text-gray-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+    <div class="ml-3 text-sm font-medium text-gray-700 dark:text-gray-300">
+      A simple dark alert with an <a href="#" class="font-semibold underline hover:text-gray-800 dark:hover:text-white">example link</a>. Give it a click if you like.
+    </div>
+    <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-gray-100 text-gray-500 rounded-lg focus:ring-2 focus:ring-gray-400 p-1.5 hover:bg-gray-200 inline-flex h-8 w-8 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white" data-dismiss-target="#alert-border-5" aria-label="Close">
+      <span class="sr-only">Dismiss</span>
+      <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+    </button>
+</div>
+</div>
+
+
+
+
+    </div>
+
+    
+
+
+
+
+
+
+        <!-- <div>
+            <button type="button" onclick="window.location.href='{{ url_for( 'double') }}';">Forward</button>
+        </div> -->
+
+<!-- 
+
+    <table>
+        <thead>
+            <th>Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Age</th>
+            <th>#</th>
+        </thead>
+        {% for data in att %}
+        <tbody>
+            <td>{{data.id}}</td>
+            <td>{{data.firstname}}</td>
+            <td>{{data.op}}</td>
+            <td>{{data.snatch1}}</td>
+            <td><a href="/delete/{{data.id}}" type="button">Delete</a></td>
+        </tbody>
+        {% endfor%}
+    </table> -->
+
+
+
+<script>
+//getData();
+async function updAllTable() {
+    const response= await fetch('/att/');
+    const data= await response.json();
+    length=data.attz.length;
+    var temp="";
+     for(i=0;i<length;i++)
+     {
+        temp+="<tr id=tr_"+data.attz[i].id+">";
+        $("#sname_"+data.attz[i].id).text(data.attz[i].sname.substring(0, 12));
+        $("#fname_"+data.attz[i].id).text(data.attz[i].fname.substring(0, 9));
+        $("#s1_"+data.attz[i].id).text(data.attz[i].s1);
+        $("#s1ig_"+data.attz[i].id).text(data.attz[i].s1ig);
+        //$("#p_s1_"+data.attz[1].id).addClass("app_isget")
+        //.removeClass("app_isnotget app_refused app");
+        isGet = data.attz[i].s1ig
+        if (isGet==1) {
+            $("#p_s1_"+data.attz[i].id).text(data.attz[i].s1);
+            $("#p_s1_"+data.attz[i].id)
+            .addClass("app_isget")
+            .removeClass("app_isnotget app_refused app");
+            $("#id_sXdec_").text(data.attz[i].s1d);
+            console.log('1_'+data.attz[i].s1ig);
+        }
+        else if (isGet==0) {
+                $("#p_s1_"+data.attz[i].id).text(data.attz[i].s1);
+                $("#p_s1_"+data.attz[i].id)
+                .addClass("app_isnotget")
+                .removeClass("app_isget app_refused app");                
+                console.log('0_'+data.attz[i].s1ig);
+        }
+        else if (isGet==-1) {
+                $("#p_s1_"+data.attz[i].id).text(data.attz[i].s1);
+                $("#p_s1_"+data.attz[i].id)
+                .addClass("app_refused")
+                .removeClass("app_isget app_isnotget app");                
+                console.log('0_'+data.attz[i].s1ig);
+        }
+        else if (isGet== null ) {
+                $("#p_s1_"+data.attz[i].id).text(data.attz[i].s1);
+                $("#p_s1_"+data.attz[i].id)
+                .addClass("app")
+                .removeClass("app_isget app_isnotget app_refused"); 
+                console.log('0_'+data.attz[i].s1ig);
+        }        
+
+    }
+}
+
+</script>
+
+
+
+<table id="datazz">
+
+</table>
+
+
+    <script>
+function showAddInfo() {
+  //var x = document.getElementById("addInfoDIV");
+  var e = document.getElementById("addInfoDIV");
+  var ech = document.getElementById("href_addInfo");
+       if(e.style.display == 'block') {
+          e.style.display = 'none';
+          ech.innerHTML = `<span>прочая информация &#8659; </span>`;
+}
+       else {
+          e.style.display = 'block';
+          ech.innerHTML = `<span>скрыть &#8657; </span>`;
+        }
+}
+
+      </script>
+
+
+
+
+<div class="mypanel"></div>
+
+
+
+
+<script>
+        function getAllAthl() {
+                    console.log('get all');
+                }    
+        // Grabs all the Elements by their IDs which we had given them
+        let modal = document.getElementById("my-modal");
+        let btnop = document.getElementById("add_new_att_btn");
+        let button = document.getElementById("ok-btn");
+        let cbutton = document.getElementById("close-btn");
+    
+        // We want the modal to open when the Open button is clicked
+        btnop.onclick = function() {
+        modal.style.display = "block";
+        }
+        // We want the modal to close when the OK button is clicked
+        button.onclick = function() {
+        modal.style.display = "none";
+        }
+        // The modal will close when the user clicks anywhere outside the modal
+        cbutton.onclick = function(event) {
+            modal.style.display = "none";
+        }
+
+// ADD-NEW-ATT Grabs all the Elements by their IDs which we had given them        
+        let modal_add = document.getElementById("add-att-modal");
+        let add_att_btn = document.getElementById("add_new_att_btn");
+        let button_newatt_ok = document.getElementById("add_newatt_ok_btn");
+    
+        // We want the modal to open when the Open button is clicked
+        add_att_btn.onclick = function() {
+        modal_add.style.display = "block";
+        
+        // mck = document.getElementById("male_o").checked;
+        // fmck = document.getElementById("female_o").checked;
+
+        // if (mck) {
+        //   console.info('checkeDDD!')
+
+        //   var a = document.getElementById('wcat');
+        //   var atmp = '';
+        //   for (let i = 0; i <= a.length; i++) {
+        //     //  console.log(i);
+        //     // atmp = document.getElementById('optwc_'+i);
+        //      console.log(a.length);
+        //     //  console.log(a.length);
+        //     // console.log(atmp);
+        //   }
+        //   // var a = document.getElementById('wcat');
+        //   // a.options.length = 0;          
+        //   // let option = document.querySelector("option[name=1]");         
+        // } else {
+        //   alert('NOT  !!! checkeDDD!')
+        // }
+
+
+        // var a = document.getElementById('wcat');
+        // a.options.length = 0;
+        // var o = document.createElement('option');
+        // var t = document.createTextNode('Первый');
+        // o.setAttribute('value', '1');
+        // o.appendChild(t);
+        // a.appendChild(o);        
+
+
+
+        }
+        // We want the modal to close when the OK button is clicked
+        button_newatt_ok.onclick = function(evt) {
+
+
+
+          let x = document.getElementById("sname-att").value;
+          
+          // if (isNaN(x) || x < 21 || x > 300) {
+          //   text = "Input not valid";
+          //   evt.preventDefault();
+          //       // document.getElementById("snatch1").classList.remove('hover:bg-green-600');
+                
+          //       document.getElementById("sname-att").classList.add('bg-red-200');
+          //       document.getElementById("sname-att").classList.add('border');
+          //       document.getElementById("sname-att").classList.add('border-red-500');
+          //       document.getElementById("sname-att").classList.add('text-red-900');
+          //       document.getElementById("sname-att").classList.add('placeholder-red-700');
+          //       document.getElementById("sname-att").classList.add('text-lg');
+          //       document.getElementById("sname_label").classList.add('bg-red-50');
+          //       document.getElementById("sname_label").classList.add('border');
+          //       document.getElementById("sname_label").classList.add('border-red-500');
+          //       document.getElementById("sname_label").classList.add('text-red-900');
+          //       document.getElementById("sname_label").classList.add('placeholder-red-700');
+          //       document.getElementById("sname_label").classList.add('text-lg');
+
+          //   }
+    //         else {
+    //           document.getElementById("sname-att").classList.add('bg-green-50');
+    //             document.getElementById("sname-att").classList.add('border');
+    //             document.getElementById("sname-att").classList.add('border-green-500');
+    //             document.getElementById("sname-att").classList.add('text-green-900');
+    //             document.getElementById("sname-att").classList.add('placeholder-green-700');
+    //             document.getElementById("sname-att").classList.add('text-lg');
+    //             document.getElementById("sname_label").classList.add('bg-green-50');
+    //             document.getElementById("sname_label").classList.add('border');
+    //             document.getElementById("sname_label").classList.add('border-green-500');
+    //             document.getElementById("sname_label").classList.add('text-green-900');
+    //             document.getElementById("sname_label").classList.add('placeholder-green-700');
+    //             document.getElementById("sname_label").classList.add('text-lg');
+              
+    //       let xf = document.getElementById("fname-att").value;
+    //       if (isNaN(xf) || xf < 21 || xf > 300) {
+    //         text = "Input not valid";
+    //         evt.preventDefault();
+    //             // document.getElementById("snatch1").classList.remove('hover:bg-green-600');
+                
+    //             document.getElementById("fname-att").classList.add('bg-red-200');
+    //             document.getElementById("fname-att").classList.add('border');
+    //             document.getElementById("fname-att").classList.add('border-red-500');
+    //             document.getElementById("fname-att").classList.add('text-red-900');
+    //             document.getElementById("fname-att").classList.add('placeholder-red-700');
+    //             document.getElementById("fname-att").classList.add('text-lg');
+    //             document.getElementById("fname_label").classList.add('bg-red-50');
+    //             document.getElementById("fname_label").classList.add('border');
+    //             document.getElementById("fname_label").classList.add('border-red-500');
+    //             document.getElementById("fname_label").classList.add('text-red-900');
+    //             document.getElementById("fname_label").classList.add('placeholder-red-700');
+    //             document.getElementById("fname_label").classList.add('text-lg');
+
+    //         }
+    //         else {
+    //             document.getElementById("fname-att").classList.add('bg-green-50');
+    //             document.getElementById("fname-att").classList.add('border');
+    //             document.getElementById("fname-att").classList.add('border-green-500');
+    //             document.getElementById("fname-att").classList.add('text-green-900');
+    //             document.getElementById("fname-att").classList.add('placeholder-green-700');
+    //             document.getElementById("fname-att").classList.add('text-lg');
+    //             document.getElementById("fname_label").classList.add('bg-green-50');
+    //             document.getElementById("fname_label").classList.add('border');
+    //             document.getElementById("fname_label").classList.add('border-green-500');
+    //             document.getElementById("fname_label").classList.add('text-green-900');
+    //             document.getElementById("fname_label").classList.add('placeholder-green-700');
+    //             document.getElementById("fname_label").classList.add('text-lg');             
+              
+    //         let x = document.getElementById("snatch1").value;
+    //         if (isNaN(x) || x < 21 || x > 300) {
+    //           text = "Input not valid";
+    //             evt.preventDefault();
+    //             // document.getElementById("snatch1").classList.remove('hover:bg-green-600');
+                
+    //             document.getElementById("s-label").classList.add('bg-red-200');
+    //             document.getElementById("s-label").classList.add('border');
+    //             document.getElementById("s-label").classList.add('border-red-500');
+    //             document.getElementById("s-label").classList.add('text-red-900');
+    //             document.getElementById("s-label").classList.add('placeholder-red-700');
+    //             document.getElementById("s-label").classList.add('text-lg');
+    //             document.getElementById("snatch1").classList.add('bg-red-50');
+    //             document.getElementById("snatch1").classList.add('border');
+    //             document.getElementById("snatch1").classList.add('border-red-500');
+    //             document.getElementById("snatch1").classList.add('text-red-900');
+    //             document.getElementById("snatch1").classList.add('placeholder-red-700');
+    //             document.getElementById("snatch1").classList.add('text-lg');
+
+    //         }
+    //         else {
+  
+    //           let y = document.getElementById("jerk1").value;
+    //         if (isNaN(y) || y < 21 || y > 300) {
+    //             evt.preventDefault();
+    //             // document.getElementById("snatch1").classList.remove('hover:bg-green-600');
+                
+    //             document.getElementById("j-label").classList.add('bg-red-200');
+    //             document.getElementById("j-label").classList.add('border');
+    //             document.getElementById("j-label").classList.add('border-red-500');
+    //             document.getElementById("j-label").classList.add('text-red-900');
+    //             document.getElementById("j-label").classList.add('placeholder-red-700');
+    //             document.getElementById("j-label").classList.add('text-lg');
+    //             document.getElementById("jerk1").classList.add('bg-red-50');
+    //             document.getElementById("jerk1").classList.add('border');
+    //             document.getElementById("jerk1").classList.add('border-red-500');
+    //             document.getElementById("jerk1").classList.add('text-red-900');
+    //             document.getElementById("jerk1").classList.add('placeholder-red-700');
+    //             document.getElementById("jerk1").classList.add('text-lg');
+
+    //         }
+    //         else {
+  
+    //         modal_add.style.display = "none";
+    //         }
+    //         }
+    //   }
+    // }
+
+            
+
+
+
+        
+        
+        
+          //modal_add.style.display = "none";
+        //fdsfdsf
+
+        }
+        // The modal will close when the user clicks anywhere outside the modal
+        window.onclick = function(event) {
+        if (event.target == modal_add) {
+            modal_add.style.display = "none";
+      
+        }
+        }
+// EDIT-ATT Grabs all the Elements by their IDs which we had given them        
+
+// Create event listener
+// document.querySelector("#att_table").addEventListener('click', (e) =>
+//   {
+//     // Retrieve id from clicked element
+//     let elementId = e.target.id;
+//     // If element has id
+//     if (elementId !== '') {
+//         let edit_att_btn = document.getElementById(elementId);
+//         edit_att_btn.onclick = function() {
+//             edit_att.style.display = "block";
+//             document.getElementById("md_sname").innerText = elementId
+//         }
+//         console.log(elementId);
+//     }
+//     // If element has no id
+//     else { 
+//         //console.log("An element without an id was clicked.");
+//     }
+//   }
+// );
+
+// function reply_click()
+// {
+//     alert(event.srcElement.id);
+// }
+
+//let edit_att_btn = document.getElementById(1);
+document.onreadystatechange = () => {
+  if (document.readyState === 'complete') {
+    // document ready
+
+//$(document).ready(function() { 
+            
+  console.log( "DOM ready!" );
+  $('.chData').click(function () {
+    var serviceID = $(this).attr('id');
+    var sname = $(this).attr('data-sname');
+    var fname = $(this).attr('data-fname');
+    var wnow = $(this).attr('data-wnow');
+    var en = $(this).attr('data-exnow');
+    var ent = "sj";
+    edit_att_btn = document.getElementById(serviceID);
+    console.log("serviceID :: " + serviceID);
+    document.getElementById("id_del_").innerHTML = sname +' '+ fname[0]+'.';
+    document.getElementById("id_del_id").innerHTML = "( # "+ serviceID+ " )";
+    
+    var s1app_end = document.getElementById("id_sXch2_").innerHTML;
+    //if 
+    console.log('### - =====', s1app_end);
+    // console.log(s1app_end.value,"++++");
+    if(s1app_end!=="&nbsp;&nbsp;.&nbsp;&nbsp;") {
+        console.log("changes app is ends");
+        var disable_dec = document.getElementById("edit_dec-btn");
+        var disable_inc = document.getElementById("edit_inc-btn");
+        var disable_edt = document.getElementById("id_wnow_");
+        var back_edit_app_back_off = document.getElementById("edt_back_off");
+        var show_hint2kg = document.getElementById("p2kg_hint");
+        
+        // show_hint2kg.classList.add("visible");
+        // show_hint2kg.classList.remove("invisible");
+        // show_hint2kg.classList.add("block");
+        // show_hint2kg.classList.remove("hidden");
+
+        //back_edit_app_back_off.classList.add("");
+        //back_edit_app_back_off.className += " bg-gray-400";
+        
+        // disable_dec.classList.add("hidden");
+        // disable_inc.classList.add("hidden");
+        
+        // document.getElementById("id_sXdec_label").innerHTML = "*=> перезаявки закончились";
+        document.getElementById("id_sXdec_label").classList.add('bg-pink-700');
+        document.getElementById("id_sXdec_label").classList.add('text-gray-200');
+        document.getElementById("id_sXdec_label").classList.add('drop-shadow-2xl');
+        document.getElementById("id_sXdec_label").classList.add('text-xl');
+        document.getElementById("id_sXdec_label").classList.add('font-bold');
+        //document.getElementById("id_sXdec_label").classList.add('pulse_op_now_square');
+      
+        
+
+        
+        document.getElementById("edt_back_off").classList.add('clear-both');
+        // document.getElementById("edt_back_off").classList.add('invisible');
+
+
+        document.getElementById("id_sXdec_label").classList.add('border-rose-400');
+        document.getElementById("edt_back_off").style.opacity = "0.3";
+        document.getElementById("id_sXdec_label").style.opacity = "0.9";
+        document.getElementById("reappdiv").style.opacity = "0.8"; 
+        document.getElementById("reapp_ok_btn").style.opacity = "0.0";
+        //document.getElementById("reapp_ok_btn").style.visibility = hidden;
+    
+          
+        // document.getElementById("reappdiv").innerHTML=".";
+
+        document.getElementById("id_sXdec_label").innerHTML = "&nbsp;&nbsp;перезаявки исчерпаны...&nbsp;&nbsp;";
+        
+        
+        
+  
+
+        //button_edit_att_ok.classList.add("disabled");
+        document.getElementById("edit_att_ok_btn").disabled = true;
+        document.getElementById("edit_att_ok_btn").classList.remove('hover:bg-green-600');
+        document.getElementById("edit_att_ok_btn").classList.add('cursor:default');
+        document.getElementById("edit_att_ok_btn").style.cursor = "default"; 
+
+        
+        document.getElementById("edit_dec-btn").disabled = true;
+        document.getElementById("edit_inc-btn").disabled = true;
+        document.getElementById("id_wnow_").disabled = true;
+
+        //disable_dec.style.top = 9999;
+        // show_hint2kg.style.removeProperty("invisible");
+        // show_hint2kg.style.removeProperty("hidden");
+        // show_hint2kg.removeAttribute('style');
+        // show_hint2kg.removeAttribute('hidden');
+        // show_hint2kg.removeAttribute('invisible');
+
+
+
+
+        console.log("change app is ends");
+    }
+    if(s1app_end=="&nbsp;&nbsp;.&nbsp;&nbsp;") {
+
+      document.getElementById("id_sXdec_label").classList.remove('bg-pink-700');
+        document.getElementById("id_sXdec_label").classList.add('text-gray-900');
+        document.getElementById("id_sXdec_label").classList.add('drop-shadow-2xl');
+        document.getElementById("id_sXdec_label").classList.add('text-xl');
+        document.getElementById("id_sXdec_label").classList.remove('font-bold');
+        document.getElementById("id_sXdec_label").classList.remove('pulse_op_now_square');
+      
+        document.getElementById("edt_back_off").classList.add('clear-both');
+        // document.getElementById("edt_back_off").classList.add('invisible');
+
+
+        document.getElementById("id_sXdec_label").classList.add('border-rose-400');
+        document.getElementById("edt_back_off").style.opacity = "1";
+        document.getElementById("id_sXdec_label").style.opacity = "1";
+        document.getElementById("reappdiv").style.opacity = "1"; 
+        document.getElementById("reapp_ok_btn").style.opacity = "1"; 
+        document.getElementById("edit_att_ok_btn").disabled = false;
+
+      
+        
+        
+
+
+
+        document.getElementById("edt_back_off").style.opacity = "1";
+        document.getElementById("id_sXdec_label").innerHTML = "перезаявки:";
+        document.getElementById("id_sXdec_label").classList.add('bg-gray-600');
+        document.getElementById("id_sXdec_label").classList.add('text-gray-200');
+        document.getElementById("id_sXdec_label").classList.add('drop-shadow-2xl');
+        document.getElementById("id_sXdec_label").classList.add('text-xl');
+        document.getElementById("id_sXdec_label").classList.add('font-bold');
+
+        document.getElementById("edit_dec-btn").disabled = false;
+        document.getElementById("edit_inc-btn").disabled = false;
+        document.getElementById("id_wnow_").disabled = false;
+        document.getElementById("edit_att_ok_btn").disabled = false;
+        document.getElementById("edit_att_ok_btn").classList.add('hover:bg-green-600');
+        document.getElementById("edit_att_ok_btn").classList.remove('cursor-not-allowed');        
+    }
+//sss
+    
+
+    document.getElementById("id_edit_").innerHTML = sname +' '+ fname[0]+'.';
+    document.getElementById("id_sXdec_").innerHTML = $("id_sXdec_").attr('data-s1dec');
+    
+    let xdec = $(this).attr('data-s1dec');
+    let xch1 = $(this).attr('data-s1ch1');
+    let xch2 = $(this).attr('data-s1ch1');
+    switch (en) {
+        case "s1":
+        ent = "рывок # 1";
+        xdec = $(this).attr('data-s1dec');
+        xch1 = $(this).attr('data-s1ch1');
+        xch2 = $(this).attr('data-s1ch2');
+        break;
+    case "s2":
+        xdec = $(this).attr('data-s2dec');
+        xch1 = $(this).attr('data-s2ch1');
+        xch2 = $(this).attr('data-s2ch2');        
+        ent = "рывок # 2";
+        break;
+    case "s3":
+        xdec = $(this).attr('data-s3dec');
+        xch1 = $(this).attr('data-s3ch1');
+        xch2 = $(this).attr('data-s3ch2'); 
+        ent = "рывок # 3";
+        break;
+    case "j1":
+        xdec = $(this).attr('data-j1dec');
+        xch1 = $(this).attr('data-j1ch1');
+        xch2 = $(this).attr('data-j1ch2');      
+        ent = "толчок # 1";
+        break;
+    case "j2":
+        xdec = $(this).attr('data-j2dec');
+        xch1 = $(this).attr('data-j2ch1');
+        xch2 = $(this).attr('data-j2ch2');        
+        ent = "толчок # 2";
+        break;
+    case "j3":
+        xdec = $(this).attr('data-j3dec');
+        xch1 = $(this).attr('data-j3ch1');
+        xch2 = $(this).attr('data-j3ch2');        
+        ent = "толчок # 3";
+        break;
+  default:
+    console.log("Can not get data-sXd...")
+}
+    //console.log('===='+wnow)
+    document.getElementById("id_wnow_").value = wnow;
+    document.getElementById("id_en_").innerHTML = ent;
+            console.log(xdec+'==='+ent);
+    if  ((xdec)&&(xdec!== undefined)) {
+    document.getElementById("id_sXdec_").innerHTML = xdec;
+    if (xdec=="None") 
+    document.getElementById("id_sXdec_").innerHTML = "&nbsp;&nbsp;.&nbsp;&nbsp;";    
+    // document.getElementById("id_sXch1_").innerHTML = xch1;
+    // document.getElementById("id_sXch2_").innerHTML = xch2;
+    } else {
+    document.getElementById("id_sXdec_").innerHTML = "&nbsp;&nbsp;.&nbsp;&nbsp;";
+    // document.getElementById("id_sXch1_").innerHTML = "&nbsp;&nbsp;.&nbsp;&nbsp;";
+    // document.getElementById("id_sXch2_").innerHTML = "&nbsp;&nbsp;.&nbsp;&nbsp;";
+    }
+    if  ((xch1)&&(xch1!== undefined)) {
+    document.getElementById("id_sXch1_").innerHTML = xch1;
+    if (xch1=="None") 
+    document.getElementById("id_sXch1_").innerHTML = "&nbsp;&nbsp;.&nbsp;&nbsp;"
+    } else {
+     document.getElementById("id_sXch1_").innerHTML = "&nbsp;&nbsp;.&nbsp;&nbsp;";
+    }
+    if ((xch2)&&(xch2!== undefined)) {
+    document.getElementById("id_sXch2_").innerHTML = xch2;
+    if (xch2=="None")
+    document.getElementById("id_sXch2_").innerHTML = "&nbsp;&nbsp;.&nbsp;&nbsp;"
+    } else {
+        if (xch2=="None") 
+     document.getElementById("id_sXch2_").innerHTML = "&nbsp;&nbsp;.&nbsp;&nbsp;";        
+    }
+
+    //document.getElementById("id_sXdec_").innerHTML = xdec;
+    //document.getElementById("id_sXch1_").innerHTML = xch1;
+    //document.getElementById("id_sXch2_").innerHTML = xch2;
+
+    
+
+
+/* add GET param */
+    var queryParams = new URLSearchParams(window.location.search);
+    queryParams.set("id", serviceID);
+    queryParams.set("wn", wnow);
+    queryParams.set("sn", sname);
+    queryParams.set("fn", fname);
+    queryParams.set("en", en);
+
+    queryParams.set("xd", xdec);
+    queryParams.set("ch1", xch1);
+    queryParams.set("ch2", xch2);
+
+
+    //queryParams.set("wn", wn);
+    // queryParams.set("en", en);
+    /////
+    //queryParams.set("edit_weight", serviceID);
+    history.replaceState(null, null, "?"+queryParams.toString());
+/* add GET param */
+
+    edit_att_btn.onclick = function() {
+        edit_att.style.display = "block";
+    }    
+  })
+
+
+}};  
+// });
+
+        let edit_att = document.getElementById("edit-att-modal");
+        let modal_add2close = document.getElementById("add-att-modal");
+        ///
+        let button_edit_att_ok = document.getElementById("edit_att_ok_btn");
+            
+        // We want the modal to open when the Open button is clicked
+        // edit_att_btn.onclick = function() {
+        //     edit_att.style.display = "block";
+        // }
+        // We want the modal to close when the OK button is clicked
+        button_edit_att_ok.onclick = function() {
+        edit_att.style.display = "none";
+        console.log('chanhe app #');
+
+        }
+        // The modal will close when the user clicks anywhere outside the modal
+        window.onclick = function(event) {
+        if (event.target == edit_att) {
+          edit_att.style.display = "none";;
+        }
+        if (event.target == modal_add2close) {
+        modal_add2close.style.display = "none";
+        }        
+        }
+        
+
+
+</script>
+    
+    
+
+
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function() {
+        // Connect to the Socket.IO server.
+        // The connection URL has the following format, relative to the current page:
+        //     http[s]://<domain>:<port>[/<namespace>]
+        var app_ip = "{{appHost}}";
+        var app_port = "{{appPort}}";
+        var clean_app_ip = app_ip.substring(5);
+        var clean_app_ip = clean_app_ip.slice(0, -5);
+        // var socket = io('ws://10.0.0.108:5000/',{
+        var socket = io('ws://'+clean_app_ip+':'+app_port+'/',{
+        transports: ["websocket", "polling"] // use WebSocket first, if available
+        });
+
+        // Event handler for new connections.
+        // The callback function is invoked when a connection with the
+        // server is established.
+        socket.on('connect', function() {
+            socket.emit('my_event', {data: 'I\'m connected!'});
+        });
+
+        // Event handler for server sent data.
+        // The callback function is invoked whenever the server emits data
+        // to the client. The data is then displayed in the "Received"
+        // section of the page.
+        socket.on('my_response', function(msg, cb) {
+            $('#log').append('<br>' + $('<div/>').text('Received #' + msg.count + ': ' + msg.data).html());
+            if (cb)
+                cb();
+        });
+
+        // Interval function that tests message latency by sending a "ping"
+        // message. The server then responds with a "pong" message and the
+        // round trip time is measured.
+        var ping_pong_times = [];
+        var start_time;
+        window.setInterval(function() {
+            start_time = (new Date).getTime();
+            $('#transport').text(socket.io.engine.transport.name);
+            socket.emit('my_ping');
+        }, 1000);
+
+        // Handler for the "pong" message. When the pong is received, the
+        // time from the ping is stored, and the average of the last 30
+        // samples is average and displayed.
+        socket.on('my_pong', function() {
+            var latency = (new Date).getTime() - start_time;
+            ping_pong_times.push(latency);
+            ping_pong_times = ping_pong_times.slice(-30); // keep last 30 samples
+            var sum = 0;
+            for (var i = 0; i < ping_pong_times.length; i++)
+                sum += ping_pong_times[i];
+            $('#ping-pong').text(Math.round(10 * sum / ping_pong_times.length) / 10);
+        });
+
+        // Handlers for the different forms in the page.
+        // These accept data from the user and send it to the server in a
+        // variety of ways
+        $('form#emit').submit(function(event) {
+            socket.emit('my_event', {data: $('#emit_data').val()});
+            return false;
+        });
+        $('form#broadcast').submit(function(event) {
+            socket.emit('my_broadcast_event', {data: $('#broadcast_data').val()});
+            return false;
+        });
+        $('form#join').submit(function(event) {
+            socket.emit('join', {room: $('#join_room').val()});
+            return false;
+        });
+        $('form#leave').submit(function(event) {
+            socket.emit('leave', {room: $('#leave_room').val()});
+            return false;
+        });
+        $('form#send_room').submit(function(event) {
+            socket.emit('my_room_event', {room: $('#room_name').val(), data: $('#room_data').val()});
+            return false;
+        });
+        $('form#close').submit(function(event) {
+            socket.emit('close_room', {room: $('#close_room').val()});
+            return false;
+        });
+        $('form#disconnect').submit(function(event) {
+            socket.emit('disconnect_request');
+            return false;
+        });
+    });
+</script>
+
+
+<script>
+    function decrement(e) {
+      const btn = e.target.parentNode.parentElement.querySelector(
+        'button[data-action="decrement"]'
+      );
+      const target = btn.nextElementSibling;
+      let value = Number(target.value);
+      value--;
+      target.value = value;
+    }
+  
+    function increment(e) {
+      const btn = e.target.parentNode.parentElement.querySelector(
+        'button[data-action="decrement"]'
+      );
+      const target = btn.nextElementSibling;
+      let value = Number(target.value);
+      value++;
+      target.value = value;
+    }
+  
+    const decrementButtons = document.querySelectorAll(
+      `button[data-action="decrement"]`
+    );
+  
+    const incrementButtons = document.querySelectorAll(
+      `button[data-action="increment"]`
+    );
+  
+    decrementButtons.forEach(btn => {
+      btn.addEventListener("click", decrement);
+    });
+  
+    incrementButtons.forEach(btn => {
+      btn.addEventListener("click", increment);
+    });
+  </script>
+
+
+<div id="ws_info_div" class="hidden bg-gray-300 mx-5 px-5 my-5 py-5">
+    <h1>Flask-SocketIO Test</h1>
+    <p>
+      Async mode is: <b>{{ async_mode }}</b><br>
+      Current transport is: <b><span id="transport"></span></b><br>
+      Average ping/pong latency: <b><span id="ping-pong"></span>ms</b>
+    </p>
+    <h2>Send:</h2>
+    <form id="broadcast" method="POST" action='#'>
+        <input type="text" name="broadcast_data" id="broadcast_data" placeholder="Message">
+        <input type="submit" value="Broadcast">
+    </form>
+
+    <form id="disconnect" method="POST" action="#">
+        <input type="submit" value="Disconnect">
+    </form>
+    <h2>Receive:</h2>
+    <div id="log"></div>    
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+      // var text = "{{appHost}}";
+      //   console.log(text);
+
+</script>
+
+
+
+
+
+<!-- <script>
+    var openmodal = document.querySelectorAll('modal-open')
+    for (var i = 0; i < openmodal.length; i++) {
+      openmodal[i].addEventListener('click', function(event){
+    	event.preventDefault()
+    	toggleModal()
+      })
+    }
+    
+    const overlay = document.querySelector('.modal-overlay')
+    overlay.addEventListener('click', toggleModal)
+    
+    var closemodal = document.querySelectorAll('.modal-close')
+    for (var i = 0; i < closemodal.length; i++) {
+      closemodal[i].addEventListener('click', toggleModal)
+    }
+    
+    document.onkeydown = function(evt) {
+      evt = evt || window.event
+      var isEscape = false
+      if ("key" in evt) {
+    	isEscape = (evt.key === "Escape" || evt.key === "Esc")
+      } else {
+    	isEscape = (evt.keyCode === 27)
+      }
+      if (isEscape && document.body.classList.contains('modal-active')) {
+    	toggleModal()
+      }
+    };
+    
+    
+    function toggleModal () {
+      const body = document.querySelector('body')
+      const modal = document.querySelector('.modal')
+      modal.classList.toggle('opacity-0')
+      modal.classList.toggle('pointer-events-none')
+      body.classList.toggle('modal-active')
+    }
+    
+     
+  </script> -->
+
+
+  <script>
+
+    
+    /* Get the documentElement (<html>) to display the page in fullscreen */
+     var elem = document.documentElement;
+    //var elem = document.getElementById("min_screen");
+    function chkFS_btnStyle() {
+    var x = document.getElementById("idBtnFS");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+    }
+
+
+    /* View in fullscreen */
+    function openFullscreen() {
+
+      let idfsbtn = document.getElementById('idBtnFS');
+      // idfsbtn.addClass();
+      fullscreenEnabled = document.fullscreenEnabled; 
+      console.info(fullscreenEnabled);
+      if(fullscreenEnabled) {
+        chkFS_btnStyle();
+      } else { chkFS_btnStyle(); }
+
+
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.webkitRequestFullscreen) { /* Safari */
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) { /* IE11 */
+        elem.msRequestFullscreen();
+      }
+    }
+    
+    /* Close fullscreen */
+    function closeFullscreen() {
+      let xbtnFS = document.getElementById("idBtnFS");
+        xbtnFS.style.display = "block";
+      if (document.exitFullscreen) {
+        // document.exitFullscreen();
+        var xzzxcd = document.getElementById("idBtnFS");
+        xzzxcd.style.display = "block";
+      } else if (document.webkitExitFullscreen) { /* Safari */
+        document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) { /* IE11 */
+        document.msExitFullscreen();
+      }
+    }
+
+
+//////////////////////////////////
+document.onkeydown = function (event) {
+    event = event || window.event;
+    // ESC key
+    if (event.keyCode === 27) {
+
+      let modal_edit2close = document.getElementById("edit-att-modal");
+      let modal_add2close = document.getElementById("add-att-modal");
+
+      
+        modal_edit2close.style.display = "none";
+        modal_add2close.style.display = "none";
+
+
+        modal_del.style.display = "none";
+        edit_data_att.style.display = "none";
+        edit_window.style.display = "none";
+        
+        let xbtnFS = document.etElementById("idBtnFS");
+        xbtnFS.style.display = "block";
+        closeFullscreen();
+        console.log(':ECS key DOWN');
+    }
+    if (event.keyCode === 32) {
+        console.log(':SPACE key DOWN');
+    }
+    if (event.keyCode === 13) {
+        console.log(':ENTER key DOWN');
+    }    
+    }
+
+    </script>
+
+
+
+
+
+<script>
+
+  const boxxz = document.getElementById('p2kg_hint');
+  const btnxz = document.getElementById('edit_dec-btn');
+  
+  btnxz.addEventListener('click', function handleClick() {
+    chkWeight();
+    if (boxxz.style.visibility === 'hidden') {
+      boxxz.style.visibility = 'visible';
+      boxxz.hidden=false;
+  
+      //btnxz.textContent = 'Hide div';
+    } else {
+      boxxz.style.visibility = 'hidden';
+      boxxz.hidden=true;
+      //btnxz.textContent = 'Show div';
+    }
+  });
+  
+  var wcnt = 0;
+  function chkWeight() {
+      val_weight = document.getElementById('id_wnow_').value;
+      wcnt = ++wcnt;
+      // tmp_weight = document.getElementById('id_wnow_');
+      //val_weight = tmp_weight.value;
+      if (wcnt==20) {
+          console.log('P 20 KG!!!');
+          document.getElementById('id_wnow_').disabled = true;
+          document.getElementById('edit_dec-btn').disabled = true;
+          document.getElementById('p2kg_hint').visibility = true;
+          document.getElementById('p2kg_hint').hidden = false;
+          document.getElementById('p2kg_hint').classList.remove('hidden');
+      }
+      console.log(val_weight + ' @DEC ' + wcnt );
+      
+  }
+
+  // function handler2() {
+  //   alert('Спасибо ещё раз!');
+  // }
+
+  // edit_dec-btn.onclick = () => alert("Привет");
+  // edit_dec-btn.addEventListener("click", handler1); // Спасибо!
+  // edit_dec-btn.addEventListener("click", handler2); // Спасибо ещё раз!
+
+
+
+
+  </script>
+
+
+<script>
+  //onclick="restartApp()"
+  // MAIN Shortcuts KEY (1 ONE KEY COMMAND) || OR 2 TWO
+  // now ONE KEY command
+document.onkeyup = function(e) {
+  if (e.altKey && e.which == 77) {
+    console.info("[ M ] was pressed MARSHAL (Flow) ->");
+    document.getElementById("restart_flow_form").submit();
+  } else if (e.altKey && e.which == 68) {
+    console.info("[ D ] was pressed DOUBLE ->");
+//    document.getElementById("restart_flow_form").submit();
+  } else if (e.altKey && e.which == 84) {
+    console.info("[ T ] was pressed TABLO ->");
+  } else if (e.altKey && e.which == 67) {
+    console.info("[ C ] was pressed CHRONOGRAPH ->");
+  } else if (e.altKey && e.which == 83) {
+    console.info("[ S ] was pressed SIGLAL ->");
+  } else if (e.altKey && e.which == 74) {
+    console.info("[ J ] was pressed JUDGE ->");
+  } else if (e.altKey && e.which == 65) {
+    console.info("[ A ] was pressed ADD NEW ATHLETE ->");
+    
+    document.getElementById("add-att-modal").style.display = "block";
+        
+  } else if (e.altKey && e.which == 69) {
+    console.info("[ E ] was pressed ADD EDIT FLOW ->");
+    let edit_att = document.getElementById("edit-att-modal");
+    edit_att.style.display = "block";
+  } else if (e.altKey && e.which == 79) {
+    console.info("[ O ] was pressed OPTIONS/CFG/SETTINGS ->");
+  } else if (e.altKey && e.which == 82) {
+    console.info('[ R ] was pressed RELOAD DATA! 🔄 ->');
+    //alert("[ R ] was pressed ADD NEW RELOAD DATA! 🔄 ->");
+    restartApp();
+  } else if (e.altKey && e.which == 85) {
+    console.info("[ U ] was pressed OPEN MAIN MENU! ->");
+  } else if (e.altKey && e.which == 70) {
+    console.info("[ F ] was pressed FULL SCREEN! ->");
+    openFullscreen();
+  } else if (e.which == 187) {
+    console.info("[ + ] was pressed +1 kG (plus 1 kG) ->");
+  } else if (e.which == 189) {
+    console.info("[ - ] was pressed -1 kG (minus 1 kG) ->");    
+  } else if (e.which == 49) {
+    console.info("[ 1 ] was pressed +1 kG (plus 1 kG) ->");
+  } else if (e.which == 50) {
+    console.info("[ 2 ] was pressed +2 kG (plus 2 kG) ->");
+  } else if (e.which == 51) {
+    console.info("[ 3 ] was pressed +3 kG (plus 3 kG) ->");
+  } else if (e.which == 52) {
+    console.info("[ 4 ] was pressed +4 kG (plus 4 kG) ->");
+  } else if (e.which == 53) {
+    console.info("[ 5 ] was pressed +5 kG (plus 5 kG) ->");
+  } else if (e.which == 54) {
+    console.info("[ 6 ] was pressed +6 kG (plus 6 kG) ->");
+  } else if (e.which == 55) {
+    console.info("[ 7 ] was pressed +7 kG (plus 7 kG) ->");
+  } else if (e.which == 56) {
+    console.info("[ 8 ] was pressed +8 kG (plus 8 kG) ->");
+  } else if (e.which == 57) {
+    console.info("[ 9 ] was pressed +9 kG (plus 9 kG) ->");
+  }
+
+};
+
+
+
+
+
+
+function restartApp() {
+  console.info('[ R ] was pressed RELOAD DATA! 🔄 ->');
+  document.getElementById("restart_flow_form").submit();
+} 
+
+window.setTimeout(function() {
+    $("#app-succsess01").fadeTo(500, 0).slideUp(400, function(){
+      console.info('app-succsess01 is CLOSE');
+        $(this).remove(); 
+    });
+}, 2345);
+
+</script>
+  
+
+</body>
+
+</html>
