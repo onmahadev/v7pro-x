@@ -6100,7 +6100,7 @@ def get_id_min_w_s2(exclude_id=0):
         # set_op_now(4)
         return rez
     else:
-        print('*** EXCLUDE s2 OP ID ????? : [ ', exclude_id, ' ]')    
+        print('*** EXCLUDE s2 OP ID = 0 : [ ', exclude_id, ' ]')    
         ma = att.alias()
         rez = {}
         i=0
@@ -6201,16 +6201,16 @@ def get_id_min_w_s2(exclude_id=0):
             azzxd1 = 2        
         if(len(s2_dict)==2):
             if( azzxd1w < azzxd0w ):
-                print(f's1_dict[4]<s2_dict[4] !!  :::{azzxd1}:{azzxd1w} <  {azzxd0}:{azzxd0w} |=  ')
-                print(f's1_dict[4]<VRADJENDRA PR KI JAY!!!!  !!  ::: {azzxd0} <  {azzxd1} ')
+                print(f's1_dict[x] < s2_dict[4] !!  :::{azzxd1}:{azzxd1w} <  {azzxd0}:{azzxd0w} |=  ')
+                print(f's1_dict[x] < VRADJENDRA PR KI JAY!!!!  !!  ::: {azzxd0} <  {azzxd1} ')
                 rez = azzxd1
             if( azzxd1w > azzxd0w ):
-                print(f's1_dict[4]<s2_dict[4] !!  :::{azzxd1}:{azzxd1w} <  {azzxd0}:{azzxd0w} |=  ')
-                print(f's1_dict[4]<VRADJENDRA PR KI JAY!!!!  !!  ::: {azzxd0} <  {azzxd1} ')
+                print(f's1_dict[x] > s2_dict[4] !!  :::{azzxd1}:{azzxd1w} >  {azzxd0}:{azzxd0w} |=  ')
+                print(f's1_dict[x] > VRADJENDRA PR KI JAY!!!!  !!  ::: {azzxd0} >  {azzxd1} ')
                 rez = azzxd0
             if( azzxd1w == azzxd0w ):
-                print(f's1_dict[4]<s2_dict[4] !!  :::{azzxd1}:{azzxd1w} <  {azzxd0}:{azzxd0w} |=  ')
-                print(f's1_dict[4]<VRADJENDRA PR KI JAY!!!!  !!  ::: {azzxd0} <  {azzxd1} ')
+                print(f's1_dict[x]==s2_dict[4] !!  :::{azzxd1}:{azzxd1w} ==  {azzxd0}:{azzxd0w} |=  ')
+                print(f's1_dict[x]==VRADJENDRA PR KI JAY!!!!  !!  ::: {azzxd0} == {azzxd1} ')
                 rez = azzxd0                                
             # print(f'******___ len(s2_dict)==2  ::: {len(s2_dict)}')
             print(f'SNATCH 2 == 2 DOUBLE WEIGHT !!!  ::: {len(s2_dict)}')
