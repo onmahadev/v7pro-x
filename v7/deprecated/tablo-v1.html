@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="ru" class="antialiased">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>f7-Judge </title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel=" stylesheet">
+    <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
+    
+    <!-- <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/daisyui2.22.0.css') }}"> -->
+
+    <script src="{{url_for('static', filename = 'js/socket.io.min.js')}}"></script>
+    
+    <script src="{{url_for('static', filename = 'js/ovmenu.js')}}"></script>
+    <!-- <script defer src="{{url_for('static', filename = 'js/alpine3.10.2.min.js')}}"></script> -->
+
+
+    <script src="{{url_for('static', filename = 'js/jquery-3.6.0.min.js')}}"></script>
+
+    <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/tablo.css') }}">
+
+    <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/ovmenu.css') }}">
+    
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon_io/tablo/favicon.ico') }}">
+    <!--Replace with your tailwind.css once created-->
+
+    <style>
+body {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+  -webkit-touch-callout: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+}        
+
+
+.v7bg_anime {
+    background: linear-gradient(156deg, #5eb9a2, #217ba5, #0a217f, #e31515, #15e326, #d2ea0e, #d2ea0e, #e11d1d);
+    background-size: 1600% 1600%;
+
+    -webkit-animation: v7bganimation 6s ease infinite;
+    -moz-animation: v7bganimation 6s ease infinite;
+    animation: v7bganimation 6s ease infinite;
+}
+
+@-webkit-keyframes v7bganimation {
+    0%{background-position:2% 0%}
+    50%{background-position:99% 100%}
+    100%{background-position:2% 0%}
+}
+@-moz-keyframes v7bganimation {
+    0%{background-position:2% 0%}
+    50%{background-position:99% 100%}
+    100%{background-position:2% 0%}
+}
+@keyframes v7bganimation {
+    0%{background-position:2% 0%}
+    50%{background-position:99% 100%}
+    100%{background-position:2% 0%}
+}
+
+
+.bibooza {
+    margin-left: -9%;
+}
+
+    </style>
+
+</head>
+
+
+<body id="wrapp0" class="select-none bg-opacity-100 bg-black leading-normal">
+
+    
+
+  <div id="wrapp-main" class="min-h-screen bg-black">
+    {% for data in attz %}
+  
+    <div class="w-full px-4 md:px-0 md:mt-8 mb-16 text-gray-800 leading-normal">
+
+
+        <div>
+            <button   onclick="openFullscreen()" type="button" class=" hover:border-white hover:opacity-90 opacity-25 border-transparent border-2  focus:border-white text-gray-500 bg-transparent font-medium rounded-lg text-sm px-2 py-2 mb-2 dark:bg-transparent dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+            
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13 3H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-3"></path>
+                    <path d="M8 21h8"></path>
+                    <path d="M12 17v4"></path>
+                    <path d="m17 8 5-5"></path>
+                    <path d="M17 3h5v5"></path>
+                  </svg>
+        
+            </button>
+        </div>
+
+        <!--Console Content-->
+
+        <div id="j11-3" class="w-full md:w-1/2 xl:w-1/3 p-3">
+            <!--Metric Card-->
+            <div class="p-2">
+                <div class="flex flex-row items-center">
+                    <div class="flex-1 text-right md:text-center">
+                        <p class="attNumberStr">#</p>
+                        <h5 class="attNumber font-bold uppercase text-white">
+                            {{data.id}}
+                        </h5>                            
+                    </div>
+                </div>
+            </div>
+            
+            <div class="p-2">
+                <div class="flex items-center">
+                    <div class="flex-1 text-right md:text-center">
+                        <div  id="div_flag_{{data.id}}" class="flagDiv flex items-center space-x-3">
+                            <div id="div_img_{{data.id}}" class="inline-flex w-20 h-20"> 
+                                {% for data in attdata %}                                 
+                                <img id="img_{{data.id}}" class='w-20 h-20 opacity-60 py-0 object-cover rounded-full border-2 border-blue-300'
+                                alt='User avatar' src='../static/img/flags/{{data.country.flag}}.png' />                                
+                                {% endfor %}
+                                
+                            </div>
+                            </div>
+                                                        
+                    </div>
+                    <div>
+                        <input type="button" class="hidden" id="btnYES" value="____YES____" onclick="pYes()">
+                        <input type="button" class="hidden" id="btnNO" value="____NO____" onclick="pNo()">
+                    </div>   
+                </div>
+                <h5 class="country2s ml-64 opacity-95 font-bold uppercase text-white">
+                    {% for data in attdata %}                                 
+                    {{data.city.upper()}}   
+                    {% endfor %}
+                </h5>                
+            </div>   
+            
+            <div class="hidden p-2">
+                <div class="flex flex-row items-center">
+                    <div class="flex-1 text-right md:text-center">
+                        <h5 class="country2s opacity-95 font-bold uppercase text-white">
+                            {% for data in attdata %}                                 
+                            {{data.city.upper()}}
+                            {% endfor %}
+                        </h5>
+                        <!-- <button onclick="pYes()">PLAY</button> -->
+                    </div>
+                </div>
+            </div>            
+            <!--/Metric Card-->
+        </div>
+        
+        
+
+
+        <div class="flex flex-wrap">
+            <div id="j1-1" class="w-full md:w-1/2 xl:w-1/3 p-3">
+                <!--Metric Card-->
+                <div class="p-2">
+                    <div class="flex flex-row items-center">
+                        <div class="flex-1 text-right md:text-center">
+                            <h5 class="ATTop opacity-85 font-bold text-white">
+                                {{data.exnow[1:]}}
+                            </h5>
+                            <h5 class="strATTop opacity-85 font-bold text-white">
+                                подъем
+                            </h5>                            
+                            
+                        </div>
+                    </div>
+                </div>
+                <!--/Metric Card-->
+            </div>
+            <div id="j2-1" class="w-full md:w-1/2 xl:w-1/3 p-3 h-3/6">
+                <!--Metric Card-->
+                <!-- <div class="bg-white border rounded shadow p-2 h-3/6"> -->
+                    <div class="p-2 h-3/6">
+                    <div class="flex flex-row items-center">
+                        <div class="flex-1 text-right md:text-center">
+                            <!-- <h5 class="timerbox font-bold uppercase">1:00</h5> -->
+                            <span class="countdown timerbox">
+                                <span id="countdownTablo"></span>
+                              </span>
+
+                        </div>
+                        
+                    </div>
+                </div>
+                <p id="pageInfo" class="blink text-center text-lg text-white">
+                    <svg class="h-9 w-9 bibooza" fill="#f0f0f0f" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </p>                
+                <!--/Metric Card-->
+            </div>
+            <div id="j3-1" class="w-full md:w-1/2 xl:w-1/3 p-3">
+                <!--Metric Card-->
+                <div class="p-2">
+                    <div class="flex flex-row items-center">
+                        <div class="flex-1 text-right md:text-center">
+                            <h5 class="weightOPkgStr opacity-90 font-bold uppercase">
+                                {{data.wnow}}
+                            </h5>
+                            <h5 class="weightOPkgStr3 opacity-95 font-bold uppercase">
+                               кг 
+                            </h5>
+                            <h5 class="weightOPkgStr2 opacity-85 font-bold uppercase">
+                                штанга  
+                             </h5>
+                        </div>
+                    </div>
+                </div>
+                <!--/Metric Card-->
+            </div>
+            <div id="j1-2" class="w-full md:w-1/2 xl:w-1/3 p-3">
+                <!--Metric Card-->
+                <!-- <div class="bg-white border rounded shadow p-2">
+                    <div class="flex flex-row items-center">
+                        <div class="flex-1 text-right md:text-center">
+                            <h5 class="font-bold uppercase text-gray-500">==</h5>
+                        </div>
+                    </div>
+                </div> -->
+                <!--/Metric Card-->
+            </div>
+            <div  id="j2-2" class="z-10 w-full md:w-1/2 xl:w-1/3 p-3">
+                <!--Metric Card--> 
+                <div class="p-2">
+                    <div class="flex flex-row items-center">
+                        <div class="flex-1 text-left md:text-center mt-3">
+
+                            <h5 class="attFirstName text-left opacity-95 font-bold uppercase ">
+                                {{data.fname[:14]}}
+                            </h5>             
+                            <h5 class="attSecondName text-left opacity-95 font-bold ">
+                                {{data.sname[:14]}}
+                            </h5>                            
+
+                        </div>
+                    </div>
+                </div>
+
+                <!--/Metric Card-->
+            </div>
+            <div id="j3-2" class="z-0 md:w-1/2 xl:w-1/3 p-3">
+                <!--Metric Card-->
+                <!-- <div class="bg-white border rounded shadow p-2">
+                    <div class="flex flex-row items-center">
+                        <div class="flex-1 text-right md:text-center">
+                            <h5 class="font-bold uppercase text-gray-500">==</h5>
+                        </div>
+                    </div>
+                </div> -->
+                <!--/Metric Card-->
+            </div>
+            <div id="j1-3" class="hidden w-full md:w-1/2 xl:w-1/3 p-3">
+                <!--Metric Card-->
+                <div class="p-2">
+                    <div class="flex flex-row items-center">
+                        <div class="flex-1 text-right md:text-center">
+                            <p class="attNumberStr">#</p>
+                            <h5 class="attNumber font-bold uppercase text-white">
+                                {{data.id}}
+                            </h5>                            
+                        </div>
+                    </div>
+                </div>
+                <!--/Metric Card-->
+            </div>
+            <div id="j2-3" class="hidden w-full md:w-1/2 xl:w-1/3 p-3">
+                <!--Metric Card-->
+                <div class="p-2">
+                    <div class="flex  items-center">
+                        <div class="flex-1 text-right md:text-center">
+                            <div  id="div_flag_{{data.id}}" class="flagDiv flex items-center space-x-3">
+                                <div id="div_img_{{data.id}}" class="inline-flex w-20 h-20"> <img id="img_{{data.id}}" class='w-20 h-20 opacity-50 py-0 object-cover rounded-full border-2 border-blue-300'
+                                alt='User avatar' src='../static/img/flags/ru.png' />
+                                </div>
+                                </div>
+                                                            
+                        </div>
+                    </div>
+                </div>
+                <!--/Metric Card-->
+            </div>
+            <div id="j3-3" class="hidden w-full md:w-1/2 xl:w-1/3 p-3">
+                <!--Metric Card-->
+                <div class="p-2">
+                    <div class="flex flex-row items-center">
+                        <div class="flex-1 text-right md:text-center">
+                            <h5 class="country2s opacity-75 font-bold uppercase text-white">
+                                {% for data in attdata %}                                
+                                {{data.country.flag.upper()}}
+                                {% endfor %}
+
+                            </h5>
+                            <button onclick="pYes()">PLAY</button>
+                        </div>
+                    </div>
+                </div>
+                <!--/Metric Card-->
+            </div>            
+        </div>
+    </div>
+    {% endfor%}
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function() {
+        // Connect to the Socket.IO server.
+        // The connection URL has the following format, relative to the current page:
+        //     http[s]://<domain>:<port>[/<namespace>]
+    var app_ip = "{{appHost}}";
+    var app_port = "{{appPort}}";
+    var clean_app_ip = app_ip.substring(5);
+    var clean_app_ip = clean_app_ip.slice(0, -5);
+    var socket = io('ws://'+clean_app_ip+':'+app_port+'/',{
+        transports: ["websocket", "polling"] // use WebSocket first, if available     
+        });    
+
+        // Event handler for new connections.
+        // The callback function is invoked when a connection with the
+        // server is established.
+        socket.on('connect', function() {
+            socket.emit('my_event', {data: 'I\'m connected!'});
+        });
+
+        // Event handler for server sent data.
+        // The callback function is invoked whenever the server emits data
+        // to the client. The data is then displayed in the "Received"
+        // section of the page.
+        socket.on('my_response', function(msg, cb) {
+            // $('#log').append('<br>' + $('<div/>').text('Received #' + msg.count + ': ' + msg.data).html());
+
+            if (msg.data==0) {
+                //
+                // $('#j1-1').css("background-color","white");
+                // $('#j1-2').css("background-color","white");
+                // $('#j1-3').css("background-color","white");                
+                socket.emit('my_broadcast_event', {data: 0});
+                window.location.reload();
+                
+                // $('#log').append('<br>' + $('<div/>').text('is ONE!#' + msg.count + ': ' + msg.data).html());
+            }          
+
+            
+            if (msg.data==11) {
+                //
+                $('#j1-1').css("background-color","white");
+                $('#j1-2').css("background-color","white");
+                $('#j1-3').css("background-color","white");                
+                // $('#log').append('<br>' + $('<div/>').text('is ONE!#' + msg.count + ': ' + msg.data).html());
+            }
+            if (msg.data==10) {
+                //
+                $('#j1-1').css("background-color","red");
+                $('#j1-2').css("background-color","red");
+                $('#j1-3').css("background-color","red");
+                // $('#log').append('<br>' + $('<div/>').text('is ONE!#' + msg.count + ': ' + msg.data).html());
+
+            }
+            if (msg.data==19) {
+                //
+                $('#j1-1').css("background-color","#000000");
+                $('#j1-2').css("background-color","#000000");
+                $('#j1-3').css("background-color","#000000");
+                // $('#log').append('<br>' + $('<div/>').text('is ONE!#' + msg.count + ': ' + msg.data).html());
+
+            }            
+            
+            if (msg.data==21) {
+                //
+                $('#j2-1').css("background-color","white");
+                $('#j2-2').css("background-color","white");
+                $('#j2-3').css("background-color","white");                
+                //$('#log').append('<br>' + $('<div/>').text('is ONE!#' + msg.count + ': ' + msg.data).html());
+            }
+            if (msg.data==20) {
+                //
+                $('#j2-1').css("background-color","red");
+                $('#j2-2').css("background-color","red");
+                $('#j2-3').css("background-color","red");
+                // $('#log').append('<br>' + $('<div/>').text('is ONE!#' + msg.count + ': ' + msg.data).html());
+            }
+            if (msg.data==29) {
+                //
+                $('#j2-1').css("background-color","#000000");
+                $('#j2-2').css("background-color","#000000");
+                $('#j2-3').css("background-color","#000000");
+                // $('#log').append('<br>' + $('<div/>').text('is ONE!#' + msg.count + ': ' + msg.data).html());
+            }            
+            if (msg.data==31) {
+                //
+                $('#j3-1').css("background-color","white");
+                $('#j3-2').css("background-color","white");
+                $('#j3-3').css("background-color","white");
+                // $('#log').append('<br>' + $('<div/>').text('is ONE!#' + msg.count + ': ' + msg.data).html());
+            }
+            if (msg.data==30) {
+                //
+                $('#j3-1').css("background-color","red");
+                $('#j3-2').css("background-color","red");
+                $('#j3-3').css("background-color","red");
+                // $('#log').append('<br>' + $('<div/>').text('is ONE!#' + msg.count + ': ' + msg.data).html());
+
+            }
+            if (msg.data==39) {
+                //
+                $('#j3-1').css("background-color","#000000");
+                $('#j3-2').css("background-color","#000000");
+                $('#j3-3').css("background-color","#000000");
+            }                                    
+        });
+
+        // Interval function that tests message latency by sending a "ping"
+        // message. The server then responds with a "pong" message and the
+        // round trip time is measured.
+        var ping_pong_times = [];
+        var start_time;
+        window.setInterval(function() {
+            start_time = (new Date).getTime();
+            $('#transport').text(socket.io.engine.transport.name);
+            socket.emit('my_ping');
+        }, 3000);
+
+        // Handler for the "pong" message. When the pong is received, the
+        // time from the ping is stored, and the average of the last 30
+        // samples is average and displayed.
+        socket.on('my_pong', function() {
+            // var latency = (new Date).getTime() - start_time;
+            // ping_pong_times.push(latency);
+            // ping_pong_times = ping_pong_times.slice(-30); // keep last 30 samples
+            // var sum = 0;
+            // for (var i = 0; i < ping_pong_times.length; i++)
+            //     sum += ping_pong_times[i];
+            $('#ping-pong').text('-----');
+        });
+
+        // Handlers for the different forms in the page.
+        // These accept data from the user and send it to the server in a
+        // variety of ways
+        $('form#emit').submit(function(event) {
+            socket.emit('my_event', {data: $('#emit_data').val()});
+            return false;
+        });
+        $('form#broadcast').submit(function(event) {
+            socket.emit('my_broadcast_event', {data: $('#broadcast_data').val()});
+            return false;
+        });
+        $('form#join').submit(function(event) {
+            socket.emit('join', {room: $('#join_room').val()});
+            return false;
+        });
+        $('form#leave').submit(function(event) {
+            socket.emit('leave', {room: $('#leave_room').val()});
+            return false;
+        });
+        $('form#send_room').submit(function(event) {
+            socket.emit('my_room_event', {room: $('#room_name').val(), data: $('#room_data').val()});
+            return false;
+        });
+        $('form#close').submit(function(event) {
+            socket.emit('close_room', {room: $('#close_room').val()});
+            return false;
+        });
+        $('form#disconnect').submit(function(event) {
+            socket.emit('disconnect_request');
+            return false;
+        });
+    });
+
+
+
+
+function j1Vote(votez) {
+    $(document).ready(function() {
+        // Connect to the Socket.IO server.
+        // The connection URL has the following format, relative to the current page:
+        //     http[s]://<domain>:<port>[/<namespace>]
+    var app_ip = "{{appHost}}";
+    var app_port = "{{appPort}}";
+    var clean_app_ip = app_ip.substring(5);
+    var clean_app_ip = clean_app_ip.slice(0, -5);
+    var socket = io('ws://'+clean_app_ip+':'+app_port+'/',{
+        transports: ["websocket", "polling"] // use WebSocket first, if available     
+        });    
+
+        // Event handler for new connections.
+        // The callback function is invoked when a connection with the
+        // server is established.
+        socket.on('connect', function() {
+            socket.emit('my_event', {data: 'I\'m connected!'});
+        });
+
+        // Event handler for server sent data.
+        // The callback function is invoked whenever the server emits data
+        // to the client. The data is then displayed in the "Received"
+        // section of the page.
+        socket.on('my_response', function(msg, cb) {
+
+            // if (msg.data==0) {
+            //     //
+            //     // $('#j1-1').css("background-color","white");
+            //     // $('#j1-2').css("background-color","white");
+            //     // $('#j1-3').css("background-color","white");                
+            //     socket.emit('my_broadcast_event', {data: 0});
+
+            //     // $('#log').append('<br>' + $('<div/>').text('is ONE!#' + msg.count + ': ' + msg.data).html());
+            // }            
+            // $('#log').append('<br>' + $('<div/>').text('Received #' + msg.count + ': ' + msg.data).html());
+            if (msg.data==11) {
+                //
+                $('#j1-1').css("background-color","white");
+                $('#j1-2').css("background-color","white");
+                $('#j1-3').css("background-color","white");                
+                // $('#log').append('<br>' + $('<div/>').text('is ONE!#' + msg.count + ': ' + msg.data).html());
+            }
+            if (msg.data==10) {
+                //
+                $('#j1-1').css("background-color","red");
+                $('#j1-2').css("background-color","red");
+                $('#j1-3').css("background-color","red");
+                // $('#log').append('<br>' + $('<div/>').text('is ONE!#' + msg.count + ': ' + msg.data).html());
+
+            }
+            if (msg.data==19) {
+                //
+                $('#j1-1').css("background-color","#000000");
+                $('#j1-2').css("background-color","#000000");
+                $('#j1-3').css("background-color","#000000");
+                // $('#log').append('<br>' + $('<div/>').text('is ONE!#' + msg.count + ': ' + msg.data).html());
+
+            }            
+            
+            if (msg.data==21) {
+                //
+                $('#j2-1').css("background-color","white");
+                $('#j2-2').css("background-color","white");
+                $('#j2-3').css("background-color","white");                
+                //$('#log').append('<br>' + $('<div/>').text('is ONE!#' + msg.count + ': ' + msg.data).html());
+            }
+            if (msg.data==20) {
+                //
+                $('#j2-1').css("background-color","red");
+                $('#j2-2').css("background-color","red");
+                $('#j2-3').css("background-color","red");
+                // $('#log').append('<br>' + $('<div/>').text('is ONE!#' + msg.count + ': ' + msg.data).html());
+            }
+            if (msg.data==29) {
+                //
+                $('#j2-1').css("background-color","#000000");
+                $('#j2-2').css("background-color","#000000");
+                $('#j2-3').css("background-color","#000000");
+                // $('#log').append('<br>' + $('<div/>').text('is ONE!#' + msg.count + ': ' + msg.data).html());
+            }            
+            if (msg.data==31) {
+                //
+                $('#j3-1').css("background-color","white");
+                $('#j3-2').css("background-color","white");
+                $('#j3-3').css("background-color","white");
+                // $('#log').append('<br>' + $('<div/>').text('is ONE!#' + msg.count + ': ' + msg.data).html());
+            }
+            if (msg.data==30) {
+                //
+                $('#j3-1').css("background-color","red");
+                $('#j3-2').css("background-color","red");
+                $('#j3-3').css("background-color","red");
+                // $('#log').append('<br>' + $('<div/>').text('is ONE!#' + msg.count + ': ' + msg.data).html());
+
+            }
+            if (msg.data==39) {
+                //
+                $('#j3-1').css("background-color","#000000");
+                $('#j3-2').css("background-color","#000000");
+                $('#j3-3').css("background-color","#000000");
+            }                                    
+        });
+
+        // Interval function that tests message latency by sending a "ping"
+        // message. The server then responds with a "pong" message and the
+        // round trip time is measured.
+        var ping_pong_times = [];
+        var start_time;
+        window.setInterval(function() {
+            start_time = (new Date).getTime();
+            $('#transport').text(socket.io.engine.transport.name);
+            socket.emit('my_ping');
+        }, 3000);
+
+        // Handler for the "pong" message. When the pong is received, the
+        // time from the ping is stored, and the average of the last 30
+        // samples is average and displayed.
+        socket.on('my_pong', function() {
+            // var latency = (new Date).getTime() - start_time;
+            // ping_pong_times.push(latency);
+            // ping_pong_times = ping_pong_times.slice(-30); // keep last 30 samples
+            // var sum = 0;
+            // for (var i = 0; i < ping_pong_times.length; i++)
+            //     sum += ping_pong_times[i];
+            $('#ping-pong').text('-----');
+        });
+
+        // Handlers for the different forms in the page.
+        // These accept data from the user and send it to the server in a
+        // variety of ways
+        $('form#emit').submit(function(event) {
+            socket.emit('my_event', {data: $('#emit_data').val()});
+            return false;
+        });
+        $('form#broadcast').submit(function(event) {
+            socket.emit('my_broadcast_event', {data: $('#broadcast_data').val()});
+            return false;
+        });
+        $('form#join').submit(function(event) {
+            socket.emit('join', {room: $('#join_room').val()});
+            return false;
+        });
+        $('form#leave').submit(function(event) {
+            socket.emit('leave', {room: $('#leave_room').val()});
+            return false;
+        });
+        $('form#send_room').submit(function(event) {
+            socket.emit('my_room_event', {room: $('#room_name').val(), data: $('#room_data').val()});
+            return false;
+        });
+        $('form#close').submit(function(event) {
+            socket.emit('close_room', {room: $('#close_room').val()});
+            return false;
+        });
+        $('form#disconnect').submit(function(event) {
+            socket.emit('disconnect_request');
+            return false;
+        });
+    });
+
+
+}
+</script>
+
+<script>
+
+//////////////////
+// get From MYSQL
+async function getSecondsFRMysql() {
+    
+    // const objectz = { status: 999, isid: 0 };
+    //   const responsez = await fetch('/timer-write', {
+    //     method: 'POST',
+    //     body: JSON.stringify(objectz)
+        
+    //   });
+
+    
+    let status = 0; // 1=start;2=pause;0=stop
+      const object = { status: 999, isid: 0 };
+      const response = await fetch('/timer-get-sec-on-tablo', {
+        method: 'POST',
+        body: JSON.stringify(object)
+        
+      });
+      
+      const responseText = await response.text();
+      var obj_scnd = JSON.parse(responseText);
+      document.getElementById('countdownTablo').innerText = obj_scnd.sec2tablo;
+    }  
+   
+    //////////////////
+
+
+    
+// let counter = 199 // EVERY =3 min 19 sec= -> RELOAD TABLO!!!
+let counter = 300 // EVERY = 5 min 0 sec= -> RELOAD TABLO!!!
+
+let mainTICK = setInterval(() => {
+        if(counter>0){
+			counter--
+		}
+        if(counter<=0){
+            //document.getElementById('countdownTablo').style.setProperty('--value', 5);
+            console.log('Time IS [ END ]. RELOAD : TABLO View_');
+            var v7bg_anime = document.getElementById("wrapp0");
+            v7bg_anime.classList.add("v7bg_anime");
+            // var v7bg_anime2 = document.getElementById("wrapp-main");
+            // v7bg_anime2.classList.add("v7bg_anime");            
+            setInterval(function () {window.location.reload()}, 3500);
+            
+		}        
+    
+
+
+
+
+
+
+
+        
+        getSecondsFRMysql();
+        console.log('tick!');
+        
+    
+    j1is = document.getElementById("j1-1").style.backgroundColor;
+    j2is = document.getElementById("j2-1").style.backgroundColor;
+    j3is = document.getElementById("j3-1").style.backgroundColor;
+    // console.log(j1is,j2is,j3is);
+
+
+    // var app_ip = "{{appHost}}";
+    var app_port = "{{appPort}}";
+    // console.warn(app_ip+'!!!!!');
+    // console.warn(app_port);
+    //var clean_app_ip = app_ip.substring(5);
+    var clean_app_ip = "10.0.0.8";
+
+//////////
+////////// if 2 judge vote NO & 1 judge vote YES
+//////////    
+    if((j2is=='red' && j3is=='red' && j1is=='white') || (j1is=='red' && j3is=='red' && j2is=='white') || (j1is=='red' && j2is=='red' && j3is=='white')) 
+    {
+        console.log('votes NO, 2 j say NOT!');
+        if((j1is=='red' && j3is=='red' && j2is=='white') || (j2is=='red' && j3is=='red' && j1is=='white') 
+            || (j1is=='red' && j2is=='red' && j3is=='white')) {
+            document.getElementById("j1-1").classList.add("blinkNow");
+            document.getElementById("j1-2").classList.add("blinkNow");
+            document.getElementById("j1-3").classList.add("blinkNow");
+            document.getElementById("j2-1").classList.add("blinkNow");
+            document.getElementById("j2-2").classList.add("blinkNow");
+            document.getElementById("j2-3").classList.add("blinkNow");
+            document.getElementById("j3-1").classList.add("blinkNow");                        
+            document.getElementById("j3-2").classList.add("blinkNow");                        
+            document.getElementById("j3-3").classList.add("blinkNow");
+            ///
+            //document.getElementById('stop_player').play();
+            //document.getElementById('stop_player').play();
+            //$.get("../core/model-db.php", { "is_get": "0" }, function(data) { console.log("response: " + data); });
+            //send('sigNot');
+            console.log('NO - SEND');
+
+            ///////
+            // var APIURL = 'http://'+clean_app_ip+':'+app_port+'/judge-cmd-1/'            
+            // fetch(APIURL)
+            // .then((response) => response.json())
+            // .then((data) => console.log(data));            
+
+            // var APIURL = 'http://'+clean_app_ip+':'+app_port+'/judge-cmd-0/'            
+            // fetch(APIURL)
+            // .then((response) => response.text())
+            // .then((data) => console.log(data));
+
+            ///////
+            // document.getElementById('stop_player').muted;
+            // document.getElementById('stop_player').play();
+            //pNo();
+            document.getElementById('btnNO').click();
+            jSET_no();
+            j1Vote(0);
+            
+            // let timerIdno = setTimeout(function tblRefresh3sno() { location.reload(); timerIdno = setTimeout(tblRefresh3sno, 3278); }, 3178);
+        }
+    }
+
+//////////
+////////// if 2 judge vote YES & 1 judge vote NO
+//////////    
+    if((j2is=='white' && j3is=='white' && j1is=='red') || (j1is=='white' && j3is=='white' && j2is=='red') || (j1is=='white' && j2is=='white' && j3is=='red')) {
+        console.log('votes YES, 2 j say YES!');
+        if((j1is=='white' && j3is=='white' && j2is=='red') || (j2is=='white' && j3is=='white' && j1is=='red') 
+            || (j1is=='white' && j2is=='white' && j3is=='red')) {
+            document.getElementById("j1-1").classList.add("blinkNow");
+            document.getElementById("j1-2").classList.add("blinkNow");
+            document.getElementById("j1-3").classList.add("blinkNow");
+            document.getElementById("j2-1").classList.add("blinkNow");
+            document.getElementById("j2-2").classList.add("blinkNow");
+            document.getElementById("j2-3").classList.add("blinkNow");
+            document.getElementById("j3-1").classList.add("blinkNow");                        
+            document.getElementById("j3-2").classList.add("blinkNow");                        
+            document.getElementById("j3-3").classList.add("blinkNow");
+            console.log('YES - SEND');
+            // 11111111
+
+            
+                
+
+            // document.getElementById('start_player').play();
+            ///////
+            // var APIURL = 'http://'+clean_app_ip+':'+app_port+'/judge-cmd-1/'            
+            // fetch(APIURL)
+            // .then((response) => response.text())
+            // .then((data) => console.log(data));
+            ///////
+            //pYes();
+            document.getElementById('btnYES').click();
+            jSET_yes();
+            j1Vote(0);
+            // let timerIdno = setTimeout(function tblRefresh3sno() { location.reload(); timerIdno = setTimeout(tblRefresh3sno, 3278); }, 3178);
+        }
+    }
+
+
+//////////
+////////// if 3 judge vote YES
+//////////    
+if((j2is=='white' && j3is=='white' && j1is=='white')) {
+        console.log('votes YES, 3j say YES!');
+        if((j1is=='white' && j3is=='white' && j2is=='white')) {
+            document.getElementById("j1-1").classList.add("blinkNow");
+            document.getElementById("j1-2").classList.add("blinkNow");
+            document.getElementById("j1-3").classList.add("blinkNow");
+            document.getElementById("j2-1").classList.add("blinkNow");
+            document.getElementById("j2-2").classList.add("blinkNow");
+            document.getElementById("j2-3").classList.add("blinkNow");
+            document.getElementById("j3-1").classList.add("blinkNow");                        
+            document.getElementById("j3-2").classList.add("blinkNow");                        
+            document.getElementById("j3-3").classList.add("blinkNow");
+            console.log('YES - SEND');
+            // document.getElementById('start_player').play();
+            ///////
+            // var APIURL = 'http://'+clean_app_ip+':'+app_port+'/judge-cmd-1/'            
+            // fetch(APIURL)
+            // .then((response) => response.text())
+            // .then((data) => console.log(data));  
+            
+            // let intervalID = setInterval(() => {
+	        // const res = await fetch(`https://jsonplaceholder.typicode.com/posts`);
+            // }, 2000);
+            // if (condition) {
+	        // clearInterval(intervalID); // Stop the interval if the condition holds true
+            // }            
+            
+            ///////
+            //pYes();
+            document.getElementById('btnYES').click();
+            jSET_yes()
+            j1Vote(0);
+            // let timerIdno = setTimeout(function tblRefresh3sno() {  location.reload(); timerIdno = setTimeout(tblRefresh3sno, 3278); }, 3178);
+        }
+    }    
+
+
+//////////
+////////// if 3 judge vote NO
+//////////    
+if((j2is=='red' && j3is=='red' && j1is=='red')) {
+        console.log('votes YES, 3j say NO!');
+        if((j1is=='red' && j3is=='red' && j2is=='red')) {
+            document.getElementById("j1-1").classList.add("blinkNow");
+            document.getElementById("j1-2").classList.add("blinkNow");
+            document.getElementById("j1-3").classList.add("blinkNow");
+            document.getElementById("j2-1").classList.add("blinkNow");
+            document.getElementById("j2-2").classList.add("blinkNow");
+            document.getElementById("j2-3").classList.add("blinkNow");
+            document.getElementById("j3-1").classList.add("blinkNow");                        
+            document.getElementById("j3-2").classList.add("blinkNow");                        
+            document.getElementById("j3-3").classList.add("blinkNow");
+            console.log('NO - SEND');
+            // document.getElementById('start_player').play();
+            // var APIURL = 'http://'+clean_app_ip+':'+app_port+'/judge-cmd-0/'            
+            // fetch(APIURL)
+            // .then((response) => response.text())
+            // .then((data) => console.log(data));            
+            //pNo();
+            document.getElementById('btnNO').click();
+            jSET_no();
+            j1Vote(0);
+            // let timerIdno = setTimeout(function tblRefresh3sno() { location.reload(); timerIdno = setTimeout(tblRefresh3sno, 3278); }, 3178);
+        }
+    }        
+
+    //console.log('j1 - ' + j1is);
+    // withe 
+    // red
+    // elem.classList.add("");
+    // elem.classList.remove("");
+
+    
+    
+    
+
+
+
+
+
+
+}, 1000)
+
+
+
+function jSET_yes() {
+    clearTimeout(mainTICK)
+    fetch('http://10.0.0.8:4848/judge-cmd-1/');
+    console.warn('http://10.0.0.8:4848/judge-cmd-1/');
+    let timerIdno = setTimeout(function tblRefresh3sno() {  location.reload(); timerIdno = setTimeout(tblRefresh3sno, 3978); }, 3878);
+// v7 WEBSOCKETS SEND
+        j1Vote(11111111);
+        j1Vote(0);
+
+        
+
+
+}
+function jSET_no() {
+    clearTimeout(mainTICK)
+    fetch('http://10.0.0.8:4848/judge-cmd-0/');
+    console.warn('http://10.0.0.8:4848/judge-cmd-0/');
+    let timerIdno = setTimeout(function tblRefresh3sno() {  location.reload(); timerIdno = setTimeout(tblRefresh3sno, 3978); }, 3878);
+    j1Vote(00000000);
+    j1Vote(0);
+}
+
+
+
+function pYes() {
+    console.warn('vote YES!');
+    const media = document.getElementById('yes_snd');
+    // document.getElementById('start_player').play();
+    media.muted = true; // without this line it's not working although I have "muted" in HTML
+    media.play();
+    media.muted = false;
+    // var audio = new Audio('../static/snd/yes.mp3');
+    // var playPromise = audio.play();
+
+}
+function pNo() {
+    console.warn('vote NO!!!');
+    const median = document.getElementById('no_snd');
+    // document.getElementById('start_player').play();
+    median.muted = true; // without this line it's not working although I have "muted" in HTML
+    median.play();
+    median.muted = false;
+}
+</script>
+
+
+
+
+<div>
+    <h1>Flask-SocketIO Test</h1>
+    <p>
+      Async mode is: <b>{{ async_mode }}</b><br>
+      Current transport is: <b><span id="transport"></span></b><br>
+      Average ping/pong latency: <b><span id="ping-pong"></span>ms</b>
+    </p>
+    <h2>Send:</h2>
+    <form id="broadcast" method="POST" action='#'>
+        <input type="text" name="broadcast_data" id="broadcast_data" placeholder="Message">
+        <input type="submit" value="Broadcast">
+    </form>
+
+    <form id="disconnect" method="POST" action="#">
+        <input type="submit" value="Disconnect">
+    </form>
+    <h2>Receive:</h2>
+    <div id="log"></div>    
+</div>
+
+</body>
+
+ <!-- <audio muted muted="muted" autoplay  id="stop_player" src="../static/snd/no.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.</audio> -->
+<audio muted="muted" autoplay="true" id="yes_snd" src="../static/snd/yes.mp3" type="audio/mpeg">
+Your browser does not support the audio element.</audio>
+<audio muted="muted" autoplay="true" id="no_snd" src="../static/snd/no.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.</audio>
+
+<!-- <audio controls autoplay>
+    <source src="../static/snd/yes.ogg" type="audio/ogg">
+    <source src="../static/snd/yes.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+  </audio> -->
+<!-- <audio id="stop_player" controls preload="auto">
+    <source src="../static/snd/no.mp3" type="audio/mpeg" />
+    This text displays if the audio tag isn't supported.
+</audio> -->
+
+<!-- <audio id="30sec_player" src="../static/snd/30sec.mp3" type="audio/mpeg">
+Your browser does not support the audio element.</audio>
+<audio id="90sec_player" src="../static/snd/90sec.mp3" type="audio/mpeg">
+Your browser does not support the audio element.</audio>
+<audio id="sndStart1" src="../static/snd/btnclick.mp3" type="audio/mpeg">
+Your browser does not support the audio element.</audio>
+<audio id="sndStart2" src="../static/snd/btnclick.mp3" type="audio/mpeg">
+Your browser does not support the audio element.</audio>
+<audio id="sndStop" src="../static/snd/btnclick.mp3" type="audio/mpeg">
+Your browser does not support the audio element.</audio>
+<audio id="sndAdd" src="../static/snd/jchik.mp3" type="audio/mpeg">
+Your browser does not support the audio element.</audio>
+<audio id="sndDel" src="../static/snd/jchik.mp3" type="audio/mpeg">
+Your browser does not support the audio element.</audio> -->
+
+
+<script>
+    /* Get the documentElement (<html>) to display the page in fullscreen */
+     var elem = document.documentElement;
+    //var elem = document.getElementById("min_screen");
+    
+    /* View in fullscreen */
+    function openFullscreen() {
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.webkitRequestFullscreen) { /* Safari */
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) { /* IE11 */
+        elem.msRequestFullscreen();
+      }
+    }
+    
+    /* Close fullscreen */
+    function closeFullscreen() {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.webkitExitFullscreen) { /* Safari */
+        document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) { /* IE11 */
+        document.msExitFullscreen();
+      }
+    }
+
+
+
+    document.onkeyup = function(e) {
+  if (e.which == 70) {
+    console.info("[ F ] was pressed (TABLO) ->");
+    openFullscreen();
+  }
+  if (e.which == 82) {
+    console.info("[ R ] was pressed (TABLO) ->");
+    window.location.reload();
+  }    
+
+};
+
+
+
+    </script>
+
+</html>

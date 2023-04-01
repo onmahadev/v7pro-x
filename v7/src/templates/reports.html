@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="ru" class="antialiased">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v7-Итоговый протокол </title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <!-- <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel=" stylesheet"> -->
+    <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/production_v7.css') }}">
+    
+
+    <!-- <script src="{{url_for('static', filename = 'js/faker.min.js')}}"></script> -->
+
+    <script src="{{url_for('static', filename = 'js/flowbite.js')}}"></script>
+    
+    <script src="{{url_for('static', filename = 'js/datepicker.js')}}"></script>
+
+    <script src="{{url_for('static', filename = 'js/socket.io.min.js')}}"></script>
+    
+    <script src="{{url_for('static', filename = 'js/ovmenu.js')}}"></script>
+    <!-- <script defer src="{{url_for('static', filename = 'js/alpine3.10.2.min.js')}}"></script> -->
+
+    <script src="{{url_for('static', filename = 'js/jquery-3.6.0.min.js')}}"></script>
+
+        
+
+    <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/ovmenu.css') }}">
+    <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/flow.css') }}">
+    <!-- <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/jquery-editable.css') }}"> -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <!--Replace with your tailwind.css once created-->
+
+
+
+    <script>
+      var seconds = 300;
+      // countdown timer. took 48 because page takes approx 48 sec to load
+      var url="{{url_for('flow')}}";        
+      function redirect(){
+       if (seconds <=0){
+        
+       // redirect to new url after counter  down.
+        window.location = url;
+       } else {
+        seconds--;
+        document.getElementById("pageInfo").innerHTML=" Оспаривание результата "
+      +seconds+" секунд"
+        setTimeout("redirect()", 1000)
+       }
+      }
+      </script>
+      
+
+<style>
+.content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 160px;
+  overflow: hidden;
+  font-family: "Lato", sans-serif;
+  font-size: 35px;
+  line-height: 40px;
+  color: #ecf0f1;
+}
+
+
+table.minimalistBlack {
+  border: 3px solid #000000;
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+table.minimalistBlack td, table.minimalistBlack th {
+  border: 1px solid #000000;
+  padding: 5px 4px;
+}
+table.minimalistBlack tbody td {
+  font-size: 13px;
+}
+table.minimalistBlack thead {
+  background: #CFCFCF;
+  background: -moz-linear-gradient(top, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
+  background: -webkit-linear-gradient(top, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
+  background: linear-gradient(to bottom, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
+  border-bottom: 3px solid #000000;
+}
+table.minimalistBlack thead th {
+  font-size: 15px;
+  font-weight: bold;
+  color: #000000;
+  text-align: center;
+}
+table.minimalistBlack tfoot {
+  font-size: 14px;
+  font-weight: bold;
+  color: #000000;
+  border-top: 3px solid #000000;
+}
+table.minimalistBlack tfoot td {
+  font-size: 14px;
+}
+
+.vtext {
+  /* writing-mode: vertical-rl; 
+  text-orientation: upright;   */
+}
+.singature {
+  font-size: 12px;
+  margin-top: 23px;
+}
+.nbrd {
+  border:0px !important;
+  border-width: 0px !important;
+  border-style: none ;
+}
+
+.container {
+  width: 100%;
+  font-family: arial;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 7px;
+}
+.container1 {
+  font-family: arial;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 7px;
+}
+.container2 {
+  width: 100%;
+  font-family: arial;
+  font-size: 12px;
+  font-weight:normal;
+  margin: 7px;
+}
+.child {
+  display: flex;
+  justify-content: center;
+}
+.lpic {
+  align-items: flex-start;
+  margin-right: 30%;
+}
+.rpic {
+  justify-content:flex-end;
+  margin-left: 30%;
+}
+.break {
+  flex-basis: 100%;
+  height: 0;
+}
+
+
+
+.main { display: flex; }
+.a { margin-left: 3%; }
+.b { flex: 1; text-align: center; }
+.c {margin-left: auto; margin-right: 7%;}
+.aa { margin-left: 3%; width: 49% }
+.bb { flex: 1; text-align: center; width:280px}
+.cc {margin-left: auto; margin-right: 7%; width: 49%}
+
+
+.rimg {
+  border: 0px none #ddd;
+  padding: 5px;
+  height: 64px;
+}
+.str5 {
+font-weight: bold;
+margin-top: 7px;
+margin-bottom: 5px;
+}
+
+
+table.minimalistBlack2 {
+  display: inline-table;
+  border: 2px solid #000000;
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+table.minimalistBlack2 td, table.minimalistBlack2 th {
+  border: 1px solid #000000;
+  padding: 5px 4px;
+}
+table.minimalistBlack2 tbody td {
+  font-size: 12px;
+}
+table.minimalistBlack2 thead {
+  background: #CFCFCF;
+  border-bottom: 2px solid #000000;
+}
+table.minimalistBlack2 thead th {
+  font-size: 12px;
+  font-weight: bold;
+  color: #000000;
+  text-align: center;
+}
+table.minimalistBlack2 tfoot td {
+  font-size: 12px;
+}
+
+.datenow {
+  font-size: 10px;
+  font-weight: bold;
+  color: #000000;
+  font-family: 'Courier New', Courier, monospace;
+  margin-top: 48px;
+}
+
+
+
+.headerz {
+  position: fixed;
+  top: 0;
+}
+.footer {
+  position: fixed;
+  bottom: -2%;
+}
+
+
+</style>
+
+</head>
+
+<body class="rep0">
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>
+    <!-- Rest of the HTML -->
+
+  </div>
+
+
+
+
+
+
+
+
+<div class="min-h-screen bg-gray-300 py-5 topper">
+
+<div class="header">
+
+  <div class="main">
+    <div class="a">
+      <img class="rimg" src="{{ url_for('static', filename='img/ftar.png') }}" alt="ФТАР">
+      <p class="datenow">{{fdate}}</p>
+    </div>
+    <div class="b"><div class="child">МИНИСТЕРСТВО СПОРТА РОССИИ</div>
+    <div class="str2">АУ ХМАО-ЮГРЫ «ЮГРАМЕГАСПОРТ»; </div>
+    <div class="str3">УПРАВЛЕНИЕ ФИЗИЧЕСКОЙ КУЛЬТУРЫ И СПОРТА АДМИНИСТРАЦИИ ГОРОДА ЛАНГЕПАС; ЛГ МАУ «СПОРТИВНЫЙ КОМПЛЕКС»;</div>    
+    <div class="str4">ФЕДЕРАЦИЯ ТЯЖЕЛОЙ АТЛЕТИКИ РОССИИ</div>
+    <div class="str5"><p> ИТОГОВЫЙ  ПРОТОКОЛ</p></div>
+  </div>
+    <div class="c">
+      <img class="rimg" src="{{ url_for('static', filename='img/msrf.png') }}" alt="ФТАР">
+    </div>
+</div>
+
+</div>
+  
+
+
+  <div id="printableTable">
+  <table class="minimalistBlack">
+    <thead>
+    <tr>
+    <th>место</th>
+    <th>Фамилия имя спортсмена</th>
+    <th>св</th>
+    <th colspan="3">рывок</th>
+    <th class="vtext">рез-ат</th>
+    <th colspan="3">толчок</th>
+    <th class="vtext">рез-ат</th>
+    <th>сумма</th>
+    <th>+разряд</th>
+    <th>очки</th>
+    <th>ФИО тренера</th>
+    </tr>
+    </thead>
+    <tr>
+      <th class="nbrd"></th> 
+      <th class="nbrd"></th> 
+      <th class="nbrd"></th> 
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th class="nbrd"></th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th class="nbrd"></th>
+      <th class="nbrd"></th>
+      <th class="nbrd"></th>
+      <th class="nbrd"></th>
+      <th class="nbrd"></th>
+      </tr>
+      </thead>    
+    <!-- <tfoot>
+    <tr>
+    <td>foot1</td>
+    <td>foot2</td>
+    <td>foot3</td>
+    <td>foot4</td>
+    <td>foot5</td>
+    </tr>
+    </tfoot> -->
+    <tbody>
+    
+      
+
+        {% for data in repdata %}
+        <tr>
+        <td nowrap  style ="font-weight: bold;">{{data.place if data.lace is not none}}</td>
+        <td nowrap  style ="text-align: left;">{{data.sname}} {{data.fname}}</td> 
+        <td>{{data.ow if data.ow is not none}}</td>
+        <td>{{data.s1 if data.s1 is not none}}</td>
+        <td>{{data.s2 if data.s2 is not none}}</td>
+        <td>{{data.s3 if data.s3 is not none}}</td>
+        <td>{{data.sres if data.sres is not none}}</td>
+        <td>{{data.j1 if data.j1 is not none}}</td>
+        <td>{{data.j2 if data.j2 is not none}}</td>
+        <td>{{data.j3 if data.j3 is not none}}</td>
+        <td>{{data.jres if data.jres is not none}}</td>
+        <td nowrap  style ="font-weight: bold;">{{data.dblsum if data.dblsum is not none}}</td>
+        <!-- <td>{{data.newrank}}</td>
+        <td>{{data.score}}</td>
+        <td>{{data.gname}}</td> -->
+        
+        <!-- <td>{{data.nr if data.nr is not none}}</td> -->
+        <td>&nbsp;</td>
+        <!-- <td nowrap  style ="font-weight: bold;">{{data.sc if data.sc is not none}}</td> -->
+        <td nowrap  style ="font-weight: bold;">
+          {{data.sinc if data.sinc is not none else data.sc if data.sc is not none}}
+          
+        </td>
+        <td>{{data.gn}}</td>
+      </tr>
+        {%endfor%}
+
+
+  </tbody>
+    </table>
+  </div>
+
+
+
+  <div class="container2">
+    <div class="child">Спортивные судьи</div>
+  </div>
+  
+
+
+
+
+<!-- ################################################################ -->
+<!--################################################################# -->
+<!--################################################################# -->
+<!-- IF ATT LIST IS 0 / NOT ADDET TO FLOW not any Athlete !!!         -->
+<!-- ################################################################ -->
+{% for data in repdata %}
+{% if loop.length==0 %}
+<div class="flex justify-center items-center h-screen">  
+  <form id="flow_formation_form_" action="{{url_for('flow')}}" method="POST">
+    <button alt="flow_formation" id="flow_formation_btb" onclick="restartApp()" type="submit" class="px-32 mx-32 focus:outline-none text-white bg-gray-300 hover:bg-gray-100 focus:ring-2 focus:ring-blue-300 hover:border-white border-transparent border-1 focus:border-white text-gray-200 bg-transparent font-medium rounded-lg text-sm px-1 py-1 mb-0 dark:bg-transparent dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+      <svg class="flex-shrink-0 w-20 h-20 text-green-700" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg> 
+  </button>
+ </form>
+  </div>
+{% endif %}
+{% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+          //window.print();
+         function printDiv() {
+         let prnt = document.getElementById("printableTable").innerHTML;
+         window.print();
+       }
+</script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="mypanel"></div>
+
+
+
+<div class="footer">
+<div class="main">
+  <div class="aa">
+    <div id="printableTableJ" class="w-full">
+      <div id="tablej1" class="w-6/12 inline-block">
+      <table class="minimalistBlack2">
+        <thead>
+        <tr>
+        <th nowrap >должность</th>
+        <th nowrap >Фамилия И.О.</th>
+        <th nowrap >город</th>
+        <th nowrap >категория</th>
+  
+        </tr>
+        </thead>
+        <tbody>
+        
+          
+    
+          {% for data in grp_dataz%}
+            <tr>
+              {% if loop.index==1 %}
+              {% if data.post=="HeadOfJuri" %}
+            <td nowrap style="text-align: left;font-weight: bold;">{{data.post_ru}}</td>
+            <td nowrap style="text-align: left;font-weight: bold; width: 60px;">{{data.name}}</td> 
+            <td nowrap style="font-weight: bold;">{{data.cat}}</td>
+            <td nowrap>{{data.city}}</td>
+              {%endif%}
+              {%endif%}              
+            </tr>
+            <tr>
+              {% if loop.index==2 %}
+              {% if data.post=="MemberOfJury" %}
+            <td nowrap style="text-align: left;font-weight: bold;">{{data.post_ru}}</td>
+            <td nowrap style="text-align: left;font-weight: bold; width: 60px;">{{data.name}}</td> 
+            <td nowrap style="font-weight: bold;">{{data.cat}}</td>
+            <td nowrap>{{data.city}}</td>
+              {%endif%}
+              {%endif%}              
+            </tr>
+            <tr>
+              {% if loop.index==3 %}
+              {% if data.post=="MemberOfJury2" %}
+            <td nowrap style="text-align: left;font-weight: bold;">{{data.post_ru}}</td>
+            <td nowrap style="text-align: left;font-weight: bold; width: 60px;">{{data.name}}</td> 
+            <td nowrap style="font-weight: bold;">{{data.cat}}</td>
+            <td nowrap>{{data.city}}</td>
+              {%endif%}
+              {%endif%}              
+            </tr>
+            <tr>
+              {% if loop.index==10 %}
+              {% if data.post=="TechController" %}
+            <td nowrap style="text-align: left;font-weight: bold;">{{data.post_ru}}</td>
+            <td nowrap style="text-align: left;font-weight: bold; width: 60px;">{{data.name}}</td> 
+            <td nowrap style="font-weight: bold;">{{data.cat}}</td>
+            <td nowrap>{{data.city}}</td>
+              {%endif%}
+              {%endif%}              
+            </tr>
+            <tr>
+              {% if loop.index==11 %}
+              {% if data.post=="LeadSecretary" %}
+            <td nowrap style="text-align: left;font-weight: bold;">{{data.post_ru}}</td>
+            <td nowrap style="text-align: left;font-weight: bold; width: 60px;">{{data.name}}</td> 
+            <td nowrap style="font-weight: bold;">{{data.cat}}</td>
+            <td nowrap>{{data.city}}</td>
+              {%endif%}
+              {%endif%}              
+            </tr>
+            <tr>
+              {% if loop.index==12 %}
+              {% if data.post=="LeadSecretaryAssistant" %}
+            <td nowrap style="text-align: left;font-weight: bold;">{{data.post_ru}}</td>
+            <td nowrap style="text-align: left;font-weight: bold; width: 60px;">{{data.name}}</td> 
+            <td nowrap style="font-weight: bold;">{{data.cat}}</td>
+            <td nowrap>{{data.city}}</td>
+              {%endif%}
+              {%endif%}              
+            </tr>                                           
+          {% endfor %}
+
+
+      </tbody>
+        </table>
+      </div>
+      </div>    
+      <p class="singature">ГЛАВНЫЙ СУДЬЯ _____________________
+        {% for data in grp_dataz%}
+        {% if loop.index==5 %}
+        {% if data.post=="SecretaryChief" %}
+        {{data.name}}
+        {%endif%}
+        {%endif%}
+        {%endfor%}
+      </p>
+  </div>
+  <div class="bb"><div class="child">&nbsp;&nbsp;&nbsp;</div>
+</div>
+  <div class="cc">
+    <div id="tablej2" class="w-5/12  inline-block">
+      <table class="minimalistBlack2">
+        <thead>
+        <tr>
+        <th>должность</th>
+        <th>Фамилия И.О.</th>
+        <th>город</th>
+        <th>категория</th>
+  
+        </tr>
+        </thead>
+        <tbody>
+        
+          {% for data in grp_dataz%}
+          <tr>
+            {% if loop.index==4 %}
+            {% if data.post=="JudgeChief" %}
+          <td nowrap style="text-align: left; font-weight: bold;">{{data.post_ru}}</td>
+          <td nowrap style="text-align: left;font-weight: bold; width: 60px;">{{data.name}}</td> 
+          <td nowrap style="font-weight: bold;">{{data.cat}}</td>
+          <td nowrap>{{data.city}}</td>
+            {%endif%}
+            {%endif%}              
+          </tr>
+          <tr>
+            {% if loop.index==5 %}
+            {% if data.post=="SecretaryChief" %}
+          <td nowrap style="text-align: left;font-weight: bold;">{{data.post_ru}}</td>
+          <td nowrap style="text-align: left;font-weight: bold; width: 60px;">{{data.name}}</td> 
+          <td nowrap style="font-weight: bold;">{{data.cat}}</td>
+          <td nowrap>{{data.city}}</td>
+            {%endif%}
+            {%endif%}              
+          </tr>
+          <tr>
+            {% if loop.index==6 %}
+            {% if data.post=="CentralJudge" %}
+          <td nowrap style="text-align: left;font-weight: bold;">{{data.post_ru}}</td>
+          <td nowrap style="text-align: left;font-weight: bold; width: 60px;">{{data.name}}</td> 
+          <td nowrap style="font-weight: bold;">{{data.cat}}</td>
+          <td nowrap>{{data.city}}</td>
+            {%endif%}
+            {%endif%}              
+          </tr>
+          <tr>
+            {% if loop.index==8 %}
+            {% if data.post=="Judge" %}
+          <td nowrap style="text-align: left;font-weight: bold;">{{data.post_ru}}</td>
+          <td nowrap style="text-align: left;font-weight: bold; width: 60px;">{{data.name}}</td> 
+          <td nowrap style="font-weight: bold;">{{data.cat}}</td>
+          <td nowrap>{{data.city}}</td>
+            {%endif%}
+            {%endif%}              
+          </tr>
+          <tr>
+            {% if loop.index==9 %}
+            {% if data.post=="Judge2" %}
+          <td nowrap style="text-align: left;font-weight: bold;">{{data.post_ru}}</td>
+          <td nowrap style="text-align: left;font-weight: bold; width: 60px;">{{data.name}}</td> 
+          <td nowrap style="font-weight: bold;">{{data.cat}}</td>
+          <td nowrap>{{data.city}}</td>
+            {%endif%}
+            {%endif%}              
+          </tr>
+          <tr>
+            {% if loop.index==7 %}
+            {% if data.post=="Doctor" %}
+          <td nowrap style="text-align: left;font-weight: bold;">{{data.post_ru}}</td>
+          <td nowrap style="text-align: left;font-weight: bold; width: 60px;">{{data.name}}</td> 
+          <td nowrap style="font-weight: bold;">{{data.cat}}</td>
+          <td nowrap>{{data.city}}</td>
+            {%endif%}
+            {%endif%}              
+          </tr>                                           
+        {% endfor %}
+                  
+    
+    
+      </tbody>
+        </table>
+    </div>
+    
+    <p class="singature">ГЛАВНЫЙ СЕКРЕТАРЬ _____________________
+      {% for data in grp_dataz%}
+        {% if loop.index==4 %}
+        {% if data.post=="JudgeChief" %}
+        {{data.name}}
+        {%endif%}
+        {%endif%}
+        {%endfor%}
+    </p>
+  </div>
+</div>
+
+</div>
+
+
+
+<script>
+const today = new Date();
+const yyyy = today.getFullYear();
+let mm = today.getMonth() + 1; // Months start at 0!
+let dd = today.getDate();
+if (dd < 10) dd = '0' + dd;
+if (mm < 10) mm = '0' + mm;
+const formattedToday = dd + '-' + mm + '-' + yyyy;
+console.warn(formattedToday);
+document.title = "v7-Итоговый протокол " + formattedToday;
+
+  </script>
+
+</body>
+
+</html>

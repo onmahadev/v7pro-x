@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="ru" class="antialiased">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>f7-Vishnu </title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel=" stylesheet">
+    <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
+    <script src="https://unpkg.com/flowbite@1.5.1/dist/datepicker.js"></script>
+    <script src="{{url_for('static', filename = 'js/socket.io.min.js')}}"></script>
+    
+    <script src="{{url_for('static', filename = 'js/ovmenu.js')}}"></script>
+    <!-- <script defer src="{{url_for('static', filename = 'js/alpine3.10.2.min.js')}}"></script> -->
+
+
+    <script src="{{url_for('static', filename = 'js/jquery-3.6.0.min.js')}}"></script>
+
+    <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/ovmenu.css') }}">
+    <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/double.css') }}">
+    <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/jquery-editable.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <!--Replace with your tailwind.css once created-->
+
+
+
+</head>
+
+
+<body class="leading-normal">
+    <!-- Sudarshana Chkra-->
+    <span class="f7_main_sc">
+        <div id="pica" class="pica">
+            <img src="static/img/tilaka-tr.png" alt="..."
+                class="shadow rounded-full mt-2 ml-1 h-9 align-middle border-none" />
+        </div>
+    </span>
+
+    <!-- Slider MENU-->
+    {% include 'nav.html' %}
+    <!-- Slider MENU-->
+
+
+
+
+
+
+
+
+    
+
+<!-- <div
+    x-cloak
+    x-data="{athletes: [],
+            'isLoading': true,
+        }"
+    x-init="fetch('http://10.0.0.108:5000/')
+    .then(response => response.json())
+    .then(response => { athletes = response.athletes; isLoading = false; console.log(response.athletes); })"
+>
+
+<h1 x-show="isLoading">Loading...</h1>
+<table x-show="!isLoading">
+    <tr>
+        <th>#</th>
+        <th>fname</th>
+        <th>sname</th>
+        <th>op</th>
+        <th>s1</th>
+        <th>s2</th>
+        <th>s3</th>
+    </tr>
+    <template x-for="att in athletes" :key="att.id">
+        <tr>
+        <td x-text="att.id"></td>
+        <td x-text="att.fname"></td>
+        <td x-text="att.sname"></td>
+        <td x-text="att.op"></td>
+        <td x-text="att.s1"></td>
+        <td x-text="att.s2"></td>
+        <td x-text="att.s3"></td>
+        </tr>
+    </template>
+</table>
+
+
+</div> -->
+
+
+
+
+<div>
+    <!-- Rest of the HTML -->
+
+  </div>
+
+
+
+
+
+
+
+<div class="min-h-screen bg-indigo-900 py-5">
+    
+
+    <div class="w-80 mx-auto mt-5 p-7">
+        <button class="bg-red-500 text-white rounded-md px-8 py-2 text-base font-medium hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300" 
+                id="load-json" onclick="updAllTable()">
+                    upd()!
+        </button>
+    </div>
+
+    <div class='overflow-x-auto w-full '>
+        <table id="att_dataz"
+        class='select-none mx-auto max-w-4xl w-full whitespace-nowrap rounded-lg bg-gray-200 divide-y overflow-hidden table-auto shadow-md'>
+        <thead class="bg-gray-500">
+            <tr class="text-white text-center">
+            <th class="font-semibold text-xs lowercase px-6 py-0">атлет</th>
+            <th class="font-semibold text-xs lowercase px-6 py-0">1 рыв</th>
+            <th class="font-semibold text-xs lowercase px-6 py-0">2 рыв</th>
+            <th class="font-semibold text-xs lowercase px-6 py-0">3 рыв</th>
+            <th class="font-semibold text-xs lowercase px-6 py-0">рез-т</th>
+            <th class="font-semibold text-xs lowercase px-6 py-0">1 тол</th>
+            <th class="font-semibold text-xs lowercase px-6 py-0">2 тол</th>
+            <th class="font-semibold text-xs lowercase px-6 py-0">3 тол</th>
+            <th class="font-semibold text-xs lowercase px-6 py-0">рез-т</th>
+            <th class="font-semibold text-xs lowercase px-6 py-0">сумма</th>
+            </tr>
+        </thead>
+<tbody class="divide-y divide-gray-100">
+{% for data in attdata %}
+{% if data.op == 1 %}
+<tr class="isOP_tr pulse_op_now_square id_{{loop.index}}">
+{% elif data.nop == 1 %}
+<tr class="isNOP_tr id_{{loop.index}}" id="tr_{{loop.index}}">
+{% else %}
+<tr id="tr_{{loop.index}}" class="ttr border-b border-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700 id_{{loop.index}}">
+{% endif %}
+<td class="px-4 py-0">
+<div id="tr_td_div_{{loop.index}}" class="idAtti">
+<span id="tr_td_div_span_{{loop.index}}"
+class="bg-gray-100 text-xs font-bold mr-1 px-1.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">
+{{loop.index}}
+</span>
+</div>
+<div class="flagDiv flex items-center space-x-3">
+<div class="inline-flex w-8 h-8"> <img class='w-8 h-8 py-0 object-cover rounded-full border-2 border-slate-900'
+alt='User avatar' src='../static/img/flags/{{data.country.flag.lower()}}.png' />
+</div>
+<div>
+
+    <span class="sex_wcat_box">
+        {% if data.sex == 1 %}
+        <span
+        class="bg-blue-900 text-white text-xs font-semibold mr-2 px-1.8 py-1.6 rounded dark:bg-blue-200 dark:text-blue-800 px-1">{{data.cat.lwcat}}</span>
+        {% else %}
+        <span
+        class="bg-red-600 text-white text-xs font-semibold mr-2 px-1.8 py-1.6 rounded dark:bg-red-200 dark:text-red-900 px-1">{{data.cat.lwcat}}</span>
+        {% endif %}
+        </span>
+
+        {% if data.op ==1 or data.nop == 1 %}
+        <span class="att_name_op"> <span id="sname_{{data.id}}">{{data.sname[:12]}}</span> <span id="fname_{{data.id}}"">{{data.fname[:9]}}</span>
+        {% elif data.op == 0 %}
+        <span class="att_name"> <span id="sname_{{data.id}}">{{data.sname[:12]}}</span> <span id="fname_{{data.id}}"">{{data.fname[:9]}}</span>
+        {% endif %}
+    
+<span class="countrt3code">{{data.country.flag.upper()}}&nbsp;</span>
+</span>
+
+<p class="text-gray-500 text-sm font-semibold tracking-wide"> <small>вес:</small>
+<span
+class="bg-gray-100 text-gray-800 text-xs font-semibold mr-1 px-0.5 py-0.6 rounded dark:bg-gray-700 dark:text-gray-300">{{data.ow}}
+kG</span>
+<span
+class="text-ellipsis overflow-hidden bg-gray-200 text-blue-900 text-xs font-semibold mr-1 px-0.8 py-0.6 rounded dark:bg-gray-700 dark:text-gray-400">{{data.cities.cname[:14]}}</span>
+</p>
+</div>
+</div>
+</td>
+<td id="td_s1_{{data.id}}" class="px-6 text-center app">
+    {% if data.s1ig == 1 %}
+    <p id="p_s1_{{data.id}}" class="cntr text-center app_isget"> {{data.s1}} </p>
+    {% elif data.s1ig == 0 %}
+    <p id="p_s1_{{data.id}}" class="cntr text-center app_isnotget"> {{data.s1}} </p>
+    {% elif data.s1ig == -1 %}
+    <p id="p_s1_{{data.id}}" class="cntr text-center app_refused"> {{data.s1}} </p>
+    {% elif data.s1ig is none and data.op == 1 %}
+    <p id="p_s1_{{data.id}}" class="cntr text-center pulse_op_now"> {{data.s1}} </p>
+    {% else %}
+    <p id="p_s1_{{data.id}}" class="cntr text-center app"> {{data.s1 if data.s1 is not none}} </p>
+    {% endif %}
+</td>
+
+<td class="px-6 text-center app">
+    {% if data.s2ig == 1 %}
+    <p class="cntr text-center app_isget"> {{data.s2}} </p>
+    {% elif data.s2ig == 0 %}
+    <p class="cntr text-center app_isnotget"> {{data.s2}} </p>
+    {% elif data.s2ig == -1 %}
+    <p class="cntr text-center app_refused"> {{data.s2}} </p>
+    {% elif data.s2ig is none and data.s1ig is not none and data.op == 1 %}
+    <p class="cntr text-center pulse_op_now"> {{data.s2 if data.s2 is not none}} </p>
+    {% elif data.s2ig is none and data.op == 0 %}
+    <p class="cntr text-center app vvvvv"> {{data.s2 if data.s2 is not none}} </p>
+    {% endif %}
+</td>
+
+<td class="px-6 text-center app">
+    {% if data.s3ig == 1 %}
+    <p class="cntr text-center app_isget"> {{data.s3}} </p>
+    {% elif data.s3ig == 0 %}
+    <p class="cntr text-center app_isnotget"> {{data.s3}} </p>
+    {% elif data.s3ig == -1 %}
+    <p class="cntr text-center app_refused"> {{data.s3}} </p>
+    {% elif data.s3ig is none and data.s2ig is not none and data.op == 1 %}
+    <p class="cntr text-center pulse_op_now"> {{data.s3 if data.s3 is not none}} </p>
+    {% elif data.j3ig is none and data.op==1  %}
+    <p class="cntr text-center"> {{data.s3 if data.s3 is not none}} </p>
+    {% else %}
+    <p class="cntr text-center app"> {{data.s3 if data.s3 is not none}} </p>
+    {% endif %}
+</td>
+
+<td class="px-6 py-1 text-center">
+<p><u> {{data.sres}} </u></p>
+</td>
+
+<td class="px-6 text-center app">
+    {% if data.j1ig == 1 %}
+    <p class="cntr text-center app_isget"> {{data.j1}} </p>
+    {% elif data.j1ig == 0 %}
+    <p class="cntr text-center app_isnotget"> {{data.j1}} </p>
+    {% elif data.j1ig == -1 %}
+    <p class="cntr text-center app_refused"> {{data.j1}} </p>
+    {% elif data.j3ig is none and data.op==1 and data.CJ is sameas False %}
+    <p class="cntr text-center"> {{data.j1}} </p>
+    {% else %}
+    <p class="cntr text-center app"> {{data.j1 if data.j1 is not none}} </p>
+    {% endif %}
+</td>
+
+<td class="px-6 text-center app">
+    {% if data.j2ig == 1 %}
+    <p class="cntr text-center app_isget"> {{data.j2}} </p>
+    {% elif data.j2ig == 0 %}
+    <p class="cntr text-center app_isnotget"> {{data.j2}} </p>
+    {% elif data.j2ig == -1 %}
+    <p class="cntr text-center app_refused"> {{data.j2}} </p>
+    {% elif data.j3ig is none and data.op==1 and data.CJ is sameas False %}
+    <p class="cntr text-center"> {{data.j2 if data.j2 is not none}} </p>
+    {% else %}
+    <p class="cntr text-center app"> {{data.j2 if data.j2 is not none}} </p>
+    {% endif %}
+</td>
+
+<td class="px-6 text-center app">
+    {% if data.j3ig == 1 %}
+    <p class="cntr text-center app_isget"> {{data.j3}} </p>
+    {% elif data.j3ig == 0 %}
+    <p class="cntr text-center app_isnotget"> {{data.j3}} </p>
+    {% elif data.j3ig == -1 %}
+    <p class="cntr text-center app_refused"> {{data.j3}} </p>
+    {% elif data.j3ig is none and data.op==1 and data.CJ is sameas False %}
+    <p class="cntr text-center"> {{data.j3 if data.j3 is not none}} </p>
+    {% else %}
+    <p class="cntr text-center app"> {{data.j3 if data.j3 is not none}} </p>
+    {% endif %}
+</td>
+
+                        <td class="px-6 text-center">
+                            <p><u> {{data.jres}} </u></p>
+                        </td>
+                        <td class="px-6 text-center">
+                            <p><b> {{data.dblsum}} </b></p>
+                        </td>
+                    </tr>
+                    {% endfor%}
+                </tbody>
+
+            </table>
+        </div>
+
+
+
+
+
+
+
+
+
+<div class="w-80 mx-auto mt-5 p-7">
+    <button class="bg-green-500 text-white rounded-md px-8 py-2 text-base font-medium hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300" 
+            id="open-btn">
+                popUp BOX!
+    </button>
+</div>
+
+<div class="w-80 mx-auto mt-5 p-7">
+    <button class="bg-green-200 text-white rounded-md px-8 py-2 text-base font-medium hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300" 
+            id="add_new_att_btn">
+                +
+    </button>
+</div>
+
+
+<!--Overlay Effect-->
+<div
+	class="fixed hidden inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"
+	id="my-modal">
+
+<!--modal content-->
+<div
+	class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white"
+>
+	<div class="mt-3 text-center">
+		<div
+			class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100"
+		>
+			<svg
+				class="h-6 w-6 text-green-600"
+				fill="none"
+				stroke="currentColor"
+				viewBox="0 0 24 24"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M5 13l4 4L19 7"
+				></path>
+			</svg>
+		</div>
+		<h3 class="text-lg leading-6 font-medium text-gray-900">Успешно!</h3>
+		<div class="mt-2 px-7 py-3">
+			<p class="text-sm text-gray-500">
+				Атлет добавлен!
+			</p>
+		</div>
+		<div class="items-center px-4 py-3">
+			<button
+				id="ok-btn"
+				class="px-4 py-2 bg-green-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300"
+			>
+				OK
+			</button>
+		</div>
+	</div>
+</div>
+
+</div>
+
+
+
+<!--Overlay Effect-->
+<div
+	class="fixed hidden inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"
+	id="add-att-modal">
+
+<!--modal add a new athlete-->
+<div
+	class="relative top-5 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white"
+>
+	<div class="mt-1">
+		<div
+			class="float-right flex items-center justify-center h-12 w-12 rounded-full bg-blue-200"
+		>
+            <svg class="w-6 h-6"
+                 fill="none"
+                 stroke="currentColor" 
+                 iewBox="0 0 24 24" 
+                 xmlns="http://www.w3.org/2000/svg">
+                 <path stroke-linecap="round" 
+                 stroke-linejoin="round" 
+                 stroke-width="2" 
+                 d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z">
+                </path>
+            </svg>  
+		</div>
+		<h3 class="add_att_header_txt text-lg float-right leading-6 font-medium text-gray-900">ДОБАВИТЬ АТЛЕТА &nbsp;&nbsp;&nbsp;</h3>
+		<div class="mt-2 px-7 py-3">
+			<!-- <p class="text-sm text-gray-500">
+				Атлет добавлен!
+			</p> -->
+<div class="vert_spacer_big">.</div>            
+            <form id="add_att_form" action="{{url_for('new_alhlete')}}" method="POST">
+            <div class="mb-6">
+                <div class="flex">
+                    <div class="flex items-center mr-4">
+                        <input checked id="inline-checked-radio" type="radio" value="1" name="sex" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="inline-checked-radio" class="ml-2 text-lg font-medium text-gray-900 dark:text-gray-300">муж</label>
+                    </div>
+                    <div class="flex items-center mr-4">
+                        <input id="inline-radio" type="radio" value="0" name="sex" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="inline-radio" class="ml-2 text-lg font-medium text-gray-900 dark:text-gray-300">жен</label>
+                    </div>
+                </div>            
+            </div>
+
+<div class="mb-6">
+<div class="flex ">
+  <span class="inline-flex items-center px-3 text-base text-gray-900 bg-gray-200 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+    Фамилия
+  </span>
+  <input type="text" id="sname-att" name="sname" class="rounded-none rounded-r-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Блинчиков">
+</div>
+<div class="vert_spacer">.</div>
+<div class="flex">
+    <span class="inline-flex items-center px-3 text-base text-gray-900 bg-gray-200 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+      Имя&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>
+    <input type="text" id="fname-att" name="fname" class="rounded-none rounded-r-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Сергей">
+  </div>
+</div>
+<div class="mb-6">
+<label for="snatch1" class="block mb-2 text-lg font-semibold text-gray-900 dark:text-gray-300">Начальные попытки (вес кг)</label>
+<div class="flex">
+  <span class="inline-flex items-center px-3 text-lg text-gray-900 bg-gray-200 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+    рывок
+  </span>
+  <input type="text" id="snatch1" name="s1" class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="26">
+  <div class="vert_spacer">.</div>
+  <span class="inline-flex items-center px-3 text-lg text-gray-900 bg-gray-200 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+    толчок
+  </span>
+  <input type="text" id="jerk1" name="j1" class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="26">  
+</div>
+</div>
+
+<span class="items-center px-6 py-0">
+<a href="#more" id="href_addInfo" onclick="showAddInfo()" class="float-right text-blue-500 underline">прочая информация &#8659;</a>
+</span>
+
+<div id="addInfoDIV" class="mb-6 hidden">
+
+    <div class="flex">
+      <span class="inline-flex items-center px-3 text-lg text-gray-900 bg-gray-200 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+        вес
+      </span>
+      <input type="text" id="ow" name="ow" class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-lg border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="26">
+      <div class="vert_spacer">.</div>
+      <span class="inline-flex">
+      <select id="wcat" name="wcat" class="bg-gray-50 px-3 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        <option selected>Весовая категория:</option>
+        <option value="US">United States</option>
+        <option value="CA">Canada</option>
+        <option value="FR">France</option>
+        <option value="DE">Germany</option>
+      </select>
+    </span>
+    </div>
+    <div class="vert_spacer">.</div>
+    <div class="flex">
+        <span class="flex">
+        <select id="countries" name="countries" class="bg-gray-50 px-3 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option selected>Субъект страны:</option>
+            <option value="US">United States</option>
+            <option value="CA">Canada</option>
+            <option value="FR">France</option>
+            <option value="DE">Germany</option>
+          </select>
+        </span>
+          <div class="vert_spacer">.</div>
+          <span class="inline-flex">
+            <select id="cities" name="cities"class="bg-gray-50 px-3 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              <option selected>&nbsp;Город / место:&nbsp;&nbsp;</option>
+              <option value="US">United States</option>
+              <option value="CA">Canada</option>
+              <option value="FR">France</option>
+              <option value="DE">Germany</option>
+            </select>
+          </span>
+    </div>
+    <div class="vert_spacer">.</div>
+    <div class="flex">
+
+        <div class="relative">
+            <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+              <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+            </div>
+            <input id="yearz" name="yearz" datepicker="" datepicker-autohide datepicker-format="yyyy" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input" placeholder="Год рождения:">
+          </div>
+          
+      </div>  
+
+</div>
+
+
+
+
+                <div class="items-center px-4 py-3">
+                    <button
+                        id="add_newatt_ok_btn"
+                        class="px-4 py-2 bg-green-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300"
+                    >
+                        OK
+                    </button>
+                </div>
+              </form>
+            
+
+		</div>
+
+	</div>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+    
+
+
+
+
+
+
+        <!-- <div>
+            <button type="button" onclick="window.location.href='{{ url_for( 'double') }}';">Forward</button>
+        </div> -->
+
+<!-- 
+
+    <table>
+        <thead>
+            <th>Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Age</th>
+            <th>#</th>
+        </thead>
+        {% for data in att %}
+        <tbody>
+            <td>{{data.id}}</td>
+            <td>{{data.firstname}}</td>
+            <td>{{data.op}}</td>
+            <td>{{data.snatch1}}</td>
+            <td><a href="/delete/{{data.id}}" type="button">Delete</a></td>
+        </tbody>
+        {% endfor%}
+    </table> -->
+
+
+
+<script>
+      //getData();
+async function updAllTable() {
+    const response= await fetch('/att/');
+    const data= await response.json();
+    length=data.attz.length;
+    var temp="";
+     for(i=0;i<length;i++)
+     {
+        temp+="<tr id=tr_"+data.attz[i].id+">";
+        $("#sname_"+data.attz[i].id).text(data.attz[i].sname.substring(0, 12));
+        $("#fname_"+data.attz[i].id).text(data.attz[i].fname.substring(0, 9));
+        $("#s1_"+data.attz[i].id).text(data.attz[i].s1);
+        $("#s1ig_"+data.attz[i].id).text(data.attz[i].s1ig);
+        //$("#p_s1_"+data.attz[1].id).addClass("app_isget")
+        //.removeClass("app_isnotget app_refused app");
+        isGet = data.attz[i].s1ig
+        if (isGet==1) {
+            $("#p_s1_"+data.attz[i].id).text(data.attz[i].s1);
+            $("#p_s1_"+data.attz[i].id)
+            .addClass("app_isget")
+            .removeClass("app_isnotget app_refused app");
+            console.log('1_'+data.attz[i].s1ig);
+        }
+        else if (isGet==0) {
+                $("#p_s1_"+data.attz[i].id).text(data.attz[i].s1);
+                $("#p_s1_"+data.attz[i].id)
+                .addClass("app_isnotget")
+                .removeClass("app_isget app_refused app");                
+                console.log('0_'+data.attz[i].s1ig);
+        }
+        else if (isGet==-1) {
+                $("#p_s1_"+data.attz[i].id).text(data.attz[i].s1);
+                $("#p_s1_"+data.attz[i].id)
+                .addClass("app_refused")
+                .removeClass("app_isget app_isnotget app");                
+                console.log('0_'+data.attz[i].s1ig);
+        }
+        else if (isGet== null ) {
+                $("#p_s1_"+data.attz[i].id).text(data.attz[i].s1);
+                $("#p_s1_"+data.attz[i].id)
+                .addClass("app")
+                .removeClass("app_isget app_isnotget app_refused"); 
+                console.log('0_'+data.attz[i].s1ig);
+        }        
+
+        // switch (data.attz[i].s1ig)
+        //     {
+        //     case "1":
+        //         $("#p_s1_"+data.attz[i].id).text(data.attz[i].s1);
+        //         $("#p_s1_"+data.attz[i].id)
+        //         .addClass("app_isget")
+        //         .removeClass("app_isnotget app_refused app");
+        //         console.log('1');
+        //         console.log('!!!1_'+data.attz[i].s1ig);
+        //     case "0":
+        //         $("#p_s1_"+data.attz[i].id).text(data.attz[i].s1);
+        //         $("#p_s1_"+data.attz[i].id)
+        //         .addClass("app_isnotget")
+        //         .removeClass("app_isget app_refused app");                
+        //         console.log('0');
+        //         console.log('!!!0_'+data.attz[i].s1ig);
+        //     default: 
+        //         $("#p_s1_"+data.attz[i].id).text(data.attz[i].s1);
+        //         $("#p_s1_"+data.attz[i].id)
+        //         .addClass("app")
+        //         .removeClass("app_isget app_isnotget app_refused");
+        //         console.log('!!!defa_'+data.attz[i].s1ig);
+        //         console.log('defa');
+        //     }
+        // // $("#fname_"+data.attz[i].id).text(data.attz[i].op);
+        // $("#fname_"+data.attz[i].id).text(data.attz[i].nop);
+        // $("#fname_"+data.attz[i].id).text(data.attz[i].s2);
+        // $("#fname_"+data.attz[i].id).text(data.attz[i].s3);
+    }
+}
+
+async function getData(){
+     const response= await fetch('/att/');
+     //console.log(response);
+     const data= await response.json();
+     //console.log(data);
+     length=data.attz.length;
+     console.log(length);
+     var temp="";
+     for(i=0;i<length;i++)
+     {
+        temp+="<tr id=tr_"+data.attz[i].id+">";
+        temp+="<td>"+data.attz[i].id+"</td>";
+        temp+="<td>"+data.attz[i].fname+"</td>";
+        temp+="<td>"+data.attz[i].cid+"</td>";
+     }
+
+  document.getElementById("datazz").innerHTML=temp;
+   }
+
+</script>
+
+
+
+<table id="datazz">
+
+</table>
+
+
+    <script>
+function showAddInfo() {
+  //var x = document.getElementById("addInfoDIV");
+  var e = document.getElementById("addInfoDIV");
+  var ech = document.getElementById("href_addInfo");
+       if(e.style.display == 'block') {
+          e.style.display = 'none';
+          ech.innerHTML = `<span>прочая информация &#8659; </span>`;
+}
+       else {
+          e.style.display = 'block';
+          ech.innerHTML = `<span>скрыть &#8657; </span>`;
+        }
+}
+
+    getData()
+      function blinkUpdate(element, newValue, newColor='#00ff00') {
+          previousColor = element.style.color;
+          element.innerHTML = newValue;
+          element.style.color = newColor;
+          // Set back to original color after timeout ms
+          setTimeout(() => {
+              element.style.color = previousColor
+          }, 2000)
+      }
+      </script>
+
+
+
+
+    <div class="mypanel"></div>
+
+
+
+<!-- <script>
+    //blinkUpdate()
+// json data
+var api = "http://10.0.0.108:5000/";
+$.getJSON(api, function(json_data){
+var table_obj = $('table.tbl0');
+//console.log(json_data.athletes[0])
+$.each(json_data, function(index, item){
+    console.log(item[5].fname)
+     var table_row = $('<tr>', {id: item[0].id});
+     var table_cell = $('<td>', {html: item[0].fname});
+     table_row.append(table_cell);
+     table_obj.append(table_row);
+})
+
+})
+</script>         -->
+
+
+
+
+<script type="text/javascript">
+        function getAllAthl() {
+                    console.log('get all');
+                }    
+        // Grabs all the Elements by their IDs which we had given them
+        let modal = document.getElementById("my-modal");
+        let btn = document.getElementById("open-btn");
+        let button = document.getElementById("ok-btn");
+    
+        // We want the modal to open when the Open button is clicked
+        btn.onclick = function() {
+        modal.style.display = "block";
+        }
+        // We want the modal to close when the OK button is clicked
+        button.onclick = function() {
+        modal.style.display = "none";
+        }
+        // The modal will close when the user clicks anywhere outside the modal
+        window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+        }
+// ADD-NEW-ATT Grabs all the Elements by their IDs which we had given them        
+        let modal_add = document.getElementById("add-att-modal");
+        let add_att_btn = document.getElementById("add_new_att_btn");
+        let button_newatt_ok = document.getElementById("add_newatt_ok_btn");
+    
+        // We want the modal to open when the Open button is clicked
+        add_att_btn.onclick = function() {
+        modal_add.style.display = "block";
+        }
+        // We want the modal to close when the OK button is clicked
+        button_newatt_ok.onclick = function() {
+        modal_add.style.display = "none";
+        }
+        // The modal will close when the user clicks anywhere outside the modal
+        window.onclick = function(event) {
+        if (event.target == modal_add) {
+            modal_add.style.display = "none";
+        }
+        }
+
+</script>
+    
+    
+
+
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function() {
+        // Connect to the Socket.IO server.
+        // The connection URL has the following format, relative to the current page:
+        //     http[s]://<domain>:<port>[/<namespace>]
+        var socket = io('ws://10.0.0.108:5000/',{
+            transports: ["websocket", "polling"] // use WebSocket first, if available
+        });
+
+        // Event handler for new connections.
+        // The callback function is invoked when a connection with the
+        // server is established.
+        socket.on('connect', function() {
+            socket.emit('my_event', {data: 'I\'m connected!'});
+        });
+
+        // Event handler for server sent data.
+        // The callback function is invoked whenever the server emits data
+        // to the client. The data is then displayed in the "Received"
+        // section of the page.
+        socket.on('my_response', function(msg, cb) {
+            $('#log').append('<br>' + $('<div/>').text('Received #' + msg.count + ': ' + msg.data).html());
+            if (cb)
+                cb();
+        });
+
+        // Interval function that tests message latency by sending a "ping"
+        // message. The server then responds with a "pong" message and the
+        // round trip time is measured.
+        var ping_pong_times = [];
+        var start_time;
+        window.setInterval(function() {
+            start_time = (new Date).getTime();
+            $('#transport').text(socket.io.engine.transport.name);
+            socket.emit('my_ping');
+        }, 1000);
+
+        // Handler for the "pong" message. When the pong is received, the
+        // time from the ping is stored, and the average of the last 30
+        // samples is average and displayed.
+        socket.on('my_pong', function() {
+            var latency = (new Date).getTime() - start_time;
+            ping_pong_times.push(latency);
+            ping_pong_times = ping_pong_times.slice(-30); // keep last 30 samples
+            var sum = 0;
+            for (var i = 0; i < ping_pong_times.length; i++)
+                sum += ping_pong_times[i];
+            $('#ping-pong').text(Math.round(10 * sum / ping_pong_times.length) / 10);
+        });
+
+        // Handlers for the different forms in the page.
+        // These accept data from the user and send it to the server in a
+        // variety of ways
+        $('form#emit').submit(function(event) {
+            socket.emit('my_event', {data: $('#emit_data').val()});
+            return false;
+        });
+        $('form#broadcast').submit(function(event) {
+            socket.emit('my_broadcast_event', {data: $('#broadcast_data').val()});
+            return false;
+        });
+        $('form#join').submit(function(event) {
+            socket.emit('join', {room: $('#join_room').val()});
+            return false;
+        });
+        $('form#leave').submit(function(event) {
+            socket.emit('leave', {room: $('#leave_room').val()});
+            return false;
+        });
+        $('form#send_room').submit(function(event) {
+            socket.emit('my_room_event', {room: $('#room_name').val(), data: $('#room_data').val()});
+            return false;
+        });
+        $('form#close').submit(function(event) {
+            socket.emit('close_room', {room: $('#close_room').val()});
+            return false;
+        });
+        $('form#disconnect').submit(function(event) {
+            socket.emit('disconnect_request');
+            return false;
+        });
+    });
+</script>
+
+
+<div class="bg-white">
+    <h1>Flask-SocketIO Test</h1>
+    <p>
+      Async mode is: <b>{{ async_mode }}</b><br>
+      Current transport is: <b><span id="transport"></span></b><br>
+      Average ping/pong latency: <b><span id="ping-pong"></span>ms</b>
+    </p>
+    <h2>Send:</h2>
+    <form id="broadcast" method="POST" action='#'>
+        <input type="text" name="broadcast_data" id="broadcast_data" placeholder="Message">
+        <input type="submit" value="Broadcast">
+    </form>
+
+    <form id="disconnect" method="POST" action="#">
+        <input type="submit" value="Disconnect">
+    </form>
+    <h2>Receive:</h2>
+    <div id="log"></div>    
+</div>
+
+</body>
+
+</html>

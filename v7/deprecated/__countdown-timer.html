@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en" class="antialiased">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v7 :: Таймер / время  </title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel=" stylesheet">
+    <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
+    
+    <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/daisyui2.22.0.css') }}">
+
+    <script src="{{url_for('static', filename = 'js/socket.io.min.js')}}"></script>
+    
+    <script src="{{url_for('static', filename = 'js/ovmenu.js')}}"></script>
+    <!-- <script defer src="{{url_for('static', filename = 'js/alpine3.10.2.min.js')}}"></script> -->
+
+
+    <script src="{{url_for('static', filename = 'js/jquery-3.6.0.min.js')}}"></script>
+
+    <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/tablo.css') }}">
+
+    <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/ovmenu.css') }}">
+    
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <!--Replace with your tailwind.css once created-->
+
+
+
+    <script>
+        function Timer(duration, element) {
+            var self = this;
+            this.duration = duration;
+            this.element = element;
+            this.running = false;
+        
+            
+            this.els = {
+                ticker: document.getElementById("ticker"),
+                seconds: document.getElementById("seconds")
+            };
+        
+            document.getElementById("toggle").addEventListener("click", function () {
+                var cl = "countdown--wide";
+                if (self.element.classList.contains(cl)) {
+                    self.element.classList.remove(cl);
+                } else {
+                    self.element.classList.add(cl);
+                }
+            });
+        
+            var hammerHandler = new Hammer(this.element);
+            hammerHandler.get("pan").set({ direction: Hammer.DIRECTION_VERTICAL });
+            hammerHandler.on("panup pandown", function (ev) {
+                if (!self.running) {
+                    if (ev.direction === Hammer.DIRECTION_UP && self.duration < 999000) {
+                        self.setDuration(self.duration + 1000);
+                    } else if (ev.direction === Hammer.DIRECTION_DOWN && self.duration > 0) {
+                        self.setDuration(self.duration - 1000);
+                    }
+                }
+            });
+        
+            hammerHandler.on("tap", function () {
+                if (self.running) {
+                    self.reset();
+                } else {
+                    self.start();
+                }
+            });
+        }
+        
+        Timer.prototype.start = function () {
+            var self = this;
+            var start = null;
+            this.running = true;
+            var remainingSeconds = (this.els.seconds.textContent = this.duration / 1000);
+        
+            function draw(now) {
+                if (!start) start = now;
+                var diff = now - start;
+                var newSeconds = Math.ceil((self.duration - diff) / 1000);
+        
+                if (diff <= self.duration) {
+                    self.els.ticker.style.height = 100 - (diff / self.duration) * 100 + "%";
+        
+                    if (newSeconds != remainingSeconds) {
+                        self.els.seconds.textContent = newSeconds;
+                        remainingSeconds = newSeconds;
+                    }
+        
+                    self.frameReq = window.requestAnimationFrame(draw);
+                } else {
+                    //self.running = false;
+                    self.els.seconds.textContent = 0;
+                    self.els.ticker.style.height = "0%";
+                    self.element.classList.add("countdown--ended");
+                }
+            }
+        
+            self.frameReq = window.requestAnimationFrame(draw);
+        };
+        
+        Timer.prototype.reset = function () {
+            this.running = false;
+            window.cancelAnimationFrame(this.frameReq);
+            this.els.seconds.textContent = this.duration / 1000;
+            this.els.ticker.style.height = null;
+            this.element.classList.remove("countdown--ended");
+        };
+        
+        Timer.prototype.setDuration = function (duration) {
+            this.duration = duration;
+            this.els.seconds.textContent = this.duration / 1000;
+        };
+        
+        var timer = new Timer(60000, document.getElementById("countdown"));
+        timer.start();
+        
+        </script>
+
+<style>
+
+.container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.countdown {
+  display: block;
+  width: 66vmin;
+  height: 66vmin;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Oswald", sans-serif;
+  font-weight: 400;
+  font-size: 25vmin;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  transition: width, height, border-radius, font-size;
+  transition-duration: 0.2s;
+}
+.countdown--ended {
+  -webkit-animation: buzz 0.5s;
+          animation: buzz 0.5s;
+}
+.countdown:active {
+  transform: scale(1.02);
+}
+@-webkit-keyframes buzz {
+  0% {
+    transform: rotate(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: rotate(6deg);
+  }
+  20%, 40%, 60%, 80% {
+    transform: rotate(-6deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
+@keyframes buzz {
+  0% {
+    transform: rotate(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: rotate(6deg);
+  }
+  20%, 40%, 60%, 80% {
+    transform: rotate(-6deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
+.countdown--wide {
+  width: 100%;
+  height: 100%;
+  font-size: 50vmin;
+  border-radius: 0;
+}
+.countdown__fill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background: #FF5722;
+  opacity: 1;
+}
+.countdown__digit {
+  width: 100%;
+  color: #FF5722;
+  text-align: center;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.countdown__buttons {
+  position: absolute;
+  right: 50px;
+  top: 50%;
+  height: 200px;
+  margin-top: -100px;
+  color: white;
+  z-index: 1;
+}
+.countdown__button {
+  height: 50%;
+}
+
+.full-button {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  padding: 1em 0.5em 0.5em 2em;
+  font-family: "Oswald", sans-serif;
+  text-transform: uppercase;
+  color: white;
+  cursor: pointer;
+}    
+</style>
+
+</head>
+
+
+<body class="bg-opacity-100 bg-black leading-normal">
+
+    
+
+
+    <div class="container">
+        <div class="countdown countdown--wide" id="countdown">
+          <div class="countdown__fill" id="ticker"></div>
+          <div class="countdown__digit" id="seconds">00</div>
+          <!--.countdown__buttons-->
+          <!--	.countdown__button +-->
+          <!--	.countdown__button --->
+        </div>
+      </div><a class="full-button" id="toggle">Toggle size</a>
+      
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function() {
+        // Connect to the Socket.IO server.
+        // The connection URL has the following format, relative to the current page:
+        //     http[s]://<domain>:<port>[/<namespace>]
+
+        var app_ip = "{{appHost}}";
+        var app_port = "{{appPort}}";
+        var clean_app_ip = app_ip.substring(5);
+        var clean_app_ip = clean_app_ip.slice(0, -5);
+        // var socket = io('ws://10.0.0.108:5000/',{
+        var socket = io('ws://'+clean_app_ip+':'+app_port+'/',{
+        transports: ["websocket", "polling"] // use WebSocket first, if available
+        });
+
+        // Event handler for new connections.
+        // The callback function is invoked when a connection with the
+        // server is established.
+        socket.on('connect', function() {
+            socket.emit('my_event', {data: 'I\'m connected!'});
+        });
+
+        // Event handler for server sent data.
+        // The callback function is invoked whenever the server emits data
+        // to the client. The data is then displayed in the "Received"
+        // section of the page.
+        socket.on('my_response', function(msg, cb) {
+            // $('#log').append('<br>' + $('<div/>').text('Received #' + msg.count + ': ' + msg.data).html());
+            if (msg.data==11) {
+                //
+                $('#j1-1').css("background-color","white");
+                $('#j1-2').css("background-color","white");
+                $('#j1-3').css("background-color","white");                
+                // $('#log').append('<br>' + $('<div/>').text('is ONE!#' + msg.count + ': ' + msg.data).html());
+            }
+
+
+
+
+                      
+        });
+
+        // Interval function that tests message latency by sending a "ping"
+        // message. The server then responds with a "pong" message and the
+        // round trip time is measured.
+        var ping_pong_times = [];
+        var start_time;
+        window.setInterval(function() {
+            start_time = (new Date).getTime();
+            $('#transport').text(socket.io.engine.transport.name);
+            socket.emit('my_ping');
+        }, 3000);
+
+        // Handler for the "pong" message. When the pong is received, the
+        // time from the ping is stored, and the average of the last 30
+        // samples is average and displayed.
+        socket.on('my_pong', function() {
+            // var latency = (new Date).getTime() - start_time;
+            // ping_pong_times.push(latency);
+            // ping_pong_times = ping_pong_times.slice(-30); // keep last 30 samples
+            // var sum = 0;
+            // for (var i = 0; i < ping_pong_times.length; i++)
+            //     sum += ping_pong_times[i];
+            $('#ping-pong').text('-----');
+        });
+
+        // Handlers for the different forms in the page.
+        // These accept data from the user and send it to the server in a
+        // variety of ways
+        $('form#emit').submit(function(event) {
+            socket.emit('my_event', {data: $('#emit_data').val()});
+            return false;
+        });
+        $('form#broadcast').submit(function(event) {
+            socket.emit('my_broadcast_event', {data: $('#broadcast_data').val()});
+            return false;
+        });
+        $('form#join').submit(function(event) {
+            socket.emit('join', {room: $('#join_room').val()});
+            return false;
+        });
+        $('form#leave').submit(function(event) {
+            socket.emit('leave', {room: $('#leave_room').val()});
+            return false;
+        });
+        $('form#send_room').submit(function(event) {
+            socket.emit('my_room_event', {room: $('#room_name').val(), data: $('#room_data').val()});
+            return false;
+        });
+        $('form#close').submit(function(event) {
+            socket.emit('close_room', {room: $('#close_room').val()});
+            return false;
+        });
+        $('form#disconnect').submit(function(event) {
+            socket.emit('disconnect_request');
+            return false;
+        });
+    });
+</script>
+
+<script>
+
+    
+let counter = 60
+
+
+</script>
+
+<div>
+    <h1>Flask-SocketIO Test</h1>
+    <p>
+      Async mode is: <b>{{ async_mode }}</b><br>
+      Current transport is: <b><span id="transport"></span></b><br>
+      Average ping/pong latency: <b><span id="ping-pong"></span>ms</b>
+    </p>
+    <h2>Send:</h2>
+    <form id="broadcast" method="POST" action='#'>
+        <input type="text" name="broadcast_data" id="broadcast_data" placeholder="Message">
+        <input type="submit" value="Broadcast">
+    </form>
+
+    <form id="disconnect" method="POST" action="#">
+        <input type="submit" value="Disconnect">
+    </form>
+    <h2>Receive:</h2>
+    <div id="log"></div>    
+</div>
+
+</body>
+
+ <!-- <audio muted muted="muted" autoplay  id="stop_player" src="../static/snd/no.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.</audio> -->
+<audio  id="start_player" src="../static/snd/yes.mp3" type="audio/mpeg">
+Your browser does not support the audio element.</audio> -->
+
+<!-- <audio controls autoplay>
+    <source src="../static/snd/yes.ogg" type="audio/ogg">
+    <source src="../static/snd/yes.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+  </audio> -->
+<!-- <audio id="stop_player" controls preload="auto">
+    <source src="../static/snd/no.mp3" type="audio/mpeg" />
+    This text displays if the audio tag isn't supported.
+</audio> -->
+
+<!-- <audio id="30sec_player" src="../static/snd/30sec.mp3" type="audio/mpeg">
+Your browser does not support the audio element.</audio>
+<audio id="90sec_player" src="../static/snd/90sec.mp3" type="audio/mpeg">
+Your browser does not support the audio element.</audio>
+<audio id="sndStart1" src="../static/snd/btnclick.mp3" type="audio/mpeg">
+Your browser does not support the audio element.</audio>
+<audio id="sndStart2" src="../static/snd/btnclick.mp3" type="audio/mpeg">
+Your browser does not support the audio element.</audio>
+<audio id="sndStop" src="../static/snd/btnclick.mp3" type="audio/mpeg">
+Your browser does not support the audio element.</audio>
+<audio id="sndAdd" src="../static/snd/jchik.mp3" type="audio/mpeg">
+Your browser does not support the audio element.</audio>
+<audio id="sndDel" src="../static/snd/jchik.mp3" type="audio/mpeg">
+Your browser does not support the audio element.</audio> -->
+
+
+<script>
+    /* Get the documentElement (<html>) to display the page in fullscreen */
+     var elem = document.documentElement;
+    //var elem = document.getElementById("min_screen");
+    
+    /* View in fullscreen */
+    function openFullscreen() {
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.webkitRequestFullscreen) { /* Safari */
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) { /* IE11 */
+        elem.msRequestFullscreen();
+      }
+    }
+    
+    /* Close fullscreen */
+    function closeFullscreen() {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.webkitExitFullscreen) { /* Safari */
+        document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) { /* IE11 */
+        document.msExitFullscreen();
+      }
+    }
+    </script>
+
+
+<!-- mysql q -->
+<!-- SELECT UNIX_TIMESTAMP(NOW())  -->
+<!-- SELECT UNIX_TIMESTAMP(); -->
+
+<!-- SELECT UNIX_TIMESTAMP(STR_TO_DATE('Oct 19 2018 10:00PM', '%M %d %Y %h:%i%p')); -->
+
+</html>

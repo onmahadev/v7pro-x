@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="ru" class="antialiased">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>f7-Vishnu | Модель штанги</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <!-- ########## unCOMMENT this on PROD ########## -->
+    <!-- ########## unCOMMENT this on PROD ########## -->
+    <!-- ########## unCOMMENT this on PROD ########## -->
+              <meta http-equiv="refresh" content="5">
+    <!-- ########## unCOMMENT this on PROD ########## -->
+    <!-- ########## unCOMMENT this on PROD ########## -->
+    <!-- ########## unCOMMENT this on PROD ########## -->
+    <!-- <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel=" stylesheet"> -->
+    <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/production_v7.css') }}">
+    
+
+    <!-- <script src="{{url_for('static', filename = 'js/faker.min.js')}}"></script> -->
+
+    <script src="{{url_for('static', filename = 'js/flowbite.js')}}"></script>
+
+    <!-- <script src="{{url_for('static', filename = 'js/socket.io.min.js')}}"></script> -->
+    
+    <script src="{{url_for('static', filename = 'js/ovmenu.js')}}"></script>
+    <!-- <script defer src="{{url_for('static', filename = 'js/alpine3.10.2.min.js')}}"></script> -->
+    <script src="{{url_for('static', filename = 'js/chart.min.js')}}"></script>
+    <!-- <script src="{{url_for('static', filename = 'js/jquery-3.6.0.min.js')}}"></script> -->
+
+        
+
+    <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/ovmenu.css') }}">
+    <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/flow.css') }}">
+    
+    <!-- <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/jquery-editable.css') }}"> -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon_io/b_model/favicon.ico') }}">
+    <!--Replace with your tailwind.css once created-->
+
+
+
+    <script>
+      var seconds = 300;
+      // countdown timer. took 48 because page takes approx 48 sec to load
+      var url="{{url_for('flow')}}";        
+      function redirect(){
+       if (seconds <=0){
+        
+       // redirect to new url after counter  down.
+        window.location = url;
+       } else {
+        seconds--;
+        document.getElementById("pageInfo").innerHTML=" Оспаривание результата "
+      +seconds+" секунд"
+        setTimeout("redirect()", 1000)
+       }
+      }
+      </script>
+      
+
+<style>
+          .blink {
+              animation: blinker 2.1s linear infinite;
+              font-family: sans-serif;
+          }
+          @keyframes blinker {
+              50% {
+                  opacity: 0.4;
+              }
+          }
+
+
+
+
+.barbell {
+  display: inline-block;
+  height: 88%;
+  left: 0%;
+  position: absolute;
+  top: 7%;
+  width: 100%;
+  z-index: -108;
+}
+
+.pl_25 {
+  background: radial-gradient(circle, #ff0000,#444444);
+  border: 2px solid #000000;
+  border-radius: 10%;
+  display: inline-block;
+  height: 100%;
+  margin: 0 1px;
+  margin-left: 0%;
+  width: 10%;
+}
+.pl_20 {
+  background: radial-gradient(circle, #0BCE39,#444444);
+  border: 2px solid #000000;
+  border-radius: 10%;
+  display: inline-block;
+  height: 100%;
+  margin: 0 1px;
+  width: 8.358%;
+}
+.pl_15 {
+  background: radial-gradient(circle, #e7dc11,#444444);
+  border: 2px solid #000000;
+  border-radius: 10%;
+  display: inline-block;
+  height: 100%;
+  margin: 0 1px;
+  width: 6.269%;
+}
+.pl_10 {
+  background: radial-gradient(circle, #cfcfcf,#b2adad);
+  border: 2px solid #000000;
+  border-radius: 10%;
+  display: inline-block;
+  height: 100%;
+  margin: 0 1px;
+  width: 5.224%;
+}
+/* .pl_40 {
+  background: radial-gradient(circle, #1c24c6,#444444);
+  border: 2px solid #000000;
+  border-radius: 10%;
+  display: inline-block;
+  height: 100%;
+  margin: 0 1px;
+  width: 10%;
+} */
+.pl_5 {
+  background: radial-gradient(circle, #f0f0f0,#7d7d7d);
+  border: 2px solid #000000;
+  border-radius: 10%;
+  display: inline-block;
+  height: 72.22%;
+  margin: 0 1px;
+  width: 3.134%;
+  position: relative;  
+  top: -14%;  
+}
+
+.pl_0-5 {
+  background: radial-gradient(circle, #f0f0f0,#7d7d7d);
+  border: 2px solid #000000;
+  border-radius: 10%;
+  display: inline-block;
+  height: 28.89%;
+  margin: 0 1px;
+  width: 1.94%;
+  position: relative;  
+  top: -35.2%;  
+}
+.pl_1 {
+  background: radial-gradient(circle, #3bb323,#444444);
+  border: 2px solid #000000;
+  border-radius: 10%;
+  display: inline-block;
+  height: 35.56%;
+  margin: 0 1px;
+  width: 2.313%;
+  position: relative;  
+  top: -31.8%;  
+}
+.pl_1-5 {
+  background: radial-gradient(circle, #cec51a,#444444);
+  border: 2px solid #000000;
+  border-radius: 10%;
+  display: inline-block;
+  height: 40%;
+  margin: 0 1px;
+  width: 2.687%;
+  position: relative; 
+  top: -29.9%;
+}
+.pl_2 {
+  background: radial-gradient(circle, #2222d2,#444444);
+  border: 2px solid #000000;
+  border-radius: 10%;
+  display: inline-block;
+  height: 42.22%;
+  margin: 0 1px;
+  width: 2.836%;
+  position: relative;  
+  top: -29.0%;
+}
+.pl_2-5 {
+  background: radial-gradient(circle, #be1313,#444444);
+  border: 2px solid #000000;
+  border-radius: 10%;
+  display: inline-block;
+  position: relative; 
+  top: -29.1%;
+  height: 42.22%;
+  margin: 0 1px;
+  width: 2.836%;
+}
+
+.pl_big_transparent {
+  background: radial-gradient(circle, transparent,transparent);
+  border: 2px none transparent;
+  border-radius: 10%;
+  display: inline-block;
+  height: 100%;
+  margin: 0 1px;
+  margin-left: 0%;
+  width: 0px;  
+}
+
+.bar {
+  background: radial-gradient(#4b4b4b,#818181);
+  border: 3px solid #f3f3f3;
+  border-radius: 17px;
+  top: -17%;
+  left: 5%;
+  bottom: 40px;
+  display: inline-block;
+  height: 168px;
+  margin: 0  1px;
+  position: relative;
+  width: 108px;
+  z-index: -106;
+}
+
+.lock_sm {
+  transform: rotate(90deg);
+  border: 2px solid #a4a4a4;
+  border-radius: 33px;
+  top: -68%;
+  background-color: #d6d6d6;
+  left: -26%;
+  bottom: 40px;
+  display: inline-block;
+  height: 23%;  
+  margin: 0 10px;
+  position: relative;
+  width: 8%;  
+  z-index: 559;
+}
+.lock_bg {
+  transform: rotate(25deg);
+  border: 2px solid #f4f4f4;
+  border-radius: 7px;
+  top: -33%;
+  background-color: #d6d6d6;
+  left: -15%;
+  bottom: 40px;
+  display: inline-block;
+  height: 74px;
+  margin: 0 10px;
+  position: relative;
+  width: 7%;  
+  z-index: -100;
+}
+.collar {
+  z-index: 10;
+  border: 0px solid #010101;
+  border-radius: 7px;
+  top: -32.8%;
+  bottom: 40px;
+  display: inline-block;
+  height: 128px;
+  margin: 0 -1px;
+  position: relative;
+  z-index: -100;
+}
+
+.collarLeft {
+  background: radial-gradient(at right, #979797,#eeeeee);
+}
+
+.collarRight {
+  background: radial-gradient(at left, #979797,#eeeeee);
+  width: 28%;
+}          
+.lbarpeace{
+  background: radial-gradient(at right, #979797,#eeeeee);
+  width: 9%;
+  top: -40.2%;
+  height: 128px;
+  z-index: -99;
+}
+
+html{
+width: 100%;
+max-width: 100%;
+overflow-x: hidden;
+}
+
+body
+{
+width: 100%;
+max-width: 100%;
+overflow-x: hidden;
+}
+
+.b_weight_m {
+  z-index: -1;
+  padding-left: 12px;
+  padding-right: 10px;
+  border: 2px solid #5f5f5f;
+  border-radius: 17px;
+  top: -33px;
+  margin-right: 7%;
+  margin-top: 3%;
+  font-size:50px;
+  font-weight: bolder;
+  /* bottom: 40px; */
+  /* display: inline-block; */
+  /* height: 128px; */
+  /* margin: 0 10px; */
+  position: relative;
+  background: radial-gradient(at left, #767676,#dcd7d7);
+  /* width: 14%;   */
+  float:right;
+
+  color: #4b4b4b;
+  background: #232323;
+  text-shadow: 0 0 23px #FFF, 0 0 24px #FFF, 0 0 25px #FFF, 0 0 24px #0f19d7, 0 0 25px #09109f, 0 0 25px #0d1194, 0 0 27px #132cb8, 0 0 25px #2015c1;
+  color: #2d2d2d;
+  background: #1c1c1c;  
+}
+.b_weight_f {
+  z-index: -1;
+  padding-left: 12px;
+  border: 2px solid #4d4d4d;
+  border-radius: 17px;
+  margin-right: -9%;
+  top: -33px;
+  margin-right: 7%;
+  margin-top: 3%;
+  font-size:50px;
+  font-weight: bolder;
+  /* bottom: 40px; */
+  /* display: inline-block; */
+  /* height: 128px; */
+  /* margin: 0 10px; */
+  position: relative;
+  background: radial-gradient(at left, #767676,#dcd7d7);
+  /* width: 14%;   */
+  float:right;
+
+  color: #4b4b4b;
+  background: #232323;
+  text-shadow: 0 0 23px #FFF, 0 0 25px #FFF, 0 0 25px #FFF, 0 0 24px #e11215, 0 0 25px #e11215, 0 0 25px #e11215, 0 0 15px #e11215, 0 0 25px #e11215;
+  color: #2d2d2d;
+  background: #232323;  
+}
+.mkg_{
+  top: 0px;
+  margin-right: -9%;
+  top: -33px;
+  font-size:15px;
+  font-weight: bolder;
+  position: relative;
+  float: right;
+  font-weight:800;
+  color: #fff;
+  margin-top: 9.4%;
+  padding: 3px 5px 3px 5px;
+  background: radial-gradient(at left, #040a7c,#0012da);
+}
+.fkg_{
+  top: 0px;
+  margin-right: -7%;
+  margin-top: 9%;
+  font-size:15px;
+  font-weight: bolder;
+  position: relative;
+  float: right;
+  font-weight:800;
+  color: #fff;
+  margin-top: 9.4%;
+  padding: 3px 5px 3px 5px;
+  background: radial-gradient(at left, #a20000,#de0000);
+}
+
+
+
+
+
+
+/* .     .   .  .  .  .  . . . .*/
+/* Add a black background color to the top navigation */
+.topnav {
+    /* display: flex; */
+    background-color: transparent;
+    overflow: hidden;
+    margin-top: 48%;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {    
+  float: left;
+  box-sizing: border-box;
+  padding: 20px;  
+  border: 1px solid rgb(164, 164, 164);
+  color: #141852;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+/* Right-aligned section inside the top navigation */
+.topnav-right {
+  float: right;
+}
+</style>
+
+</head>
+
+<!-- <body class="bg-opacity-25 bg-gray-300 leading-normal" onload="updAllTable(); redirect();"> -->
+  <body class="bg-opacity-25 bg-gray-300 leading-normal">
+  
+
+
+
+
+    <!-- Sudarshana Chkra-->
+    <span class="f7_main_sc">
+      <a href="/quit">
+        <div id="pica" class="pica">
+            <img src="static/img/v7-tilaka-black.png" alt="f7v-logo"
+                class="shadow rounded-full mt-2 ml-1 h-9 align-middle border-none" />
+        </div>
+      </a>
+    </span>
+
+
+
+
+
+
+
+
+    <!-- Slider MENU-->
+    {% include 'nav.html' %}
+    <!-- Slider MENU-->
+
+
+
+
+
+
+
+
+
+
+
+
+<div>
+    <!-- Rest of the HTML -->
+
+  </div>
+
+
+
+
+  <!-- //////////////////////////////   -->
+  <!-- //////////////////////////////   -->
+  <!-- //////////////////////////////   -->
+<!-- directory || bar load diagram   -->
+  <!-- //////////////////////////////   -->
+  <!-- //////////////////////////////   -->
+  
+
+
+
+
+
+  <!-- //////////////////////////////   -->
+  <!-- END !END !END !END !END !END !   -->
+  <!-- //////////////////////////////   -->
+
+
+
+  {% for data in attdata %}
+  {% if data.sex == 1 %}
+<div id="bm_weight_now" class="b_weight_m">
+    {% if data.wnow != '0' %}
+    {% set oneSideWeight = (data.wnow | int - 25)//2 %}
+    /{{ oneSideWeight }}[замок]
+    (total: {{ data.wnow }})
+    <!-- {{ wOnOneSide }} -->
+    <!-- {{ data.wnow }} -->
+    {% endif %}
+  {% endif %}
+  {% if data.sex == 0 %}
+  <div id="bm_weight_now" class="b_weight_f">
+    {% if data.wnow != '0' %}
+    {% set oneSideWeight = (data.wnow | int - 20)/2 %}
+    :{{ oneSideWeight }}
+
+
+    
+    <!-- {{ data.wnow }} -->
+    {% endif %}
+  {% endif %}
+  {% if data.sex == 1 %}
+    </div><p class="mkg_">кг</p>
+  {% endif %}    
+  {% if data.sex == 0 %}    
+    </div><p class="fkg_">кг</p>
+{% endif %}
+{% endfor %}
+
+
+<!-- render barbell Model  -->
+<!-- BEGIN  -->
+<h1>{{oneSideWeight}}</h1>
+{% for data in attdata %}
+
+{% if data.sex==1 and data.wnow != '0' %}
+{% set oneSideWeight = (data.wnow | int - 25)//2 %}
+
+
+<!-- oneSideWeight -->
+  <div class="barbell">
+    <div class="collar lbarpeace"></div>
+    {% if oneSideWeight == 1|int and data.sex == 1 %}
+    <div class="pl_0-5"></div>
+    {% elif oneSideWeight == 2|int and data.sex == 1 %}
+    <div class="pl_big_transparent"></div>
+    <div class="pl_5"></div>
+    <div class="pl_2-5"></div>
+    <div class="pl_1-5"></div>
+
+
+
+
+    {% elif oneSideWeight == 9|int and data.sex == 1 %}
+    <div class="pl_big_transparent"></div>
+    <div class="pl_5"></div>
+    <div class="pl_2-5"></div>
+    <div class="pl_1-5"></div>
+
+
+
+
+
+
+
+
+    {% elif oneSideWeight !=0|int and data.sex == 1 %}
+    <div class="pl_big_transparent"></div>
+    <!-- <div class="pl_0-5"></div> -->
+    <span class="pl_0-5" id="{{oneSideWeight}}">{{oneSideWeight}}</span>
+    
+    
+
+
+
+
+
+
+
+    {% endif %}    
+    <div class="collar collarRight">
+      <div class="bar"></div>
+      <div class="lock_bg"></div>
+      <div class="lock_sm"></div>
+
+      
+      {%endif%}
+    </div>
+  </div>
+  {% endfor %}
+<!-- render barbell Model  -->
+<!-- BEGIN  -->
+  
+
+
+
+<div class="topnav">
+<div class="topnav-right">
+  <a onclick="dec_wn()" href="#decw">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>    
+  </a>
+  <a onclick="inc_wn()" href="#incw">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+  </a>  
+</div>
+</div>
+
+
+
+<script>
+function inc_wn() {
+  document.getElementById('bm_weight_now').textContent++;
+  if (document.getElementById('bm_weight_now').textContent=='345') {
+    alert('Ну ты че Олень совсем да???!  ');
+    document.getElementById('bm_weight_now').textContent--;
+  }    
+
+}
+
+function dec_wn() {
+  document.getElementById('bm_weight_now').textContent--;
+  if (document.getElementById('bm_weight_now').textContent=='0') {
+    alert('Ну ты че Олень совсем да???!  ');
+    document.getElementById('bm_weight_now').textContent++;
+  }  
+}
+
+</script>
+
+
+</body>
+
+</html>

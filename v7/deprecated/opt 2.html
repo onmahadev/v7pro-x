@@ -1,0 +1,702 @@
+<html>
+<html lang="en" class="antialiased">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>f7-Vishnu </title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <!-- <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel=" stylesheet"> -->
+    <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/output.css') }}">
+    <!-- <script src="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.bundle.js"></script> -->
+    <script src="{{url_for('static', filename = 'js/socket.io.min.js')}}"></script>
+    
+    <script src="{{url_for('static', filename = 'js/ovmenu.js')}}"></script>
+    <!-- <script defer src="{{url_for('static', filename = 'js/alpine3.10.2.min.js')}}"></script> -->
+
+
+    <!-- <script src="{{url_for('static', filename = 'js/jquery-3.6.0.min.js')}}"></script> -->
+
+    <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/ovmenu.css') }}">
+    <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/opt.css') }}">
+    <!-- <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/jquery-editable.css') }}"> -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon_io/opt/favicon.ico') }}">
+    <!--Replace with your tailwind.css once created-->
+
+
+
+</head>
+
+
+<body class="bg-opacity-25 leading-normal">
+
+    <!-- Slider MENU-->
+    {% include 'nav.html' %}
+    <!-- Slider MENU-->
+
+
+
+
+
+
+
+
+
+<div class="min-h-screen bg-gray-700 py-3">
+    
+
+
+
+
+    <div class="w-full mx-auto mt-4 rounded">
+        <h5 class="ml-3 font-semibold border-l-4 px-3 leading-tight text-xl mt-0 mb-2 text-white">
+          <svg class="w-8 h-8 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg> 
+          Настройки</h5>
+        
+        <!-- Tabs -->
+        <ul id="tabs" class="inline-flex  ml-1 px-1 pt-2 ">
+          <li class="uppercase px-4 py-2 -mb-px font-semibold text-white border-b-2 border-white rounded-t opacity-50"><a id="default-tab" href="#opt1tab">
+            <embed class="w-8 h-8 inline bg-gray-200" src="/static/img/expand-all-svgrepo-com.svg" />
+            &nbsp;общие</a></li>
+          <li class="uppercase px-4 py-2 font-semibold text-white rounded-t opacity-50"><a href="#opt2tab">
+            <svg class="w-7 h-7 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
+            &nbsp;маршал</a></li>
+          <li class="uppercase px-4 py-2 font-semibold text-white rounded-t opacity-50"><a href="#opt3tab">
+            <svg class="w-7 h-7 inline"  fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg> 
+            &nbsp;дубль</a></li>
+          <li class="uppercase px-4 py-2 font-semibold text-white rounded-t opacity-50"><a href="#opt4tab">
+            <svg class="w-7 h-7 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 13v-1m4 1v-3m4 3V8M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"></path></svg>
+            &nbsp;табло</a></li>
+          <li class="uppercase px-4 py-2 font-semibold text-white rounded-t opacity-50"><a href="#opt5tab">
+            <svg class="w-7 h-7 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path></svg>
+            &nbsp;сигнал</a></li>
+        </ul>
+
+        <!-- <form id="optz_" action="{{url_for('options',opt_id=9,opt_val=0)}}" method="POST"> -->
+    
+        <!-- Tab Contents -->
+        <div id="tab-contents">
+          <div id="opt1tab" class="grid grid-rows-3 grid-flow-col gap-4 p-4 tabs_page">
+<!-- Toggle B -->
+<div class="w-96 row-start-2 row-span-2">
+  
+  <div>
+    <label for="ipaddr" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">IP address:</label>
+    <input type="text" id="ipaddr" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="10.0.0.1" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required>
+</div>&nbsp;&nbsp;&nbsp;
+
+<div class="w-96 row-end-3 row-span-2 ">
+  <label for="port" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Porn number:</label>
+  <input type="number" id="port" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="4848" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required>
+</div>&nbsp;&nbsp;&nbsp;
+
+    
+
+  <div class="w-96 row-start-1 row-end-4">
+    <label for="v7_i18n" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Язык приложения:</label>
+    <select id="v7_i18n" name="wcat" class="bg-gray-50 px-3 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+      <option style="display:none;" selected >Язык</option>
+      <option value="RUS">Русский язык</option>
+      <option value="ENG">English language</option>
+    </select>
+  </div>
+
+
+
+
+    
+    <!-- <div>
+      
+      <img class="h-10 w-10" src="{{url_for('static', filename = 'img/svg/chrome.svg')}}"  alt="svg"/>
+      <img class="h-10 w-10" src="{{url_for('static', filename = 'img/svg/opera.svg')}}"  alt="svg"/>
+      <img class="h-12 w-12" src="{{url_for('static', filename = 'img/svg/ff.svg')}}"  alt="svg"/>
+      <img class="h-10 w-10" src="{{url_for('static', filename = 'img/svg/vivaldi.svg')}}"  alt="svg"/>
+      <img class="h-12 w-12" src="{{url_for('static', filename = 'img/svg/safari.svg')}}"  alt="svg"/>       -->
+      <!-- <img class="h-12 w-12" src="{{url_for('static', filename = 'img/svg/brave.svg')}}"  alt="svg"/>       -->
+      <!-- <img class="h-12 w-12" src="{{url_for('static', filename = 'img/svg/edge.svg')}}"  alt="svg"/> -->
+  
+    <!-- </div>     -->
+  
+  <!-- </div> -->
+          </div>
+
+
+
+
+
+
+
+          <div id="opt2tab" class="hidden p-4 tabs_page">
+            <div class="flex w-full mb-12">
+  
+              
+                fsdfdfdsfdsfdsfds
+              
+              
+            </div>
+            
+
+
+            <div class="flex w-full mb-12">
+fsdfdsfdsf
+              
+            </div>   
+            
+            <div class="flex bg-blue-200 w-full mb-12">
+              <p id="tgl_flow_p"></p>
+            </div>
+
+
+            
+          </div>
+          <div id="opt3tab" class="hidden p-4 tabs_page">
+
+fdsfdsfdsfdsfdsfds
+      
+
+  <!-- OPTIONS -->
+  {% for datas in optdata_z %}
+          
+  {% if datas.value == 1 and datas.name =="dbl_show_number" %}
+  <label for="toggle_opt_3" class="flex items-center cursor-pointer">
+    <!-- toggle -->
+    <div class="relative">
+      <!-- input -->
+      <form id="dbl_opt_snum" onSubmit="return set_dbl_bg_color;" action="{{url_for('options',opt_id=9,opt_val=1)}}" method="POST">
+      <input name="dbl_options" type="checkbox" onchange="save_the(9,1)" checked id="toggle_opt_3" class="opt_ opt_3 sr-only">
+      </form>
+      <!-- line -->
+      <div class="block bg-gray-600 w-14 h-8 rounded-full"></div>
+      <!-- dot -->
+      <div class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition"></div>
+    </div>
+    <!-- label -->
+    <div id="toggle_opt_3desc" class="ml-3 text-white font-medium">
+      {{datas.desc}}
+    </div>
+  </label>
+
+
+  
+  {% elif datas.value == 0 and datas.name =='dbl_show_number' %}
+  {{datas.o_id }}
+  <label for="toggle_opt_3" class="flex items-center cursor-pointer">
+    <!-- toggle -->
+    <div class="relative">
+      <!-- input -->
+      <form id="dbl_opt_snum" onSubmit="return set_dbl_bg_color;" action="{{url_for('options',opt_id=9,opt_val=0)}}" method="POST"></form>
+      <input name="dbl_options" type="checkbox" onchange="save_the(9,0)" checked id="toggle_opt_3" class="opt_ opt_3 sr-only">      
+      <!-- line -->
+      <div class="block bg-gray-600 w-14 h-8 rounded-full"></div>
+      <!-- dot -->
+      <div class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition"></div>
+    </div>
+    <!-- label -->
+    <div id="toggle_opt_3desc" class="ml-3 text-white font-medium">
+      {{datas.descoff}}
+    </div>
+  </label>
+  {% endif %}
+                
+{% endfor %}    
+
+
+
+<p class="text-gray-500 text-sm font-semibold tracking-wide">&nbsp;</p> 
+
+
+
+  <!-- OPTIONS -->
+  {% for datas in optdata_z %}
+          
+  {% if datas.value == 1 and datas.name =="dbl_show_flag" %}
+  <label for="toggle_opt_2" class="flex items-center cursor-pointer">
+    <!-- toggle -->
+    <div class="relative">
+      <!-- input -->
+      <input name="dbl_options" type="checkbox" onchange="save_the(this.id)" checked  id="toggle_opt_2" class="opt_  sr-only">
+      <!-- line -->
+      <div class="block bg-gray-600 w-14 h-8 rounded-full"></div>
+      <!-- dot -->
+      <div class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition"></div>
+    </div>
+    <!-- label -->
+    <div class="ml-3 text-white font-medium">
+      {{datas.desc}}
+    </div>
+  </label>
+
+
+  <p class="text-gray-500 text-sm font-semibold tracking-wide">&nbsp;</p> 
+  {% elif datas.value == 0 and datas.name =='dbl_show_flag' %}
+  {{datas.o_id }}
+  <label for="toggle_opt_2" class="flex items-center cursor-pointer">
+    <!-- toggle -->
+    <div class="relative">
+      <!-- input -->
+      <input name="dbl_options" type="checkbox" onchange="save_the(this.id)"  id="toggle_opt_2" class="opt_  sr-only">
+      <!-- line -->
+      <div class="block bg-gray-600 w-14 h-8 rounded-full"></div>
+      <!-- dot -->
+      <div class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition"></div>
+    </div>
+    <!-- label -->
+    <div class="ml-3 text-white font-medium">
+      {{datas.descoff}}
+    </div>
+  </label>
+  {% endif %}
+                
+{% endfor %}    
+
+
+
+<p class="text-gray-500 text-sm font-semibold tracking-wide">&nbsp;</p> 
+
+
+
+
+              <!-- OPTIONS -->
+              {% for datas in optdata_z %}
+          
+                {% if datas.value == 1 and datas.name =="dbl_show_ow_city" %}
+                <label for="toggle_opt_1" class="flex items-center cursor-pointer">
+                  <!-- toggle -->
+                  <div class="relative">
+                    <!-- input -->
+                    <input name="dbl_options" type="checkbox" onchange="save_the(this.id)" checked  id="toggle_opt_1" class="opt_  sr-only">
+                    <!-- line -->
+                    <div class="block bg-gray-600 w-14 h-8 rounded-full"></div>
+                    <!-- dot -->
+                    <div class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition"></div>
+                  </div>
+                  <!-- label -->
+                  <div class="ml-3 text-white font-medium">
+                    {{datas.desc}}
+                  </div>
+                </label>
+
+
+                
+                {% elif datas.value == 0 and datas.name =='dbl_show_ow_city' %}
+                {{datas.o_id }}
+                <label for="toggle_opt_1" class="flex items-center cursor-pointer">
+                  <!-- toggle -->
+                  <div class="relative">
+                    <!-- input -->
+                    <input name="dbl_options" type="checkbox" onchange="save_the(this.id)"  id="toggle_opt_1" class="opt_ sr-only">
+                    <!-- line -->
+                    <div class="block bg-gray-600 w-14 h-8 rounded-full"></div>
+                    <!-- dot -->
+                    <div class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition"></div>
+                  </div>
+                  <!-- label -->
+                  <div class="ml-3 text-white font-medium">
+                    {{datas.descoff}}
+                  </div>
+                </label>
+                {% endif %}
+                              
+              {% endfor %}
+
+
+              <p class="text-gray-500 text-sm font-semibold tracking-wide">&nbsp;</p>               
+
+
+<!-- OPTIONS -->
+{% for datas in optdata_z %}
+          
+{% if datas.value == 1 and datas.name =="dbl_show_wcat" %}
+<label for="toggle_opt_5" class="flex items-center cursor-pointer">
+  <!-- toggle -->
+  <div class="relative">
+    <!-- input -->
+    <input name="dbl_options" type="checkbox" onchange="save_the(this.id)" checked  id="toggle_opt_5" class="opt_  sr-only">
+    <!-- line -->
+    <div class="block bg-gray-600 w-14 h-8 rounded-full"></div>
+    <!-- dot -->
+    <div class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition"></div>
+  </div>
+  <!-- label -->
+  <div class="ml-3 text-white font-medium">
+    {{datas.desc}}
+  </div>
+</label>
+
+
+
+{% elif datas.value == 0 and datas.name =='dbl_show_wcat' %}
+{{datas.o_id }}
+<label for="toggle_opt_5" class="flex items-center cursor-pointer">
+  <!-- toggle -->
+  <div class="relative">
+    <!-- input -->
+    <input name="dbl_options" type="checkbox" onchange="save_the(this.id)"  id="toggle_opt_5" class="opt_ sr-only">
+    <!-- line -->
+    <div class="block bg-gray-600 w-14 h-8 rounded-full"></div>
+    <!-- dot -->
+    <div class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition"></div>
+  </div>
+  <!-- label -->
+  <div class="ml-3 text-white font-medium">
+    {{datas.descoff}}
+  </div>
+</label>
+{% endif %}
+              
+{% endfor %}    
+
+
+
+<p class="text-gray-500 text-sm font-semibold tracking-wide">&nbsp;</p> 
+<label for="toggle5_1" class="flex items-center cursor-pointer">
+  <!-- toggle -->
+  <div class="relative">
+    <!-- input -->
+    <input name="dbl_options" type="checkbox"  onchange="save_the(this.id)"  id="toggle5_1" class="sr-only opt_">
+    <!-- line -->
+    <div class="block bg-gray-600 w-14 h-8 rounded-full"></div>
+    <!-- dot -->
+    <div class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition"></div>
+  </div>
+  <!-- label -->
+  <div class="ml-3 text-white font-medium">
+   Выбрать свой цвет заднего фона (ДУБЛЬ):
+  </div>
+</label>
+  <form id="colorForm" onSubmit="return set_dbl_bg_color;" action="{{url_for('options',opt_id=14,opt_val=0)}}" method="POST">
+  <div id="colordiv" style="visibility: none;">
+  <label for="colorpicker">Цвет заднего фона (ДУБЛЬ):&nbsp;&nbsp; </label>
+  <input name="dbl_options" id="colorpicker" type="color" onchange="changecolor(this)">
+  <div id="colorprimer"> &nbsp; </div>
+  </div>
+</form>  
+
+          </div>
+
+
+
+
+
+
+          <div id="opt4tab" class="hidden p-4 tabs_page">
+
+
+            <div class="flex w-full mb-12">
+  
+                <label for="toggle4_1" class="flex items-center cursor-pointer">
+                  <!-- toggle -->
+                  <div class="relative">
+                    <!-- input -->
+                    <input type="checkbox" id="toggle4_1" class="sr-only">
+                    <!-- line -->
+                    <div class="block bg-gray-600 w-14 h-8 rounded-full"></div>
+                    <!-- dot -->
+                    <div class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition"></div>
+                  </div>
+                  <!-- label -->
+                  <div class="ml-3 text-white font-medium">
+                    Скрыть/Показать порядковый номер Атлета #
+                  </div>
+                </label>
+              
+              </div>
+
+
+          </div>
+          <div id="opt5tab" class="hidden p-4 tabs_page">
+            555 tab
+          </div>          
+        </div>
+        <button id="save_brm" type="submit" class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+          SAVE
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+         </button>
+        <!-- </form> -->
+
+
+
+        
+      </div>
+
+
+
+  <script>
+
+
+// document.addEventListener("change", function(event) { 
+//     document.getElementById("tgl_flow").addEventListener('change', function(e) {
+//         //your event handling code here
+//     })
+// })    
+    //  var y = document.getElementById('tgl_flow');
+    //   y.addEventListener('change', function(){
+    //   document.getElementById('tgl_flow_p').innerHTML = y.checked;
+    //     //////////
+
+    // });
+
+  function changecolor(el) {
+    //document.body.style.backgroundColor = el.value;
+    //colorprimer.style.backgroundColor = el.value;
+    document.getElementById("colorForm").submit();
+
+
+}
+  </script>
+
+
+
+<script>
+    let tabsContainer = document.querySelector("#tabs");
+
+let tabTogglers = tabsContainer.querySelectorAll("a");
+console.log(tabTogglers);
+
+tabTogglers.forEach(function(toggler) {
+toggler.addEventListener("click", function(e) {
+e.preventDefault();
+
+let tabName = this.getAttribute("href");
+
+let tabContents = document.querySelector("#tab-contents");
+
+for (let i = 0; i < tabContents.children.length; i++) {
+
+tabTogglers[i].parentElement.classList.remove("border-white", "border-b",  "-mb-px", "opacity-100");  tabContents.children[i].classList.remove("hidden");
+if ("#" + tabContents.children[i].id === tabName) {
+continue;
+}
+tabContents.children[i].classList.add("hidden");
+
+}
+e.target.parentElement.classList.add("border-white", "border-b-4", "-mb-px", "opacity-100");
+});
+});
+
+document.getElementById("default-tab").click();
+
+
+
+function save_the(id, valuer) {
+
+
+
+var http = new XMLHttpRequest();
+var url = 'http://10.0.0.108:5000/opt/1/0';
+var params = 'opt_id=13&opt_val=0&id';
+http.open('POST', url, true);
+
+//Send the proper header information along with the request
+http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+http.onreadystatechange = function() {//Call a function when the state changes.
+    if(http.readyState == 4 && http.status == 200) {
+        alert(http.responseText);
+    }
+}
+http.send(params);
+
+
+/////
+// fetch('http://10.0.0.108:5000/opt/1/0?opt_id=13&opt_val=0&id=toggle5_1&vl=0', {
+//   method: 'POST',
+//   headers: {
+//     'Content-Type': 'application/json',
+//   },
+//   body: JSON.stringify({ key: 'value' }),
+// })
+// .then(response => response.json())
+// .then(data => {
+//   console.log('Success:', data);
+// })
+// .catch((error) => {
+//   console.error('Error:', error);
+// });
+/////
+
+
+  
+  function getUrlVars() {
+    
+    
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+        vars[key] = value;
+    });
+        return vars;
+    }
+    // var opt_id = getUrlVars()["id"];
+    // var opt_val = getUrlVars()["vl"];
+    // document.getElementById('dbl_opt_snum').action = "/opt/"+opt_id+"/"+opt_val;
+
+
+
+
+
+  // const form1  = document.getElementById('colorForm');
+  // form1.submit();
+  // event.preventDefault();
+
+
+/* add GET param */
+var queryParams = new URLSearchParams(window.location.search);
+    queryParams.set("id", id);
+    queryParams.set("vl", valuer);
+
+    history.replaceState(null, null, "?"+queryParams.toString());
+
+
+  
+  // let form = document.createElement('form1');
+  // form.action = 'https://10.0.0.108.opt/';
+  // form.method = 'GET';
+  //toggle_opt_3
+
+//   form.innerHTML = '<input id="toggle_opt_3">';
+
+// // перед отправкой формы, её нужно вставить в документ
+
+// document.body.append(form);
+// form.submit();
+
+
+    // var para = document.getElementById("p");
+    // if(para.classList.contains("paragraphClass")) {
+    //     para.classList.remove("paragraphClass");
+    // } else { para.classList.add("paragraphClass"); }  
+  
+
+  //toggle_opt_3
+  // var sw = document.getElementById(id).checked;
+  //var sw = document.getElementById(id).checked = true;
+
+  var sw = 1;
+  //var sw = document.getElementById(id).checked;
+  var checkbox = document.getElementById(id);
+  var colord = document.getElementById("toggle5_1");
+  var cdiv = document.getElementById("colordiv");
+  // checkbox.value = 1;
+
+  // for (var checkbox of checkboxes) {
+  //       checkbox.checked = !checkbox.checked;
+  //   }  
+  //var sw = document.getElementById(id).checked;
+  switch (sw) {
+  case true:
+    checkbox.value==1
+    console.log("ON (1) - "  +  sw + "id: " + id);
+    cdiv.style.display = ((cdiv.style.display!='none') ? 'none' : 'block');
+    // checkbox.checked = checkbox.checked;  
+    break;
+    //sw.
+  case false:
+  // checkbox.value == 0    
+  console.log("OFF (0) - "  +  sw + "id::: " + id);
+  cdiv.style.display = ((cdiv.style.display=='block') ? 'none' : 'none');
+  // checkbox.checked = !checkbox.checked;
+    break;
+  default:
+  // checkbox.value == 0
+  console.log("defa - "  +  sw + "id: " + id);
+    break;
+}
+
+  
+// document.querySelector('#myBtn').addEventListener('click', function () {
+//  // do something
+// });
+
+// var button_opt = document.querySelector('.opt_3');
+// console.log(button_opt);
+
+
+
+}
+
+function set_dbl_bg_color() {
+  // checkbox.value = 1;
+  if (checkbox.value==1) {
+    checkbox.value == 0  }
+  else { checkbox.value == 1  }
+
+  let form = document.createElement('form1');
+form.action = 'http://10.0.0.108/opt/1/0/?opt_id=13&opt_val=0&id=toggle5_1&vl=0';
+form.method = 'GET';
+
+form.innerHTML = '<input name="q" value="test">';
+
+// перед отправкой формы, её нужно вставить в документ
+// document.body.append(form);
+// form.submit();
+
+//document.getElementById('colorForm').submit();
+  //event.preventDefault();
+}
+
+
+
+// document.getElementById('toggle').onclick = function() {
+//     var checkboxes = document.getElementsByName('vehicle');
+  
+// }
+
+// const button = document.querySelector('.opt_');
+// function handleClick() {
+
+
+//   var sw = this.id;
+//   //var sw = document.getElementById(id).checked;
+  
+//   switch (sw) {
+//   case true:
+//     console.log("ON (1) - "  +  sw);
+//     if (cdiv.classList.contains('hidden')) { 
+//       // document.getElementById("colordiv").style.visibility = "hidden";
+//       console.log('HIDDEN');
+//     }
+//     break;
+//     //sw.
+//   case false:
+//   console.log("OFF (1) - "  +  sw);
+//   // checkbox.checked = !checkbox.checked;
+//     break;
+//   default:
+//   console.log("defa - "  +  sw);
+//     break;
+
+// }
+// }
+// button.addEventListener('click', handleClick);
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+</div>
+
+    
+
+
+
+
+
+
+
+</body>
+
+</html>
+
+
+

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ru" class="antialiased">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>f7 :: Хронограф / Судья Хронографист, Таймер </title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel=" stylesheet">
+    <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
+    <script src="{{url_for('static', filename = 'js/socket.io.min.js')}}"></script>
+    
+    <script src="{{url_for('static', filename = 'js/ovmenu.js')}}"></script>
+    <!-- <script defer src="{{url_for('static', filename = 'js/alpine3.10.2.min.js')}}"></script> -->
+
+
+    <script src="{{url_for('static', filename = 'js/jquery-3.6.0.min.js')}}"></script>
+
+    <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/ovmenu.css') }}">
+    <!-- <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/double.css') }}"> -->
+    <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/judge.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <!--Replace with your tailwind.css once created-->
+
+
+<style>
+body {
+    background-color: transparent;
+    /* -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none; 
+    -webkit-touch-callout: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;     */
+}    
+</style>
+</head>
+
+
+<body class="bg-opacity-25 leading-normal">
+    <!-- Sudarshana Chkra-->
+    <span class="f7_main_sc">
+    </span>
+
+    <!-- Slider MENU-->
+    {% include 'nav-clean.html' %}
+    <!-- Slider MENU-->
+
+
+
+
+
+
+<div>
+    <!-- Rest of the HTML -->
+
+  </div>
+
+
+
+
+
+
+
+<div class="min-h-screen bg-green-200 py-1">
+
+    
+    <!-- Sudarshana Chkra-->
+    <span class="f7_main_sc">
+        <a href="/quit">
+          <div id="pica" class="pica">
+              <img src="static/img/v7-tilaka-black.png" alt="f7v-logo"
+                  class="shadow rounded-full mt-4 ml-4 h-9 align-middle border-none" />
+          </div>
+        </a>
+      </span>
+      <br/><br/>
+
+    <div class="w-11/12 mx-auto mt-5 p-2">
+        <a href="/chrono">
+        <button class="jBtnz bg-green-800 border-dotted border-2 border-white w-full h-24 text-white text-2xl rounded-md px-8 py-2 text-base font-medium hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-red-300" 
+                id="timer1">
+                    Таймер (время)
+                    <div class="flex items-center justify-center">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path></svg>                        
+                    </div>
+        </button></a>
+    </div>
+    
+    <div class="w-11/12 mx-auto mt-5 p-2">
+        <a href="/timer">
+        <button class="jBtnz bg-yellow-600 border-dotted border-2 border-white w-full h-24 text-white text-3xl rounded-md px-8 py-2 text-base font-medium hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-red-300" 
+                id="timer2">
+                Судья-хронометрист 
+                <div class="flex items-center justify-center mt-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+        </button></a>
+    </div>
+
+    <div class="w-11/12 mx-auto mt-5 p-2">
+        <a href="/break">
+        <button class="jBtnz bg-red-700 border-dotted border-2 border-white w-full h-24 text-white text-3xl rounded-md px-8 py-2 text-base font-medium hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-red-300" 
+                id="break">
+                Перерыв
+                <div class="flex items-center justify-center">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path></svg>
+                </div>
+        </button></a>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+<script>
+    
+
+    // var x_chColor = document.getElementById("myNav");    
+    document.getElementById("bMenu").style.color = "#000000";
+</script>
+
+</body>
+
+</html>

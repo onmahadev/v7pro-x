@@ -1,0 +1,943 @@
+<head>
+  <html>
+<title>v7pro: Время</title>
+<link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/production_v7.css') }}">
+<script src="{{url_for('static', filename = 'js/flowbite.js')}}"></script>
+<script src="{{url_for('static', filename = 'js/jquery-3.6.0.min.js')}}"></script>
+<link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/daisyui2.22.0.css') }}">
+<link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/chrono.css') }}">
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon_io/v7time/favicon.ico') }}">
+<style>
+    .blink {
+      font-family: sans-serif;
+      animation: blinker 2.1s linear infinite;
+    }
+    @keyframes blinker {
+        50% {
+            opacity: 0.4;
+        }
+    }
+
+
+
+    .parent {
+display: grid;
+grid-template-columns: 4fr repeat(5, 1fr) 4fr;
+grid-template-rows: repeat(7, 1fr);
+grid-column-gap: 5px;
+grid-row-gap: 3px;
+}
+
+
+body{ 
+	font: normal 13px/20px Arial, Helvetica, sans-serif; word-wrap:break-word;
+	background: #fff;
+}
+
+.countdown-label {
+  font: thin 15px Arial, sans-serif;
+	color: #b3b3b300;
+	text-align: center;
+	text-transform: uppercase;
+	display: inline-block;
+  letter-spacing: 2px;
+  margin-top: 9px
+}
+#countdown{
+box-shadow: 0 1px 2px 0 rgba(1, 1, 1, 0.4);
+width: 680px;
+	height: 108px;
+	text-align: center;
+background: #f1f1f1;
+
+	border-radius: 5px;
+
+	margin: auto;
+
+}
+
+
+
+#countdown #tiles{
+  color: #fff;
+	position: relative;
+	z-index: 1;
+text-shadow: 5px 5px 12px rgb(86, 119, 179);
+	display: inline-block;
+  font-family: Arial, sans-serif;
+	text-align: center;
+  
+  padding: 20px;
+  border-radius: 5px 5px 0 0;
+  font-size: 208px;
+  font-weight: bold;
+  display: block;
+
+  color: #0e0a73;
+/* background: #232323; */
+text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 9px #FFF, 0 0 12px #111111, 0 0 20px #121212, 0 0 30px #171817, 0 0 45px #1a1c1a, 0 0 55px #20211f;
+    
+}
+
+.color-full {
+  background: #53bb74;
+}
+.color-half {
+  background: #ebc85d;
+}
+.color-empty {
+  background: #e5554e;
+}
+
+#countdown #tiles > span{
+	width: 70px;
+	max-width: 70px;
+
+	padding: 28px 0;
+	position: relative;
+}
+
+
+
+
+
+#countdown .labels{
+	width: 100%;
+	height: 25px;
+	text-align: center;
+	position: absolute;
+	bottom: 18px;
+}
+
+#countdown .labels li{
+	width: 102px;
+	font: bold 15px 'Droid Sans', Arial, sans-serif;
+	color: #f47321;
+	text-shadow: 1px 1px 0px #000;
+	text-align: center;
+	text-transform: uppercase;
+	display: inline-block;
+}
+
+
+#countdown {
+  background-color: #989b94;
+  -webkit-box-shadow:0px 0px 15px 8px #e4e4e4 inset;
+  -moz-box-shadow:0px 0px 15px 8px #dadada inset;
+  box-shadow:0px 0px 15px 8px #cdcecd inset;
+  border-radius:5px;
+  -moz-border-radius:5px;
+  -webkit-border-radius:  5px;
+}
+
+
+
+/* NEW wlwments for XXX */
+.f_timer_time {
+  opacity: 1;
+  font-size:smaller;
+  font-size: 54px;
+  color: rgb(20, 43, 125);
+  margin-top: -8px;
+  margin-right: 24px;
+  text-shadow: 3px 1px 1px rgb(176, 110, 105);
+  font-family: Impact, Charcoal, sans-serif;
+  letter-spacing: 1px;
+  word-spacing: 1px;
+  text-decoration: none;
+  font-style: normal;
+  font-variant: normal;
+  text-transform: uppercase;
+  z-index: 143; 
+}
+
+
+
+
+
+
+#the_flow_timer {
+  position: absolute;
+  z-index: 9;
+  background-color: #f1f1f1;
+  border: 1px solid #8c0606;
+  text-align: center;
+}
+
+
+
+
+
+
+
+/* yes / no radio  */
+.toggler-wrapper.style-199 input[type="checkbox"]:checked+.toggler-slider {
+	
+  background-color: white;
+	border-color: #e61f1f;
+}
+
+.toggler-wrapper.style-199 input[type="checkbox"]:checked+.toggler-slider:after {
+	content: '02:00';
+  left: 118%;
+  color:#e61f1f;
+}
+
+.toggler-wrapper.style-199 input[type="checkbox"]:checked+.toggler-slider .toggler-knob {
+	left: calc(100% - 39px - 7px);
+	background-color: #e61f1f;
+}
+
+.toggler-wrapper.style-199 .toggler-slider {
+	background-color: transparent;
+	border-radius: 0;
+	border: 2px solid #21dd1d;
+}
+
+.toggler-wrapper.style-199 .toggler-slider:after {
+	content: '01:00';
+	position: absolute;
+	top: 50%;
+  color:#36c81f ;
+	/* right: -93%; */
+  left: 118%;
+  -webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+	font-size: 234%;
+	text-transform: uppercase;
+	font-weight: 700;
+	opacity: 0.9;
+}
+
+.toggler-wrapper.style-199 .toggler-knob {
+	width: calc(25px - 6px);
+	height: calc(25px - 6px);
+	left: 3px;
+	top: 3px;
+  width: 48%;
+	height: 92%;
+	background-color: #23c717;
+}
+
+
+
+.toggler-wrapper {
+	display: block;
+	width: 95px;
+	height: 79px;
+	cursor: pointer;
+	position: relative;
+}
+
+.toggler-wrapper input[type="checkbox"] {
+	display: none;
+}
+
+.toggler-wrapper input[type="checkbox"]:checked+.toggler-slider {
+	background-color: #44cc66;
+}
+
+.toggler-wrapper .toggler-slider {
+	background-color: #ccc;
+	position: absolute;
+	border-radius: 100px;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	-webkit-transition: all 300ms ease;
+	transition: all 300ms ease;
+}
+
+
+.toggler-wrapper .toggler-knob {
+	position: absolute;
+	-webkit-transition: all 300ms ease;
+	transition: all 300ms ease;
+}
+
+.zalaza {
+  /* -webkit-box-shadow: inset -1px 3px 8px 5px #7b7b7b, 2px 5px 16px 0px #444444, 5px 5px 15px 5px rgba(0,0,0,0); 
+  box-shadow: inset -1px 3px 8px 5px #767676, 2px 5px 16px 0px #414141, 5px 5px 15px 5px rgba(0,0,0,0); */
+  /* box-shadow: 0px 10px 15px -3px rgba(202, 202, 202, 0.1); */
+  /* -webkit-box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
+  -moz-box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
+  box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);   */
+  filter: drop-shadow(2px 4px 5px rgb(64, 61, 83));
+
+/* 
+	border: solid #BDBDBD 1px; 
+	box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.3)  ; 
+	-webkit-box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.3)  ; 
+	-moz-box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.3)  ;  */
+}
+
+
+
+
+body {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+  -webkit-touch-callout: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;  
+}
+
+
+
+.f7_main_sc_bgblack {
+  background-color: #000;
+  color: #000;
+}
+
+
+</style>
+
+</head>
+
+{% block body %}
+   
+
+<script>
+
+
+
+
+
+
+
+
+function getCountdown(){
+
+
+  fetch('/timer-get-sec-on-tablo')
+    .then(res => res.json())
+    .then((out) => {
+        console.warn('Output# : ', out);
+        // console.warn('Output# : ', out.sec2tablo);
+        document.getElementById("tiles").innerHTML = "<span id='min_z'></span><span id='sec_z'>"+out.sec2tablo+"</span>";
+  
+}).catch(err => console.error(err));
+
+
+// find the amount of "seconds" between now and target
+
+// format countdown string + set tag value
+//countdown.innerHTML = "<span id='min_z'>" +  minutes + ":</span><span id='sec_z'>" + seconds + "</span>"; 
+
+// const response =  fetch('/timer-get-seconds/', {
+//     method: 'POST',
+//     body: JSON.stringify(object)
+//   });
+//   const responseText = response.text();
+//   //console.log(responseText); // logs 'OK'
+//       var obj_scnd = JSON.parse(responseText);
+//       console.log(obj_scnd.cc); // logs 'OK'
+
+//       document.addEventListener('DOMContentLoaded', e => {
+//           console.log(`Document is ready!`)
+//           document.getElementById("tiles").innerHTML = "<span id='min_z'>05:</span><span id='sec_z'>80</span>";
+//           })      
+
+// get_seconds_now_dysplay_onTablo();
+
+// setTimeout(function(){
+// //   fetch('/timer-get-sec-on-tablo')
+// //     .then(res => res.json())
+// //     .then((out) => {
+// //         console.warn('Output# : ', out);
+// //         // console.warn('Output# : ', out.sec2tablo);
+// //         // document.getElementById("tiles").innerHTML = "<span id='min_z'></span><span id='sec_z'>"+out.sec2tablo+"</span>";
+  
+// // }).catch(err => console.error(err));
+//      }, 987); 
+
+
+
+
+// document.getElementById("tiles").innerHTML = "<span id='min_z'></span><span id='sec_z'>"+out+"</span>";
+
+
+
+//countdown.innerHTML = "<span id='min_z'>" +  minutes + ":</span><span id='sec_z'>" + 58 + "</span>"; 
+
+
+
+
+
+
+
+
+
+
+
+}
+ 
+// setTimeout(function(){
+
+
+//     fetch('/timer-get-sec-on-tablo')
+//     .then(res => res.json())
+//     .then((out) => {
+//         console.warn('Output# : ', out);
+//         // console.warn('Output# : ', out.sec2tablo);
+//         document.getElementById("tiles").innerHTML = "<span id='min_z'> </span><span id='sec_z'>"+out.sec2tablo+"</span>";
+  
+// }).catch(err => console.error(err));
+
+
+  
+//   fetch('/timer-get-sec-on-tablo')
+//     .then(res => res.json())
+//     .then((out) => {
+//         console.warn('Output# : ', out);
+//         // console.warn('Output# : ', out.sec2tablo);
+//         document.getElementById("tiles").innerHTML = "<span id='min_z'> </span><span id='sec_z'>"+out.sec2tablo+"</span>";
+  
+// }).catch(err => console.error(err));
+
+
+//   getCountdown();
+//   // getSecondsFRMysql();
+//      }, 987);    
+
+
+
+
+
+
+     async function getSecondsFRMysql() {
+    
+    // const objectz = { status: 999, isid: 0 };
+    //   const responsez = await fetch('/timer-write', {
+    //     method: 'POST',
+    //     body: JSON.stringify(objectz)
+        
+    //   });
+
+    
+    let status = 0; // 1=start;2=pause;0=stop
+      const object = { status: 999, isid: 0 };
+      const response = await fetch('/timer-get-sec-on-tablo', {
+        method: 'GET',
+        body: JSON.stringify(object)
+        
+      });
+      
+      const responseText = await response.text();
+      var obj_scnd = JSON.parse(responseText);
+      //sec2tablo
+      //console.log(obj_scnd.cc); // logs 'OK'
+      //document.getElementById('countdownTablo').innerText = obj_scnd.cc;
+      document.getElementById('countdownTablo').innerText = obj_scnd.sec2tablo;
+    }  
+
+
+</script>
+ <!-- <body onload="reseTimer(); timer_play();"> -->
+  <body onload="getCountdown();">
+
+
+
+
+
+    
+
+    <!-- Sudarshana Chkra-->
+    <span class="f7_main_sc_bgblack">
+      <a href="/quit">
+        <div id="pica" class="pica">
+            <img src="static/img/v7-tilaka-black.png" alt="f7v-logo"
+                class="shadow rounded-full mt-4 ml-4 h-9 align-middle border-none" />
+        </div>
+      </a>
+    </span>
+    
+    
+    <!-- <div class="flex-1 text-right md:text-center">
+      
+      <span class="countdown timerbox">
+          <span id="countdownTablo"></span>
+        </span>
+
+  </div> -->
+
+   
+<section class="bg-black dark:bg-gray-900 h-full w-full">
+    <div class="py-2 px-4 mx-auto max-w-screen-xl h-fulllg:py-6 lg:px-6">
+        <div class="mx-auto max-w-screen-sm text-center">
+            <p id="pageInfo" class="blink text-center text-lg text-white">
+            <h1 class="mb-4 text-7xl tracking-tight font-extrabold lg:text-9xl text-white dark:text-primary-500">
+
+                <svg class="h-9 w-9" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+
+            </h1>
+
+
+
+  <div class="div110">
+    <input type="hidden" id="set-time" value="60"/>
+    <div id="countdown">
+      
+      <div id='tiles' class="color-full"></div>
+      <div id ="left" class="countdown-label">ОСТАВШЕЕСЯ ВРЕМЯ</div>
+    </div>
+
+  </div>
+  <div>
+  <div class="div11">&nbsp;</div>
+  <div class="div12">&nbsp;</div>
+  <div class="div13">&nbsp;</div>
+
+
+  <div class="inline-flex hidden">
+    <div class="f_timer_time px-2.5"></div>
+    <div class="f_timer_play px-1.5">
+          
+    <button alt="play" id="play_btn" onclick="timer_play()" type="submit" class="zalaza focus:outline-none text-black bg-transparent hover:bg-green-600 focus:ring-4 focus:ring-green-300 hover:border-white border-transparent border-2 focus:border-white text-gray-200 bg-transparent font-medium rounded-lg text-sm px-2 py-2 mb-2 dark:bg-transparent dark:hover:bg-green-600 dark:focus:ring-green-400">
+      <svg class="zalaza w-64 h-64" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+    </button>
+    </div>
+    
+    <div class="f_timer_pause px-1.5">
+      <button alt="pause" id="pause_btn" onclick="timer_pause()" type="submit" class="hidden zalaza focus:outline-none text-white bg-transparent hover:bg-yellow-500 focus:ring-4 focus:ring-green-300 hover:border-white border-transparent border-2 focus:border-white text-gray-200 bg-transparent font-medium rounded-lg text-sm px-2 py-2 mb-2 dark:bg-transparent dark:hover:bg-yellow-500 dark:focus:ring-yellow-400">
+        <svg class="zalaza w-64 h-64" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+      </button>
+  
+    </div>
+    <div class="f_timer_stop px-1.5 hidden">
+      <button alt="stop" id="stop_btm" onclick="restartApp()" type="submit" class="focus:outline-none text-white bg-transparent hover:bg-gray-900 focus:ring-4 focus:ring-green-300 hover:border-white border-transparent border-2 focus:border-white text-gray-200 bg-transparent font-medium rounded-lg text-sm px-2 py-2 mb-2 dark:bg-transparent dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+        <svg class="w-64 h-64" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 10a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z"></path></svg>
+      </button>    
+      
+    </div>
+    <div class="f_timer_12m px-2.5 ">
+              <!-- Toggle Button Style 19 -->
+              <label class="toggler-wrapper style-199">
+                <input onclick="changeTimer_time()"  type="checkbox" name="one_two_min" value="1" id="one_two_min">
+                <div class="toggler-slider">
+                  <div class="toggler-knob"></div>
+                </div>
+              </label>
+              <!-- End Toggle Button Style 19 -->
+    </div>
+    </div>
+
+
+
+
+
+
+
+
+  <div id="btn_panelss" class="hidden border-2 px-0.5 mx-9 bg-gray-400 inline-flex">
+    <div class="w-80 mx-auto mt-1 p-7">
+        <button class="bg-green-700 border-dotted border-2 border-red-500 w-full h-48 text-white rounded-md px-2 py-2 text-base font-medium hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-red-300" 
+                id="jx1" onclick="j1Vote(11)">
+                <svg class="w-64 h-64" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        </button>
+    </div>
+
+    <div class="w-80 mx-auto mt-1 p-7">
+        <button class="bg-yellow-500 border-dotted border-2 border-white w-full h-48 text-white rounded-md px-2 py-2 text-base font-medium hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-red-300" 
+                id="jx0" onclick="j1Vote(10)">
+                <svg class="w-20 h-20" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        </button>
+    </div>
+</div>
+</div>
+
+
+
+
+
+
+
+<div>.</div>
+           
+
+
+
+        </div>
+    </div>
+</section>
+
+
+
+
+
+  
+{% endblock %}
+
+
+
+
+
+
+
+
+<script>
+  // TIMER!!!
+
+
+// getCountdown();
+
+setInterval(function () { getCountdown(); }, 1000);
+
+
+
+function pad(n) {
+	return (n < 10 ? '0' : '') + n;
+}
+
+
+  function timer_play(param1) {
+    v7timer_start();
+    console.warn('[ PLAY ] v7Timer BTN was clickED!!!');
+    let audio = new Audio("../static/snd/play_btn.mp3").play();
+    audio.muted = true;
+    audio.currentTime = 0
+    audio.muted = false;
+    
+    var bplay = document.getElementById("play_btn");
+    var bpause = document.getElementById("pause_btn");
+    bpause.classList.remove("hidden");
+    bplay.classList.add("hidden");
+      bplay.addEventListener("click", () => {
+        //audio.play();
+        console.warn('audio.play_btn.play();');
+    });    
+  }
+
+
+  function timer_pause(param1) {
+    v7timer_pause();
+    console.warn('[ PAUSE ] v7Timer BTN was clickED!!!');
+    let audio = new Audio("../static/snd/pause_btn.mp3").play();
+    audio.muted = true;
+    audio.currentTime = 0
+    audio.muted = false;
+    var bplay = document.getElementById("play_btn");
+    var bpause = document.getElementById("pause_btn");
+    bplay.classList.remove("hidden");
+    bpause.classList.add("hidden");    
+      bplay.addEventListener("click", () => {
+        //audio.play();
+        console.warn('audio.pause_btn.play();');
+    });        
+  }  
+  
+  function changeTimer_time(param1) {
+    v7timer_stop();
+    var miner_min = document.getElementById("set-time").value;
+    console.warn('[ 60/120 radio SECOND ] v7Timer BTN was clickED!!!');
+    let audio = new Audio("../static/snd/1or2min_radio_btn.mp3").play();
+    audio.muted = true;
+    audio.currentTime = 0
+    audio.muted = false;
+    // var bplay = document.getElementById("one_two_min");
+    var bplay = document.getElementById("one_two_min");
+
+    if (bplay.checked == true ) { document.getElementById("tiles").innerHTML = "<span id='min_z'>02:</span><span id='sec_z'>00</span>"; }
+    else { bplay.checked == false; document.getElementById("tiles").innerHTML = "<span id='min_z'>01:</span><span id='sec_z'>00</span>"; }    
+
+    if (bplay.checked == true ) {
+        const object = { status: 2, isid: 1 };
+        const response = fetch('/timer-set/2', {
+          method: 'GET',
+          body: JSON.stringify(object)
+        });
+        //const responseText = response.text();
+        //console.log(responseText); // logs 'OK'
+    }
+    else { 
+        const object = { status: 1, isid: 1 };
+        const response = fetch('/timer-set/1', {
+          method: 'POST',
+          body: JSON.stringify(object)
+        });
+        //const responseText = response.text();
+        //console.log(responseText); // logs 'OK'
+    }
+
+
+    // if (bplay.checked == true ) { document.getElementById("tiles").innerHTML = "<span id='sec_z'>120</span>"; }
+    // else { bplay.checked == false; document.getElementById("tiles").innerHTML = "<span id='sec_z'>60</span>"; }        
+    console.warn('audio.1or2min_radio_btn.play();');
+    console.warn('@@@' + bplay.checked);
+
+    //   bplay.addEventListener("click", () => {
+    //     // if (miner_min==1) { miner_min.value = 2; document.getElementById("tiles").innerHTML = "<span id='min_z'>02:</span><span id='sec_z'>00</span>"; }
+    //     // if (miner_min==2) { miner_min.value = 1; document.getElementById("tiles").innerHTML = "<span id='min_z'>01:</span><span id='sec_z'>00</span>"; }
+    //     // console.warn('audio.1or2min_radio_btn.play();');
+    // });        
+  }  
+  
+  
+  // DEFAULT IS 60 SEC
+  // DEFAULT IS 60 SEC
+  // DEFAULT IS 60 SEC
+  // DEFAULT IS 60 SEC
+  // DEFAULT IS 60 SEC
+  document.getElementById("tiles").innerHTML = "<span id='min_z'>01:</span><span id='sec_z'>00</span>";
+</script>
+
+
+
+
+
+<script>
+
+  //////////////////
+// get From MYSQL
+// trigger
+// SET NEW.until_end = NEW.start_timestamp - NEW.curr_timestamp
+// SET NEW.until_end = NEW.until_end
+async function getSecondsFRMysql() {
+    
+    // const objectz = { status: 999, isid: 0 };
+    //   const responsez = await fetch('/timer-write', {
+    //     method: 'POST',
+    //     body: JSON.stringify(objectz)
+        
+    //   });
+
+    const objectz = { status: 999, isid: 0 };
+    
+      // const responsez = await fetch('/timer-write/'+sec2, {
+      //   method: 'POST',
+      //   body: JSON.stringify(objectz)
+        
+
+      // });    
+
+    
+    let status = 0; // 1=start;2=pause;0=stop
+      const object = { status: 999, isid: 0 };
+      const response = await fetch('/timer-get-sec-on-tablo', {
+        method: 'GET',
+        body: JSON.stringify(object)
+        
+      });
+      
+      const responseText = await response.text();
+      var obj_scnd = JSON.parse(responseText);
+      //sec2tablo
+      //console.log(obj_scnd.cc); // logs 'OK'
+      //document.getElementById('countdownTablo').innerText = obj_scnd.cc;
+      countdown.innerHTML = "<span id='min_z'>:</span><span id='sec_z'>" + obj_scnd.sec2tablo + "</span>"; 
+      // document.getElementById('countdownTablo').innerText = obj_scnd.sec2tablo;
+    }  
+   
+    //////////////////
+
+
+let tID = '';
+let idx0 = '';
+
+async function v7timer_start() {
+///////////////////////////////////////////////////////////
+var minutes = document.getElementById("set-time").value;
+
+//var target_date = new Date().getTime() + ((minutes * 60 ) * 1000); // set the countdown date
+var target_date = new Date().getTime() + ((minutes ) * 1000); // set the countdown date
+//var time_limit = ((minutes * 60 ) * 1000);
+var time_limit = ((minutes ) * 1000);
+//set actual timer
+idx0 = setTimeout(
+  function() 
+  {
+    document.getElementById("left").innerHTML = "Время истекло";
+  }, time_limit );
+
+var days, hours, minutes, seconds; // variables for time units
+
+var countdown = document.getElementById("tiles"); // get tag element
+
+getCountdown();
+tID = setInterval(function () {  getCountdown(); }, 1000);
+
+
+
+function getCountdown(){
+
+// find the amount of "seconds" between now and target
+var current_date = new Date().getTime();
+// console.warn('### curr:' + current_date);
+var seconds_left = (target_date - current_date) / 1000;
+//////////////////////////
+/// TIME IS 00:00
+//////////////////////////
+if ( seconds_left <= 0 ) { console.warn('TIME IS ENDDDD!!!!!!!!!!!!!!!!!!!'); }
+
+
+if ( seconds_left >= 0 ) {
+console.log(time_limit);
+ if ( (seconds_left * 1000 ) < ( time_limit / 2 ) )  {
+   $( '#tiles' ).removeClass('color-full');
+   $( '#tiles' ).addClass('color-half');
+
+  } 
+  if ( (seconds_left * 1000 ) < ( time_limit / 4 ) )  {
+    $( '#tiles' ).removeClass('color-half');
+    $( '#tiles' ).addClass('color-empty');
+  }
+
+days = pad( parseInt(seconds_left / 86400) );
+seconds_left = seconds_left % 86400;
+   
+hours = pad( parseInt(seconds_left / 3600) );
+seconds_left = seconds_left % 3600;
+    
+minutes = pad( parseInt(seconds_left / 60) );
+seconds = pad( parseInt( seconds_left % 60 ) );
+
+// format countdown string + set tag value
+//countdown.innerHTML = "<span id='min_z'>" +  minutes + ":</span><span id='sec_z'>" + seconds + "</span>"; 
+
+// const response =  fetch('/timer-get-seconds/', {
+//     method: 'POST',
+//     body: JSON.stringify(object)
+//   });
+//   const responseText = response.text();
+//   //console.log(responseText); // logs 'OK'
+//       var obj_scnd = JSON.parse(responseText);
+//       console.log(obj_scnd.cc); // logs 'OK'
+
+//       document.addEventListener('DOMContentLoaded', e => {
+//           console.log(`Document is ready!`)
+//           document.getElementById("tiles").innerHTML = "<span id='min_z'>05:</span><span id='sec_z'>80</span>";
+//           })      
+
+getSecondsFRMysql();
+get_seconds_now_dysplay_onTablo();
+
+
+      document.addEventListener('DOMContentLoaded', e => {
+          console.log(`Document is ready!`)
+          //document.getElementById("tiles").innerHTML = "<span id='min_z'>05:</span><span id='sec_z'>80</span>";
+          })      
+
+
+
+//countdown.innerHTML = "<span id='min_z'>" +  minutes + ":</span><span id='sec_z'>" + 58 + "</span>"; 
+
+
+
+
+
+
+
+
+
+
+
+}
+ 
+
+
+}
+///////////////////////////////////////////////////////////
+  let status = 1; // 1=start;2=pause;0=unstate
+  let x_min = document.getElementById("one_two_min");
+  if (x_min.checked) {  status=2 }
+  if (!x_min.checked) {  status=1 }
+  const object = { status: 3, isid: 1 };
+  const response = await fetch('/timer-start/'+status, {
+    method: 'GET',
+    body: JSON.stringify(object)
+  });
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'
+}
+
+
+
+async function get_seconds_now_dysplay_onTablo() {
+    const object = { status: 2, isid: 1 };
+    const response =  await fetch('/timer-get-seconds', {
+    method: 'GET',
+    body: JSON.stringify(object)
+  });
+  const responseText = response.text();
+  console.log(responseText); // logs 'OK'
+}
+
+
+
+
+function get_seconds() {
+    const response =  fetch('/timer-get-time/'+status, {
+    method: 'GET',
+    body: JSON.stringify(object)
+  });
+  const responseText = response.text();
+  console.log(responseText); // logs 'OK'
+}
+
+
+// SELECT ROUND(TIME_TO_SEC(TIMEDIFF((SELECT `curr_timestamp` FROM `v7timer` WHERE 1),(SELECT `start_timestamp` FROM `v7timer` WHERE 1))),0);
+// SELECT ROUND(TIME_TO_SEC(TIMEDIFF('2023-02-10 23:52:50.539761','2023-02-10 23:52:32.740431')),0);
+// SELECT ROUND(TIME_TO_SEC(TIMEDIFF('2023-02-10 23:52:50.539761','2023-02-10 23:52:32.740431')),0);
+// SELECT ROUND(TIME_TO_SEC(TIMEDIFF('2023-02-10 23:52:50.539761','2023-02-10 23:52:32.740431')),0);
+// SELECT ROUND(TIME_TO_SEC(TIMEDIFF('2023-02-10 23:52:50.539761','2023-02-10 23:52:32.740431')),0);
+
+
+
+async function v7timer_pause() {
+  ///////////////////////////////////////////////////////////
+// clearInterval(getCountdown);
+// clearInterval(idx);
+var minutes = $( '#set-time' ).val();
+
+var target_date = new Date().getTime() + ((minutes * 60 ) * 1000); // set the countdown date
+var time_limit = ((minutes * 60 ) * 1000);
+//set actual timer
+// let idx0 = setTimeout(
+//   function() 
+//   {
+//     document.getElementById("left").innerHTML = "Время истекло";
+//   }, time_limit );
+
+//???????????????????????????????
+clearInterval(idx0);
+clearInterval(tID);
+
+///////////////////////////////////////////////////////////
+  let status = 1; // 1=start;2=pause;0=unstate
+  const object = { status: 3, isid: 2 };
+  const response = await fetch('/timer-pause', {
+    method: 'GET',
+    body: JSON.stringify(object)
+  });
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'
+}
+
+async function v7timer_stop() {
+  let status = 0; // 1=start;2=pause;0=stop
+  const object = { status: 3, isid: 0 };
+  const response = await fetch('/timer-stop', {
+    method: 'GET',
+    body: JSON.stringify(object)
+  });
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'
+}
+
+
+async function reseTimer
+() {
+  let status = 0; // 1=start;2=pause;0=stop
+  const object = { status: 0, isid: 0 };
+  const response = await fetch('/timer-reset', {
+    method: 'GET',
+    body: JSON.stringify(object)
+  });
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'  
+}
+</script>
+</html>

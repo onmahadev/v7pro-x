@@ -1,0 +1,3874 @@
+<!DOCTYPE html>
+<html lang="ru" class="antialiased">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v7pro : Маршал </title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <!-- <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel=" stylesheet"> -->
+    <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/production_v7.css') }}">
+    
+
+    <!-- <script src="{{url_for('static', filename = 'js/faker.min.js')}}"></script> -->
+
+    <script src="{{url_for('static', filename = 'js/flowbite.js')}}"></script>
+    
+    <script src="{{url_for('static', filename = 'js/datepicker.js')}}"></script>
+
+    <script src="{{url_for('static', filename = 'js/socket.io.min.js')}}"></script>
+    
+    <script src="{{url_for('static', filename = 'js/ovmenu.js')}}"></script>
+    <!-- <script defer src="{{url_for('static', filename = 'js/alpine3.10.2.min.js')}}"></script> -->
+
+    <script src="{{url_for('static', filename = 'js/jquery-3.6.0.min.js')}}"></script>
+
+        
+
+    <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/ovmenu.css') }}">
+    <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/flow.css') }}">
+    <!-- <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/jquery-editable.css') }}"> -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon_io/flow/favicon.ico') }}">
+    <!--Replace with your tailwind.css once created-->
+
+
+
+    <script>
+
+
+
+
+
+      var seconds = 300;
+      // countdown timer. took 48 because page takes approx 48 sec to load
+      var url="{{url_for('flow')}}";        
+      function redirect(){
+       if (seconds <=0){
+        
+       // redirect to new url after counter  down.
+        window.location = url;
+       } else {
+        seconds--;
+        document.getElementById("pageInfo").innerHTML=" Оспаривание результата "
+      +seconds+" секунд"
+        setTimeout("redirect()", 1000)
+       }
+      }
+      </script>
+      
+
+<style>
+
+
+
+
+
+
+.blinkNow {
+  
+  font-size: 3em; 
+  border-bottom: 10px solid #e02b07;
+  animation-name: blinking;
+  animation-duration: 1s;
+  animation-iteration-count: 100;
+}
+@keyframes blinking {
+  50% {
+    border-color: #cacaca;
+  }
+}
+
+          .blink {
+              animation: blinker 2.1s linear infinite;
+              font-family: sans-serif;
+          }
+          @keyframes blinker {
+              50% {
+                  opacity: 0.4;
+              }
+          }
+.content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 160px;
+  overflow: hidden;
+  font-family: "Lato", sans-serif;
+  font-size: 35px;
+  line-height: 40px;
+  color: #ecf0f1;
+}
+.content__container {
+  font-weight: 600;
+  overflow: hidden;
+  height: 40px;
+  padding: 0 40px;
+}
+.content__container:before {
+  content: "[";
+  left: 0;
+}
+.content__container:after {
+  content: "]";
+  position: absolute;
+  right: 0;
+}
+.content__container:after, .content__container:before {
+  position: absolute;
+  top: 0;
+  color: #a01616;
+  font-size: 42px;
+  line-height: 40px;
+  -webkit-animation-name: opacity;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  animation-name: opacity;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+.content__container__text {
+  display: inline;
+  float: left;
+  margin: 0;
+}
+.content__container__list {
+  margin-top: 0;
+  padding-left: 110px;
+  text-align: left;
+  list-style: none;
+  -webkit-animation-name: change;
+  -webkit-animation-duration: 10s;
+  -webkit-animation-iteration-count: infinite;
+  animation-name: change;
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+}
+.content__container__list__item {
+  line-height: 40px;
+  margin: 0;
+}
+
+@-webkit-keyframes opacity {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes change {
+  0%, 12.66%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  16.66%, 29.32% {
+    transform: translate3d(0, -25%, 0);
+  }
+  33.32%, 45.98% {
+    transform: translate3d(0, -50%, 0);
+  }
+  49.98%, 62.64% {
+    transform: translate3d(0, -75%, 0);
+  }
+  66.64%, 79.3% {
+    transform: translate3d(0, -50%, 0);
+  }
+  83.3%, 95.96% {
+    transform: translate3d(0, -25%, 0);
+  }
+}
+@keyframes opacity {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes change {
+  0%, 12.66%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  16.66%, 29.32% {
+    transform: translate3d(0, -25%, 0);
+  }
+  33.32%, 45.98% {
+    transform: translate3d(0, -50%, 0);
+  }
+  49.98%, 62.64% {
+    transform: translate3d(0, -75%, 0);
+  }
+  66.64%, 79.3% {
+    transform: translate3d(0, -50%, 0);
+  }
+  83.3%, 95.96% {
+    transform: translate3d(0, -25%, 0);
+  }
+}  
+
+
+.ats[att_sex1="1"] {
+  margin: 40px;
+  background: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+
+
+
+
+select option[value="29"] {
+  background: rgba(154, 25, 25, 0.3);
+}
+
+select option[value="31"] {
+  background: rgba(16, 174, 71, 0.3);
+}
+
+select option[value="33"] {
+  background: rgba(200, 200, 200, 0.3);
+}
+
+select option[value="35"] {
+  background: rgba(163, 29, 145, 0.3);
+}
+
+
+body {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+  -webkit-touch-callout: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+}
+
+
+
+.setUNCLICKABLED{
+  cursor:not-allowed;
+  /* pointer-events: auto;
+  pointer-events: none; */
+  
+}
+
+
+.setUNC{
+  cursor:not-allowed;
+  pointer-events: auto;
+  pointer-events: none;
+  
+}
+
+
+
+.zzzsdsds {
+  color: #fefefe;
+  color: #fefefe;
+  font-style: normal #fefefe;
+  cursor:not-allowed;
+  z-index: -1999;
+
+}
+.dsds{
+  color: #fefefe;
+  color: #fefefe;
+  font-style: normal #fefefe;
+  cursor:not-allowed;
+  z-index: -1999;
+}
+
+</style>
+
+
+
+
+<script>
+
+
+
+// function getLStorage(param) {
+//   let currGender = localStorage.getItem('currGender');
+//   let currContry = localStorage.getItem('currContry');
+//   let currWCat = localStorage.getItem('currWCat');
+//   let currCityTeam = localStorage.getItem('currCityTeam');
+//   let currAva = localStorage.getItem('currAva');
+//   let currBDay = localStorage.getItem('currBDay');
+//   let currFNAme = localStorage.getItem('currFNAme');
+//   let currLName = localStorage.getItem('currLName');
+//   let currS1order = localStorage.getItem('currS1order');
+//   let currCJ1order = localStorage.getItem('currCJ1order');
+//   let getParam = param;
+//   if (param==='print') {
+//     console.log('gen1:' +currGender+'| country2:'+currContry+'| wcat3:'+currWCat+'| cTeam4:'+currCityTeam+'| ava5:'+currAva+'| BDay6:'+currBDay+'| fName7:'+currFNAme+'| LName8:'+currLName+'| S1_9:'+currS1order + '| CJ1_10:'+currCJ1order +'|||');
+//   }
+// }
+
+// ################################################################################################################
+// #####  trY use JS localStorage !!!
+// ################################################################################################################
+  // Check browser support
+//   if( window.localStorage ) {
+    
+//   if( !localStorage.getItem( 'need2refreshFlow' ) ) {
+//     console.log('n2r: 1 -> refresh!');
+//     localStorage[ 'need2refreshFlow' ] = true;
+//     // window.location.reload();
+//   }
+//   else {
+//     // localStorage.removeItem( 'need2refreshFlow' );
+//     console.log('n2r: 0 -> NO refresh!');
+//   }
+// }
+// ################################################################################################################
+// #####  trY use JS localStorage @@@
+// ################################################################################################################
+
+</script>
+</head>
+
+<body class="bg-opacity-25 leading-normal" onload="updAllTable(); redirect();">
+  
+
+
+  
+
+
+
+
+
+    <!-- Sudarshana Chkra-->
+    <span class="f7_main_sc">
+      <a href="/quit">
+        <div id="pica" class="pica">
+            <img src="static/img/v7-tilaka-white.png" alt="f7v-logo"
+                class="shadow rounded-full mt-4 ml-4 h-9 align-middle border-none" />
+        </div>
+      </a>
+    </span>
+
+
+
+
+
+
+
+
+    <!-- Slider MENU-->
+    {% include 'nav.html' %}
+    <!-- Slider MENU-->
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+<div>
+    <!-- Rest of the HTML -->
+
+  </div>
+
+
+
+
+
+
+
+
+<div class="min-h-screen bg-indigo-900 py-5 topper">
+
+
+
+<!-- toast BOX OK/GREEN / Alert box -->
+<!-- toast BOX OK/GREEN / Alert box -->
+<!-- toast BOX OK/GREEN / Alert box -->
+<div id="app-succsess01" class="absolute flex w-full bg-opacity-75 z-50 p-4 mb-4 bg-red-200 border-t-4 border-green-500 dark:bg-green-200 animated snake" role="alert">
+  <svg class="flex-shrink-0 w-5 h-5 text-green-700" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+  <div class="ml-3 text-sm font-medium text-black animated snake">
+    задача #: <b> <span id="idnumz" class="animated snake"></span> </b> выполнена успешно!
+    <script>
+      let xnum = (Math.random() * 9999999);
+      document.getElementById("idnumz").innerHTML = Math.ceil(xnum);
+    </script>
+  </div>
+  <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-green-100 dark:bg-green-200 text-red-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 dark:hover:bg-green-300 inline-flex h-8 w-8" data-dismiss-target="#alert-border-3" aria-label="Close">
+    <span class="sr-only">close</span>
+    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+  </button>
+</div>
+<div></div>
+
+<!-- <div id="app-succsess02" class="p-4 mb-4 w-10/12 hidden  bg-green-100 border-t-4 border-green-500 dark:bg-green-200 animated snake" role="alert"> -->
+<div id="app-succsess02" class="hidden absolute flex w-full bg-opacity-75 z-50 p-4 mb-4 bg-green-100 border-t-4 border-green-500 dark:bg-green-200 animated snake" role="alert">
+  <svg class="flex-shrink-0 w-5 h-5 text-green-700" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+  <div class="ml-3 text-sm font-medium text-green-700 animated snake">
+    Судья приглашен, задача #: <b> <span id="idnumz2" class="animated snake"></span> </b> выполнена успешно!
+    <script>
+      let xnum1 = (Math.random() * 9999999);
+      document.getElementById("idnumz2").innerHTML = Math.ceil(xnum1);
+    </script>
+  </div>
+  <!-- <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-green-100 dark:bg-green-200 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 dark:hover:bg-green-300 inline-flex h-8 w-8" data-dismiss-target="#alert-border-3" aria-label="Close">
+    <span class="sr-only">close</span>
+    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+  </button> -->
+</div>
+<!-- toast BOX OK/GREEN / Alert box -->
+<!-- toast BOX OK/GREEN / Alert box -->
+<!-- toast BOX OK/GREEN / Alert box -->
+
+
+
+
+<div id="flow_endz" class='hidden endflowzzz overflow-x-auto w-full'>
+  <h1 class="feh rainbow mb-4 text-4xl font-extrabold leading-10 tracking-tight text-white md:text-5xl lg:text-6xl dark:text-white">ПОТОК ЗАКОНЧЕН</h1>   
+</div>
+
+  
+    <div class='overflow-x-auto w-full'>
+        <table id="att_dataz"
+        class='opacity-95 select-none mx-auto max-w-4xl w-full whitespace-nowrap rounded-lg bg-gray-200 divide-y overflow-hidden table-auto shadow-md'>
+        <thead class="bg-gray-500">
+            <tr class="text-white text-center">
+            <th class="font-semibold text-xs lowercase px-6 py-0">атлет</th>
+            <th class="font-semibold text-xs lowercase px-6 py-0">1 рыв</th>
+            <th class="font-semibold text-xs lowercase px-6 py-0">2 рыв</th>
+            <th class="font-semibold text-xs lowercase px-6 py-0">3 рыв</th>
+            <th class="font-semibold text-xs lowercase px-6 py-0">рез-т</th>
+            <th class="font-semibold text-xs lowercase px-6 py-0">1 тол</th>
+            <th class="font-semibold text-xs lowercase px-6 py-0">2 тол</th>
+            <th class="font-semibold text-xs lowercase px-6 py-0">3 тол</th>
+            <th class="font-semibold text-xs lowercase px-6 py-0">рез-т</th>
+            <th class="font-semibold text-xs lowercase px-6 py-0">сумма</th>
+            </tr>
+        </thead>
+<tbody id="att_table" class="divide-y divide-gray-100">
+{% for data in attdata %}
+{% if data.op == 1 %}   
+ <!-- var serviceID = $(this).attr('id'); -->
+<tr id="{{data.id}}" data-op="{{data.op}}" data-s1="{{data.s1}}" data-s1ig="{{data.s1ig}}" data-s2="{{data.s2}}" data-s2ig="{{data.s2ig}}" data-s3="{{data.s3}}" data-s3ig="{{data.s3ig}}" data-j1="{{data.j1}}" data-j1ig="{{data.j1ig}}" data-j2="{{data.j2}}" data-j2ig="{{data.j2ig}}" data-j3="{{data.j3}}" data-j3ig="{{data.j3ig}}" data-s1dec="{{data.s1d}}" data-s1ch1="{{data.s1ch1}}" data-s1ch2="{{data.s1ch2}}" data-s2dec="{{data.s2d}}" data-s2ch1="{{data.s2ch1}}" data-s2ch2="{{data.s2ch2}}" data-s3dec="{{data.s3d}}" data-s3ch1="{{data.s3ch1}}" data-s3ch2="{{data.s3ch2}}"
+data-birth="{{data.birth}}" data-sex="{{data.sex}}" data-ow="{{data.ow}}" data-city="{{data.city}}" data-cntry="{{data.country_id}}" data-wcat="{{data.wcat_id}}" data-j1dec="{{data.j1d}}" data-j1ch1="{{data.j1ch1}}" data-j1ch2="{{data.j1ch2}}" data-j2ch2="{{data.j2ch2}}" data-j2dec="{{data.j2d}}" data-j2ch1="{{data.j2ch1}}" data-j2ch2="{{data.j2ch2}}" data-j3dec="{{data.j3d}}" data-j3ch1="{{data.j3ch1}}" data-j3ch2="{{data.j3ch2}}" data-wnow="{{data.wnow}}" data-exnow="{{data.exnow}}" data-sname="{{data.sname}}" data-fname="{{data.fname}}" class="chData modal-open isOP_tr pulse_op_now_square">
+{% elif data.nop == 1 %}
+<tr id="{{data.id}}" data-nop="{{data.nop}}" data-s1="{{data.s1}}" data-s1ig="{{data.s1ig}}" data-s2="{{data.s2}}" data-s2ig="{{data.s2ig}}" data-s3="{{data.s3}}" data-s3ig="{{data.s3ig}}" data-j1="{{data.j1}}" data-j1ig="{{data.j1ig}}" data-j2="{{data.j2}}" data-j2ig="{{data.j2ig}}" data-j3="{{data.j3}}" data-j3ig="{{data.j3ig}}" data-s1dec="{{data.s1d}}" data-s1ch1="{{data.s1ch1}}" data-s1ch2="{{data.s1ch2}}" data-s2dec="{{data.s2d}}" data-s2ch1="{{data.s2ch1}}" data-s2ch2="{{data.s2ch2}}" data-s3dec="{{data.s3d}}" data-s3ch1="{{data.s3ch1}}" data-s3ch2="{{data.s3ch2}}"
+data-birth="{{data.birth}}" data-sex="{{data.sex}}" data-ow="{{data.ow}}" data-city="{{data.city}}" data-cntry="{{data.country_id}}" data-wcat="{{data.wcat_id}}" data-j1dec="{{data.j1d}}" data-j1ch1="{{data.j1ch1}}" data-j1ch2="{{data.j1ch2}}" data-j2ch2="{{data.j2ch2}}" data-j2dec="{{data.j2d}}" data-j2ch1="{{data.j2ch1}}" data-j2ch2="{{data.j2ch2}}" data-j3dec="{{data.j3d}}" data-j3ch1="{{data.j3ch1}}" data-j3ch2="{{data.j3ch2}}" data-wnow="{{data.wnow}}" data-exnow="{{data.exnow}}" data-sname="{{data.sname}}" data-fname="{{data.fname}}" class="chData modal-open isNOP_tr">
+{% else %}
+<tr id="{{data.id}}" data-s1="{{data.s1}}" data-s1ig="{{data.s1ig}}" data-s2="{{data.s2}}" data-s2ig="{{data.s2ig}}" data-s3="{{data.s3}}" data-s3ig="{{data.s3ig}}" data-j1="{{data.j1}}" data-j1ig="{{data.j1ig}}" data-j2="{{data.j2}}" data-j2ig="{{data.j2ig}}" data-j3="{{data.j3}}" data-j3ig="{{data.j3ig}}" data-s1dec="{{data.s1d}}" data-s1ch1="{{data.s1ch1}}" data-s1ch2="{{data.s1ch2}}" data-s2dec="{{data.s2d}}" data-s2ch1="{{data.s2ch1}}" data-s2ch2="{{data.s2ch2}}" data-s3dec="{{data.s3d}}" data-s3ch1="{{data.s3ch1}}" data-s3ch2="{{data.s3ch2}}"
+data-birth="{{data.birth}}" data-sex="{{data.sex}}" data-ow="{{data.ow}}" data-city="{{data.city}}" data-cntry="{{data.country_id}}" data-wcat="{{data.wcat_id}}" data-j1dec="{{data.j1d}}" data-j1ch1="{{data.j1ch1}}" data-j1ch2="{{data.j1ch2}}"  data-j2ch2="{{data.j2ch2}}" data-j2dec="{{data.j2d}}" data-j2ch1="{{data.j2ch1}}" data-j2ch2="{{data.j2ch2}}" data-j3dec="{{data.j3d}}" data-j3ch1="{{data.j3ch1}}" data-j3ch2="{{data.j3ch2}}" data-wnow="{{data.wnow}}" data-exnow="{{data.exnow}}" data-sname="{{data.sname}}" data-fname="{{data.fname}}" class="chData modal-open ttr border-b border-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700 dark:hover:text-white id_{{loop.index}}">
+{% endif %}
+<td class="px-4 py-0">
+<div class="idAtti">
+<span 
+class="bg-gray-100 text-xs font-bold mr-1 px-1.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">
+{{loop.index}}
+</span>
+</div>
+<div  id="div_flag_{{data.id}}" class="flagDiv flex items-center space-x-3">
+<div id="div_img_{{data.id}}" class="inline-flex w-8 h-8"> <img id="img_{{data.id}}" class='w-8 h-8 py-0 object-cover rounded-full border-2 border-slate-900'
+alt='User avatar' src='../static/img/flags/{{data.country.flag.lower()}}.png' />
+</div>
+<div>
+
+  {% if data.op != 1 %}
+  <span id="setOP_btn_flow" class="m-0 float-left setOP_btn_flow" onclick="setOP_flow();" data-tooltip=" Вызвать атлета на помост">🟢</span>
+  {% endif %}
+    <span class="sex_wcat_box">
+        {% if data.sex == 1 %}
+        <span id="sex_{{data.id}}"
+        class="bg-blue-900 text-white text-xs font-semibold mr-2 px-1.8 py-1.6 rounded dark:bg-blue-200 dark:text-blue-800 px-1">{{data.cat.lwcat}}</span>
+        {% else %}
+        <span id="sex_{{data.id}}"
+        class="bg-red-600 text-white text-xs font-semibold mr-2 px-1.8 py-1.6 rounded dark:bg-red-200 dark:text-red-900 px-1">{{data.cat.lwcat}}</span>
+        {% endif %}
+        </span>
+
+        {% if data.op ==1 or data.nop == 1 %}
+        <span class="att_name_op"> <span id="sname_{{data.id}}">{{data.sname[:14]|upper}}</span> <span id="fname_{{data.id}}">{{data.fname[:14]|capitalize}}</span>
+        {% elif data.op == 0 %}
+        <span class="att_name"> <span id="sname_{{data.id}}">{{data.sname[:14]|upper}}</span> <span id="fname_{{data.id}}">{{data.fname[:14]|capitalize}}</span>
+        {% endif %}
+        
+                
+     <span id="cit_{{data.id}}" data-atcity="{{data.city}}" lang="ru" class="city_att z-0 text-ellipsis overflow-hidden bg-gray-200 text-blue-900 text-xs font-semibold mr-1 px-0.8 py-0.6 rounded dark:bg-gray-700 dark:text-gray-400">{{data.city[:14]}}</span>
+     &nbsp;     
+<!-- <span id="key2cnt_{{data.id}}" class="countrt3code">{{data.country.flag.upper()}}&nbsp;</span> -->
+
+</span>
+
+
+
+<!-- <p id="tr_p_{{data.id}}" class="text-gray-500 text-sm font-semibold tracking-wide"> <small id="ow__{{data.id}}">вес:</small>
+<span id="ow_{{data.id}}"
+class="bg-gray-100 text-gray-800 text-xs font-semibold mr-1 px-0.5 py-0.6 rounded dark:bg-gray-700 dark:text-gray-300"> {{ "%.1f"|format(data.ow|float) }}
+kG</span>
+<span id="cit_{{data.id}}"
+class="text-ellipsis overflow-hidden bg-gray-200 text-blue-900 text-xs font-semibold mr-1 px-0.8 py-0.6 rounded dark:bg-gray-700 dark:text-gray-400">{{data.cities.cname[:14]}}</span>
+</p> -->
+</div>
+</div>
+</td>
+<td id="td_s1_{{data.id}}" class=" px-6 text-center app">
+    {% if data.s1ig == 1 %}
+    <p id="p_s1_{{data.id}}" class="cntr text-center app_isget">  {{data.s1ch2 if data.s1ch2 is not none else data.s1ch1 if data.s1ch1 is not none else data.s1 if data.s1 is not none}} </p>
+    {% elif data.s1ig == 0 %}
+    <p id="p_s1_{{data.id}}" class="cntr text-center app_isnotget">  {{data.s1ch2 if data.s1ch2 is not none else data.s1ch1 if data.s1ch1 is not none else data.s1 if data.s1 is not none}} </p>
+    {% elif data.s1ig == -1 %}
+    <p id="p_s1_{{data.id}}" class="cntr text-center app_refused">  {{data.s1ch2 if data.s1ch2 is not none else data.s1ch1 if data.s1ch1 is not none else data.s1 if data.s1 is not none}} </p>
+    {% elif data.s1ig is none and data.op == 1 and data.j1ig is none %}
+    <p id="p_s1_{{data.id}}" class="cntr text-center pulse_op_now"> {{data.s1ch2 if data.s1ch2 is not none else data.s1ch1 if data.s1ch1 is not none else data.s1 if data.s1 is not none}} </p>
+    {% else %}
+    <p id="p_s1_{{data.id}}" class="cntr text-center app"> {{data.s1ch2 if data.s1ch2 is not none else data.s1ch1 if data.s1ch1 is not none else data.s1 if data.s1 is not none}} </p>
+    {% endif %}
+</td>
+
+<td class="px-6 text-center app">
+    {% if data.s2ig == 1 %}
+    <p class="cntr text-center app_isget"> {{data.s2ch2 if data.s2ch2 is not none else data.s2ch1 if data.s2ch1 is not none else data.s2 if data.s2 is not none}} </p>
+    {% elif data.s2ig == 0 %}
+    <p class="cntr text-center app_isnotget"> {{data.s2ch2 if data.s2ch2 is not none else data.s2ch1 if data.s2ch1 is not none else data.s2 if data.s2 is not none}} </p>
+    {% elif data.s2ig == -1 %}
+    <p class="cntr text-center app_refused"> {{data.s2ch2 if data.s2ch2 is not none else data.s2ch1 if data.s2ch1 is not none else data.s2 if data.s2 is not none}} </p>
+    {% elif data.s2ig is none and data.s1ig is not none and data.op == 1 and data.j1ig is none %}
+    <p class="cntr text-center pulse_op_now"> {{data.s2ch2 if data.s2ch2 is not none else data.s2ch1 if data.s2ch1 is not none else data.s2 if data.s2 is not none}} </p>
+    {% elif data.s2ig is none and data.op == 0 %}
+    <p class="cntr text-center app vvvvv"> {{data.s2ch2 if data.s2ch2 is not none else data.s2ch1 if data.s2ch1 is not none else data.s2 if data.s2 is not none}} </p>
+    {% endif %}
+</td>
+
+<td class="px-6 text-center app">
+    {% if data.s3ig == 1 %}
+    <p class="cntr text-center app_isget"> {{data.s3ch2 if data.s3ch2 is not none else data.s3ch1 if data.s3ch1 is not none else data.s3 if data.s3 is not none}} </p>
+    {% elif data.s3ig == 0 %}
+    <p class="cntr text-center app_isnotget">  {{data.s3ch2 if data.s3ch2 is not none else data.s3ch1 if data.s3ch1 is not none else data.s3 if data.s3 is not none}} </p>
+    {% elif data.s3ig == -1 %}
+    <p class="cntr text-center app_refused">  {{data.s3ch2 if data.s3ch2 is not none else data.s3ch1 if data.s3ch1 is not none else data.s3 if data.s3 is not none}} </p>
+    {% elif data.s3ig is none and data.s2ig is not none and data.op == 1 %}
+    <p class="cntr text-center pulse_op_now">  {{data.s3ch2 if data.s3ch2 is not none else data.s3ch1 if data.s3ch1 is not none else data.s3 if data.s3 is not none}} </p>
+    {% elif data.j3ig is none and data.op==1 and data.s1ig is not none and data.s2ig is not none and data.j1ig is none%}
+    <p class="cntr text-center">  {{data.s3ch2 if data.s3ch2 is not none else data.s3ch1 if data.s3ch1 is not none else data.s3 if data.s3 is not none}} </p>
+    {% else %}
+    <p class="cntr text-center app">  {{data.s3ch2 if data.s3ch2 is not none else data.s3ch1 if data.s3ch1 is not none else data.s3 if data.s3 is not none}} </p>
+    {% endif %}
+</td>
+
+<td class="px-6 py-1 text-center back-sres">
+{% if data.op == 1 %}
+<p class="back-sres-op"><u> {{data.sres}} </u></p>
+{% elif data.nop == 1 %}
+<p class="back-sres-nop"><u> {{data.sres}} </u></p>
+{% else %}
+<p class="back-sres-reg"><u> {{data.sres}} </u></p>
+{% endif %}                
+
+
+
+</td>
+
+<td class="px-6 text-center app">
+    {% if data.j1ig == 1 %}
+    <p class="cntr text-center app_isget">  {{data.j1ch2 if data.j1ch2 is not none else data.j1ch1 if data.j1ch1 is not none else data.j1 if data.j1 is not none}} </p>
+    {% elif data.j1ig == 0 %}
+    <p class="cntr text-center app_isnotget">  {{data.j1ch2 if data.j1ch2 is not none else data.j1ch1 if data.j1ch1 is not none else data.j1 if data.j1 is not none}} </p>
+    {% elif data.j1ig == -1 %}
+    <p class="cntr text-center app_refused">  {{data.j1ch2 if data.j1ch2 is not none else data.j1ch1 if data.j1ch1 is not none else data.j1 if data.j1 is not none}} </p>
+    {% elif data.j3ig is none and data.op==1 and data.j1ig is none and data.s1ig is not none and data.s2ig is not none and data.s3ig is not none %}
+    <p class="cntr text-center pulse_op_now">   {{data.j1ch2 if data.j1ch2 is not none else data.j1ch1 if data.j1ch1 is not none else data.j1 if data.j1 is not none}} </p>
+    {% else %}
+    <p class="cntr text-center app">  {{data.j1ch2 if data.j1ch2 is not none else data.j1ch1 if data.j1ch1 is not none else data.j1 if data.j1 is not none}} </p>
+    {% endif %}
+</td>
+
+<td class="px-6 text-center app">
+    {% if data.j2ig == 1 %}
+    <p class="cntr text-center app_isget">   {{data.j2ch2 if data.j2ch2 is not none else data.j2ch1 if data.j2ch1 is not none else data.j2 if data.j2 is not none}} </p>
+    {% elif data.j2ig == 0 %}
+    <p class="cntr text-center app_isnotget">  {{data.j2ch2 if data.j2ch2 is not none else data.j2ch1 if data.j2ch1 is not none else data.j2 if data.j2 is not none}} </p>
+    {% elif data.j2ig == -1 %}
+    <p class="cntr text-center app_refused"> {{data.j2ch2 if data.j2ch2 is not none else data.j2ch1 if data.j2ch1 is not none else data.j2 if data.j2 is not none}} </p>
+    {% elif data.j3ig is none and data.op==1 and data.j1ig is not none and data.s1ig is not none and data.s2ig is not none and data.s3ig is not none%}
+    <p class="cntr text-center pulse_op_now">  {{data.j2ch2 if data.j2ch2 is not none else data.j2ch1 if data.j2ch1 is not none else data.j2 if data.j2 is not none}} </p>
+    {% else %}
+    <p class="cntr text-center app">  {{data.j2ch2 if data.j2ch2 is not none else data.j2ch1 if data.j2ch1 is not none else data.j2 if data.j2 is not none}} </p>
+    {% endif %}
+</td>
+
+<td class="px-6 text-center app">
+    {% if data.j3ig == 1 %}
+    <p class="cntr text-center app_isget">  {{data.j3ch2 if data.j3ch2 is not none else data.j3ch1 if data.j3ch1 is not none else data.j3 if data.j3 is not none}} </p>
+    {% elif data.j3ig == 0 %}
+    <p class="cntr text-center app_isnotget">   {{data.j3ch2 if data.j3ch2 is not none else data.j3ch1 if data.j3ch1 is not none else data.j3 if data.j3 is not none}} </p>
+    {% elif data.j3ig == -1 %}
+    <p class="cntr text-center app_refused">  {{data.j3ch2 if data.j3ch2 is not none else data.j3ch1 if data.j3ch1 is not none else data.j3 if data.j3 is not none}} </p>
+    {% elif data.j3ig is none and data.op==1 and data.j1ig is not none and data.j2ig is not none and data.s2ig is not none and data.s1ig is not none %}
+    <p class="cntr text-center pulse_op_now">   {{data.j3ch2 if data.j3ch2 is not none else data.j3ch1 if data.j3ch1 is not none else data.j3 if data.j3 is not none}} </p>
+    {% else %}
+    <p class="cntr text-center app">   {{data.j3ch2 if data.j3ch2 is not none else data.j3ch1 if data.j3ch1 is not none else data.j3 if data.j3 is not none}} </p>
+    {% endif %}
+</td>
+
+<td class="px-6 py-1 text-center back-jres">
+    {% if data.op == 1 %}
+    <p class="back-jres-op"><u> {{data.jres}} </u></p>
+    {% elif data.nop == 1 %}
+    <p class="back-jres-nop"><u> {{data.jres}} </u></p>
+    {% else %}
+    <p class="back-jres-reg"><u> {{data.jres}} </u></p>
+    {% endif %}                
+</td>    
+                        {% if data.op == 1 %}
+                        <td class="px-6 text-center back-dsum-op">
+                        {% elif data.nop == 1 %}
+                        <td class="px-6 text-center back-dsum-nop">
+                        {% else %}
+                        <td class="px-6 text-center back-dsum-reg"> 
+                        {% endif %}                            
+                            <p><b> {{data.dblsum}} </b></p>
+                        </td>
+                    </tr>
+                    
+                    {% endfor%}
+                </tbody>
+
+            </table>
+        </div>
+
+
+
+<div>.</div>
+
+<!-- ################################################################ -->
+<!--################################################################# -->
+<!--################################################################# -->
+<!-- IF ATT LIST IS 0 / NOT ADDET TO FLOW not any Athlete !!!         -->
+<!-- ################################################################ -->
+{% for data in attz %}
+{% if loop.length==0 %}
+<div class="flex justify-center items-center h-screen">  
+  <form id="flow_formation_form_" action="{{url_for('flow')}}" method="POST">
+    <button alt="flow_formation" id="flow_formation_btb" onclick="restartApp()" type="submit" class="px-32 mx-32 focus:outline-none text-white bg-gray-300 hover:bg-gray-100 focus:ring-2 focus:ring-blue-300 hover:border-white border-transparent border-1 focus:border-white text-gray-200 bg-transparent font-medium rounded-lg text-sm px-1 py-1 mb-0 dark:bg-transparent dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+      <svg class="flex-shrink-0 w-20 h-20 text-green-700" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg> 
+  </button>
+ </form>
+  </div>
+{% endif %}
+{% endfor %}
+
+
+
+
+
+
+<div id="flow_bottom_control_panel" class="pl-48 inline-block">
+  <div class="hidden inline-block border-white border-0">
+  <button id="add_new_att_btn" type="button" class="newattbtn focus:outline-none text-white bg-yellow-500 hover:bg-green-600 focus:ring-4 focus:ring-green-300 hover:border-white border-transparent border-2 focus:border-white text-gray-200 bg-transparent font-medium rounded-lg text-sm px-2 py-2 mb-2 dark:bg-transparent dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+   <svg class="btnIco w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path></svg>
+  </button>
+</div>
+
+<!-- <div class="hidden inline-block border-white border-0 mx-32 px-32">
+  <p>&nbsp;&nbsp;&nbsp;</p>
+  </div> -->
+<span class="hidden text-white">::</span>
+<div class="inline-block border-white border-0 mx-32 px-32">
+<!-- <p>&nbsp;&nbsp;&nbsp;</p> -->
+</div>
+
+<div data-tooltip="Обновить данные"  class="inline-block border-white border-0">
+<form id="restart_flow_form" action="{{url_for('flow')}}" method="POST">
+  <button alt="restart" id="restart_brm" onclick="restartApp()" type="submit" class="focus:outline-none text-white bg-indigo-500 hover:bg-green-600 focus:ring-4 focus:ring-green-300 hover:border-white border-transparent border-2 focus:border-white text-gray-200 bg-transparent font-medium rounded-lg text-sm px-2 py-2 mb-2 dark:bg-purple-300 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+   <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+  </button>
+ </form>
+</div>
+<span class=" text-white">&nbsp;&nbsp;&nbsp;‖</span>
+<div class="inline-block border-white border-0 mx-32 px-32">
+<!-- <p>&nbsp;&nbsp;&nbsp;</p> -->
+</div>
+
+<div id="sec_zzxsdsdsz"  data-tooltip="Стартовый номер атлета на помосте" class="inline-flex serial_number_on_the_sleeve px-2.5">
+  №<div id="sec_sdsds" class="serial_number_on_the_sleeve_int px-1.5"></div>:
+  </div>
+
+<div  class=" inline-block border-white border-0">
+  <form id="yes_form"  method="POST">
+    <button data-tooltip="Атлет на помосте - Успешное выполнение" alt="restart" id="restart_6brm" onclick="wrapper_jSET_yes()" class="yesnot_buttonz focus:outline-none text-gray-600 bg-gray-300  hover:bg-white  focus:ring-4 focus:ring-green-300 hover:border-white border-transparent border-2 focus:border-white text-gray-200 bg-transparent font-medium rounded-lg text-sm px-2 py-2 mb-2 dark:bg-gray-100 dark:hover:bg-gray-300 dark:focus:ring-gray-200">
+     <!-- <svg  fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg> -->
+     <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M6.633 10.5c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 00.322-1.672V3a.75.75 0 01.75-.75A2.25 2.25 0 0116.5 4.5c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 01-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 00-1.423-.23H5.904M14.25 9h2.25M5.904 18.75c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 01-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 10.203 4.167 9.75 5 9.75h1.053c.472 0 .745.556.5.96a8.958 8.958 0 00-1.302 4.665c0 1.194.232 2.333.654 3.375z"></path>
+    </svg>
+    </button>
+   </form>
+  </div>
+  <div class=" inline-block border-white border-0">
+    <form id="not_form" method="POST">
+      <button data-tooltip="Атлет на помосте - НЕ Выполнил упражнение"  alt="restart" id="restart_5brm" onclick="wrapper_jSET_not()" class="yesnot_buttonz focus:outline-none text-white bg-red-700  hover:bg-red-800 focus:ring-4 focus:ring-green-300 hover:border-white border-transparent border-2 focus:border-white text-gray-200 bg-transparent font-medium rounded-lg text-sm px-2 py-2 mb-2 dark:bg-red-400 dark:hover:bg-red-500 dark:focus:ring-red-900">
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 15h2.25m8.024-9.75c.011.05.028.1.052.148.591 1.2.924 2.55.924 3.977a8.96 8.96 0 01-.999 4.125m.023-8.25c-.076-.365.183-.75.575-.75h.908c.889 0 1.713.518 1.972 1.368.339 1.11.521 2.287.521 3.507 0 1.553-.295 3.036-.831 4.398C20.613 14.547 19.833 15 19 15h-1.053c-.472 0-.745-.556-.5-.96a8.95 8.95 0 00.303-.54m.023-8.25H16.48a4.5 4.5 0 01-1.423-.23l-3.114-1.04a4.5 4.5 0 00-1.423-.23H6.504c-.618 0-1.217.247-1.605.729A11.95 11.95 0 002.25 12c0 .434.023.863.068 1.285C2.427 14.306 3.346 15 4.372 15h3.126c.618 0 .991.724.725 1.282A7.471 7.471 0 007.5 19.5a2.25 2.25 0 002.25 2.25.75.75 0 00.75-.75v-.633c0-.573.11-1.14.322-1.672.304-.76.93-1.33 1.653-1.715a9.04 9.04 0 002.86-2.4c.498-.634 1.226-1.08 2.032-1.08h.384"></path>
+        </svg>
+      </button>
+     </form>
+    </div>
+
+    <span class=" text-white">&nbsp;&nbsp;&nbsp;‖</span>
+<div class="inline-block border-white border-0 mx-12 px-12">
+</div>
+  <!-- Trigger/Open The Modal -->
+  <div id="stopTIME_sec_vote" class="overlay">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNavST()">&times;</a>
+    <div class="overlay-contenST">
+     
+      <div class="content">
+
+        <div class="mx-auto max-w-screen-sm text-center">
+          <p id="pageInfo" class="blink text-center text-lg text-white"></p>
+        
+      </div>   
+
+        <div class="content__container">
+          <p class="content__container__text">
+            стоп
+          </p>
+          
+          <ul class="content__container__list">
+            <li class="content__container__list__item">ВРЕМЯ!</li>
+            <li class="content__container__list__item">ВЫПОЛНЕНИЕ!</li>
+            <li class="content__container__list__item">ВЫЗОВ!</li>
+            <li class="content__container__list__item">СТОП!</li>
+          </ul>
+
+        </div>
+      </div>      
+
+
+    </div>
+  </div>
+  <!-- <span class="hidden" style="font-size:30px;cursor:pointer" onclick="openNavST()">&#9776; open</span> -->
+  
+
+
+<div class="inline-block border-white border-0 mx-0 px-0">
+   <div class="bg-indigo-900 text-center py-2 lg:px-2">
+    <!-- to ivite judge# -->
+<button data-tooltip="Решение судьи / Вызвать судью  № 1" id="invite_g1" onclick="invite_j1();" type="button" class=" hover:border-white border-transparent border-2 focus:border-gray-100 text-gray-400 font-medium rounded-lg px-2 py-2 mb-1 dark:bg-transparent dark:hover:bg-purple-700 dark:focus:ring-purple-900 text-3xl">
+  <!-- <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg> -->
+  ❶
+</button>
+
+<span class="text-white">⁝</span>
+<button data-tooltip="Решение судьи / Вызвать судью  № 2" id="invite_g2" onclick="invite_j2();" type="button" class=" hover:border-white border-transparent border-2 focus:border-gray-100 text-gray-400 bg-transparent font-medium rounded-lg px-2 py-2 mb-1 dark:bg-transparent dark:hover:bg-purple-700 dark:focus:ring-purple-900 text-3xl">
+  <!-- <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg> -->
+  ❷
+</button>
+
+<span class="text-white">⁝</span>
+<button data-tooltip="Решение судьи / Вызвать судью  № 3" id="invite_g3" onclick="invite_j3();" type="button" class=" hover:border-white border-transparent border-2 focus:border-gray-100 text-gray-400 bg-transparent font-medium rounded-lg px-2 py-2 mb-1 dark:bg-transparent dark:hover:bg-purple-700 dark:focus:ring-purple-900 text-3xl">
+  <!-- <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg> -->
+  ❸
+</button>
+
+
+    <div class="p-2 bg-indigo-800 items-center text-indigo-100 leading-none lg:rounded-full flex lg:inline-flex" role="alert">
+
+      <form id="restart_flow_form_" action="{{url_for('flow')}}" method="POST">
+          <button disabled alt="restart" id="restart_brm" onclick="restartApp()" type="submit" class="px-32 mx-32 focus:outline-none text-white bg-gray-100 hover:bg-gray-100 focus:ring-2 focus:ring-blue-300 hover:border-white border-transparent border-1 focus:border-white text-gray-200 bg-transparent font-medium rounded-lg text-sm px-1 py-1 mb-0 dark:bg-transparent dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+         <img class="h-10 w-14" id="auto-pic" src="../static/img/___auto_grey_ru.svg" alt="AUTOmatic ||OR||  Manual control" />
+         <svg class="w-10 h-10 hidden" fill="#228B22" stroke="#228B22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11"></path></svg>
+        </button>
+       </form>
+       <!-- v7_workmode_ind_svg -->
+      <!-- <span id="v7_workmode_ind" class="font-semibold mr-2 text-left flex-auto"> &nbsp;<b>АВТО</b>матический режим Потока</span> -->
+      <span id="v7_workmode_ind" class="font-semibold mr-2 text-left flex-auto"> &nbsp; режим Потока</span>
+      <svg id="v7_workmode_indfdsfds_svg" class="fill-current opacity-75 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"/></svg>
+      <svg id="v7_workmode_ind_svg_wrk" class="hidden w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11"></path></svg>
+    </div>
+  </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+<div id="zzxsdsdsz" data-tooltip="Таймер подхода"  class="inline-flex f_timer_time px-2.5">
+<svg class="w-7 h-7" fill="none" stroke="#fefefe" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+<div id="zzzsdsds" class="f_timer_time  px-2.5">01:00</div>
+<!-- <div class="f_timer_play px-1.5"> -->
+</div>
+
+</div>
+
+
+
+<!-- <div id="sec_zzxsdsdsz"  data-tooltip="Стартовый номер спортсмена" class="inline-flex serial_number_on_the_sleeve px-2.5">
+№<div id="sec_sdsds" class="serial_number_on_the_sleeve_int  px-2.5"></div>
+</div> -->
+
+
+
+  <div class="hidden inline-block border-white border-0">
+    <!-- <form id="secStopSariki" action="{{url_for('flow')}}" method="POST"> -->
+      <!-- <form id="secStopSariki" action="{{url_for('flow')}}" method="POST">   -->
+      <button alt="restart" id="toggleBTN_TIMER" onclick="toggle_timer_div()" type="submit" class="focus:outline-none text-gray-400 bg-pink-400 hover:bg-red-400 focus:ring-4 focus:ring-white hover:border-white border-transparent border-2 focus:border-white text bg-transparent font-medium rounded-lg text-sm px-2 py-2 mb-2 dark:bg-transparent dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+      </button>
+     <!-- </form> -->
+    </div>
+    
+
+<!-- 
+<div class="hidden inline-block border-white border-0 mx-32 px-32">
+<p>&nbsp;&nbsp;&nbsp;</p>
+</div> -->
+<!-- 
+<span class="text-white"></span> -->
+
+    <div id="cp2" class="inline-flex">
+<button data-tooltip="d3v"  id="toggleBTN" onclick="toggle_ws_info()" type="button" class=" hover:border-white border-transparent border-2 focus:border-gray-100 text-gray-400 bg-transparent font-medium rounded-lg text-sm px-2 py-2 mb-1 dark:bg-transparent dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg> 
+</button>
+
+<span class="text-white">‖</span>
+
+<button data-tooltip="Рекорды / нормативы"  id="toggleBTN_WR" onclick="toggle_wr_info()" type="button" class=" hover:border-white border-transparent border-2 focus:border-gray-100 text-gray-400 bg-transparent font-medium rounded-lg text-sm px-2 py-2 mb-1 dark:bg-transparent dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+  <!-- <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg> -->
+  <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 002.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 012.916.52 6.003 6.003 0 01-5.395 4.972m0 0a6.726 6.726 0 01-2.749 1.35m0 0a6.772 6.772 0 01-3.044 0"></path>
+  </svg>
+</button>
+</div>
+  
+
+
+<div>.</div>
+<div id="idBtnFS" class="absolute bottom-0 right-0 p-12 mx-5 inline-block border-white border-0">
+  <button onclick="openFullscreen()" type="button" class="bg-gray-800  hover:border-white border-gray-500 border-2 focus:border-white text-gray-200 bg-transparent font-medium rounded-lg text-sm px-2 py-2 mb-2 dark:bg-transparent dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+  
+      <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M13 3H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-3"></path>
+          <path d="M8 21h8"></path>
+          <path d="M12 17v4"></path>
+          <path d="m17 8 5-5"></path>
+          <path d="M17 3h5v5"></path>
+        </svg>
+
+  </button>
+</div>
+<div>.</div>
+
+<div id="wr_info_div" class="hidden overflow-x-auto shadow-md sm:rounded-lg pl-12">
+  <table class="w-9/12 text-sm text-left text-gray-500 dark:text-gray-400">
+    <thead class="text-xs text-gray-700 uppercase bg-opacity-15 bg-gray-400 dark:bg-gray-700 dark:text-gray-400">
+      <tr>
+        <th scope="col" class="py-2 px-4">
+          КАТЕГОРИЯ
+        </th>
+        <th scope="col" class="hidden py-3 px-6">
+          мастер МС МК
+        </th>        
+        <th scope="col" class="py-2 px-4">
+          мастер
+        </th>
+        <th scope="col" class="py-2 px-4">
+          КМС
+        </th>
+        <th scope="col" class="py-2 px-4">
+          рывок
+        </th>
+        <th scope="col" class="py-2 px-4">
+          толчок
+        </th>
+        <th scope="col" class="py-2 px-4">
+          сумма
+        </th>
+        <th scope="col" class="py-2 px-4 text-center inline-flex">
+          
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9">
+            </path>
+          </svg> &nbsp;рекорд
+        </th>
+        <th scope="col" class="py-2 px-4 text-center">
+          &nbsp;&nbsp;&nbsp;когда где
+        </th>        
+
+      </tr>
+    </thead>
+    <tbody>
+      
+        {% for data in attopdata %}
+            
+        <tr class="bg-white bg-opacity-25 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">  
+        <td scope="row" class="py-2 px-4 text-2xl font-bold text-gray-900 whitespace-nowrap dark:text-white">
+
+          {% if data.op is not none and data.op==1%}
+          {{data.cat.lwcat}}
+        </td>
+
+        <td class="hidden py-2 px-4 text-2xl font-bold text-gray-900 dark:text-white">
+          {% if data.ranks.r_msmk is not none %}   
+          {{data.ranks.r_msmk}}
+          {% else %}
+          {{'...'}}
+          {% endif %}
+          
+        </td>
+        <td class="py-2 px-4 text-2xl font-bold text-gray-900 dark:text-white">
+          {% if data.ranks.r_ms is not none %}   
+          {{data.ranks.r_ms}}
+          {% else %}
+          {{'...'}}
+          {% endif %}
+        </td>        
+        <td class="py-4 px-6 text-2xl font-bold text-gray-900 dark:text-white">
+          {% if data.ranks.r_kms is not none %}   
+          {{data.ranks.r_kms}}
+          {% else %}
+          {{'...'}}
+          {% endif %}
+        </td>
+        <td class="py-2 px-4 text-2xl font-bold text-gray-900 dark:text-white">
+          {% if data.ranks.wr_snatch is not none %}   
+          {{data.ranks.wr_snatch}}
+          {% else %}
+          {{'...'}}
+          {% endif %}
+        </td>
+        <td class="py-2 px-4 text-2xl font-bold text-gray-900 dark:text-white">
+          {% if data.ranks.wr_cj is not none %}   
+          {{data.ranks.wr_cj}}
+          {% else %}
+          {{'...'}}
+          {% endif %}
+        <td class="py-2 px-4 text-2xl font-bold text-gray-900 dark:text-white">
+          {% if data.ranks.wr_total is not none %}   
+          {{data.ranks.wr_total}}
+          {% else %}
+          {{'...'}}
+          {% endif %}
+        </td>
+
+        <td class="py-2 px-4 font-bold text-gray-900 dark:text-white">
+          <p class="text-2xl text-center font-bold text-gray-900 text-blue-800">
+            {{data.ranks.wr if data.ranks.wr is not none}}</p>
+          <p class="text-2xl text-center font-bold text-red-700 ">
+            {{data.ranks.wr_who if data.ranks.wr_who is not none}}</p>
+        </td>
+        <td class="py-2 px-4 font-bold text-gray-900 dark:text-white">
+          <p class="text-xl text-left font-semibold text-gray-600">
+            {{data.ranks.wr_when if data.ranks.wr_when is not none}}</p>
+          <p class="text-sm text-right font-semibold text-gray-600">
+            {{data.ranks.wr_where if data.ranks.wr_where is not none}}</p>
+        </td>        
+        {% endif%}
+      </tr>
+    
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+
+
+
+<div id="the_flow_timer" class="hidden pt-2 w-1/2  bg-indigo-800 overflow-x-auto shadow-md sm:rounded-lg">
+    <div id="mydivheader" class="hidden">✖</div>
+  <div class="inline-flex">
+
+  <svg class="w-7 h-7" fill="none" stroke="#bfbfbf" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+  <div id="sdsds" class="f_timer_time px-2.5">01:00</div>
+  <div class="f_timer_play px-1.5">
+        
+  <button alt="play" id="play_btm" onclick="timer_play()" type="submit" class="hidden focus:outline-none text-black bg-green-700 hover:bg-green-600 focus:ring-4 focus:ring-green-300 hover:border-white border-transparent border-2 focus:border-white text-gray-200 bg-transparent font-medium rounded-lg text-sm px-2 py-2 mb-2 dark:bg-transparent dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+  </button>
+   
+
+  </div>
+  <div class="f_timer_pause px-1.5">
+    <button alt="pause" id="pause_btm" onclick="timer_pause()" type="submit" class="hidden focus:outline-none text-white bg-yellow-500 hover:bg-gray-900 focus:ring-4 focus:ring-green-300 hover:border-white border-transparent border-2 focus:border-white text-gray-200 bg-transparent font-medium rounded-lg text-sm px-2 py-2 mb-2 dark:bg-transparent dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+      <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+    </button>
+
+  </div>
+  <div class="f_timer_stop px-1.5 hidden">
+    <button alt="stop" id="stop_btm" onclick="restartApp()" type="submit" class="focus:outline-none text-white bg-red-700 hover:bg-gray-900 focus:ring-4 focus:ring-green-300 hover:border-white border-transparent border-2 focus:border-white text-gray-200 bg-transparent font-medium rounded-lg text-sm px-2 py-2 mb-2 dark:bg-transparent dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+      <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 10a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z"></path></svg>
+    </button>    
+    
+  </div>
+  <div class="f_timer_12m px-2.5 hidden">
+            <!-- Toggle Button Style 19 -->
+            <label class="toggler-wrapper style-199">
+              <input onclick="timer60_120_set()"  type="checkbox" name="one_two_min" value="1" id="one_two_min">
+              <div class="toggler-slider">
+                <div class="toggler-knob"></div>
+              </div>
+            </label>
+            <!-- End Toggle Button Style 19 -->
+  </div>
+  </div>
+  
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+<script>
+  var xbbc = document.getElementById("the_flow_timer");
+  variableOFtimer = localStorage.getItem("f_Timer");
+  if (variableOFtimer=="hidden") {
+    xbbc.classList.remove("hidden");  
+  }
+  console.warn(variableOFtimer);
+
+  
+</script>
+
+
+
+
+  <script>
+function toggle_timer_div() {
+  variableOF = localStorage.getItem("f_Timer");
+  console.warn(variableOF);
+
+  console.warn('TIMER DIV SHOW!');
+  var x = document.getElementById("the_flow_timer");    
+    var tbx = document.getElementById("toggleBTN_TIMER");    
+    if (x.className.includes("hidden")) {
+        x.classList.remove("hidden");
+        localStorage.removeItem("f_Timer");
+        localStorage.setItem("f_Timer", "hidden");
+        tbx.classList.remove("text-gray-400");
+        tbx.classList.add("text-gray-100");
+    } else {
+        x.classList.add("hidden");
+        localStorage.removeItem("f_Timer");
+        localStorage.setItem("f_Timer", "opened");
+        tbx.classList.remove("text-gray-100");
+        tbx.classList.add("text-gray-400");
+    }  
+}
+
+function toggle_wr_info() {
+    var x = document.getElementById("wr_info_div");    
+    var tbx = document.getElementById("toggleBTN_WR");    
+    if (x.className.includes("hidden")) {
+        x.classList.remove("hidden");
+        tbx.classList.remove("text-gray-400");
+        tbx.classList.add("text-gray-100");
+    } else {
+        x.classList.add("hidden");
+        tbx.classList.remove("text-gray-100");
+        tbx.classList.add("text-gray-400");
+    }
+}
+
+function toggle_ws_info() {
+    var x = document.getElementById("ws_info_div");    
+    var tbx = document.getElementById("toggleBTN");    
+    if (x.className.includes("hidden")) {
+        x.classList.remove("hidden");
+        tbx.classList.remove("text-gray-400");
+        tbx.classList.add("text-gray-100");
+    } else {
+        x.classList.add("hidden");
+        tbx.classList.remove("text-gray-100");
+        tbx.classList.add("text-gray-400");
+    }
+}
+
+
+    function closeAlert(event){
+      let element = event.target;
+      while(element.nodeName !== "BUTTON"){
+        element = element.parentNode;
+      }
+      element.parentNode.parentNode.removeChild(element.parentNode);
+    }
+
+
+
+    var alert_del = document.querySelectorAll('.alert-del');
+  alert_del.forEach((x) =>
+    x.addEventListener('click', function () {
+      x.parentElement.classList.add('hidden');
+    })
+  );    
+  </script>
+
+  
+
+
+
+
+
+
+
+
+{% include 'modals.html' %}
+
+
+
+
+<div class="hidden">
+<div id="alert-border-1" class="flex p-4 mb-4 bg-blue-100 border-t-4 border-blue-500 dark:bg-blue-200" role="alert">
+    <svg class="flex-shrink-0 w-5 h-5 text-blue-700" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+    <div class="ml-3 text-sm font-medium text-blue-700">
+      A simple info alert with an <a href="#" class="font-semibold underline hover:text-blue-800">example link</a>. Give it a click if you like.
+    </div>
+    <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-blue-100 dark:bg-blue-200 text-blue-500 rounded-lg focus:ring-2 focus:ring-blue-400 p-1.5 hover:bg-blue-200 dark:hover:bg-blue-300 inline-flex h-8 w-8" data-dismiss-target="#alert-border-1" aria-label="Close">
+      <span class="sr-only">Dismiss</span>
+      <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+    </button>
+</div>
+<div id="alert-border-2" class="flex p-4 mb-4 bg-red-100 border-t-4 border-red-500 dark:bg-red-200" role="alert">
+    <svg class="flex-shrink-0 w-5 h-5 text-red-700" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+    <div class="ml-3 text-sm font-medium text-red-700">
+      A simple danger alert with an <a href="#" class="font-semibold underline hover:text-red-800">example link</a>. Give it a click if you like.
+    </div>
+    <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-red-100 dark:bg-red-200 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 dark:hover:bg-red-300 inline-flex h-8 w-8" data-dismiss-target="#alert-border-2" aria-label="Close">
+      <span class="sr-only">Dismiss</span>
+      <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+    </button>
+</div>
+<div id="alert-border-3" class="flex p-4 mb-4 bg-green-100 border-t-4 border-green-500 dark:bg-green-200" role="alert">
+    <svg class="flex-shrink-0 w-5 h-5 text-green-700" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+    <div class="ml-3 text-sm font-medium text-green-700">
+      A simple success alert with an <a href="#" class="font-semibold underline hover:text-green-800">example link</a>. Give it a click if you like.
+    </div>
+    <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-green-100 dark:bg-green-200 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 dark:hover:bg-green-300 inline-flex h-8 w-8" data-dismiss-target="#alert-border-3" aria-label="Close">
+      <span class="sr-only">Dismiss</span>
+      <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+    </button>
+</div>
+<div id="alert-border-4" class="flex p-4 mb-4 bg-yellow-100 border-t-4 border-yellow-500 dark:bg-yellow-200" role="alert">
+    <svg class="flex-shrink-0 w-5 h-5 text-yellow-700" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+    <div class="ml-3 text-sm font-medium text-yellow-700">
+      A simple danger alert with an <a href="#" class="font-semibold underline hover:text-yellow-800">example link</a>. Give it a click if you like.
+    </div>
+    <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-yellow-100 dark:bg-yellow-200 text-yellow-500 rounded-lg focus:ring-2 focus:ring-yellow-400 p-1.5 hover:bg-yellow-200 dark:hover:bg-yellow-300 inline-flex h-8 w-8" data-dismiss-target="#alert-border-4" aria-label="Close">
+      <span class="sr-only">Dismiss</span>
+      <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+    </button>
+</div>
+<div id="alert-border-5" class="flex p-4 bg-gray-100 border-t-4 border-gray-500 dark:bg-gray-700" role="alert">
+    <svg class="flex-shrink-0 w-5 h-5 text-gray-700 dark:text-gray-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+    <div class="ml-3 text-sm font-medium text-gray-700 dark:text-gray-300">
+      A simple dark alert with an <a href="#" class="font-semibold underline hover:text-gray-800 dark:hover:text-white">example link</a>. Give it a click if you like.
+    </div>
+    <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-gray-100 text-gray-500 rounded-lg focus:ring-2 focus:ring-gray-400 p-1.5 hover:bg-gray-200 inline-flex h-8 w-8 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white" data-dismiss-target="#alert-border-5" aria-label="Close">
+      <span class="sr-only">Dismiss</span>
+      <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+    </button>
+</div>
+</div>
+
+
+
+
+    </div>
+
+    
+
+
+    <div id="ws_info_div" class="hidden bg-gray-300 mx-5 px-5 my-5 py-5">
+      <h1>Flask-SocketIO Test</h1>
+      <p>
+        Async mode is: <b>{{ async_mode }}</b><br>
+        Current transport is: <b><span id="transport"></span></b><br>
+        Average ping/pong latency: <b><span id="ping-pong"></span>ms</b>
+      </p>
+      <h2>Send:</h2>
+      <form id="broadcast" method="POST" action='#'>
+          <input type="text" name="broadcast_data" id="broadcast_data" placeholder="Message">
+          <input type="submit" value="Broadcast">
+      </form>
+  
+      <form id="disconnect" method="POST" action="#">
+          <input type="submit" value="Disconnect">
+      </form>
+      <h2>Receive:</h2>
+      <div id="log"></div>    
+  </div>
+  
+
+
+
+        <!-- <div>
+            <button type="button" onclick="window.location.href='{{ url_for( 'double') }}';">Forward</button>
+        </div> -->
+
+
+    <script>
+      // let modal_del = document.getElementById("del-att-modal");
+      // // let modal_reject = document.getElementById("reject-att-modal");
+      // let del_att_btn = document.getElementById("editBtn_del");
+      // let edit_window = document.getElementById("edit-att-modal");
+    
+      // del_att_btn.onclick = function () {
+      //   edit_window.style.display = "none";
+      //   modal_del.style.display = "block";
+      //   console.warn('DELETE #');
+      // }
+    
+    </script>
+        
+
+
+<script>
+
+
+function timer60_120_set() {
+  let ootmin = document.getElementById("one_two_min").checked;
+  if (!ootmin) {
+    console.warn('@chekED: ' + ootmin);
+  fetch('/timer-set/1', {
+  method: "GET",
+  headers: {"Content-type": "application/json;charset=UTF-8"}
+})
+.then(response => response.json()) 
+.then(json => console.log(json))
+.catch(err => console.log(err));    
+  }
+
+if (ootmin) {
+  console.warn('@chekED: ' + ootmin);
+  fetch('/timer-set/2', {
+  method: "GET",
+  headers: {"Content-type": "application/json;charset=UTF-8"}
+})
+.then(response => response.json()) 
+.then(json => console.log(json))
+.catch(err => console.log(err));    
+}
+
+
+}
+
+
+
+async function timer_stop() {
+  console.warn("flow_@cmd: timer STOP :1");
+  fetch('/timer-stop', {
+  method: "GET",
+  headers: {"Content-type": "application/json;charset=UTF-8"}
+})
+.then(response => response.json()) 
+.then(json => console.log(json))
+.catch(err => console.log(err));
+}
+
+async function timer_pause() {
+  console.warn("flow_@cmd: timer pause :1");
+  fetch('/timer-pause', {
+  method: "GET",
+  headers: {"Content-type": "application/json;charset=UTF-8"}
+})
+.then(response => response.json()) 
+.then(json => console.log(json))
+.catch(err => console.log(err));
+}
+
+async function timer_play() {
+  startCountdown();
+  console.warn("flow_@cmd: timer play :1");
+  fetch('/timer-start/1', {
+  method: "GET",
+  headers: {"Content-type": "application/json;charset=UTF-8"}
+})
+.then(response => response.json()) 
+.then(json => console.log(json))
+.catch(err => console.log(err));
+}
+
+
+
+async function startCountdown() {
+  
+  // let status = 1; // 1=start;2=pause;0=unstate
+  // let x_min = document.getElementById("one_two_min");
+  // if (x_min.checked) {  status=2 }
+  // if (!x_min.checked) {  status=1 }
+  // const object = { status: 3, isid: 1 };
+  // const response = await fetch('/timer-write', {
+  //   method: 'POST',
+  //   body: JSON.stringify(object)
+  // });
+  // const responseText = await response.text();
+  // console.log(responseText); // logs 'OK'
+// console.warn('--------- ====');
+
+
+
+
+
+
+// let status = 1; // 1=start;2=pause;0=unstate
+//   let x_min = document.getElementById("one_two_min");
+//   if (x_min.checked) {  status=2 }
+//   if (!x_min.checked) {  status=1 }
+//   const object = { status: 3, isid: 1 };
+//   const response = await fetch('/timer-write', {
+//     method: 'POST',
+//     body: JSON.stringify(object)
+//   });
+//   const responseText = await response.text();
+
+  // console.log(responseText); // logs 'OK'
+  
+getSecondsFRMysql();
+}
+
+
+
+//////////////////
+// get From MYSQL
+async function getSecondsFRMysql() {
+    
+    // const objectz = { status: 999, isid: 0 };
+    //   const responsez = await fetch('/timer-write', {
+    //     method: 'POST',
+    //     body: JSON.stringify(objectz)
+        
+    //   });
+
+    
+    let status = 0; // 1=start;2=pause;0=stop
+      const object = { status: 999, isid: 0 };
+      const response = await fetch('/timer-get-sec-on-tablo', {
+        method: 'GET',
+        // body: JSON.stringify(object)
+        // "content-length": "6347" 12h
+        
+      });
+      
+      const responseText = await response.text();
+      var obj_scnd = JSON.parse(responseText);
+
+
+
+      if (obj_scnd.sec2tablo=='01:00' && obj_scnd.otm2tablo=='1') {
+                console.warn('01:00 ! SECONDS @ ALARM $$$$$$$');
+                try {
+              //  document.querySelector("tr.isOP_tr").style.cursor = "not-allowed;";  
+                // SET OP TR backround0color
+                // const trop = document.querySelector("tr.isOP_tr").style.backgroundColor = "rgba(89, 80, 84, 0.86)";
+                // document.querySelector("tr.isOP_tr").classList.add("setUNCLICKABLED");
+                // document.querySelector("tr.isOP_tr").classList.add("setUNC");
+
+}
+catch(err) {
+  console.warn('ERRORZZZ: ' + err.message);
+  // document.getElementById("demo").innerHTML = 
+}       
+
+                
+            }      
+            if (obj_scnd.sec2tablo=='00:30' || obj_scnd.sec2tablo<'00:30') {
+                console.warn('30 ! SECONDS @ ALARM');
+
+                try {
+               //const trop = document.querySelector("[data-op]");
+               document.querySelector("tr.isOP_tr").style.cursor = "not-allowed;";  
+                // SET OP TR backround0color
+                const trop = document.querySelector("tr.isOP_tr").style.backgroundColor = "rgba(89, 80, 84, 0.86)";
+                document.querySelector("tr.isOP_tr").classList.add("setUNCLICKABLED");
+                document.querySelector("tr.isOP_tr").classList.add("setUNC");
+
+}
+catch(err) {
+  console.warn('ERRORZZZ: ' + err.message);
+  // document.getElementById("demo").innerHTML = 
+}                
+ 
+
+
+                
+                freezeREAPP_30sec();
+            }
+            if ((obj_scnd.otm2tablo=='2') && (obj_scnd.sec2tablo=='01:30' || obj_scnd.sec2tablo<'01:30')) {
+                console.warn('90 !!! SECONDS @ ALARM');
+                
+                freezeREAPP_90sec();
+                try {
+
+               document.querySelector("tr.isOP_tr").style.cursor = "not-allowed;";  
+                const trop = document.querySelector("tr.isOP_tr").style.backgroundColor = "rgba(89, 80, 84, 0.86)";
+                document.querySelector("tr.isOP_tr").classList.add("setUNCLICKABLED");
+                document.querySelector("tr.isOP_tr").classList.add("setUNC");
+
+}
+catch(err) {
+  console.warn('ERRORZZZ: ' + err.message);
+}                
+
+            }
+            // if (obj_scnd.sec2tablo=='00:00') {
+            //     console.warn('TIME is END !!!  @ ALARM');
+            //     playNOT();
+            //     $('#j1-1').css("background-color","red");
+            //     $('#j2-1').css("background-color","red");
+            //     $('#j3-1').css("background-color","red");
+            // }
+            if (obj_scnd.sec2tablo=='00:00' || obj_scnd.sec2tablo=='00:01') {
+                console.warn('TIME is END !!!  @ ALARM');
+                $('#invite_g1').css("background-color","red");
+                $('#invite_g2').css("background-color","red");
+                $('#invite_g3').css("background-color","red");
+
+
+              // ??
+                // playNOT();
+                jSET_no();
+                
+                
+                // ЭТО !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                // ЭТО !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                // ЭТО !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                // ЭТО !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                // ЭТО !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                // setTimeout(window.location.reload(), 5878);
+                // ВЫЗЫВАЕТ ОШИБКУ И ТРОЙНУЮ(и более) перезагрузку страницы
+                // и дублтрует запись в БД (ТРИ РАЗА+-)
+                //
+                //
+
+
+
+                // ********
+            }            
+      
+      document.getElementById('sdsds').innerText = obj_scnd.sec2tablo;
+      document.getElementById('zzzsdsds').innerText = obj_scnd.sec2tablo;
+      
+
+
+
+      idOP = document.getElementById('sec_sdsds').innerText;
+      document.getElementById('sec_sdsds').innerText = obj_scnd.id2tablo;
+      // проверка и перезагрузка при cммене ID ???????
+      // проверка и перезагрузка при cммене ID ???????
+      // проверка и перезагрузка при cммене ID ???????
+      // проверка и перезагрузка при cммене ID ???????
+      // проверка и перезагрузка при cммене ID ???????
+      // проверка и перезагрузка при cммене ID ???????
+      // проверка и перезагрузка при cммене ID ???????
+      // document.getElementById('sec_sdsds').innerText = obj_scnd.id2tablo;
+      // if(idOP!=obj_scnd.id2tablo) {
+      //   // idOP = document.getElementById('sec_sdsds').innerText;
+      //   // document.getElementById('sec_sdsds').innerText = obj_scnd.id2tablo;
+      //   // alert('!=');
+      //   console.warn('idOP!=obj_scnd.id2tablo)');
+      //   console.warn(idOP);
+      //   console.warn(obj_scnd.id2tablo);
+      //   // setTimeout(window.location.reload(), 3878);
+    
+
+      // }
+      // else {
+      // document.getElementById('sec_sdsds').innerText = obj_scnd.id2tablo;
+      // // console.warn('idOP == obj_scnd.id2tablo)');
+      // // console.warn(idOP);
+      // // console.warn(obj_scnd.id2tablo);
+      // }
+
+
+      
+
+
+
+      chkVotez();
+    }  
+   
+
+
+
+
+function chkVotez() {
+  
+    j1is = document.getElementById("invite_g1").style.backgroundColor;
+    j2is = document.getElementById("invite_g2").style.backgroundColor;
+    j3is = document.getElementById("invite_g3").style.backgroundColor;
+    // console.log(j1is,j2is,j3is);
+
+
+//////////
+////////// if 2 judge vote NO & 1 judge vote YES
+//////////    
+if((j2is=='red' && j3is=='red' && j1is=='white') || (j1is=='red' && j3is=='red' && j2is=='white') || (j1is=='red' && j2is=='red' && j3is=='white')) 
+    {
+        console.log('votes NO, 2 j say NOT!');
+        if((j1is=='red' && j3is=='red' && j2is=='white') || (j2is=='red' && j3is=='red' && j1is=='white') 
+            || (j1is=='red' && j2is=='red' && j3is=='white')) {
+
+            console.log('NO - SEND');
+            jSET_no();
+            document.getElementById("invite_g1").classList.add("blinkNow");
+            document.getElementById("invite_g2").classList.add("blinkNow");
+            document.getElementById("invite_g3").classList.add("blinkNow");
+
+
+      }
+    }    
+//////////
+////////// if 2 judge vote YES & 1 judge vote NO
+//////////    
+if((j2is=='white' && j3is=='white' && j1is=='red') || (j1is=='white' && j3is=='white' && j2is=='red') || (j1is=='white' && j2is=='white' && j3is=='red')) {
+        console.log('votes YES, 2 j say YES!');
+        if((j1is=='white' && j3is=='white' && j2is=='red') || (j2is=='white' && j3is=='white' && j1is=='red') 
+            || (j1is=='white' && j2is=='white' && j3is=='red')) {
+
+            console.log('YES - SEND');
+            jSET_yes();
+            document.getElementById("invite_g1").classList.add("blinkNow");
+            document.getElementById("invite_g2").classList.add("blinkNow");          
+            document.getElementById("invite_g3").classList.add("blinkNow");               
+
+            }
+          }
+
+
+//////////
+////////// if 3 judge vote YES
+//////////    
+if((j2is=='white' && j3is=='white' && j1is=='white')) {
+        console.log('votes YES, 3j say YES!');
+        if((j1is=='white' && j3is=='white' && j2is=='white')) {
+          console.log('YES - SEND');
+            jSET_yes();
+            document.getElementById("invite_g1").classList.add("blinkNow");
+            document.getElementById("invite_g2").classList.add("blinkNow");          
+            document.getElementById("invite_g3").classList.add("blinkNow");               
+        }
+      }
+
+
+
+//////////
+////////// if 3 judge vote NO
+//////////    
+if((j2is=='red' && j3is=='red' && j1is=='red')) {
+        console.log('votes YES, 3j say NO!');
+        if((j1is=='red' && j3is=='red' && j2is=='red')) {
+          console.log('NO - SEND');
+          jSET_no();
+          document.getElementById("invite_g1").classList.add("blinkNow");
+          document.getElementById("invite_g2").classList.add("blinkNow");          
+          document.getElementById("invite_g3").classList.add("blinkNow");          
+  }
+}
+
+
+
+
+
+
+
+
+
+
+  }    
+
+
+function jSET_no() {
+  var id_at = 0;
+  ex_now='s1';
+  try {
+    id_at = document.querySelector("tr.isOP_tr").id;
+    const ex_now_z = document.querySelector("tr.isOP_tr");
+    ex_now = ex_now_z.dataset.exnow; 
+
+}
+catch(err) {
+  console.warn('ERRORZZZ: ' + err.message);
+} 
+  // mysql  
+  // max_heap_table_size    
+  // 16777216 -> 4294966272
+  // max_connections
+  // 151 -> 100 000
+  // max_connect_errors
+  // 100 -> 4294967295
+  // max_error_count
+  // 64 -> 65535
+  // wait_timeout
+  // 60 -> 536000
+  // innodb_buffer_pool_size
+  // 16777216 -> 134217728
+  // max_allowed_packet
+  // 1 048 576 -> 100M
+  // query_cache
+  // OFF -> ON = OFF
+  //net_read_timeout=1200
+  //net_write_timeout=1200
+  
+  // alert('id: '+id_at + 'exNOW:' +ex_now);
+  fetch('http://10.0.0.8:4848/timer-reset');
+    console.warn('http://10.0.0.8:4848/timer-reset/');
+  // data-op="1"
+    fetch('http://10.0.0.8:4848/judge-cmd-0/'+id_at+'/'+ex_now);
+    console.warn('http://10.0.0.8:4848/judge-cmd-0/'+id_at+'/'+ex_now);
+    //setTimeout(function tblRefresh3sno() {  location.reload(); timerIdno = setTimeout(tblRefresh3sno, 1978); }, 1878);
+
+
+}
+
+
+const links = document.querySelector('.yesnot_buttonz')
+
+links.addEventListener('click', (event) => {
+  // отменяем действие по умолчанию. Перехода по ссылке не будет
+  event.preventDefault()
+})
+
+
+function wrapper_jSET_yes() {
+  let yesModals = document.getElementById("yes-att-modalX");
+  yesModals.style.display = "block";
+  edit_window.style.display = "none";
+  let flow_ctrl_panel = document.getElementById("flow_bottom_control_panel");
+  flow_ctrl_panel.style.display = "none";   
+  event.preventDefault()
+}
+
+
+
+function wrapper_jSET_not() {
+  let notModals = document.getElementById("not-att-modalX");
+  notModals.style.display = "block";
+  edit_window.style.display = "none";
+  let flow_ctrl_panel = document.getElementById("flow_bottom_control_panel");
+  flow_ctrl_panel.style.display = "none";     
+  event.preventDefault()
+}
+
+
+
+function jSET_yes() {
+  var id_at = 0;
+  ex_now='s1';
+  try {
+    id_at = document.querySelector("tr.isOP_tr").id;
+    const ex_now_z = document.querySelector("tr.isOP_tr");
+    ex_now = ex_now_z.dataset.exnow; 
+
+}
+catch(err) {
+  console.warn('ERRORZZZ: ' + err.message);
+}      
+
+
+    
+  
+  // alert('id: '+id_at + 'exNOW:' +ex_now);
+  fetch('http://10.0.0.8:4848/timer-reset');
+    console.warn('http://10.0.0.8:4848/timer-reset');
+  // data-op="1"
+    fetch('http://10.0.0.8:4848/judge-cmd-1/'+id_at+'/'+ex_now);
+    console.warn('http://10.0.0.8:4848/judge-cmd-1/'+id_at+'/'+ex_now);
+// v7 WEBSOCKETS SEND
+// j1Vote(77);
+// j1Vote(1);
+    
+}
+
+
+
+function jSET_not() {
+  var id_at = 0;
+  ex_now='s1';
+  try {
+    id_at = document.querySelector("tr.isOP_tr").id;
+    const ex_now_z = document.querySelector("tr.isOP_tr");
+    ex_now = ex_now_z.dataset.exnow; 
+
+}
+catch(err) {
+  console.warn('ERRORZZZ: ' + err.message);
+}      
+
+
+    
+  
+  // alert('id: '+id_at + 'exNOW:' +ex_now);
+  fetch('http://10.0.0.8:4848/timer-reset');
+    console.warn('http://10.0.0.8:4848/timer-reset');
+  // data-op="1"
+    fetch('http://10.0.0.8:4848/judge-cmd-0/'+id_at+'/'+ex_now);
+    console.warn('http://10.0.0.8:4848/judge-cmd-0/'+id_at+'/'+ex_now);
+// v7 WEBSOCKETS SEND
+// j1Vote(77);
+// j1Vote(1);
+    
+}
+
+
+
+function freezeREAPP_30sec() {
+  
+  // att_table
+  // const plant = document.getElementById('att_table');
+  // const fruitCount = plant.getAttribute('data-op');
+  // const trop = document.querySelector("[data-op]");
+  //const trop = document.querySelector("tr.isOP_tr").style.backgroundColor = "red";
+  
+
+  try {
+               //const trop = document.querySelector("[data-op]");
+               const trop = document.querySelector("tr.isOP_tr").disabled = true; 
+                document.querySelector("tr.isOP_tr").classList.add("setUNC");
+
+}
+catch(err) {
+  console.warn('ERRORZZZ: ' + err.message);
+  // document.getElementById("demo").innerHTML = 
+}       
+  
+  //console.warn('freezeREAPP_30sec @ ' + trop);
+
+  
+
+
+  // var serviceID = $(this).attr('id');
+  // ***********
+  // var serviceID = $(this).attr('id');
+
+
+
+}
+
+function freezeREAPP_90sec() {
+try {
+                const trop = document.querySelector("tr.isOP_tr").disabled = true; 
+                document.querySelector("tr.isOP_tr").classList.add("setUNC");
+}
+catch(err) {
+  console.warn('ERRORZZZ: ' + err.message);
+}       
+  
+}
+
+//getData();
+async function updAllTable() {
+    const response= await fetch('/att/');
+    const data= await response.json();
+    length=data.attz.length;
+    var temp="";
+     for(i=0;i<length;i++)
+     {
+        temp+="<tr id=tr_"+data.attz[i].id+">";
+        $("#sname_"+data.attz[i].id).text(data.attz[i].sname.substring(0, 12));
+        $("#fname_"+data.attz[i].id).text(data.attz[i].fname.substring(0, 9));
+        $("#s1_"+data.attz[i].id).text(data.attz[i].s1);
+        $("#s1ig_"+data.attz[i].id).text(data.attz[i].s1ig);
+        //$("#p_s1_"+data.attz[1].id).addClass("app_isget")
+        //.removeClass("app_isnotget app_refused app");
+        isGet = data.attz[i].s1ig
+        if (isGet==1) {
+            $("#p_s1_"+data.attz[i].id).text(data.attz[i].s1);
+            $("#p_s1_"+data.attz[i].id)
+            .addClass("app_isget")
+            .removeClass("app_isnotget app_refused app");
+            $("#id_sXdec_").text(data.attz[i].s1d);
+            console.log('1_'+data.attz[i].s1ig);
+        }
+        else if (isGet==0) {
+                $("#p_s1_"+data.attz[i].id).text(data.attz[i].s1);
+                $("#p_s1_"+data.attz[i].id)
+                .addClass("app_isnotget")
+                .removeClass("app_isget app_refused app");                
+                console.log('0_'+data.attz[i].s1ig);
+        }
+        else if (isGet==-1) {
+                $("#p_s1_"+data.attz[i].id).text(data.attz[i].s1);
+                $("#p_s1_"+data.attz[i].id)
+                .addClass("app_refused")
+                .removeClass("app_isget app_isnotget app");                
+                console.log('0_'+data.attz[i].s1ig);
+        }
+        else if (isGet== null ) {
+                $("#p_s1_"+data.attz[i].id).text(data.attz[i].s1);
+                $("#p_s1_"+data.attz[i].id)
+                .addClass("app")
+                .removeClass("app_isget app_isnotget app_refused"); 
+                console.log('0_'+data.attz[i].s1ig);
+        }        
+
+
+        // const para = document.createElement("p");
+        // para.innerHTML = "This is a paragraph.";
+        //document.getElementById("att_dataz").append(temp);
+        //console.warn(temp);
+    }
+}
+
+
+window.setInterval(function() {
+  startCountdown();
+      }, 1000);
+
+
+</script>
+
+
+
+<table id="datazz" class="border">
+
+</table>
+
+
+    <script>
+function showAddInfo() {
+  //var x = document.getElementById("addInfoDIV");
+  var e = document.getElementById("addInfoDIV");
+  var ech = document.getElementById("href_addInfo");
+       if(e.style.display == 'block') {
+          e.style.display = 'none';
+          ech.innerHTML = `<span>прочая информация &#8659; </span>`;
+}
+       else {
+          e.style.display = 'block';
+          ech.innerHTML = `<span>скрыть &#8657; </span>`;
+        }
+}
+
+      </script>
+
+
+
+
+<div class="mypanel"></div>
+
+<button id="tzt"  onclick="reloadPage();" class= "hidden  bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
+  GET!
+</button>
+
+
+<script>
+  
+        function getAllAthl() {
+                    console.log('get all');
+                }    
+        // Grabs all the Elements by their IDs which we had given them
+        let modal = document.getElementById("my-modal");
+        let btnop = document.getElementById("add_new_att_btn");
+        let button = document.getElementById("ok-btn");
+        let cbutton = document.getElementById("close-btn");
+    
+        // We want the modal to open when the Open button is clicked
+        btnop.onclick = function() {
+        modal.style.display = "block";
+        // document.getElementById("sname-att").focus();
+        }
+        // We want the modal to close when the OK button is clicked
+        button.onclick = function() {
+        modal.style.display = "none";
+        }
+        // The modal will close when the user clicks anywhere outside the modal
+        cbutton.onclick = function(event) {
+            modal.style.display = "none";
+        }
+
+// ADD-NEW-ATT Grabs all the Elements by their IDs which we had given them        
+        let modal_add = document.getElementById("add-att-modal");
+        let add_att_btn = document.getElementById("add_new_att_btn");
+        let button_newatt_ok = document.getElementById("add_newatt_ok_btn");
+    
+        // We want the modal to open when the Open button is clicked
+        add_att_btn.onclick = function() {
+        modal_add.style.display = "block";
+        document.getElementById("sname-att").focus();
+    
+        
+        // mck = document.getElementById("male_o").checked;
+        // fmck = document.getElementById("female_o").checked;
+
+        // if (mck) {
+        //   console.info('checkeDDD!')
+
+        //   var a = document.getElementById('wcat');
+        //   var atmp = '';
+        //   for (let i = 0; i <= a.length; i++) {
+        //     //  console.log(i);
+        //     // atmp = document.getElementById('optwc_'+i);
+        //      console.log(a.length);
+        //     //  console.log(a.length);
+        //     // console.log(atmp);
+        //   }
+        //   // var a = document.getElementById('wcat');
+        //   // a.options.length = 0;          
+        //   // let option = document.querySelector("option[name=1]");         
+        // } else {
+        //   alert('NOT  !!! checkeDDD!')
+        // }
+
+
+        // var a = document.getElementById('wcat');
+        // a.options.length = 0;
+        // var o = document.createElement('option');
+        // var t = document.createTextNode('Первый');
+        // o.setAttribute('value', '1');
+        // o.appendChild(t);
+        // a.appendChild(o);        
+
+
+
+        }
+        // We want the modal to close when the OK button is clicked
+        button_newatt_ok.onclick = function(evt) {
+        let x = document.getElementById("sname-att").value;
+        //document.getElementById("add_att_form").submit();
+        console.warn('#######___');
+          
+
+        }
+        // The modal will close when the user clicks anywhere outside the modal
+        window.onclick = function(event) {
+        if (event.target == modal_add) {
+            // modal_add.style.display = "none";
+            // window.location.reload();
+        }
+        }
+        window.onclick = function(event) {
+        if (event.target == edit_att) {
+            // modal_add.style.display = "none";
+            // window.location.reload();
+      
+        }
+        }        
+
+
+        
+// EDIT-ATT Grabs all the Elements by their IDs which we had given them        
+
+// Create event listener
+// document.querySelector("#att_table").addEventListener('click', (e) =>
+//   {
+//     // Retrieve id from clicked element
+//     let elementId = e.target.id;
+//     // If element has id
+//     if (elementId !== '') {
+//         let edit_att_btn = document.getElementById(elementId);
+//         edit_att_btn.onclick = function() {
+//             edit_att.style.display = "block";
+//             document.getElementById("md_sname").innerText = elementId
+//         }
+//         console.log(elementId);
+//     }
+//     // If element has no id
+//     else { 
+//         //console.log("An element without an id was clicked.");
+//     }
+//   }
+// );
+
+// function reply_click()
+// {
+//     alert(event.srcElement.id);
+// }
+
+//let edit_att_btn = document.getElementById(1);
+document.onreadystatechange = () => {
+  if (document.readyState === 'complete') {
+    // document ready
+
+//$(document).ready(function() { 
+            
+  console.log( "DOM ready!" );
+  $('.chData').click(function () {
+    var serviceID = $(this).attr('id');
+    var sname = $(this).attr('data-sname');
+    var fname = $(this).attr('data-fname');
+    var city = $(this).attr('data-atcity');
+    var wnow = $(this).attr('data-wnow');
+    var en = $(this).attr('data-exnow');
+
+
+    var d_s1 = $(this).attr('data-s1');
+    var d_s1ch1 = $(this).attr('data-s1ch1');
+    var d_s1ch2 = $(this).attr('data-s1ch2');
+    var d_s2ch1 = $(this).attr('data-s2ch1');
+    var d_s2ch2 = $(this).attr('data-s2ch2');    
+    var d_s3ch1 = $(this).attr('data-s3ch1');
+    var d_s3ch2 = $(this).attr('data-s3ch2');        
+    
+    var d_j1ch1 = $(this).attr('data-j1ch1');
+    var d_j1ch2 = $(this).attr('data-j1ch2');
+    var d_j2ch1 = $(this).attr('data-j2ch1');
+    var d_j2ch2 = $(this).attr('data-j2ch2');    
+    var d_j3ch1 = $(this).attr('data-j3ch1');
+    var d_j3ch2 = $(this).attr('data-j3ch2');        
+
+    var d_s1ig = $(this).attr('data-s1ig');
+    var d_s2 = $(this).attr('data-s2');
+    var d_s2ig = $(this).attr('data-s2ig');
+    var d_s3 = $(this).attr('data-s3');
+    var d_s3ig = $(this).attr('data-s3ig'); 
+    var d_j1 = $(this).attr('data-j1');
+    var d_j1ig = $(this).attr('data-j1ig');
+    var d_j2 = $(this).attr('data-j2');
+    var d_j2ig = $(this).attr('data-j2ig');
+    var d_j3 = $(this).attr('data-j3');
+    var d_j3ig = $(this).attr('data-j3ig');     
+    var d_ow_fe = $(this).attr('data-ow');
+    var d_acity = $(this).attr('data-city');
+    var d_wcat = $(this).attr('data-wcat');
+    var d_cntry = $(this).attr('data-cntry');
+    var d_sex = $(this).attr('data-sex');
+    var d_birth = $(this).attr('data-birth');
+
+
+
+    var ent = "sj";
+    edit_att_btn = document.getElementById(serviceID);
+    console.log("serviceID :: " + serviceID);
+    document.getElementById("id_del_").innerHTML = sname +' '+ fname;
+    document.getElementById("id_del_id").innerHTML = "( # "+ serviceID+ " )";
+    document.getElementById("id_del_city").innerHTML = "( @ "+ en+ " )";
+  
+    document.getElementById("id_cancel_").innerHTML = sname +' '+ fname;
+    document.getElementById("id_cancel_id").innerHTML = "( # "+ serviceID+ " )";
+    document.getElementById("id_cancel_city").innerHTML = "( @ "+ city+ " )";
+    document.getElementById("id_setop_").innerHTML = sname +' '+ fname;
+    document.getElementById("id_setop_id").innerHTML = "( # "+ serviceID+ " )";
+    document.getElementById("id_setop_city").innerHTML = "( @ "+ en+ " )";
+    
+  let s1_ = '';
+  if (d_s1ch1 != null && d_s1ch2 == null && en== 's1' ) {
+    console.log('s1ch1 do!');
+    document.getElementById("s1_weight").value = d_s1ch1
+  } if (d_s1ch1 != null && d_s1ch2 != null && en== 's1' ) {
+    console.log('s1ch2 do!');
+    document.getElementById("s1_weight").value = d_s1ch2
+  }  
+  if (d_s2ch1 != null && d_s2ch2 == null && en== 's2' ) {
+    console.log('s2ch1 do!');
+    document.getElementById("s2_weight").value = d_s2ch1
+  } if (d_s2ch1 != null && d_s2ch2 != null && en== 's2' ) {
+    console.log('s2ch2 do!');
+    document.getElementById("s2_weight").value = d_s2ch2
+    // ???????????????????????
+    // ***********************
+  }  
+  if (d_s3ch1 != null && d_s3ch2 == null && en== 's3' ) {
+    console.log('s3ch1 do!');
+    document.getElementById("s3_weight").value = d_s3ch1
+  } if (d_s3ch1 != null && d_s3ch2 != null && en== 's3' ) {
+    console.log('s3ch2 do!');
+    document.getElementById("s3_weight").value = d_s3ch2
+  }   
+  if (d_j1ch1 != null && d_j1ch2 == null && en== 'j1' ) {
+    console.log('j1ch1 do!');
+    document.getElementById("j1_weight").value = d_j1ch1
+  } if (d_j1ch1 != null && d_j1ch2 != null && en== 'j1' ) {
+    console.log('j1ch2 do!');
+    document.getElementById("j1_weight").value = d_j1ch2
+  }       
+  if (d_j2ch1 != null && d_j2ch2 == null && en== 'j2' ) {
+    console.log('j2ch1 do!');
+    document.getElementById("j2_weight").value = d_j2ch1
+  } if (d_j2ch1 != null && d_j2ch2 != null && en== 'j2' ) {
+    console.log('j2ch2 do!');
+    document.getElementById("j2_weight").value = d_j2ch2
+  }    
+  if (d_j3ch1 != null && d_j3ch2 == null && en== 'j3' ) {
+    console.log('j3ch1 do!');
+    document.getElementById("j3_weight").value = d_j3ch1
+  } if (d_j3ch1 != null && d_j3ch2 != null && en== 'j3' ) {
+    console.log('j3ch2 do!');
+    document.getElementById("j3_weight").value = d_j3ch2
+  }    
+    // document.getElementById("s1_weight").value = d_s1;
+    // document.getElementById("s2_weight").value = d_s2;
+    // document.getElementById("s3_weight").value = d_s3;
+    // document.getElementById("j1_weight").value = d_j1;
+    // document.getElementById("j2_weight").value = d_j2;
+    // document.getElementById("j3_weight").value = d_j3;
+
+
+    console.warn('# d_s1ig - ' + d_s1ig);
+    console.warn('# d_s2ig - ' + d_s2ig);
+    console.warn('# d_s3ig - ' + d_s3ig);
+
+    console.warn('# d_j1ig - ' + d_j1ig);
+    console.warn('# d_j2ig - ' + d_j2ig);
+    console.warn('# d_j3ig - ' + d_j3ig);
+    // *************
+
+    if(d_s1ig==1) { 
+      document.getElementById("option-1").checked = true;
+      document.getElementById("s1id_caption").innerHTML = 'Да ⚪';
+      document.getElementById("s1id_caption").style.textShadow = '1px 1px 1px #000000';
+      document.getElementById("s1id_caption").style.color = '#ffffff';
+    }
+    if(d_s1ig==0) { 
+      document.getElementById("option-2").checked = true;
+      document.getElementById("s1id_caption").innerHTML = 'Нет 🔴';
+      document.getElementById("s1id_caption").style.textShadow = '1px 1px 1px #101010';
+      document.getElementById("s1id_caption").style.color = '#d50007';      
+    }
+    if(d_s1ig==-1) { 
+      document.getElementById("option-3").checked = true; 
+      document.getElementById("s1id_caption").innerHTML = 'Отказ 🟠';
+      document.getElementById("s1id_caption").style.textShadow = '1px 1px 1px #000000';
+      document.getElementById("s1id_caption").style.color = '#e47e18';      
+    }
+    if(d_s1ig=='None') { 
+      document.getElementById("option-1").checked = false;
+      document.getElementById("option-2").checked = false; 
+      document.getElementById("option-3").checked = false; 
+      document.getElementById("s1id_caption").innerHTML = '---';
+      document.getElementById("s1id_caption").style.textShadow = '1px 1px 1px #000000';
+      document.getElementById("s1id_caption").style.color = '#bebebe'; 
+    }    
+
+    if(d_s2ig==1) { 
+      document.getElementById("option-5").checked = true;
+      document.getElementById("s2id_caption").innerHTML = 'Да ⚪';
+      document.getElementById("s2id_caption").style.textShadow = '1px 1px 1px #000000';
+      document.getElementById("s2id_caption").style.color = '#ffffff';
+    }
+    if(d_s2ig==0) { 
+      document.getElementById("option-6").checked = true;
+      document.getElementById("s2id_caption").innerHTML = 'Нет 🔴';
+      document.getElementById("s2id_caption").style.textShadow = '1px 1px 1px #101010';
+      document.getElementById("s2id_caption").style.color = '#d50007';      
+    }
+    if(d_s2ig==-1) { 
+      document.getElementById("option-7").checked = true; 
+      document.getElementById("s2id_caption").innerHTML = 'Отказ 🟠';
+      document.getElementById("s2id_caption").style.textShadow = '1px 1px 1px #000000';
+      document.getElementById("s2id_caption").style.color = '#e47e18';      
+    }
+    if(d_s2ig=='None') { 
+      document.getElementById("option-5").checked = false;
+      document.getElementById("option-6").checked = false; 
+      document.getElementById("option-7").checked = false; 
+      document.getElementById("s2id_caption").innerHTML = '---';
+      document.getElementById("s2id_caption").style.textShadow = '1px 1px 1px #000000';
+      document.getElementById("s2id_caption").style.color = '#bebebe'; 
+    }        
+    
+    if(d_s3ig==1) { 
+      document.getElementById("option-9").checked = true;
+      document.getElementById("s3id_caption").innerHTML = 'Да ⚪';
+      document.getElementById("s3id_caption").style.textShadow = '1px 1px 1px #000000';
+      document.getElementById("s3id_caption").style.color = '#ffffff';
+    }
+    if(d_s3ig==0) { 
+      document.getElementById("option-10").checked = true;
+      document.getElementById("s3id_caption").innerHTML = 'Нет 🔴';
+      document.getElementById("s3id_caption").style.textShadow = '1px 1px 1px #101010';
+      document.getElementById("s3id_caption").style.color = '#d50007';      
+    }
+    if(d_s3ig==-1) { 
+      document.getElementById("option-11").checked = true; 
+      document.getElementById("s3id_caption").innerHTML = 'Отказ 🟠';
+      document.getElementById("s3id_caption").style.textShadow = '1px 1px 1px #000000';
+      document.getElementById("s3id_caption").style.color = '#e47e18';      
+    }    
+    if(d_s3ig=='None') { 
+      document.getElementById("option-9").checked = false;
+      document.getElementById("option-10").checked = false; 
+      document.getElementById("option-11").checked = false; 
+      document.getElementById("s3id_caption").innerHTML = '---';
+      document.getElementById("s3id_caption").style.textShadow = '1px 1px 1px #000000';
+      document.getElementById("s3id_caption").style.color = '#bebebe'; 
+    }    
+
+    if(d_j1ig==1) { 
+      document.getElementById("option-13").checked = true;
+      document.getElementById("cj1id_caption").innerHTML = 'Да ⚪';
+      document.getElementById("cj1id_caption").style.textShadow = '1px 1px 1px #000000';
+      document.getElementById("cj1id_caption").style.color = '#ffffff';
+    }
+    if(d_j1ig==0) { 
+      document.getElementById("option-14").checked = true;
+      document.getElementById("cj1id_caption").innerHTML = 'Нет 🔴';
+      document.getElementById("cj1id_caption").style.textShadow = '1px 1px 1px #101010';
+      document.getElementById("cj1id_caption").style.color = '#d50007';      
+    }
+    if(d_j1ig==-1) { 
+      document.getElementById("option-15").checked = true; 
+      document.getElementById("cj1id_caption").innerHTML = 'Отказ 🟠';
+      document.getElementById("cj1id_caption").style.textShadow = '1px 1px 1px #000000';
+      document.getElementById("cj1id_caption").style.color = '#e47e18';      
+    }    
+    if(d_j1ig=='None') { 
+      document.getElementById("option-13").checked = false;
+      document.getElementById("option-14").checked = false; 
+      document.getElementById("option-15").checked = false; 
+      document.getElementById("cj1id_caption").innerHTML = '---';
+      document.getElementById("cj1id_caption").style.textShadow = '1px 1px 1px #000000';
+      document.getElementById("cj1id_caption").style.color = '#bebebe'; 
+    }    
+    if(d_j2ig==1) { 
+      document.getElementById("option-17").checked = true;
+      document.getElementById("cj2id_caption").innerHTML = 'Да ⚪';
+      document.getElementById("cj2id_caption").style.textShadow = '1px 1px 1px #000000';
+      document.getElementById("cj2id_caption").style.color = '#ffffff';
+    }
+    if(d_j2ig==0) { 
+      document.getElementById("option-18").checked = true;
+      document.getElementById("cj2id_caption").innerHTML = 'Нет 🔴';
+      document.getElementById("cj2id_caption").style.textShadow = '1px 1px 1px #101010';
+      document.getElementById("cj2id_caption").style.color = '#d50007';      
+    }
+    if(d_j2ig==-1) { 
+      document.getElementById("option-19").checked = true; 
+      document.getElementById("cj2id_caption").innerHTML = 'Отказ 🟠';
+      document.getElementById("cj2id_caption").style.textShadow = '1px 1px 1px #000000';
+      document.getElementById("cj2id_caption").style.color = '#e47e18';      
+    }    
+    if(d_j2ig=='None') { 
+      document.getElementById("option-7").checked = false;
+      document.getElementById("option-18").checked = false; 
+      document.getElementById("option-19").checked = false; 
+      document.getElementById("cj2id_caption").innerHTML = '---';
+      document.getElementById("cj2id_caption").style.textShadow = '1px 1px 1px #000000';
+      document.getElementById("cj2id_caption").style.color = '#bebebe'; 
+    }        
+    if(d_j3ig==1) { 
+      document.getElementById("option-21").checked = true;
+      document.getElementById("cj3id_caption").innerHTML = 'Да ⚪';
+      document.getElementById("cj3id_caption").style.textShadow = '1px 1px 1px #000000';
+      document.getElementById("cj3id_caption").style.color = '#ffffff';
+    }
+    if(d_j3ig==0) { 
+      document.getElementById("option-22").checked = true;
+      document.getElementById("cj3id_caption").innerHTML = 'Нет 🔴';
+      document.getElementById("cj3id_caption").style.textShadow = '1px 1px 1px #101010';
+      document.getElementById("cj3id_caption").style.color = '#d50007';      
+    }
+    if(d_j3ig==-1) { 
+      document.getElementById("option-23").checked = true; 
+      document.getElementById("cj3id_caption").innerHTML = 'Отказ 🟠';
+      document.getElementById("cj3id_caption").style.textShadow = '1px 1px 1px #000000';
+      document.getElementById("cj3id_caption").style.color = '#e47e18';      
+    }        
+    if(d_j3ig=='None') { 
+      document.getElementById("option-21").checked = false;
+      document.getElementById("option-22").checked = false; 
+      document.getElementById("option-23").checked = false; 
+      document.getElementById("cj3id_caption").innerHTML = '---';
+      document.getElementById("cj3id_caption").style.textShadow = '1px 1px 1px #000000';
+      document.getElementById("cj3id_caption").style.color = '#bebebe'; 
+    }        
+
+    
+    var s1app_end = document.getElementById("id_sXch2_").innerHTML;
+    //if 
+    console.log('### - =====', s1app_end);
+    // console.log(s1app_end.value,"++++");
+    if(s1app_end!=="&nbsp;&nbsp;.&nbsp;&nbsp;" && s1app_end!==".") {
+        console.log("changes app is endZZZzzzz @", s1app_end);
+        // ???????????
+        // йобаный насоузЗззз ))))) точку в прямом смысле проЭЭЭЭ-Бали )))
+        // НифтяГгг! ))
+
+
+
+        
+        var disable_dec = document.getElementById("edit_dec-btn");
+        var disable_inc = document.getElementById("edit_inc-btn");
+        var disable_edt = document.getElementById("id_wnow_");
+        var back_edit_app_back_off = document.getElementById("edt_back_off");
+        var show_hint2kg = document.getElementById("p2kg_hint");
+        
+        // show_hint2kg.classList.add("visible");
+        // show_hint2kg.classList.remove("invisible");
+        // show_hint2kg.classList.add("block");
+        // show_hint2kg.classList.remove("hidden");
+
+        //back_edit_app_back_off.classList.add("");
+        //back_edit_app_back_off.className += " bg-gray-400";
+        
+        // disable_dec.classList.add("hidden");
+        // disable_inc.classList.add("hidden");
+        
+        // document.getElementById("id_sXdec_label").innerHTML = "*=> перезаявки закончились";
+        document.getElementById("id_sXdec_label").classList.add('bg-pink-700');
+        document.getElementById("id_sXdec_label").classList.add('text-gray-200');
+        document.getElementById("id_sXdec_label").classList.add('drop-shadow-2xl');
+        document.getElementById("id_sXdec_label").classList.add('text-xl');
+        document.getElementById("id_sXdec_label").classList.add('font-bold');
+        //document.getElementById("id_sXdec_label").classList.add('pulse_op_now_square');
+      
+        
+
+        
+        document.getElementById("edt_back_off").classList.add('clear-both');
+        // document.getElementById("edt_back_off").classList.add('invisible');
+
+
+        document.getElementById("id_sXdec_label").classList.add('border-rose-400');
+        document.getElementById("edt_back_off").style.opacity = "0.3";
+        document.getElementById("id_sXdec_label").style.opacity = "0.9";
+        document.getElementById("reappdiv").style.opacity = "0.8"; 
+        document.getElementById("reapp_ok_btn").style.opacity = "0.0";
+        //document.getElementById("reapp_ok_btn").style.visibility = hidden;
+    
+          
+        // document.getElementById("reappdiv").innerHTML=".";
+
+        document.getElementById("id_sXdec_label").innerHTML = "&nbsp;&nbsp;перезаявки исчерпаны...&nbsp;&nbsp;";
+        
+        
+        
+  
+
+        //button_edit_att_ok.classList.add("disabled");
+        // document.getElementById("edit_att_ok_btn").style.display = "none";
+        document.getElementById("edit_att_ok_btn").disabled = true;
+        document.getElementById("edit_att_ok_btn").classList.remove('hover:bg-green-600');
+        document.getElementById("edit_att_ok_btn").classList.add('cursor:default');
+        document.getElementById("edit_att_ok_btn").style.cursor = "default"; 
+
+        
+        document.getElementById("edit_dec-btn").disabled = true;
+        document.getElementById("edit_inc-btn").disabled = true;
+        document.getElementById("id_wnow_").disabled = true;
+
+        //disable_dec.style.top = 9999;
+        // show_hint2kg.style.removeProperty("invisible");
+        // show_hint2kg.style.removeProperty("hidden");
+        // show_hint2kg.removeAttribute('style');
+        // show_hint2kg.removeAttribute('hidden');
+        // show_hint2kg.removeAttribute('invisible');
+
+
+
+// ************++++++
+        console.log("change app is endsXXX");
+    }
+    if(s1app_end=="&nbsp;&nbsp;.&nbsp;&nbsp;") {
+
+      document.getElementById("id_sXdec_label").classList.remove('bg-pink-700');
+        document.getElementById("id_sXdec_label").classList.add('text-gray-900');
+        document.getElementById("id_sXdec_label").classList.add('drop-shadow-2xl');
+        document.getElementById("id_sXdec_label").classList.add('text-xl');
+        document.getElementById("id_sXdec_label").classList.remove('font-bold');
+        document.getElementById("id_sXdec_label").classList.remove('pulse_op_now_square');
+      
+        document.getElementById("edt_back_off").classList.add('clear-both');
+        // document.getElementById("edt_back_off").classList.add('invisible');
+
+
+        document.getElementById("id_sXdec_label").classList.add('border-rose-400');
+        document.getElementById("edt_back_off").style.opacity = "1";
+        document.getElementById("id_sXdec_label").style.opacity = "1";
+        document.getElementById("reappdiv").style.opacity = "1"; 
+        document.getElementById("reapp_ok_btn").style.opacity = "1"; 
+        document.getElementById("edit_att_ok_btn").disabled = false;
+
+      
+        
+        
+
+
+
+        document.getElementById("edt_back_off").style.opacity = "1";
+        document.getElementById("id_sXdec_label").innerHTML = "&nbsp;&nbsp;  перезаявки:";
+        document.getElementById("id_sXdec_label").classList.add('bg-gray-200');
+        document.getElementById("id_sXdec_label").classList.add('text-gray-700');
+        document.getElementById("id_sXdec_label").classList.add('drop-shadow-2xl');
+        document.getElementById("id_sXdec_label").classList.add('text-xl');
+        document.getElementById("id_sXdec_label").classList.add('font-bold');
+
+        document.getElementById("edit_dec-btn").disabled = false;
+        document.getElementById("edit_inc-btn").disabled = false;
+        document.getElementById("id_wnow_").disabled = false;
+        document.getElementById("edit_att_ok_btn").disabled = false;
+        document.getElementById("edit_att_ok_btn").classList.add('hover:bg-green-600');
+        document.getElementById("edit_att_ok_btn").classList.remove('cursor-not-allowed');        
+    }
+//sss
+    
+
+    // document.getElementById("id_edit_").innerHTML = sname +' '+ fname[0]+'.';
+    //document.getElementById("id_edit_").innerHTML = sname +' '+ fname;
+    document.getElementById("ides_edit_").innerHTML = sname;
+    document.getElementById("idef_edit_").innerHTML = fname;
+    document.getElementById("id_fe_es_edit_").innerHTML = sname;
+    document.getElementById("id_fe_ef_edit_").innerHTML = fname;
+    // Om Shree Krishna Arpanam Astu
+    // Это подношение Шри Кришне! Господу Вседержителю Волшебному )
+
+
+    
+    document.getElementById("id_sXdec_").innerHTML = $("id_sXdec_").attr('data-wnow');
+    // document.getElementById("id_sXdec_").innerHTML = $("id_sXdec_").attr('data-s2dec');
+    // document.getElementById("id_sXdec_").innerHTML = $("id_sXdec_").attr('data-s3dec');
+    /////////////
+    ////// ?????
+    ////////////
+
+
+
+    
+    let xdec = $(this).attr('data-s1dec');
+    let xch1 = $(this).attr('data-s1ch1');
+    let xch2 = $(this).attr('data-s1ch2');
+    switch (en) {
+        case "s1":
+        ent = "рывок # 1";
+        xdec = $(this).attr('data-s1dec');
+        xch1 = $(this).attr('data-s1ch1');
+        xch2 = $(this).attr('data-s1ch2');
+        break;
+    case "s2":
+        xdec = $(this).attr('data-s2dec');
+        xch1 = $(this).attr('data-s2ch1');
+        xch2 = $(this).attr('data-s2ch2');        
+        ent = "рывок # 2";
+        break;
+    case "s3":
+        xdec = $(this).attr('data-s3dec');
+        xch1 = $(this).attr('data-s3ch1');
+        xch2 = $(this).attr('data-s3ch2'); 
+        ent = "рывок # 3";
+        break;
+    case "j1":
+        xdec = $(this).attr('data-j1dec');
+        xch1 = $(this).attr('data-j1ch1');
+        xch2 = $(this).attr('data-j1ch2');    
+        ent = "толчок # 1";
+        break;
+    case "j2":
+        xdec = $(this).attr('data-j2dec');
+        xch1 = $(this).attr('data-j2ch1');
+        xch2 = $(this).attr('data-j2ch2');        
+        ent = "толчок # 2";
+        break;
+    case "j3":
+        xdec = $(this).attr('data-j3dec');
+        xch1 = $(this).attr('data-j3ch1');
+        xch2 = $(this).attr('data-j3ch2');        
+        ent = "толчок # 3";
+        break;
+  default:
+    console.log("Can not get data-sXd...")
+}
+    //console.log('===='+wnow)
+    document.getElementById("id_wnow_").value = wnow;
+    document.getElementById("id_en_").innerHTML = ent;
+            console.log(xdec+'==='+ent);
+    if  ((xdec)&&(xdec!== undefined)) {
+    document.getElementById("id_sXdec_").innerHTML = xdec;
+    if (xdec=="None") 
+    document.getElementById("id_sXdec_").innerHTML = "&nbsp;&nbsp;.&nbsp;&nbsp;";    
+    // document.getElementById("id_sXch1_").innerHTML = xch1;
+    // document.getElementById("id_sXch2_").innerHTML = xch2;
+    } else {
+    document.getElementById("id_sXdec_").innerHTML = "&nbsp;&nbsp;.&nbsp;&nbsp;";
+    // document.getElementById("id_sXch1_").innerHTML = "&nbsp;&nbsp;.&nbsp;&nbsp;";
+    // document.getElementById("id_sXch2_").innerHTML = "&nbsp;&nbsp;.&nbsp;&nbsp;";
+    }
+    if  ((xch1)&&(xch1!== undefined)) {
+    document.getElementById("id_sXch1_").innerHTML = xch1;
+    if (xch1=="None") 
+    document.getElementById("id_sXch1_").innerHTML = "&nbsp;&nbsp;.&nbsp;&nbsp;"
+    } else {
+     document.getElementById("id_sXch1_").innerHTML = "&nbsp;&nbsp;.&nbsp;&nbsp;";
+    }
+    if ((xch2)&&(xch2!== undefined)) {
+    document.getElementById("id_sXch2_").innerHTML = xch2;
+    if (xch2=="None")
+    document.getElementById("id_sXch2_").innerHTML = "&nbsp;&nbsp;.&nbsp;&nbsp;"
+    } else {
+        if (xch2=="None") 
+     document.getElementById("id_sXch2_").innerHTML = "&nbsp;&nbsp;.&nbsp;&nbsp;";        
+    }
+
+    //document.getElementById("id_sXdec_").innerHTML = xdec;
+    //document.getElementById("id_sXch1_").innerHTML = xch1;
+    //document.getElementById("id_sXch2_").innerHTML = xch2;
+
+    
+
+
+/* add GET param */
+    var queryParams = new URLSearchParams(window.location.search);
+    queryParams.set("id", serviceID);
+    queryParams.set("wn", wnow);
+    queryParams.set("sn", sname);
+    queryParams.set("fn", fname);
+    queryParams.set("city", city);
+    queryParams.set("en", en);
+
+    queryParams.set("xd", xdec);
+    queryParams.set("ch1", xch1);
+    queryParams.set("ch2", xch2);
+
+
+    //queryParams.set("wn", wn);
+    // queryParams.set("en", en);
+    /////
+    //queryParams.set("edit_weight", serviceID);
+    history.replaceState(null, null, "?"+queryParams.toString());
+/* add GET param */
+
+    edit_att_btn.onclick = function() {
+        edit_att.style.display = "block";
+        console.warn('OPEN MODAL ED AT');
+            // HIDE CONTOL BOTTOM PANEL !!!!!!!
+            let flow_ctrl_panel = document.getElementById("flow_bottom_control_panel");
+            flow_ctrl_panel.style.display = "none";        
+            
+
+    }    
+  })
+
+
+}};  
+// });
+
+        let edit_att = document.getElementById("edit-att-modal");
+        let modal_add2close = document.getElementById("add-att-modal");
+        ///
+        let button_edit_att_ok = document.getElementById("edit_att_ok_btn");
+        const body = document.querySelector("body");
+        
+        const hideFlow_01 = document.getElementById("restart_brm");
+        
+        // We want the modal to open when the Open button is clicked
+        // edit_att_btn.onclick = function() {
+        //     edit_att.style.display = "block";
+        // }
+        // We want the modal to close when the OK button is clicked
+
+
+        // if (!edit_att.classList.contains("hidden")) {
+        //         // Disable scroll
+        //         body.style.overflow = "hidden";
+        //         hideFlow_01.style.display = 'asd';
+                
+        //     } else {
+        //         // Enable scroll
+        //         hideFlow_01.style.display = 'hidden';
+        //     }
+
+        button_edit_att_ok.onclick = function() {
+        edit_att.style.display = "none";
+        console.log('chanGe app #');
+        let flow_ctrl_panel = document.getElementById("flow_bottom_control_panel");
+        // body.style.display = "";
+
+        // localStorage.removeItem('need2refreshFlow');
+        // console.log('n2r: 1 -> refresh!');
+
+        }
+        // The modal will close when the user clicks anywhere outside the modal
+        window.onclick = function(event) {
+        if (event.target == edit_att) {
+          // edit_att.style.display = "none";
+          // window.location.reload();
+
+        }
+        if (event.target == modal_add2close) {
+        modal_add2close.style.display = "none";
+                // window.location.reload();
+        }        
+        }
+        
+
+
+</script>
+    
+    
+
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function() {
+      // Connect to the Socket.IO server.
+      // The connection URL has the following format, relative to the current page:
+      //     http[s]://<domain>:<port>[/<namespace>]
+      var app_ip = "{{appHost}}";
+      var app_port = "{{appPort}}";
+      var clean_app_ip = app_ip.substring(5);
+      var clean_app_ip = clean_app_ip.slice(0, -5);
+      // var socket = io('ws://10.0.0.108:5000/',{
+      var socket = io('ws://'+clean_app_ip+':'+app_port+'/',{
+      transports: ["websocket", "polling"] // use WebSocket first, if available
+      // transports: [ "polling"] // use WebSocket first, if available
+      });
+
+      // Event handler for new connections.
+      // The callback function is invoked when a connection with the
+      // server is established.
+      socket.on('connect', function() {
+          socket.emit('my_event', {data: 'I\'m connected!'});
+      });
+
+      // Event handler for server sent data.
+      // The callback function is invoked whenever the server emits data
+      // to the client. The data is then displayed in the "Received"
+      // section of the page.
+      
+      
+      socket.on('my_response', function(msg, cb) {
+
+        if (msg.data==0) {
+            // $('#invite_g1').css("background-color","white");                
+            socket.emit('my_broadcast_event', {data: 0});
+            $('#invite_g1').css("background-color","red");                
+            $('#invite_g2').css("background-color","red");               
+            $('#invite_g3').css("background-color","red");                 
+            window.location.reload();
+            $('#log').append('<br>' + $('<div/>').text('is ONE!#' + msg.count + ': ' + msg.data).html());          
+            // pYes();
+        }
+        if (msg.data==11) {
+            $('#invite_g1').css("background-color","white");                
+            $('#log').append('<br>' + $('<div/>').text('is ONE!#' + msg.count + ': ' + msg.data).html());
+        }
+        if (msg.data==10) {
+            $('#invite_g1').css("background-color","red");                
+            $('#log').append('<br>' + $('<div/>').text('is ONE!#' + msg.count + ': ' + msg.data).html());
+        }
+        if (msg.data==19) {
+            $('#invite_g1').css("background-color","transparent");                
+            $('#log').append('<br>' + $('<div/>').text('is ONE!#' + msg.count + ': ' + msg.data).html());
+        }        
+
+        
+        if (msg.data==21) {
+            $('#invite_g2').css("background-color","white");                
+            $('#log').append('<br>' + $('<div/>').text('is ONE!#' + msg.count + ': ' + msg.data).html());
+        }
+        if (msg.data==20) {
+            $('#invite_g2').css("background-color","red");                
+            $('#log').append('<br>' + $('<div/>').text('is ONE!#' + msg.count + ': ' + msg.data).html());
+        }
+        if (msg.data==29) {
+            $('#invite_g2').css("background-color","transparent");                
+            $('#log').append('<br>' + $('<div/>').text('is ONE!#' + msg.count + ': ' + msg.data).html());
+        }
+
+        if (msg.data==31) {
+            $('#invite_g3').css("background-color","white");                
+            $('#log').append('<br>' + $('<div/>').text('is ONE!#' + msg.count + ': ' + msg.data).html());
+        }
+        if (msg.data==77) {
+          // reloadPage();
+          // document.getElementById('invite_g1').click();
+          // j1Vote(17);
+          // j1Vote(0);
+          // invite_j1()
+
+          //reloadPage
+          console.warn('REBOOT');
+          $('#tzt').css("background-color","white");                
+          socket.emit('my_broadcast_event', {data: 77});
+          // socket.emit('my_broadcast_event', {data: 17});
+          // window.setInterval(function() {
+          //   // window.location.reload();
+          //     }, 1000);
+            $('#log').append('<br>' + $('<div/>').text('is REBOOT!#' + msg.count + ': ' + msg.data).html());
+        }
+        // if (msg.data==8) {
+        //     socket.emit('my_broadcast_event', {data: 8});
+        //     window.setInterval(function() {
+        //       }, 3000);
+        //     $('#log').append('<br>' + $('<div/>').text('is REBOOT!#' + msg.count + ': ' + msg.data).html());
+        // }
+        if (msg.data==30) {
+            $('#invite_g3').css("background-color","red");                
+            $('#log').append('<br>' + $('<div/>').text('is ONE!#' + msg.count + ': ' + msg.data).html());
+        }
+        if (msg.data==39) {
+            $('#invite_g3').css("background-color","transparent");                
+            $('#log').append('<br>' + $('<div/>').text('is ONE!#' + msg.count + ': ' + msg.data).html());
+        }        
+
+
+        if (msg.data==17) {
+          // window.setInterval(function() {
+          //     window.location.reload();
+              
+          //     }, 10000);
+        }        
+        
+        if (msg.data==27) {
+          // window.location.reload();
+          //   window.setInterval(function() {
+          //     }, 10000);
+        }        
+        if (msg.data==37) {
+          // window.location.reload();
+          // window.setInterval(function() {
+          //     }, 300000);
+        }                
+
+        
+        
+          $('#log').append('<br>' + $('<div/>').text('Received #' + msg.count + ': ' + msg.data).html());
+          if (cb)
+              cb();
+      });
+
+      // Interval function that tests message latency by sending a "ping"
+      // message. The server then responds with a "pong" message and the
+      // round trip time is measured.
+      var ping_pong_times = [];
+      var start_time;
+      window.setInterval(function() {
+          start_time = (new Date).getTime();
+          $('#transport').text(socket.io.engine.transport.name);
+          socket.emit('my_ping');
+      }, 1000);
+
+      // Handler for the "pong" message. When the pong is received, the
+      // time from the ping is stored, and the average of the last 30
+      // samples is average and displayed.
+      socket.on('my_pong', function() {
+          var latency = (new Date).getTime() - start_time;
+          ping_pong_times.push(latency);
+          ping_pong_times = ping_pong_times.slice(-30); // keep last 30 samples
+          var sum = 0;
+          for (var i = 0; i < ping_pong_times.length; i++)
+              sum += ping_pong_times[i];
+          $('#ping-pong').text(Math.round(10 * sum / ping_pong_times.length) / 10);
+      });
+
+      // Handlers for the different forms in the page.
+      // These accept data from the user and send it to the server in a
+      // variety of ways
+      $('form#emit').submit(function(event) {
+          socket.emit('my_event', {data: $('#emit_data').val()});
+          return false;
+      });
+      $('form#broadcast').submit(function(event) {
+          socket.emit('my_broadcast_event', {data: $('#broadcast_data').val()});
+          return false;
+      });
+      $('form#join').submit(function(event) {
+          socket.emit('join', {room: $('#join_room').val()});
+          return false;
+      });
+      $('form#leave').submit(function(event) {
+          socket.emit('leave', {room: $('#leave_room').val()});
+          return false;
+      });
+      $('form#send_room').submit(function(event) {
+          socket.emit('my_room_event', {room: $('#room_name').val(), data: $('#room_data').val()});
+          return false;
+      });
+      $('form#close').submit(function(event) {
+          socket.emit('close_room', {room: $('#close_room').val()});
+          return false;
+      });
+      $('form#disconnect').submit(function(event) {
+          socket.emit('disconnect_request');
+          return false;
+      });
+  });
+</script>
+
+
+
+
+
+
+<script type="text/javascript" charset="utf-8">
+
+// $(document).ready(function() {
+//     // Connect to the Socket.IO server.
+//     // The connection URL has the following format, relative to the current page:
+//     //     http[s]://<domain>:<port>[/<namespace>]
+//     var app_ip = "{{appHost}}";
+//     var app_port = "{{appPort}}";
+//     var clean_app_ip = app_ip.substring(5);
+//     var clean_app_ip = clean_app_ip.slice(0, -5);
+//     var socket = io('ws://'+clean_app_ip+':'+app_port+'/',{
+//     transports: ["websocket", "polling"] // use WebSocket first, if available
+//     });
+//     socket.on('my_response', function(msg, cb) {
+//         $('#log').append('<br>' + $('<div/>').text('Received #' + msg.count + ': ' + msg.data).html());
+        
+//         // j1Vote
+//         if (msg.data==11111111) {
+//           // socket.emit('my_broadcast_event', {data: 11111111});
+//           //location.reload();
+//           // window.location.reload(true);
+//           console.warn('s1g : RELOAD from TABLO');
+//           $('#log').append('<br>' + $('<div/>').text('is 11111111111111111111111111111111!#' + msg.count + ': ' + msg.data).html());
+//         }
+//         if (msg.data==11) {
+//             //
+//             // document.getElementById("broadcast_data").value = 1;
+//             //document.getElementById("broadcast").submit();
+//             // socket.emit('my_broadcast_event', {data: "1"});
+//             socket.emit('my_broadcast_event', {data: 11});
+//             $('#j1-2').css("background-color","white");
+//             $('#j1-3').css("background-color","white");                
+//             $('#log').append('<br>' + $('<div/>').text('is ONE!#' + msg.count + ': ' + msg.data).html());
+//         }
+//         if (msg.data==10) {
+//             //
+//             // document.getElementById("broadcast_data").value = "0";
+//             // document.getElementById("broadcast").submit();
+//             socket.emit('my_broadcast_event', {data: 10});                
+//             $('#j1-2').css("background-color","red");
+//             $('#j1-3').css("background-color","red");
+//             $('#log').append('<br>' + $('<div/>').text('is ONE!#' + msg.count + ': ' + msg.data).html());
+//         }
+//         if (msg.data==19) {
+//             socket.emit('my_broadcast_event', {data: 19});
+//             // $('#j1-2').css("background-color","blue");
+//             // $('#j1-3').css("background-color","blue");
+//             $('#j1-2').css("background-color","black");
+//             $('#j1-3').css("background-color","black");
+//             console.log('99');
+//             $('#log').append('<br>' + $('<div/>').text('is ONE!#' + msg.count + ': ' + msg.data).html());
+//         }
+
+//         // socket.emit('my_broadcast_event', {data: 1});
+
+
+//     });
+
+
+
+
+
+
+
+    
+// });
+
+
+// var queryParams = new URLSearchParams(window.location.search);
+// queryParams.set("vote", votez);
+// history.replaceState(null, null, "?"+queryParams.toString());
+// s1jbtns1 = document.getElementById("jx1");
+// s1jbtns0 = document.getElementById("jx0");
+// spinner = document.getElementById("spinner");
+
+//ws:::cdd
+
+
+// pan_btn  = document.getElementById("btn_panel");
+// console.log('j1 VOTE: ', votez);
+//
+// ws://
+
+
+// let votez = 111111111;
+// var app_ip = "{{appHost}}";
+// var app_port = "{{appPort}}";
+// var clean_app_ip = app_ip.substring(5);
+// var clean_app_ip = clean_app_ip.slice(0, -5);
+// var socket = io('ws://'+clean_app_ip+':'+app_port+'/',{
+//     transports: ["websocket", "polling"] // use WebSocket first, if available     
+//     });    
+// socket.emit('my_broadcast_event', {data: votez});
+
+
+// document.getElementById("broadcast").submit();
+
+// document.getElementById("broadcast_data").value = '1';
+// document.getElementById("sub_btn").click();
+
+//socket.emit('my_broadcast_event', {data: 33 });
+// document.getElementById("broadcast_data").value = '1';
+// document.getElementById("broadcast").submit();
+
+
+// s1jbtns1.style.display = 'none';
+// pan_btn.style.display = 'none';
+// s1jbtns0.style.display = 'none';
+
+// document.getElementById("spinner_div").classList.remove('hidden');
+// document.getElementById("spinner_div").classList.add('visible');
+
+// setTimeout(function(){
+//         window.location.reload(true)
+//         //window.location = window.location.host;
+//      }, 1234);    
+
+
+
+// function j1Vote(votez) {
+
+// $(document).ready(function() {
+//     // Connect to the Socket.IO server.
+//     // The connection URL has the following format, relative to the current page:
+//     //     http[s]://<domain>:<port>[/<namespace>]
+//     var app_ip = "{{appHost}}";
+//     var app_port = "{{appPort}}";
+//     var clean_app_ip = app_ip.substring(5);
+//     var clean_app_ip = clean_app_ip.slice(0, -5);
+//     var socket = io('ws://'+clean_app_ip+':'+app_port+'/',{
+//     transports: ["websocket", "polling"] // use WebSocket first, if available
+//     });
+//     socket.on('my_response', function(msg, cb) {
+//         $('#log').append('<br>' + $('<div/>').text('Received #' + msg.count + ': ' + msg.data).html());
+        
+//         // j1Vote
+//         if (msg.data==11111111) {
+//           socket.emit('my_broadcast_event', {data: 11111111});
+//           //location.reload();
+//           // window.location.reload(true);
+//           console.warn('s1g : RELOAD from TABLO');
+//           $('#log').append('<br>' + $('<div/>').text('is 111111111111111111111111!#' + msg.count + ': ' + msg.data).html());
+//         }
+//         if (msg.data==11) {
+//             //
+//             // document.getElementById("broadcast_data").value = 1;
+//             //document.getElementById("broadcast").submit();
+//             // socket.emit('my_broadcast_event', {data: "1"});
+//             socket.emit('my_broadcast_event', {data: 11});
+//             $('#j1-2').css("background-color","white");
+//             $('#j1-3').css("background-color","white");                
+//             $('#log').append('<br>' + $('<div/>').text('is ONE!#' + msg.count + ': ' + msg.data).html());
+//         }
+//         if (msg.data==10) {
+//             //
+//             // document.getElementById("broadcast_data").value = "0";
+//             // document.getElementById("broadcast").submit();
+//             socket.emit('my_broadcast_event', {data: 10});                
+//             $('#j1-2').css("background-color","red");
+//             $('#j1-3').css("background-color","red");
+//             $('#log').append('<br>' + $('<div/>').text('is ONE!#' + msg.count + ': ' + msg.data).html());
+//         }
+//         if (msg.data==19) {
+//             socket.emit('my_broadcast_event', {data: 19});
+//             // $('#j1-2').css("background-color","blue");
+//             // $('#j1-3').css("background-color","blue");
+//             $('#j1-2').css("background-color","black");
+//             $('#j1-3').css("background-color","black");
+//             console.log('99');
+//             $('#log').append('<br>' + $('<div/>').text('is ONE!#' + msg.count + ': ' + msg.data).html());
+//         }
+
+//         // socket.emit('my_broadcast_event', {data: 1});
+
+
+//     });
+
+
+
+
+
+
+
+    
+// });
+
+
+// var queryParams = new URLSearchParams(window.location.search);
+// queryParams.set("vote", votez);
+// history.replaceState(null, null, "?"+queryParams.toString());
+// s1jbtns1 = document.getElementById("jx1");
+// s1jbtns0 = document.getElementById("jx0");
+// spinner = document.getElementById("spinner");
+
+//ws:::cdd
+
+
+// pan_btn  = document.getElementById("btn_panel");
+// console.log('j1 VOTE: ', votez);
+//
+// ws://
+
+
+
+// var app_ip = "{{appHost}}";
+// var app_port = "{{appPort}}";
+// var clean_app_ip = app_ip.substring(5);
+// var clean_app_ip = clean_app_ip.slice(0, -5);
+// var socket = io('ws://'+clean_app_ip+':'+app_port+'/',{
+//     transports: ["websocket", "polling"] // use WebSocket first, if available     
+//     });    
+// socket.emit('my_broadcast_event', {data: votez});
+
+
+// document.getElementById("broadcast").submit();
+
+// document.getElementById("broadcast_data").value = '1';
+// document.getElementById("sub_btn").click();
+
+//socket.emit('my_broadcast_event', {data: 33 });
+// document.getElementById("broadcast_data").value = '1';
+// document.getElementById("broadcast").submit();
+
+
+// s1jbtns1.style.display = 'none';
+// pan_btn.style.display = 'none';
+// s1jbtns0.style.display = 'none';
+
+// document.getElementById("spinner_div").classList.remove('hidden');
+// document.getElementById("spinner_div").classList.add('visible');
+
+// setTimeout(function(){
+//         window.location.reload(true)
+//         //window.location = window.location.host;
+//      }, 1234);    
+
+
+     //document.getElementById("broadcast").submit();   
+
+</script>
+
+
+<script>
+    function decrement(e) {
+      const btnd = e.target.parentNode.parentElement.querySelector(
+        'button[data-action="decrement"]'
+      );
+      const target = btnd.nextElementSibling;
+      let value = Number(target.value);
+      value--;
+      target.value = value;
+    }
+  
+    function increment(e) {
+      const btni = e.target.parentNode.parentElement.querySelector(
+        'button[data-action="decrement"]'
+      );
+      const target = btni.nextElementSibling;
+      let value = Number(target.value);
+      value++;
+      target.value = value;
+    }
+  
+    const decrementButtons = document.querySelectorAll(
+      `button[data-action="decrement"]`
+    );
+  
+    const incrementButtons = document.querySelectorAll(
+      `button[data-action="increment"]`
+    );
+  
+    decrementButtons.forEach(btn => {
+      btn.addEventListener("click", decrement);
+    });
+  
+    incrementButtons.forEach(btn => {
+      btn.addEventListener("click", increment);
+    });
+  </script>
+
+
+
+
+
+
+<script>
+      // var text = "{{appHost}}";
+      //   console.log(text);
+
+</script>
+
+
+
+
+
+<!-- <script>
+    var openmodal = document.querySelectorAll('modal-open')
+    for (var i = 0; i < openmodal.length; i++) {
+      openmodal[i].addEventListener('click', function(event){
+    	event.preventDefault()
+    	toggleModal()
+      })
+    }
+    
+    const overlay = document.querySelector('.modal-overlay')
+    overlay.addEventListener('click', toggleModal)
+    
+    var closemodal = document.querySelectorAll('.modal-close')
+    for (var i = 0; i < closemodal.length; i++) {
+      closemodal[i].addEventListener('click', toggleModal)
+    }
+    
+    document.onkeydown = function(evt) {
+      evt = evt || window.event
+      var isEscape = false
+      if ("key" in evt) {
+    	isEscape = (evt.key === "Escape" || evt.key === "Esc")
+      } else {
+    	isEscape = (evt.keyCode === 27)
+      }
+      if (isEscape && document.body.classList.contains('modal-active')) {
+    	toggleModal()
+      }
+    };
+    
+    
+    function toggleModal () {
+      const body = document.querySelector('body')
+      const modal = document.querySelector('.modal')
+      modal.classList.toggle('opacity-0')
+      modal.classList.toggle('pointer-events-none')
+      body.classList.toggle('modal-active')
+    }
+    
+     
+  </script> -->
+
+
+  <script>
+
+    
+    /* Get the documentElement (<html>) to display the page in fullscreen */
+     var elem = document.documentElement;
+    //var elem = document.getElementById("min_screen");
+    function chkFS_btnStyle() {
+    var x = document.getElementById("idBtnFS");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+    }
+
+
+    /* View in fullscreen */
+    function openFullscreen() {
+
+      let idfsbtn = document.getElementById('idBtnFS');
+      // idfsbtn.addClass();
+      fullscreenEnabled = document.fullscreenEnabled; 
+      console.info(fullscreenEnabled);
+      if(fullscreenEnabled) {
+        chkFS_btnStyle();
+      } else { chkFS_btnStyle(); }
+
+
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.webkitRequestFullscreen) { /* Safari */
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) { /* IE11 */
+        elem.msRequestFullscreen();
+      }
+    }
+    
+    /* Close fullscreen */
+    function closeFullscreen() {
+      let xbtnFS = document.getElementById("idBtnFS");
+        xbtnFS.style.display = "block";
+      if (document.exitFullscreen) {
+        // document.exitFullscreen();
+        var xzzxcd = document.getElementById("idBtnFS");
+        xzzxcd.style.display = "block";
+      } else if (document.webkitExitFullscreen) { /* Safari */
+        document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) { /* IE11 */
+        document.msExitFullscreen();
+      }
+    }
+
+
+//////////////////////////////////
+document.onkeydown = function (event) {
+    event = event || window.event;
+    // ESC key
+    if (event.keyCode === 27) {
+
+      let modal_edit2close = document.getElementById("edit-att-modal");
+      let modal_add2close = document.getElementById("add-att-modal");
+
+      
+        modal_edit2close.style.display = "none";
+        modal_add2close.style.display = "none";
+
+
+        modal_del.style.display = "none";
+        edit_data_att.style.display = "none";
+        edit_window.style.display = "none";
+        
+        let xbtnFS = document.etElementById("idBtnFS");
+        xbtnFS.style.display = "block";
+        closeFullscreen();
+        console.log(':ECS key DOWN');
+    }
+    if (event.keyCode === 32) {
+        console.log(':SPACE key DOWN');
+    }
+    if (event.keyCode === 13) {
+        console.log(':ENTER key DOWN');
+    }    
+    }
+
+    </script>
+
+
+
+
+
+<script>
+
+  const boxxz = document.getElementById('p2kg_hint');
+  const btnxz = document.getElementById('edit_dec-btn');
+  const btnxx = document.getElementById('edit_inc-btn');
+  
+  btnxx.addEventListener('click', function handleClick() {
+    // chkWeight();
+    if (boxxz.style.visibility === 'hidden') {
+      boxxz.style.visibility = 'visible';
+      boxxz.hidden=false;
+  
+      //btnxz.textContent = 'Hide div';
+    } else {
+      boxxz.style.visibility = 'hidden';
+      boxxz.hidden=true;
+      //btnxz.textContent = 'Show div';
+    }
+  });
+
+  btnxz.addEventListener('click', function handleClick() {
+    chkWeight();
+    if (boxxz.style.visibility === 'hidden') {
+      boxxz.style.visibility = 'visible';
+      boxxz.hidden=false;
+  
+      //btnxz.textContent = 'Hide div';
+    } else {
+      boxxz.style.visibility = 'hidden';
+      boxxz.hidden=true;
+      //btnxz.textContent = 'Show div';
+    }
+  });
+  function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+        vars[key] = value;
+    });
+        return vars;
+    }
+    
+    
+    // var wcnt = 0;
+    var vatid = getUrlVars()["id"];
+    console.warn(vatid);
+    var wcnt = 0;
+    // let p20var = localStorage.getItem("p20kg");
+    // let p20at_id = localStorage.getItem("p20atid");
+    let p20var = document.cookie;
+    let p20at_id = document.cookie;
+    // document.cookie = "p20kg="+wcnt;
+    // document.cookie = "p20atid="+vatid;
+  function chkWeight() {
+      // localStorage.removeItem('need2refreshFlow');
+      // console.log('n2r: 1 -> refresh!');
+
+    if (p20var>=20) {
+
+      console.log('P 20 KG!!!!!!! P 20 KG!!!!!!! P 20 KG!!!!!!! ');
+                window.setInterval(function() {
+                  location.reload();
+              }, 3000);
+      
+      // localStorage.removeItem("p20kg");
+      //   localStorage.addItem("p20kg", wcnt);
+      //   localStorage.addItem("p20atid", vatid);
+        document.cookie = "p20kg="+wcnt;
+        document.cookie = "p20atid="+vatid;        
+
+        // document.p20kg = "p20kg="+wcnt;
+        // document.p20atid = "p20atid="+vatid;
+        // localStorage.removeItem("a");
+        // localStorage.getItem("a");
+          console.log('P 20 KG!!!');
+          document.getElementById('id_wnow_').disabled = true;
+          document.getElementById('edit_dec-btn').disabled = true;
+          document.getElementById('edit_inc-btn').disabled = true;
+          document.getElementById('edit_att_ok_btn').hidden = true;
+          document.getElementById('edit_att_ok_btn').visibility = false;
+          document.getElementById('reappdiv').visibility = false;
+          document.getElementById('reappdiv').hidden = true;
+          document.getElementById('p2kg_hint').visibility = true;
+          document.getElementById('p2kg_hint').hidden = false;
+          document.getElementById('p2kg_hint').classList.remove('hidden');      
+      
+    }
+    // localStorage.removeItem("a");
+    // localStorage.getItem("a");
+
+
+      val_weight = document.getElementById('id_wnow_').value;
+      wcnt = ++wcnt;
+      localStorage.removeItem("p20kg");
+      localStorage.removeItem("p20atid");  
+
+      // localStorage.addItem("p20kg", wcnt);
+      // localStorage.addItem("p20atid", vatid);
+      // tmp_weight = document.getElementById('id_wnow_');
+      //val_weight = tmp_weight.value;
+      if (wcnt>=20) {
+        document.cookie = "p20kg="+wcnt;
+        document.cookie = "p20atid="+vatid;        
+        // localStorage.removeItem("p20kg");
+        // localStorage.removeItem("p20atid");
+        // localStorage.addItem("p20kg", wcnt);
+        // localStorage.addItem("p20atid", vatid);
+        // localStorage.removeItem("a");
+        // localStorage.getItem("a");
+          console.log('P 20 KG!!!');
+          document.getElementById('id_wnow_').disabled = true;
+          document.getElementById('edit_dec-btn').disabled = true;
+          document.getElementById('edit_inc-btn').disabled = true;
+          document.getElementById('edit_att_ok_btn').hidden = true;
+          document.getElementById('edit_att_ok_btn').visibility = false;
+          document.getElementById('reappdiv').visibility = false;
+          document.getElementById('reappdiv').hidden = true;
+          document.getElementById('p2kg_hint').visibility = true;
+          document.getElementById('p2kg_hint').hidden = false;
+          document.getElementById('p2kg_hint').classList.remove('hidden');
+      }
+      if (wcnt>20) { 
+        //  document.getElementById('edit_dec-btn').disabled = false;
+        //  document.getElementById('edit_inc-btn').disabled = false;
+        //  document.getElementById('edit_inc-btn').visibility = true;
+      }      
+      
+      console.log(' @ID= ' +p20at_id + ' @p20VAR= ' + p20var );
+    //   let  = localStorage.getItem("p20kg");
+    // let p20at_id = localStorage.getItem("p20atid");
+      console.log(val_weight + ' @DEC ' + wcnt );
+      
+  }
+  // function handler2() {
+  //   alert('Спасибо ещё раз!');
+  // }
+
+  // edit_dec-btn.onclick = () => alert("Привет");
+  // edit_dec-btn.addEventListener("click", handler1); // Спасибо!
+  // edit_dec-btn.addEventListener("click", handler2); // Спасибо ещё раз!
+
+
+
+
+  </script>
+
+
+
+
+
+
+<script>
+
+
+function j1Vote(votez) {
+
+$(document).ready(function() {
+    // Connect to the Socket.IO server.
+    // The connection URL has the following format, relative to the current page:
+    //     http[s]://<domain>:<port>[/<namespace>]
+    var app_ip = "{{appHost}}";
+    var app_port = "{{appPort}}";
+    var clean_app_ip = app_ip.substring(5);
+    var clean_app_ip = clean_app_ip.slice(0, -5);
+    var socket = io('ws://'+clean_app_ip+':'+app_port+'/',{
+    transports: ["websocket", "polling"],
+    // ***************************
+    // ???????????????????????????    
+    allowEIO3: true // use WebSocket first, if available
+    // ***************************
+    // ???????????????????????????
+    });
+    socket.on('my_response', function(msg, cb) {
+        $('#log').append('<br>' + $('<div/>').text('Received #' + msg.count + ': ' + msg.data).html());
+        if (msg.data==0) {
+            socket.emit('my_broadcast_event', {data: 0});
+            $('#invite_g1').css("background-color","red");                
+            $('#invite_g2').css("background-color","red");               
+            $('#invite_g3').css("background-color","red");                 
+            $('#log').append('<br>' + $('<div/>').text('is ONE!#' + msg.count + ': ' + msg.data).html());          
+            // pYes();
+        }
+        if (msg.data==11) {
+            // pYes();
+            //
+            // document.getElementById("broadcast_data").value = 1;
+            //document.getElementById("broadcast").submit();
+            // socket.emit('my_broadcast_event', {data: "1"});
+            socket.emit('my_broadcast_event', {data: 11});
+            $('#j1-2').css("background-color","white");
+            $('#j1-3').css("background-color","white"); 
+            $('#invite_g1').css("background-color","white");                
+            $('#log').append('<br>' + $('<div/>').text('is ONE!#' + msg.count + ': ' + msg.data).html());
+        }
+        if (msg.data==10) {
+            // pNo();
+            //
+            // document.getElementById("broadcast_data").value = "0";
+            // document.getElementById("broadcast").submit();
+            socket.emit('my_broadcast_event', {data: 10});                
+            $('#j1-2').css("background-color","red");
+            $('#j1-3').css("background-color","red");
+            $('#log').append('<br>' + $('<div/>').text('is ONE!#' + msg.count + ': ' + msg.data).html());
+        }
+        if (msg.data==19) {
+            // pCancel();
+            socket.emit('my_broadcast_event', {data: 19});
+            // $('#j1-2').css("background-color","blue");
+            // $('#j1-3').css("background-color","blue");
+            $('#j1-2').css("background-color","black");
+            $('#j1-3').css("background-color","black");
+            console.log('99');
+            $('#log').append('<br>' + $('<div/>').text('is ONE!#' + msg.count + ': ' + msg.data).html());
+        }
+
+        // if (msg.data==9) {
+        //     socket.emit('my_broadcast_event', {data: 9});
+        //     window.location.reload(true)
+        //     $('#log').append('<br>' + $('<div/>').text('is REBOOT!#' + msg.count + ': ' + msg.data).html());
+        // }
+        // if (msg.data==8) {
+        //     socket.emit('my_broadcast_event', {data: 8});
+        //     window.location.reload(true)
+        //     $('#log').append('<br>' + $('<div/>').text('is REBOOT!#' + msg.count + ': ' + msg.data).html());
+        // }
+        if (msg.data==77) {
+          // reloadPage();
+          // document.getElementById('invite_g1').click();
+          // j1Vote(17);
+          // j1Vote(0);
+          // invite_j1()
+          // invite_g1 TEST // 
+
+          // socket.emit('my_broadcast_event', {data: 0});
+          console.warn('REBOOT');
+          socket.emit('my_broadcast_event', {data: 77});
+    setTimeout(function(){
+            window.location.reload(true)
+            //window.location = window.location.host;
+         }, 1234);  
+            $('#log').append('<br>' + $('<div/>').text('is REBOOT!#' + msg.count + ': ' + msg.data).html());
+        }        
+        
+        if (msg.data==27) {
+            // pCancel();
+            socket.emit('my_broadcast_event', {data: 27});
+                // $('#j1-2').css("background-color","blue");
+                // $('#j1-3').css("background-color","blue");
+                console.log('inviting YOU! 27');
+            $('#log').append('<br>' + $('<div/>').text('is 27#' + msg.count + ': ' + msg.data).html());
+        }
+        if (msg.data==37) {
+            // pCancel();
+            socket.emit('my_broadcast_event', {data: 37});
+                // $('#j1-2').css("background-color","blue");
+                // $('#j1-3').css("background-color","blue");
+                console.log('inviting YOU! 37');
+            $('#log').append('<br>' + $('<div/>').text('is 37#' + msg.count + ': ' + msg.data).html());
+        }                
+        if (msg.data==17) {
+                // pCancel();
+                socket.emit('my_broadcast_event', {data: 17});
+                // $('#j1-2').css("background-color","blue");
+                // $('#j1-3').css("background-color","blue");
+                console.log('inviting YOU!');
+              //   window.setInterval(function() {
+              //     location.reload();
+              // }, 3000);
+                
+                // document.getElementById("spinner_div").classList.remove('hidden');
+                // document.getElementById("spinner_div").classList.add('visible');
+
+    setTimeout(function(){
+            window.location.reload(true)
+            //window.location = window.location.host;
+         }, 1234);    
+
+
+                
+                $('#log').append('<br>' + $('<div/>').text('is ONE!#' + msg.count + ': ' + msg.data).html());
+            }           
+
+
+
+        
+
+        // socket.emit('my_broadcast_event', {data: 1});
+
+
+    });
+
+
+
+
+
+
+
+    
+});
+
+
+var queryParams = new URLSearchParams(window.location.search);
+queryParams.set("vote", votez);
+history.replaceState(null, null, "?"+queryParams.toString());
+s1jbtns1 = document.getElementById("jx1");
+s1jbtns0 = document.getElementById("jx0");
+spinner = document.getElementById("spinner");
+
+//ws:::cdd
+
+
+pan_btn  = document.getElementById("btn_panel");
+console.log('j1 VOTE: ', votez);
+//
+// ws://
+
+
+
+var app_ip = "{{appHost}}";
+var app_port = "{{appPort}}";
+var clean_app_ip = app_ip.substring(5);
+var clean_app_ip = clean_app_ip.slice(0, -5);
+var socket = io('ws://'+clean_app_ip+':'+app_port+'/',{
+    transports: ["websocket", "polling"] // use WebSocket first, if available     
+    //transports: ["polling"] // TRY 
+    });    
+socket.emit('my_broadcast_event', {data: votez});
+
+
+// document.getElementById("broadcast").submit();
+
+// document.getElementById("broadcast_data").value = '1';
+// document.getElementById("sub_btn").click();
+
+//socket.emit('my_broadcast_event', {data: 33 });
+// document.getElementById("broadcast_data").value = '1';
+// document.getElementById("broadcast").submit();
+
+
+// s1jbtns1.style.display = 'none';
+// pan_btn.style.display = 'none';
+// s1jbtns0.style.display = 'none';
+
+// document.getElementById("spinner_div").classList.remove('hidden');
+// document.getElementById("spinner_div").classList.add('visible');
+
+setTimeout(function(){
+        window.location.reload(true)
+        //window.location = window.location.host;
+     }, 1234);    
+
+
+     //document.getElementById("broadcast").submit();   
+}
+
+
+</script>
+
+
+
+
+
+<script>
+  //onclick="restartApp()"
+  // MAIN Shortcuts KEY (1 ONE KEY COMMAND) || OR 2 TWO
+  // now ONE KEY command
+document.onkeyup = function(e) {
+  if (e.altKey && e.which == 77) {
+    console.info("[ M ] was pressed MARSHAL (Flow) ->");
+    document.getElementById("restart_flow_form").submit();
+  } else if (e.altKey && e.which == 68) {
+    console.info("[ D ] was pressed DOUBLE ->");
+//    document.getElementById("restart_flow_form").submit();
+  } else if (e.altKey && e.which == 84) {
+    console.info("[ T ] was pressed TABLO ->");
+  } else if (e.altKey && e.which == 67) {
+    console.info("[ C ] was pressed CHRONOGRAPH ->");
+  } else if (e.altKey && e.which == 83) {
+    console.info("[ S ] was pressed SIGLAL ->");
+  } else if (e.altKey && e.which == 74) {
+    console.info("[ J ] was pressed JUDGE ->");
+  } else if (e.altKey && e.which == 65) {
+    console.info("[ A ] was pressed ADD NEW ATHLETE ->");
+    
+    document.getElementById("add-att-modal").style.display = "block";
+        
+  } else if (e.altKey && e.which == 69) {
+    console.info("[ E ] was pressed ADD EDIT FLOW ->");
+    let edit_att = document.getElementById("edit-att-modal");
+    edit_att.style.display = "block";
+  } else if (e.altKey && e.which == 79) {
+    console.info("[ O ] was pressed OPTIONS/CFG/SETTINGS ->");
+  } else if (e.altKey && e.which == 82) {
+    console.info('[ R ] was pressed RELOAD DATA! 🔄 ->');
+    //alert("[ R ] was pressed ADD NEW RELOAD DATA! 🔄 ->");
+    restartApp();
+  } else if (e.altKey && e.which == 85) {
+    console.info("[ U ] was pressed OPEN MAIN MENU! ->");
+  } else if (e.altKey && e.which == 70) {
+    console.info("[ F ] was pressed FULL SCREEN! ->");
+    openFullscreen();
+  } else if (e.which == 187) {
+    console.info("[ + ] was pressed +1 kG (plus 1 kG) ->");
+  } else if (e.which == 189) {
+    console.info("[ - ] was pressed -1 kG (minus 1 kG) ->");    
+  } else if (e.which == 49) {
+    console.info("[ 1 ] was pressed +1 kG (plus 1 kG) ->");
+  } else if (e.which == 50) {
+    console.info("[ 2 ] was pressed +2 kG (plus 2 kG) ->");
+  } else if (e.which == 51) {
+    console.info("[ 3 ] was pressed +3 kG (plus 3 kG) ->");
+  } else if (e.which == 52) {
+    console.info("[ 4 ] was pressed +4 kG (plus 4 kG) ->");
+  } else if (e.which == 53) {
+    console.info("[ 5 ] was pressed +5 kG (plus 5 kG) ->");
+  } else if (e.which == 54) {
+    console.info("[ 6 ] was pressed +6 kG (plus 6 kG) ->");
+  } else if (e.which == 55) {
+    console.info("[ 7 ] was pressed +7 kG (plus 7 kG) ->");
+  } else if (e.which == 56) {
+    console.info("[ 8 ] was pressed +8 kG (plus 8 kG) ->");
+  } else if (e.which == 57) {
+    console.info("[ 9 ] was pressed +9 kG (plus 9 kG) ->");
+  }
+
+};
+
+
+
+
+
+
+function restartApp() {
+  console.info('[ R ] was pressed RELOAD DATA! 🔄 ->');
+  document.getElementById("restart_flow_form").submit();
+} 
+
+window.setTimeout(function() {
+    $("#app-succsess01").fadeTo(500, 0).slideUp(400, function(){
+      console.info('app-succsess01 is CLOSE');
+        $(this).hide(); 
+        // document.getElementById("#app-succsess01").classList.add("hidden");
+    });
+}, 1345);
+
+
+
+
+async function reloadPage() {
+
+document.getElementById("tzt").classList.add("blinking");
+document.getElementById("app-succsess01").classList.remove("hidden");
+$("#app-succsess02").show(); 
+window.setTimeout(function() {
+  $("#app-succsess02").fadeTo(500, 0).slideUp(400, function(){
+    console.info('app-succsess01 is CLOSE');
+      $(this).hide(); 
+      // j1Vote(77);
+      // j1Vote();
+      window.location.reload();
+  });
+}, 3456);
+}
+
+async function invite_j1() {
+
+  document.getElementById("invite_g1").classList.add("blinking");
+  document.getElementById("app-succsess01").classList.remove("hidden");
+  $("#app-succsess02").show(); 
+  window.setTimeout(function() {
+    $("#app-succsess02").fadeTo(500, 0).slideUp(400, function(){
+      console.info('app-succsess01 is CLOSE');
+        $(this).hide(); 
+        j1Vote(17);
+        window.location.reload();
+    });
+}, 3456);
+}
+
+async function invite_j2() {
+  document.getElementById("invite_g2").classList.add("blinking");
+  // document.getElementById("app-succsess01").classList.remove("hidden");
+  $("#app-succsess02").show(); 
+  window.setTimeout(function() {
+    $("#app-succsess02").fadeTo(500, 0).slideUp(400, function(){
+      console.info('app-succsess01 is CLOSE');
+        $(this).hide(); 
+        j1Vote(27);
+        window.location.reload();
+    });
+}, 2345);
+}
+
+
+async function invite_j3() {
+  document.getElementById("invite_g3").classList.add("blinking");
+  // document.getElementById("app-succsess01").classList.remove("hidden");
+  $("#app-succsess02").show(); 
+  window.setTimeout(function() {
+    $("#app-succsess02").fadeTo(500, 0).slideUp(400, function(){
+      console.info('app-succsess01 is CLOSE');
+        $(this).hide(); 
+        j1Vote(37);
+        window.location.reload();
+    });
+}, 2345);
+}
+
+</script>
+  
+
+<script>
+window.onload = choosePic2;
+
+var myPix = new Array("static/img/avatars/defava.png","static/img/avatars/defava1.jpg","static/img/avatars/defava2.png","static/img/avatars/defava3.jpg","static/img/avatars/defava4.jpg","static/img/avatars/defava5.png","static/img/avatars/defava6.png","static/img/avatars/defava7.png","static/img/avatars/defava8.png","static/img/avatars/defava9.png","static/img/avatars/defava10.png","static/img/avatars/defava11.png");
+
+function choosePic2() {
+     var randomNum = Math.floor(Math.random() * myPix.length);
+     document.getElementById("ava_att2").src = myPix[randomNum];
+}
+
+// var randombgs=["../static/img/avatars/defava1.png", "../static/img/avatars/defava2.png", "../static/img/avatars/defava3.png"]
+// document.body.style.background='url('+Math.floor(Math.random()*randombgs.length)
+  </script>
+
+
+
+<script>
+  // let modal_setop = document.getElementById("setop-att-modal");
+  // not have licence for uses this function...
+  let modal_setop = document.getElementById("setop-att-modal_lic");
+  let wmode_setop = document.getElementById("v7_workmode_ind");
+  let wmode_setopic = document.getElementById("auto-pic");
+  let wmode_setopicwrk = document.getElementById("v7_workmode_ind_svg_wrk");
+  
+  function setOP_flow() {
+    console.warn('setOP_flow FUNC@');
+    modal_setop.style.display = "block";
+    wmode_setopicwrk.style.display = "block";
+    wmode_setop.innerHTML = "РУЧНОЙ режим!";
+    wmode_setopic.style.display = "none";
+    wmode_setopic.style.visibility = "hidden";
+    wmode_setopic.remove();
+    
+
+    // setop-att-modal
+    edit_window.style.display = "none";    
+  }
+
+
+  function delete_flow() {
+    console.warn('delete_flow FUNC@');
+
+    modal_del.style.display = "block";
+    edit_window.style.display = "none";
+    // modal_add2att.style.display = "block";
+    
+
+    // var openmodal = document.querySelectorAll('modal-open')
+    // for (var i = 0; i < openmodal.length; i++) {
+    //   openmodal[i].addEventListener('click', function(event){
+    // 	event.preventDefault()
+    //   })
+    // }
+        
+
+  
+
+  }
+</script>
+
+
+
+<script>
+
+  // Make the DIV element draggable:
+dragElement(document.getElementById("the_flow_timer"));
+
+function dragElement(elmnt) {
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  if (document.getElementById(elmnt.id + "header")) {
+    // if present, the header is where you move the DIV from:
+    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+  } else {
+    // otherwise, move the DIV from anywhere inside the DIV:
+    elmnt.onmousedown = dragMouseDown;
+  }
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    // stop moving when mouse button is released:
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
+
+
+
+
+
+// ################################################################################################################
+// #####  use JS localStorage !!!
+// ################################################################################################################
+if (window.localStorage && (typeof(Storage) !== "undefined")) {
+  localStorage.clear();
+  localStorage.setItem('need2refreshFlow', '1');
+  localStorage[ 'need2refreshFlow' ] = true;
+  console.log('localStorage: cleared&setup');
+} else {
+  console.log('localStorage: browser does not support Web Storage...');
+}
+
+
+
+
+
+function hideCP2() {
+  let flow_ctrl_panel = document.getElementById("flow_bottom_control_panel");
+  let cp2var = document.getElementById("cp2");
+  flow_ctrl_panel.style.display = "none";  
+  cp2var.style.display = "none";  
+}
+function showCP2() {
+  location.reload(true);
+}
+</script>
+
+
+</body>
+
+</html>

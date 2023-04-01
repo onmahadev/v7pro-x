@@ -1,0 +1,617 @@
+<html>
+	<head>
+
+	<title>v7 :: Capuku Судья-хронометрист</title>
+	<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    
+
+
+    
+    <style>
+
+
+body {
+	margin:0;
+	-webkit-user-select: none; /* Safari */
+  	-ms-user-select: none; /* IE 10 and IE 11 */
+  	user-select: none; /* Standard syntax */
+  	-webkit-touch-callout: none;
+  	-khtml-user-select: none;
+  	-moz-user-select: none;	
+}
+
+#top {
+	width:100%;
+	background-color:#21A97E;
+}
+
+.content {
+	margin:0 auto;
+	width:80%;
+}
+#countdown-cont {
+	width:77%;
+	height:48%;
+	margin:0 auto;
+	/* margin-top:-26px; */
+	/* background-color:#F5F5F5; */
+	
+}
+#countdown-left {
+	height:25%;
+	background-color:#F5F5F5;
+	position:absolute;
+	z-index:-99999;
+	font-size:222px;
+	color:#333333;
+	font-family: 'Montserrat', sans-serif;
+}
+#countdown-right {
+	height:25%;
+	background-color:#F5F5F5;
+	position:absolute;
+	z-index:-99999;
+	margin-left:15%;
+    font-size:222px;
+	color:#333333;
+	font-family: 'Montserrat', sans-serif;
+}
+#button_start {
+	width:9%;
+	height:46%;
+	background-color:#21A97E;
+	border-radius:15px;
+	margin-top:17px;
+	/* border: 4px solid #197e5e; */
+	border-bottom: 7px solid #1B7C5D;
+	cursor:pointer;
+	float:left;
+}
+#button_start:hover {
+	margin-top:24px;
+	border-bottom: 0px;
+}
+#start-icon {
+	color:#FDFDFD;
+	font-size:90px;
+	top:7px;
+	position:relative;
+	padding-left:28px;
+}
+.button-text {
+	font-size:37px;
+	color:#FDFDFD;
+	font-family: 'Montserrat', sans-serif;
+	padding-top:7px;
+}
+#button_pause {
+	width:9%;
+	height:46%;
+	background-color:#CEC164;
+	border-radius:15px;
+	margin-top:17px;
+	margin-left:10%;
+	/* border: 4px solid #197e5e; */
+	border-bottom: 7px solid #B1A554;
+	cursor:pointer;
+	float:left;
+	opacity:.5;
+}
+#button_pause:hover {
+	margin-top:24px;
+	border-bottom: 0px;
+}
+#pause-icon {
+	color:#FDFDFD;
+	font-size:90px;
+	top:8px;
+	position:relative;
+	padding-left:25px;
+}
+#button_stop {
+	width:7%;
+	height:9%;
+	background-color:#C55050;
+	border-radius:15px;
+	margin-top:17px;
+    margin-left:31%;
+	/* border: 4px solid #197e5e; */
+	border-bottom: 7px solid #A34040;
+	cursor:pointer;
+	opacity:.5;
+	position:absolute;
+}
+#button_stop:hover {
+	margin-top:24px;
+	border-bottom: 0px;
+}
+#stop-icon {
+	color:#FDFDFD;
+	font-size:90px;
+	top:7px;
+	position:relative;
+	padding-left:24px;
+}
+#msg-cont {
+	margin-top:15px;
+	margin-bottom:15px;
+	width:550px;
+	height:60px;
+	font-size:26px;
+	color:#333333;
+	font-family: 'Montserrat', sans-serif;
+	opacity:.5;
+}
+#msg-left {
+	width:65px;
+	height:60px;
+	background-color:#21A97E;
+	float:left;
+}
+#msg-right {
+	background-color:#F5F5F5;
+	width:485px;
+	height:45px;
+	float:left;
+	padding-top:15px;
+}
+#msg-icon {
+	color:#FDFDFD;
+	font-size:49px;
+	top:7px;
+	position:relative;
+}
+.top-center {
+	margin:0 auto;
+	width:800px;
+}
+#top-title {
+	font-size:30px;
+	color:#FDFDFD;
+	font-family: 'Montserrat', sans-serif;
+	padding-top:11px;
+	font-weight:700;
+	padding-left:331px;
+	padding-top:26px;
+}
+#watch-icon {
+	color:#FDFDFD;
+	font-size:52px;
+	top:17px;
+	position:relative;
+	float:left;
+	padding-left:276px;
+}
+
+#button_toggleOptions {
+	width:550px;
+	height:60px;
+	background-color:#2199A9;
+	border-radius:15px;
+	margin-top:26px;
+	margin-left:124px;
+	/* border: 4px solid #197e5e; */
+	border-bottom: 7px solid #1B7D8A;
+	cursor:pointer;
+	position:relative;
+	z-index:2;
+}
+#button_toggleOptions:hover {
+	margin-top:33px;
+	border-bottom: 0px;
+}
+#options_inner_cont {
+	width:550px;
+	height:0px;
+	background-color:#1B7D8A;
+	margin-left:124px;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+	overflow:hidden;
+	margin-top:-15px;
+	position:relative;
+	z-index:1;
+
+}
+
+#options_form {
+	position:relative;
+	margin-top:33px;
+	margin-left:17px;
+}
+.options_label {
+	font-size:21px;
+	color:#FDFDFD;
+	font-family: 'Montserrat', sans-serif;
+	float:left;
+	position:absolute;
+}
+.options_textbox {
+	background-color:#F5F5F5;
+	border:none;
+	width:195px;
+	height:27px;
+	padding-left:8px;
+	padding-right:5px;
+	margin-left:110px;
+	float:left;
+	position:absolute;
+	color:#333333;
+	font-size:17px;
+	font-family: 'Montserrat', sans-serif;
+}
+.options_textbox:focus {
+	outline:none;
+}
+#label_msg {
+	float:left;
+	margin-top:39px;
+	margin-left:5px;
+}
+
+select:focus {
+	outline: none;
+	background-color: #F7F7F7;
+}
+select::-ms-expand {
+    display: none;
+}
+#options_set {
+	width:110px;
+	height:27px;
+	padding-top:7px;
+	background-color:#2199A9;
+	color:#333333;
+	font-size:17px;
+	font-family: 'Montserrat', sans-serif;
+	float:right;
+	margin-right:44px;
+	margin-top:12px;
+	border-bottom: 4px solid #146772;
+	cursor:default;
+	border-radius:15px;
+	color:#FDFDFD;
+	cursor:pointer;
+	opacity:1;
+}
+#options_set:hover {
+	margin-top:16px;
+	border-bottom: 0px;
+}
+#checkmark_cont {
+	width:50px;
+	height:50px;
+	border-radius:50px;
+	background-color:#21A97E;
+	position:absolute;
+	margin-left:372px;
+	margin-top:40px;
+	opacity:0;
+}
+#checkmark {
+	font-size:40px;
+	color:#FDFDFD;
+	margin-top:6px;
+	margin-left:4px;
+	position:absolute;
+
+}
+.node {
+	width:1px;
+	height:1px;
+	opacity:1;
+}
+#footer{
+	width:100%;
+	height:8px;
+	background-color:#18684E;
+	position:relative;
+	margin-top:125px;
+}
+#footer_text {
+	color:#134636;
+	font-size:17px;
+	font-family: 'Montserrat', sans-serif;
+	padding-top:30px;
+}
+#smallButtonSet {
+	margin:0 auto;
+	height:140px;
+	margin-top:-10px;
+	margin-bottom:0px;
+}        
+    </style>
+	</head>
+			
+	<body>
+
+		<!-- <div id="top">
+			<div class="top-center">
+				<span class="typcn typcn-stopwatch" id="watch-icon" align="center"></span>
+				<div id="top-title">CountDown</div>
+			</div>
+		</div> -->
+
+
+		<div class="content">
+
+
+		<div id="countdown-cont">
+				<div id="msg-cont">
+					<div id="msg-left"><span class="typcn typcn-info-large" id="msg-icon"></span></div>
+					<div id="msg-right"><div id="msg_text">- - - - - - - - - - - - - - - - - - -</div></div>
+
+				</div><!--end msg-cont-->
+
+				<div id="countdown-left">0</div>
+				<div id="countdown-right">0</div>
+			</div><!--end countdown-cont-->
+
+			<div id="smallButtonSet">
+				<div id="button_start" id="start" class="active"><span class="typcn typcn-media-play" id="start-icon">
+                    <svg class="w-2 h-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </span></div>
+				<div id="button_pause" id="pause" ><span class="typcn typcn-media-pause" id="pause-icon">
+                    <svg class="w-2 h-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </span></div>
+				<div id="button_stop" id="stop"><span class="typcn typcn-media-stop" id="stop-icon">
+                    <svg class="w-2 h-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 10a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z"></path></svg>
+                </span></div>
+			</div>			
+            <form id="options_form" action="" method="get">
+                <label class="options_label">Seconds</label>
+                <!--	<input type="text" name="seconds" class="options_textbox"> -->
+
+                    <div class="styled-select" style="position:absolute;margin-top:-70px;margin-left:50px;">
+                        <select name="user_seconds" >
+                            <option value="">секунды</option>
+                            <option value="25">25 секунд</option>
+                            <option value="60">60 секунд</option>
+                            <option value="120">120 секунд</option>
+                        </select>       
+                    </div><!--end styled-select-->
+
+                    <div id="options_set" class="active"  onClick="return checkOptions(this.form)">Set</div>
+
+
+            </form>
+
+		</div><!--end .content-->
+
+
+
+
+
+
+<script>
+			var count = 60;
+			var zero;
+			var message = "Time is END!";
+			var user_seconds;
+			var user_msg = "NOW - Time is END!";
+			var isPaused = false;
+			var isStopped = false;
+			var digit_first, digit_second;
+			var randNumber;
+
+			var pauseButton = "off";
+
+			function start() {
+				timerInit();
+  				$('#msg-cont').animate({opacity:".7"},900);
+  				document.getElementById("msg_text").innerHTML= "- - - - - - - - - - - - - - - - - - -"; //message reset
+			}
+
+			function counterReset() {
+				if (user_seconds == null || user_seconds == "") {
+					count = 10;
+				} else {
+					count = user_seconds;
+				}
+			}
+
+			function seperateDigits() {
+
+				//add a zero if below 10
+				if (count < 10) {
+					count = "0" + count;
+				} else {
+					count = "" + count;
+				}
+
+				//split the 2 digits up into seperate strings
+				digit_first = count.slice(0,1);
+				digit_second = count.slice(1,2);
+			}
+
+			//buttons
+			function buttonStart() {
+				if($("#button_start").hasClass("active")) {
+					if(isPaused == false) {
+						counterReset();
+					} else {
+						isPaused = false;
+					}
+
+					if (isStopped == true) {
+						isStopped = false;
+					} else {
+						//do nothing
+					}
+
+					$("#button_pause").addClass("active");
+
+					$("#button_start").animate({opacity: ".5"}, 600);
+					$("#button_pause").animate({opacity: "1"}, 600);
+					$("#button_stop").animate({opacity: "1"}, 600);
+					$("#button_stop").addClass("active");
+					$("#button_start").removeClass("active");
+					$("#options_set").removeClass("active");
+					$("#options_set").animate({opacity: ".5"}, 600);
+					start(); //initialize the timer
+				} else {
+					//do nothing
+				}
+			}
+
+
+			function buttonPause() {
+				if($("#button_pause").hasClass("active")) {
+					isPaused = true;
+					$("#button_pause").css("opacity", ".5");
+					$("#button_start").animate({opacity: "1"}, 600);
+					setTimeout('$("#button_start").addClass("active")', 600);
+				}	
+			}
+
+
+			function buttonStop() {
+				if($("#button_stop").hasClass("active")) {
+					isStopped = true;
+					counterReset();
+					$("#button_pause").animate({opacity: ".5"}, 600);
+					$("#button_start").animate({opacity: "1"}, 600);
+					$("#button_stop").animate({opacity: ".5"}, 600);
+					setTimeout('$("#button_start").addClass("active")', 600);
+					$("#button_stop").removeClass("active");
+					$("#options_set").addClass("active");
+					$("#options_set").animate({opacity: "1"}, 600);
+
+
+					counterReset();
+					seperateDigits();
+					
+					document.getElementById("countdown-left").innerHTML=digit_first;
+					document.getElementById("countdown-right").innerHTML=digit_second;
+				}
+			}
+
+			function randomNumber(from,to) {
+				return Math.floor(Math.random()*(to-from+1)+from);
+			}
+ 	   
+
+			var randMsgs = ["Lead pencils are neat", "'I'm Batman' -Batman", "#hashtag", "Happy...uhh...Wednesday?", "(>'-')>", "Sleep is overrated", "FREE STUFF!", "I don't think this sentence will fi", "What year is it?", "Give me money!", "Try me again!"];
+
+			function printMsg() {
+				if (user_msg == "" || user_msg == " ") {
+					randNumber = randomNumber(0, 10);
+					document.getElementById("msg_text").innerHTML=randMsgs[randNumber]; //generate random message and display it
+				} else {
+					//user has set their own message
+					document.getElementById("msg_text").innerHTML=message; //message displayed
+
+				}
+
+				
+			}
+
+
+			
+			function counter() {
+
+				if(isPaused == false) {
+		
+				seperateDigits();
+
+				//write the two strings to the document
+				document.getElementById("countdown-left").innerHTML=digit_first;
+				document.getElementById("countdown-right").innerHTML=digit_second;
+
+				//do this stuff when the countdown ends
+				if (count == '00') {
+					$('#msg-cont').animate({opacity:"1"},700);
+					
+					printMsg();
+
+					$("#button_start").animate({opacity: "1"}, 600);
+					$("#button_start").addClass("active");
+
+					$("#button_pause").removeClass("active");
+					$("#button_pause").animate({opacity: ".5"}, 600);
+
+					$("#button_stop").removeClass("active");
+					$("#button_stop").animate({opacity: ".5"}, 600);
+
+					$("#options_set").addClass("active");
+					$("#options_set").animate({opacity: "1"}, 600);
+
+					isPaused = false;
+
+				}
+
+
+				
+				if (count != 0 && isStopped == false) {
+					setTimeout("counter()", 1000)
+				} else {
+					//nothing
+				}
+
+				count = count - 1;
+
+			   }
+
+			}
+
+			
+
+			function timerInit() {
+				counter();
+			}
+
+	
+			//start button
+			$("#button_start").click(function() {
+				buttonStart();
+			});
+
+			//pause button
+			$("#button_pause").click(function() {
+				buttonPause();
+			});
+
+			//stop button
+			$("#button_stop").click(function() {
+				buttonStop();
+			});
+
+function checkOptions(form) {
+						if($("#options_set").hasClass("active")) {
+
+ 	 		 		    	user_seconds = options_form.elements["user_seconds"].value;
+ 	 		 		   		 user_msg = options_form.elements["user_msg"].value;
+
+ 	 		 		    	//check if the user has set the seconds, if not then dont do anything
+ 	 		 		    	if (user_seconds != "") {
+ 	 		 		    		count = options_form.elements["user_seconds"].value;
+ 	 		 		    		$("#options_inner_cont").animate({height:0},400).addClass('hide');
+ 	 		 		    		$("#checkmark_cont").animate({opacity:1}, 800, function() {
+ 	 		 		    				$("#checkmark_cont").delay(500).animate({opacity:0}, 800);
+ 	 		 		    	});
+ 	 		 		   	    } else {
+ 	 		 		    		//empty:do nothing
+ 	 		 		    	}
+
+ 	 		 		    	//check if the user has set a message, if not then dont do anything
+ 	 		 		   		 if (user_msg != "") {
+ 	 		 		    		message = options_form.elements["user_msg"].value;
+ 	 		 		    	 } else {
+ 	 		 		    		user_msg = "";
+ 	 		 		   		 }
+					}
+				}
+
+					$("#button_toggleOptions").click(function(){
+    					if($("#options_inner_cont").hasClass('hide')) {
+      						$("#options_inner_cont").animate({height:120},400).removeClass('hide'); //if its hid then expand it
+      					} else { 
+      			  			$("#options_inner_cont").animate({height:0},400).addClass('hide');
+      					}
+   				 	});    
+</script>
+
+	</body>
+
+</html>

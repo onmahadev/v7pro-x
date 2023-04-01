@@ -1,0 +1,50 @@
+2022-12-30 02:34:45,411 31443 WARNING _log _internal.py 224  * Debugger is active!
+2022-12-30 02:34:50,444 31461 WARNING _log _internal.py 224  * Debugger is active!
+2022-12-30 02:34:58,947 31461 ERROR _log _internal.py 224 Error on request:
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/werkzeug/serving.py", line 335, in run_wsgi
+    execute(self.server.app)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/werkzeug/serving.py", line 327, in execute
+    write(b"")
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/werkzeug/serving.py", line 252, in write
+    assert status_set is not None, "write() before start_response"
+AssertionError: write() before start_response
+2022-12-30 02:35:00,008 31461 ERROR _log _internal.py 224 Error on request:
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/werkzeug/serving.py", line 335, in run_wsgi
+    execute(self.server.app)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/werkzeug/serving.py", line 327, in execute
+    write(b"")
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/werkzeug/serving.py", line 252, in write
+    assert status_set is not None, "write() before start_response"
+AssertionError: write() before start_response
+2022-12-30 02:35:00,735 31461 ERROR _log _internal.py 224 Error on request:
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/werkzeug/serving.py", line 335, in run_wsgi
+    execute(self.server.app)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/werkzeug/serving.py", line 327, in execute
+    write(b"")
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/werkzeug/serving.py", line 252, in write
+    assert status_set is not None, "write() before start_response"
+AssertionError: write() before start_response
+2022-12-30 02:35:01,273 31461 ERROR _log _internal.py 224 Error on request:
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/werkzeug/serving.py", line 335, in run_wsgi
+    execute(self.server.app)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/werkzeug/serving.py", line 327, in execute
+    write(b"")
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/werkzeug/serving.py", line 252, in write
+    assert status_set is not None, "write() before start_response"
+AssertionError: write() before start_response
+2022-12-30 02:35:01,782 31461 ERROR _log _internal.py 224 Error on request:
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/werkzeug/serving.py", line 335, in run_wsgi
+    execute(self.server.app)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/werkzeug/serving.py", line 327, in execute
+    write(b"")
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/werkzeug/serving.py", line 252, in write
+    assert status_set is not None, "write() before start_response"
+AssertionError: write() before start_response
+2023-01-14 03:39:18,579 45777 WARNING _log _internal.py 224  * Debugger is active!
+2023-01-14 03:40:12,803 45836 WARNING _log _internal.py 224  * Debugger is active!
+2023-01-14 03:40:28,882 45842 WARNING _log _internal.py 224  * Debugger is active!

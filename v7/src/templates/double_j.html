@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="ru" class="antialiased" id="doubleh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v7pro ::  Double CLEAN&JERK</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta http-equiv="refresh" content="7">
+    <!-- <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel=" stylesheet"> -->
+    <!-- <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script> -->
+    <!-- <script src="https://unpkg.com/flowbite@1.5.1/dist/datepicker.js"></script> -->
+    <script src="{{url_for('static', filename = 'js/socket.io.min.js')}}"></script>
+    
+    <script src="{{url_for('static', filename = 'js/ovmenu.js')}}"></script>
+    <!-- <script defer src="{{url_for('static', filename = 'js/alpine3.10.2.min.js')}}"></script> -->
+
+
+    <script src="{{url_for('static', filename = 'js/jquery-3.6.0.min.js')}}"></script>
+
+    <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/output.css') }}">
+    <!-- <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/ovmenu.css') }}"> -->
+    <!-- <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/double.css') }}"> -->
+    <!-- <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/jquery-editable.css') }}"> -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon_io/double/favicon.ico') }}">
+    <!--Replace with your tailwind.css once created-->
+
+
+</head>
+
+
+<!-- <body rel="preload" style="background-image: url('static/img/f5double-bg.jpg');" class="bg-transparent leading-normal"> -->
+<!-- <body rel="preload" class="bg-transparent leading-normal"> -->
+    <body id="dbl" rel="preload" class="w-full h-full leading-normal">
+
+
+    <div id="msgbox_app_yes" class="msgbox_app_yes hidden flex p-2 mb-2 bg-green-100 border-t-4 border-green-500 dark:bg-green-200" role="alert">
+        <svg class="flex-shrink-0 w-5 h-5 text-green-700" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+        <div class="ml-3 text-2xl font-semibold text-green-700">
+          Подход выполнен успешно!&nbsp;
+        </div>
+    </div>
+
+
+
+    <!-- Slider MENU-->
+    {% include 'nav.html' %}
+    <!-- Slider MENU-->
+
+
+    
+
+
+
+
+
+
+
+
+<div id="min_screen" class="min-h-screen double_background py-2">
+
+<!--     
+    <div id="msgbox_app_not" class="msgbox_app_not hidden flex p-4 mb-4 bg-red-100 border-t-4 border-red-500 dark:bg-red-200" role="alert">
+        <svg class="flex-shrink-0 w-5 h-5 text-red-700" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+        <div class="ml-3 text-sm font-medium text-red-700">
+            Попытка - неудачная.  <a href="#" class="font-semibold underline hover:text-red-800">[ ok ]</a>
+        </div>
+        <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-red-100 dark:bg-red-200 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 dark:hover:bg-red-300 inline-flex h-8 w-8" data-dismiss-target="#alert-border-2" aria-label="Close">
+          <span class="sr-only">закрыть</span>
+          <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </button>
+    </div> -->
+
+<div class="row">
+
+    <div>
+    <button onclick="updAllTable()" type="button" class="hover:border-white border-transparent border-2 focus:border-green-500 text-white bg-transparent font-medium rounded-lg text-sm px-2 py-2 mb-1 dark:bg-transparent dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+    
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>        
+
+    </button>
+</div>
+    <button onclick="toggle_ws_info()" type="button" class=" hover:border-white border-transparent border-2 focus:border-gray-100 text-white bg-transparent font-medium rounded-lg text-sm px-2 py-2 mb-1 dark:bg-transparent dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+    
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+
+    </button>
+    <div>
+        <button onclick="openFullscreen()" type="button" class=" hover:border-white border-transparent border-2 focus:border-gray-100 text-white bg-transparent font-medium rounded-lg text-sm px-2 py-2 mb-1 dark:bg-transparent dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+        
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13 3H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-3"></path>
+                <path d="M8 21h8"></path>
+                <path d="M12 17v4"></path>
+                <path d="m17 8 5-5"></path>
+                <path d="M17 3h5v5"></path>
+              </svg>
+    
+        </button>
+    </div>
+</div>    
+
+    <div id="attTableWrapper" class='overflow-x-auto w-full topper'>
+        <table id="att_dataz"
+        class='mx-auto max-w-4xl w-full whitespace-nowrap rounded-lg  divide-y overflow-hidden table-auto shadow-md'>
+        <thead class="bg-gray-800">
+            <tr class="text-white text-center">
+            <th class="font-semibold text-xs lowercase px-6 py-0">атлет</th>
+            <th class="font-semibold text-xs lowercase px-6 py-0">1# толчок</th>
+            <th class="font-semibold text-xs lowercase px-6 py-0">2# толчок</th>
+            <th class="font-semibold text-xs lowercase px-6 py-0">3# толчок</th>
+            <th class="font-semibold text-xs lowercase px-6 py-0">результат</th>
+            <th class="font-semibold text-xs lowercase px-2 py-0">место</th>
+            </tr>
+        </thead>
+<tbody class="divide-y divide-gray-100">
+
+    
+    
+{% for data in attdata %}
+{% if data.op == 1 %}
+<tr class="table_row isOP_tr pulse_op_now_square id_{{loop.index}}">
+{% elif data.nop == 1 %}
+<tr class="table_row  isNOP_tr id_{{loop.index}}" id="tr_{{loop.index}}">
+{% else %}
+<tr id="tr_{{loop.index}}" class="table_row ttr border-b border-gray-100 id_{{loop.index}}">
+{% endif %}
+<td class="px-4 py-0">
+
+    <div id="tr_td_div_{{loop.index}}" class="idAtti opacity-50">
+        
+                <!-- OPTIONS -->
+                {% for dataz in attcfg %}
+                {% if dataz.value == 1 and dataz.name =="dbl_show_number" %}
+                <span id="tr_td_div_span_{{loop.index}}"
+                class="bg-gray-100 text-xs font-bold mr-1 px-1.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300 opacity-100">
+                {% elif dataz.value == 0 and dataz.name =='dbl_show_number' %}
+                <span id="tr_td_div_span_{{loop.index}}"
+                class="bg-gray-100 text-xs font-bold mr-1 px-1.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300 opacity-10">
+                {% endif %}
+                {% endfor %}
+        {{loop.index}}
+        </span>
+    </div>
+
+
+<div class="flagDiv flex items-center space-x-3">
+    <!-- OPTIONS -->
+    {% for dataz in attcfg %}
+    {% if dataz.value == 1 and dataz.name =="dbl_show_flag" %}
+    <div class="inline-flex w-8 h-8"> <img rel="preload" class='w-8 h-8 py-0 object-cover rounded-full border-2 border-gray-500'
+        alt='User avatar' src='../static/img/flags/{{data.country.flag.lower()}}.png' />
+    </div>
+    <!-- <div class="inline-flex w-8 h-8">
+    </div>     -->
+    {% elif dataz.value == 0 and dataz.name =='dbl_show_flag' %}
+    <!-- <div> </div> -->
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    {% else %}
+    <!-- <div> </div> -->
+    
+    {% endif %}
+    {% endfor %}
+<div>
+
+
+
+
+  
+                <!-- OPTIONS -->
+                {% for dataz in attcfg %}
+                {% if dataz.value == 1 and dataz.name =="dbl_show_wcat" %}
+
+
+                <span class="sex_wcat_box">
+                    {% if data.sex == 1 %}
+                    <span
+                    class="bg-blue-900 text-white text-xs font-semibold mr-2 px-1.8 py-1.6 rounded dark:bg-blue-200 dark:text-blue-800 px-1">{{data.cat.lwcat}}</span>
+                    {% else %}
+                    <span
+                    class="bg-red-600 text-white text-xs font-semibold mr-2 px-1.8 py-1.6 rounded dark:bg-red-200 dark:text-red-900 px-1">{{data.cat.lwcat}}</span>
+                    {% endif %}
+                </span>                
+
+                {% elif dataz.value == 0 and dataz.name =='dbl_show_wcat' %}
+                
+
+                {% endif %}
+                {% endfor %} 
+
+
+
+
+
+
+
+                
+                
+
+
+        {% if data.op == 1 %}
+        <span class="att_name_op"> <span id="sname_{{data.id}}">{{data.sname[:12]|upper}}</span> <span id="fname_{{data.id}}">{{data.fname[:9]}}</span>
+        {% elif data.nop == 1 %}
+        <span class="att_name_nop"> <span id="sname_{{data.id}}">{{data.sname[:12]|upper}}</span> <span id="fname_{{data.id}}">{{data.fname[:9]}}</span>            
+        {% elif data.op == 0 %}
+        <span class="att_name"> <span id="sname_{{data.id}}">{{data.sname[:12]|upper}}</span> <span id="fname_{{data.id}}">{{data.fname[:9]}}</span>
+        {% endif %}
+    
+                <!-- OPTIONS -->
+                {% for dataz in attcfg %}
+                {% if dataz.value == 1 and dataz.name =="dbl_show_2ccode" %}
+                <span class="countrt3code">{{data.country.flag.upper()}}&nbsp;</span>
+
+                {% elif dataz.value == 0 and dataz.name =='dbl_show_2ccode' %}
+                
+
+                {% endif %}
+                {% endfor %} 
+
+
+
+
+
+</span>
+
+              <!-- OPTIONS -->
+              {% for dataz in attcfg %}
+              {% if dataz.value == 1 and dataz.name =="dbl_show_ow_city" %}
+              <p class="text-gray-500 text-sm font-semibold tracking-wide"> <small>вес:</small>
+                <span
+                class="bg-gray-100 text-gray-800 text-xs font-semibold mr-1 px-0.5 py-0.6 rounded dark:bg-gray-700 dark:text-gray-300">{{data.ow}}
+                kG</span>
+                <span
+                class="text-ellipsis overflow-hidden bg-gray-200 text-blue-900 text-xs font-semibold mr-1 px-0.8 py-0.6 rounded dark:bg-gray-700 dark:text-gray-400">{{data.cities.cname[:14]}}</span>
+                </p>              
+
+              {% elif dataz.value == 0 and dataz.name =='dbl_show_ow_city' %}
+              
+
+              {% endif %}
+              {% endfor %} 
+
+
+</div>
+</div>
+</td>
+<td id="td_j1_{{data.id}}" class="px-6 text-center app">
+    {% if data.j1ig == 1 %}
+    <p id="p_j1_{{data.id}}" class="cntr text-center app_isget">  {{data.j1ch2 if data.j1ch2 is not none else data.j1ch1 if data.j1ch1 is not none else data.j1 if data.j1 is not none}} </p>
+    {% elif data.j1ig == 0 %}
+    <p id="p_j1_{{data.id}}" class="cntr text-center app_isnotget">  {{data.j1ch2 if data.j1ch2 is not none else data.j1ch1 if data.j1ch1 is not none else data.j1 if data.j1 is not none}} </p>
+    {% elif data.j1ig == -1 %}
+    <p id="p_j1_{{data.id}}" class="cntr text-center app_refused">  {{data.j1ch2 if data.j1ch2 is not none else data.j1ch1 if data.j1ch1 is not none else data.j1 if data.j1 is not none}} </p>
+    {% elif data.j1ig is none and data.op == 1 %}
+    <p id="p_j1_{{data.id}}" class="cntr text-center pulse_op_now">  {{data.j1ch2 if data.j1ch2 is not none else data.j1ch1 if data.j1ch1 is not none else data.j1 if data.j1 is not none}} </p>
+    {% else %}
+    <p id="p_j1_{{data.id}}" class="cntr text-center app">  {{data.j1ch2 if data.j1ch2 is not none else data.j1ch1 if data.j1ch1 is not none else data.j1 if data.j1 is not none}} </p>
+    {% endif %}
+</td>
+
+<td id="td_j2_{{data.id}}" class="px-6 text-center app">
+    {% if data.j2ig == 1 %}
+    <p id="p_j2_{{data.id}}" class="cntr text-center app_isget">   {{data.j2ch2 if data.j2ch2 is not none else data.j2ch1 if data.j2ch1 is not none else data.j2 if data.j2 is not none}} </p>
+    {% elif data.j2ig == 0 %}
+    <p id="p_j2_{{data.id}}" class="cntr text-center app_isnotget"> {{data.j2ch2 if data.j2ch2 is not none else data.j2ch1 if data.j2ch1 is not none else data.j2 if data.j2 is not none}} </p>
+    {% elif data.j2ig == -1 %}
+    <p id="p_j2_{{data.id}}" class="cntr text-center app_refused">  {{data.j2ch2 if data.j2ch2 is not none else data.j2ch1 if data.j2ch1 is not none else data.j2 if data.j2 is not none}} </p>
+    {% elif data.j2ig is none and data.j1ig is not none and data.op == 1 %}
+    <p id="p_j2_{{data.id}}" class="cntr text-center pulse_op_now">  {{data.j2ch2 if data.j2ch2 is not none else data.j2ch1 if data.j2ch1 is not none else data.j2 if data.j2 is not none}} </p>
+    {% elif data.j2ig is none and data.op == 0 %}
+    <p id="p_j2_{{data.id}}" class="cntr text-center app vvvvv">  {{data.j2ch2 if data.j2ch2 is not none else data.j2ch1 if data.j2ch1 is not none else data.j2 if data.j2 is not none}} </p>
+    {% endif %}
+</td>
+
+<td id="td_j3_{{data.id}}" class="px-6 text-center app">
+    {% if data.j3ig == 1 %}
+    <p id="p_j3_{{data.id}}" class="cntr text-center app_isget"> {{data.j3ch2 if data.j3ch2 is not none else data.j3ch1 if data.j3ch1 is not none else data.j3 if data.j3 is not none}} </p>
+    {% elif data.j3ig == 0 %}
+    <p id="p_j3_{{data.id}}" class="cntr text-center app_isnotget">{{data.j3ch2 if data.j3ch2 is not none else data.j3ch1 if data.j3ch1 is not none else data.j3 if data.j3 is not none}} </p>
+    {% elif data.j3ig == -1 %}
+    <p id="p_j3_{{data.id}}" class="cntr text-center app_refused"> {{data.j3ch2 if data.j3ch2 is not none else data.j3ch1 if data.j3ch1 is not none else data.j3 if data.j3 is not none}} </p>
+    {% elif data.j3ig is none and data.j2ig is not none and data.op == 1 %}
+    <p id="p_j3_{{data.id}}" class="cntr text-center pulse_op_now"> {{data.j3ch2 if data.j3ch2 is not none else data.j3ch1 if data.j3ch1 is not none else data.j3 if data.j3 is not none}} </p>
+    {% elif data.j3ig is none and data.op==1  %}
+    <p id="p_j3_{{data.id}}" class="cntr text-center"> {{data.j3ch2 if data.j3ch2 is not none else data.j3ch1 if data.j3ch1 is not none else data.j3 if data.j3 is not none}} </p>
+    {% else %}
+    <p id="p_j3_{{data.id}}" class="cntr text-center app"> {{data.j3ch2 if data.j3ch2 is not none else data.j3ch1 if data.j3ch1 is not none else data.j3 if data.j3 is not none}} </p>
+    {% endif %}
+</td>
+
+<td class="px-6 py-1 text-center">
+<p><u  id="s_res_{{data.id}}" class="sres"> {{data.sres}} </u></p>
+</td>
+<td class="px-6 py-1 text-center">
+    <p><u  id="s_mesto_{{data.id}}" class="spos"> {{data.s_place if data.s_place is not none}} </u></p>
+    {% if data.j1ig == 1 %}
+    {% endif %}
+    </td>
+
+
+
+                      
+                    </tr>
+                    {% endfor%}
+                </tbody>
+
+            </table>
+        </div>
+
+
+
+
+
+        
+
+
+
+        <!-- <script>    
+
+            //find counter carColorPicker
+              const carColorPicker = document.getElementById('carColorPicker');
+              //add on color change event
+              carColorPicker.addEventListener("change", onColorChanged, false);
+          
+          function onColorChanged(event) {
+              
+                const d = document.getElementById('d');
+                
+                d.innerHTML += carColorPicker.value +"<br>";
+          }
+          
+          </script> -->
+        
+          
+   
+
+<script>
+function toggle_ws_info() {
+    console.log(" CHangeS WS div!!! ");
+    //wsdivnow = document.getElementById('ws_info_div').hasClass('hidden');        
+    //if ("$ws_info_div").hasClass("hidden") 
+    var wsdiv = document.getElementById("ws_info_div");    
+    if (wsdiv.className.includes("hidden"))
+        //alert("positive");
+        console.log("positive");
+    else              
+        console.log("Negative");
+
+        console.log(wsdiv + '+++++++++');
+        wsdiv.classList.remove("hidden");
+        //wsdiv.classList.remove("hidden");
+        // wsdiv.classList.add("hidden");
+}
+
+async function updAllTable() {
+    const response= await fetch('/att/');
+    const data= await response.json();
+    length=data.attz.length;
+    var temp="";
+     for(i=0;i<length;i++)
+     {
+        temp+="<tr id=tr_"+data.attz[i].id+">";
+            var j1_old=document.getElementById("p_j1_"+data.attz[i].id).innerText;
+            var j1_old_el=document.getElementById("p_j1_"+data.attz[i].id);
+            if (j1_old!=data.attz[i].j1) {
+                console.log(" CHangeS !!! ");
+                j1_old_el.classList.remove("scaleup");
+                j1_old_el.classList.add("scaleup");
+                //setTimeout(window.location.reload(), 4500)
+                // j1_old_el.classList.add("blob");
+                // j1_old_el.classList.add("white");
+            } else {
+                console.log(" no changes ");
+            }
+            try {
+                var j2_old=document.getElementById("p_j2_"+data.attz[i].id).innerText;
+                var j2_old_el=document.getElementById("p_j2_"+data.attz[i].id);
+                    }
+                catch(err) {
+                console.log(err.message);
+                    }
+            if (j2_old!=data.attz[i].j2) {
+                console.log(" CHangeS !!! ");
+                j2_old_el.classList.remove("scaleup");
+                j2_old_el.classList.add("scaleup");
+                //setTimeout(window.location.reload(), 4900)
+                //j3_old_el.classList.remove("scaleup");
+                // j2_old_el.classList.add("blob");
+                // j2_old_el.classList.add("white");
+            } else {
+                console.log(" no changes ");
+            }
+            var j3_old=document.getElementById("p_j3_"+data.attz[i].id).innerText;
+            var j3_old_el=document.getElementById("p_j3_"+data.attz[i].id);
+            if (j3_old!=data.attz[i].j3) {
+                console.log(" CHangeS !!! ");
+                j3_old_el.classList.remove("scaleup");
+                j3_old_el.classList.add("scaleup");
+                //setTimeout(window.location.reload(), 4900) //milliseconds until timeout//
+                //setTimeout(j3_old_el.classList.remove("scaleup"), 1900) //milliseconds until timeout//
+                //j3_old_el.classList.remove("scaleup");
+                // j3_old_el.classList.add("blob");
+                // j3_old_el.classList.add("white");
+            } else {
+                console.log(" no changes ");
+            }
+                try {
+                    var sres_old=document.getElementById("s_res_"+data.attz[i].id).innerText;
+                    var sres_old_el=document.getElementById("s_res_"+data.attz[i].id);
+                    }
+                catch(err) {
+                console.log(err.message);
+                    }
+            if (sres_old!=data.attz[i].s_res) {
+                console.log(" CHangeS !!! ");
+                sres_old_el.classList.remove("scaleup");
+                sres_old_el.classList.add("scaleup");
+                // sres_old_el.classList.add("blob");
+                // sres_old_el.classList.add("white");                
+            } else {
+                console.log(" no changes ");
+            }
+            // var jres_old=document.getElementById("j_res_"+data.attz[i].id).innerText;
+            // var jres_old_el=document.getElementById("j_res_"+data.attz[i].id);
+            // if (jres_old!=data.attz[i].j_res) {
+            //     console.log(" CHangeS !!! ");
+            //     jres_old_el.classList.add("pulse_upd_txt");
+            // } else {
+            //     console.log(" no changes ");
+            // }                        
+            // var dbl_sum_old=document.getElementById("dbl_sum_"+data.attz[i].id).innerText;
+            // var dbl_sum_old_el=document.getElementById("dbl_sum_"+data.attz[i].id);
+            // if (dbl_sum_old!=data.attz[i].dbl_sum) {
+            //     console.log(" CHangeS !!! ");
+            //     dbl_sum_old_el.classList.add("pulse_upd_txt");
+            // } else {
+            //     console.log(" no changes ");
+            // }            
+        $("#sname_"+data.attz[i].id).text(data.attz[i].sname.substring(0, 12));
+        $("#fname_"+data.attz[i].id).text(data.attz[i].fname.substring(0, 9));
+        $("#p_j1_"+data.attz[i].id).text(data.attz[i].j1);
+        $("#j1ig_"+data.attz[i].id).text(data.attz[i].j1ig);
+        $("#p_j2_"+data.attz[i].id).text(data.attz[i].j2);
+        $("#j2ig_"+data.attz[i].id).text(data.attz[i].j2ig);
+        $("#p_j3_"+data.attz[i].id).text(data.attz[i].j3);
+        $("#j3ig_"+data.attz[i].id).text(data.attz[i].j3ig);
+        
+        $("#s_res_"+data.attz[i].id).text(data.attz[i].sres);
+        $("#j_res_"+data.attz[i].id).text(data.attz[i].jres);
+        $("#dbl_sum"+data.attz[i].id).text(data.attz[i].dblsum);
+
+        //$("#j1ig_"+data.attz[i].id).text(data.attz[i].j1ig);
+
+
+
+
+
+
+
+        //$("#p_j1_"+data.attz[1].id).addClass("app_isget")
+        //.removeClass("app_isnotget app_refused app");
+        isGet = data.attz[i].j1ig
+        if (isGet==1) {
+            $("#p_j1_"+data.attz[i].id).text(data.attz[i].j1);
+            $("#p_j1_"+data.attz[i].id)
+            .addClass("app_isget")
+
+            .removeClass("app_isnotget app_refused app");
+            $("#msgbox_app_yes").removeClass("hidden");
+
+
+            console.log('1_'+data.attz[i].j1ig);
+        }
+        else if (isGet==0) {
+                $("#p_j1_"+data.attz[i].id).text(data.attz[i].j1);
+                $("#p_j1_"+data.attz[i].id)
+                .addClass("app_isnotget")
+                .removeClass("app_isget app_refused app");
+                $("#msgbox_app_not").removeClass("hidden");
+                console.log('0_'+data.attz[i].j1ig);
+        }
+        else if (isGet==-1) {
+                $("#p_j1_"+data.attz[i].id).text(data.attz[i].j1);
+                $("#p_j1_"+data.attz[i].id)
+                .addClass("app_refused")
+                .removeClass("app_isget app_isnotget app");                
+                console.log('0_'+data.attz[i].j1ig);
+        }
+        else if (isGet== null ) {
+                $("#p_j1_"+data.attz[i].id).text(data.attz[i].j1);
+                $("#p_j1_"+data.attz[i].id)
+                .addClass("app")
+                .removeClass("app_isget app_isnotget app_refused"); 
+                console.log('0_'+data.attz[i].j1ig);
+        }        
+    }
+}
+
+</script>
+
+
+
+
+
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function() {
+        // Connect to the Socket.IO server.
+        // The connection URL has the following format, relative to the current page:
+        //     http[s]://<domain>:<port>[/<namespace>]
+        // var socket = io('ws://10.0.0.8:4848/',{
+        //     transports: ["websocket", "polling"] // use WebSocket first, if available
+        // });
+        var app_ip = "{{appHost}}";
+        var app_port = "{{appPort}}";
+        var clean_app_ip = app_ip.substring(5);
+        var clean_app_ip = clean_app_ip.slice(0, -5);
+        // var socket = io('ws://10.0.0.108:5000/',{
+        var socket = io('ws://'+clean_app_ip+':'+app_port+'/',{
+        transports: ["websocket", "polling"] // use WebSocket first, if available
+        });        
+
+        // Event handler for new connections.
+        // The callback function is invoked when a connection with the
+        // server is established.
+        socket.on('connect', function() {
+            socket.emit('my_event', {data: 'I\'m connected!'});
+        });
+
+        // Event handler for server sent data.
+        // The callback function is invoked whenever the server emits data
+        // to the client. The data is then displayed in the "Received"
+        // section of the page.
+        socket.on('my_response', function(msg, cb) {
+            $('#log').append('<br>' + $('<div/>').text('Received #' + msg.count + ': ' + msg.data).html());
+            if (cb)
+                cb();
+        });
+
+        // Interval function that tests message latency by sending a "ping"
+        // message. The server then responds with a "pong" message and the
+        // round trip time is measured.
+        var ping_pong_times = [];
+        var start_time;
+        window.setInterval(function() {
+            start_time = (new Date).getTime();
+            $('#transport').text(socket.io.engine.transport.name);
+            socket.emit('my_ping');
+        }, 1000);
+
+        // Handler for the "pong" message. When the pong is received, the
+        // time from the ping is stored, and the average of the last 30
+        // samples is average and displayed.
+        socket.on('my_pong', function() {
+            var latency = (new Date).getTime() - start_time;
+            ping_pong_times.push(latency);
+            ping_pong_times = ping_pong_times.slice(-30); // keep last 30 samples
+            var sum = 0;
+            for (var i = 0; i < ping_pong_times.length; i++)
+                sum += ping_pong_times[i];
+            $('#ping-pong').text(Math.round(10 * sum / ping_pong_times.length) / 10);
+        });
+
+        // Handlers for the different forms in the page.
+        // These accept data from the user and send it to the server in a
+        // variety of ways
+        $('form#emit').submit(function(event) {
+            socket.emit('my_event', {data: $('#emit_data').val()});
+            return false;
+        });
+        $('form#broadcast').submit(function(event) {
+            socket.emit('my_broadcast_event', {data: $('#broadcast_data').val()});
+            return false;
+        });
+        $('form#join').submit(function(event) {
+            socket.emit('join', {room: $('#join_room').val()});
+            return false;
+        });
+        $('form#leave').submit(function(event) {
+            socket.emit('leave', {room: $('#leave_room').val()});
+            return false;
+        });
+        $('form#send_room').submit(function(event) {
+            socket.emit('my_room_event', {room: $('#room_name').val(), data: $('#room_data').val()});
+            return false;
+        });
+        $('form#close').submit(function(event) {
+            socket.emit('close_room', {room: $('#close_room').val()});
+            return false;
+        });
+        $('form#disconnect').submit(function(event) {
+            socket.emit('disconnect_request');
+            return false;
+        });
+    });
+</script>
+
+
+<script>
+    /* Get the documentElement (<html>) to display the page in fullscreen */
+     var elem = document.documentElement;
+    //var elem = document.getElementById("min_screen");
+    
+    /* View in fullscreen */
+    function openFullscreen() {
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.webkitRequestFullscreen) { /* Safari */
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) { /* IE11 */
+        elem.msRequestFullscreen();
+      }
+    }
+    
+    /* Close fullscreen */
+    function closeFullscreen() {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.webkitExitFullscreen) { /* Safari */
+        document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) { /* IE11 */
+        document.msExitFullscreen();
+      }
+    }
+    </script>
+
+
+
+<div id="ws_info_div" class="hidden bg-gray-300 mx-5 px-5 my-5 py-5">
+    <h1>Flask-SocketIO Test</h1>
+    <p>
+      Async mode is: <b>{{ async_mode }}</b><br>
+      Current transport is: <b><span id="transport"></span></b><br>
+      Average ping/pong latency: <b><span id="ping-pong"></span>ms</b>
+    </p>
+    <h2>Send:</h2>
+    <form id="broadcast" method="POST" action='#'>
+        <input type="text" name="broadcast_data" id="broadcast_data" placeholder="Message">
+        <input type="submit" value="Broadcast">
+    </form>
+
+    <form id="disconnect" method="POST" action="#">
+        <input type="submit" value="Disconnect">
+    </form>
+    <h2>Receive:</h2>
+    <div id="log"></div>    
+</div>
+
+</body>
+
+</html>

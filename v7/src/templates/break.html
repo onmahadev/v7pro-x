@@ -1,0 +1,283 @@
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  
+  <title>v7 Timer</title>
+<!--   <link href='https://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="style.css"> -->
+</head>
+<body>
+  
+  <div class="timer">
+    <div class="timer__controls">
+      <!-- <button data-time="20" class="timer__button">20 Secs</button> -->
+      <button data-time="300" class="timer__button">5 минут</button>
+      <button data-time="600" class="timer__button">10 минут</button>
+      <button data-time="900" class="timer__button">15 минут</button>
+      <button data-time="1200" class="timer__button">20 минут</button>
+      <button data-time="1500" class="timer__button">25 минут</button>
+      <form name="customForm" id="custom">
+        <input type="text" name="minutes" style="border-radius: 23%; background-color: #525254b2;" width="77px;" placeholder="минуты">
+      </form>
+    </div>
+    <div class="display">
+      <h1 id="display__time-leftz" class="display__time-left"></h1>
+      <p class="display__end-time"></p>
+    </div>
+    
+  </div>
+  
+<!--   <script src="scripts.js"></script> -->
+  <!-- for footer -->
+<!--   <div> 
+      <h2><a href="http://www.eleftheriabatsou.com" target="_blank">Eleftheria</a> | <a href="https://codepen.io/EleftheriaBatsou" target="_blank">Projects</a> | <a href="https://www.youtube.com/channel/UCC-WwYv3DEW7Nkm_IP6VeQQ" target="_blank"> Coding videos </a></h2> -->
+    </div> <!-- end footer -->
+  
+</body>
+</html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Countdown Timer</title>
+<!--   <link href='https://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="style.css"> -->
+<style>
+  html {
+  box-sizing: border-box;
+  font-size: 7px;
+  background: linear-gradient(45deg,  #a38fa5 0%,#608cb6 50%,#063f96 100%);
+  
+}
+
+/* *, *:before, *:after {
+  box-sizing: inherit;
+} */
+
+body {
+  margin:0;
+  text-align: center;
+  font-family: monospace; 
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+  -webkit-touch-callout: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;  
+/*   'Inconsolata', */
+}
+
+.redoz{
+  color:rgb(159, 11, 11);
+  animation: myAnim 3s ease 0s 1 normal forwards;  
+}
+@keyframes myAnim {
+	0% {
+		transform: translate(0);
+	}
+
+	20% {
+		transform: translate(-2px, 2px);
+	}
+
+	40% {
+		transform: translate(-2px, -2px);
+	}
+
+	60% {
+		transform: translate(2px, 2px);
+	}
+
+	80% {
+		transform: translate(2px, -2px);
+	}
+
+	100% {
+		transform: translate(0);
+	}
+}
+
+.display__time-left {
+  font-weight: 800;
+  font-size: 44rem;
+  margin: 0;
+  color:rgb(242, 242, 242);
+  text-shadow:4px 4px 0 rgba(0,0,0,1.25);
+}
+
+.timer {
+  display:flex;
+  min-height: 100vh;
+  flex-direction:column;
+}
+
+.timer__controls {
+  display: flex;
+}
+
+.timer__controls > * {
+  flex:1;
+}
+
+.timer__controls form {
+  flex:1;
+  display:flex;
+}
+
+.timer__controls input {
+  flex:1;
+  border:0;
+  padding:2rem;
+}
+
+.timer__button {
+  background:none;
+  border:0;
+  cursor: pointer;
+  color:white;
+  font-size: 2rem;
+  text-transform: uppercase;
+  background:rgba(0,0,0,0.1);
+  border-bottom:3px solid rgba(0,0,0,0.2);
+  border-right:1px solid rgba(0,0,0,0.2);
+  padding:1rem;
+  font-family: 'Inconsolata', monospace;
+}
+
+.timer__button:hover,
+.timer__button:focus {
+  background:rgba(0,0,0,0.2);
+  outline:0;
+}
+
+.display {
+  flex:1;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.display__end-time {
+  font-size: 4rem;
+  color:white;
+}
+
+
+
+
+
+
+body {
+	background: linear-gradient(-48deg, #d30d0d, #090616, #0e2285, #4d744c,#8d173b,#060215);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+	height: 100vh;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+
+</style>
+
+
+
+<script>
+let countdown;
+const timerDisplay = document.querySelector('.display__time-left');
+//document.getElementById('countdownTablo').style.setProperty('--value', 5);
+const textuz = document.getElementById('display__time-leftz');
+const endTime = document.querySelector('.display__end-time');
+const buttons = document.querySelectorAll('[data-time]');
+
+function timer(seconds) {
+  // clear any existing timers
+  clearInterval(countdown);
+
+  const now = Date.now();
+  const then = now + seconds * 1000;
+  displayTimeLeft(seconds);
+  displayEndTime(then);
+
+  countdown = setInterval(() => {
+    const secondsLeft = Math.round((then - Date.now()) / 1000);
+    // check if we should stop it!
+    if(secondsLeft < 0) {
+      clearInterval(countdown);
+      return;
+    }
+    if(secondsLeft <=30) {
+      textuz.style.color = '#ba1436';
+      // textuz.setAttribute("animation", "myAnim 3s ease 0s 1 normal forwards");  
+      //color:rgb(159, 11, 11);
+      textuz.style.textShadow = "5px 5px 2px #ffa0a9, 5px 5px 3px #212121";
+      console.log('ZALUPA!!!!');
+
+      let tsay = document.querySelector('.display__time-left');
+      // взять текст и покрасить в красный! и готово
+      // return;
+
+
+    }    
+    // display it
+    displayTimeLeft(secondsLeft);
+  }, 1000);
+}
+
+function displayTimeLeft(seconds){
+	const minutes = Math.floor(seconds/60);
+	const remainderSeconds = seconds % 60; 
+	const display = `${minutes}:${remainderSeconds < 10 ? '0' : '' }${remainderSeconds}`;``
+	document.title = display;
+	timerDisplay.textContent = display;
+}
+
+function displayEndTime(timestamp){
+	const end = new Date(timestamp);
+	const hour = end.getHours();
+	const minutes = end.getMinutes();
+	endTime.textContent = `Возвращайтесь в ${hour}:${minutes}`;
+}
+
+function startTimer() {
+  const seconds = parseInt(this.dataset.time);
+  timer(seconds);
+}
+
+buttons.forEach(button => button.addEventListener('click', startTimer));
+
+document.customForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+  const mins = this.minutes.value;
+  console.log(mins);
+  timer(mins * 60);
+  this.reset();
+});
+
+
+
+</script>
+</head>
+<body>
+
+
+
+<!--   <script src="scripts.js"></script> -->
+  <!-- for footer -->
+<!--   <div> 
+      <h2><a href="http://www.eleftheriabatsou.com" target="_blank">Eleftheria</a> | <a href="https://codepen.io/EleftheriaBatsou" target="_blank">Projects</a> | <a href="https://www.youtube.com/channel/UCC-WwYv3DEW7Nkm_IP6VeQQ" target="_blank"> Coding videos </a></h2> -->
+    </div> <!-- end footer -->
+  
+
+
+</body>
+</html>

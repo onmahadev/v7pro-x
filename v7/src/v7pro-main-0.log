@@ -1,0 +1,157 @@
+@mbp-2 src % 
+cc@mbp-2 src % 
+cc@mbp-2 src % 
+cc@mbp-2 src % 
+cc@mbp-2 src % 
+cc@mbp-2 src % ./v7init.sh
+v7 Sinclair calculating job!
+ic| '####################################################'
+ic| '####################################################'
+ic| f"Time taken {time() - start_time}": 'Time taken 0.6181082725524902'
+v7 c0rE job! MAIN !!!!!!!
+ * Serving Flask app 'v7'
+ * Debug mode: on
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:4848
+ * Running on http://10.0.0.8:4848
+Press CTRL+C to quit
+
+
+
+
+
+
+
+
+
+ * Restarting with stat
+v7 Sinclair calculating job!
+
+
+
+
+ic| '####################################################'
+ic| '####################################################'
+ic| f"Time taken {time() - start_time}": 'Time taken 0.614534854888916'
+v7 c0rE job! MAIN !!!!!!!
+ * Debugger is active!
+ * Debugger PIN: 682-625-307
+
+
+
+
+
+EQ_ s2 ????*****
+EQ_s2 ================================= REZ---: {1: {'id': 2, 's2': 66}, 2: {'id': 4, 's2': 66}} | len(REZ): 2
+=>>>>>>>                !!! LAST get_id_min_w_s2 === rez :::  2
+KUURWA!!! j3 - LAST 2 or 1: Орест
+r&*&*&*&*&*&*&##### !! : 1
+@@@ An exception occurred
+ic| '#################set_app_weight_now ###################################': '#################set_app_weight_now ###################################'
+ic| s1: 3
+=>>>>>>>                !!! LAST get_id_min_w_s2 === rez :::  2ic| s2: 2
+ic| s3: 1
+ic| '##################set_app_weight_now##################################': '##################set_app_weight_now##################################'
+SN!=FalseSN!=FalseSN!=FalseSN!=FalseSN!=False
+=>>>>>>>                !!! LAST get_id_min_w_s2 === rez :::  2op ::= s2 id:2 w:66
+ic| idzzz: 2
+*** EXCLUDE s1 OP ID: [  2  ]
+{'id': 3, 's1': 77} ******---*******%#####
+{'id': 5, 's1': 77} ******---*******%#####
+*** EXCLUDE s2 OP ID: [  2  ]
+EQ_s2 ================================= REZ: {1: {'id': 4, 's2': 66}} | len(REZ): 1
+===== REZ: 4
+===== mwd: {4: 66}
+===== ms2: {4: 66}
+========4 : 1
+======== ()()()() : [4]
+=ЛУН_ 4444= : 4 & 4
+ZA-ZA-ZA ::: [ 1 ] ||| OP ID ::: -= 4 =- 
+-5 LAST get_id_min_w_s2 === rez :::  4
+-4 LAST get_id_min_w_s2 === rez :::  4
+*** EXCLUDE s3 OP ID: [  2  ]
+rezNOW >1: {0: {'id': 1, 's3': 66}} len: 1
+11111!!!!!!!!!!!!!! REZZZŽ
+1
+ic| '####################$$$$################################'
+ic| s1ex: 3
+ic| s2ex: 4
+ic| s3ex: 1
+ic| '#######################$$$$$#############################'
+NOP= s2==== id:4 w:66
+input id's: 3, 4, 1,[ lastID: 4 ]
+NEED TO DO!!! 3, 4, 1,[ lastID: 4 ]
+**********************====^^^^ 4
+v7 c0rE job! = in SET_OP_NOW FUNC#
+SN is TRUE!!!!!!! DO SNATCH!!!!!
+EQ_ s2 ????*****
+EQ_s2 ================================= REZ---: {1: {'id': 2, 's2': 66}, 2: {'id': 4, 's2': 66}} | len(REZ): 2
+!!! LAST get_id_min_w_s2 === rez :::  2
+KUURWA!!! j3 - LAST 2 or 1: Ярослав
+r&*&*&*&*&*&*&##### !! : 1
+@@@ An exception occurred
+ic| s1: 3
+ic| s2: 2
+ic| s3: 1
+SN!=FalseSN!=FalseSN!=FalseSN!=FalseSN!=False
+op ::= s2 id:2 w:66
+ic| '#################  sel_op_id ######################'
+EQ_ s2 ????*****
+EQ_s2 ================================= REZ---: {1: {'id': 2, 's2': 66}, 2: {'id': 4, 's2': 66}} | len(REZ): 2
+!!! LAST get_id_min_w_s2 === rez :::  2
+KUURWA!!! j3 - LAST 2 or 1: Самуил
+r&*&*&*&*&*&*&##### !! : 1
+@@@ An exception occurred
+SN!=FalseSN!=FalseSN!=FalseSN!=FalseSN!=False
+op ::= s2 id:2 w:66
+*** EXCLUDE s1 OP ID: [  2  ]
+{'id': 3, 's1': 77} ******---*******%#####
+{'id': 5, 's1': 77} ******---*******%#####
+*** EXCLUDE s2 OP ID: [  2  ]
+EQ_s2 ================================= REZ: {1: {'id': 4, 's2': 66}} | len(REZ): 1
+===== REZ: 4
+===== mwd: {4: 66}
+===== ms2: {4: 66}
+========4 : 1
+======== ()()()() : [4]
+=ЛУН_ 4444= : 4 & 4
+ZA-ZA-ZA ::: [ 1 ] ||| OP ID ::: -= 4 =- 
+-5 LAST get_id_min_w_s2 === rez :::  4
+-4 LAST get_id_min_w_s2 === rez :::  4
+*** EXCLUDE s3 OP ID: [  2  ]
+rezNOW >1: {0: {'id': 1, 's3': 66}} len: 1
+11111!!!!!!!!!!!!!! REZZZŽ
+1
+ic| s1ex: 3
+ic| s2ex: 4
+ic| s3ex: 1
+NOP= s2==== id:4 w:66
+input id's: 3, 4, 1,[ lastID: 4 ]
+NEED TO DO!!! 3, 4, 1,[ lastID: 4 ]
+ic| '#################  sel_nop_id 1 ######################'
+10.0.0.8 - - [28/Mar/2023 23:23:06] "GET /flow HTTP/1.1" 200 -
+10.0.0.8 - - [28/Mar/2023 23:23:06] "GET /static/js/datepicker.js HTTP/1.1" 304 -
+10.0.0.8 - - [28/Mar/2023 23:23:06] "GET /static/js/ovmenu.js HTTP/1.1" 304 -
+10.0.0.8 - - [28/Mar/2023 23:23:06] "GET /static/js/flowbite.js HTTP/1.1" 304 -
+10.0.0.8 - - [28/Mar/2023 23:23:06] "GET /static/css/production_v7.css HTTP/1.1" 304 -
+10.0.0.8 - - [28/Mar/2023 23:23:06] "GET /static/js/socket.io.min.js HTTP/1.1" 304 -
+10.0.0.8 - - [28/Mar/2023 23:23:06] "GET /static/css/flow.css HTTP/1.1" 304 -
+10.0.0.8 - - [28/Mar/2023 23:23:06] "GET /static/css/ovmenu.css HTTP/1.1" 304 -
+10.0.0.8 - - [28/Mar/2023 23:23:06] "GET /static/js/jquery-3.6.0.min.js HTTP/1.1" 304 -
+10.0.0.8 - - [28/Mar/2023 23:23:06] "GET /static/img/v7-tilaka-white.png HTTP/1.1" 304 -
+10.0.0.8 - - [28/Mar/2023 23:23:06] "GET /static/img/flags/ru.png HTTP/1.1" 304 -
+10.0.0.8 - - [28/Mar/2023 23:23:06] "GET /static/img/flags/ussr.png HTTP/1.1" 304 -
+10.0.0.8 - - [28/Mar/2023 23:23:06] "GET /static/img/avatars/defava0.png HTTP/1.1" 304 -
+10.0.0.8 - - [28/Mar/2023 23:23:06] "GET /static/img/___auto_grey_ru.svg HTTP/1.1" 304 -
+10.0.0.8 - - [28/Mar/2023 23:23:06] "GET /static/img/avatars/defava11.png HTTP/1.1" 304 -
+10.0.0.8 - - [28/Mar/2023 23:23:06] "GET /static/favicon_io/flow/favicon.ico HTTP/1.1" 304 -
+10.0.0.8 - - [28/Mar/2023 23:23:07] "GET /timer-get-sec-on-tablo HTTP/1.1" 200 -
+10.0.0.8 - - [28/Mar/2023 23:23:08] "GET /timer-get-sec-on-tablo HTTP/1.1" 200 -
+10.0.0.8 - - [28/Mar/2023 23:23:09] "GET /timer-get-sec-on-tablo HTTP/1.1" 200 -
+10.0.0.8 - - [28/Mar/2023 23:23:10] "GET /timer-get-sec-on-tablo HTTP/1.1" 200 -
+10.0.0.8 - - [28/Mar/2023 23:23:11] "GET /timer-get-sec-on-tablo HTTP/1.1" 200 -
+10.0.0.8 - - [28/Mar/2023 23:23:12] "GET /timer-get-sec-on-tablo HTTP/1.1" 200 -
+10.0.0.8 - - [28/Mar/2023 23:23:13] "GET /timer-get-sec-on-tablo HTTP/1.1" 200 -
+10.0.0.8 - - [28/Mar/2023 23:23:14] "GET /timer-get-sec-on-tablo HTTP/1.1" 200 -
+10.0.0.8 - - [28/Mar/2023 23:23:15] "GET /timer-get-sec-on-tablo HTTP/1.1" 200 -

@@ -1,0 +1,4295 @@
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+<!-- jury-group-data-modal -->
+<!-- 12.01.2023 UPD date write / time 05:07:05  -->
+
+
+<!--Overlay Effect-->
+<div class="fixed hidden inset-0 bg-gray-800 bg-opacity-75 overflow-y-auto h-full w-full"
+  id="jury-group-data-modal">
+
+  <!--modal edit app & edit info modal & del modal -->
+  <div class="relative top-5 mx-auto p-1.5 border w-1/2 shadow-lg rounded-md bg-white">
+    <form id="id_jnamez_frm" action="{{url_for('staff')}}" onsubmit="return sendData();"  method = "post">
+    <button id="closee_edit-modal_data" class="float-left text-gray-500 focus:outline-none hover:text-gray-900">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      </svg>
+    </button>
+    <div class="mt-1">
+      <div class="float-right flex items-center justify-center h-12 w-12 rounded-full bg-blue-200">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
+          </path>
+        </svg>
+      </div>
+        <h3 class="add_att_header_txt text-lg float-right leading-6 font-medium text-gray-900">Редактировать данные персонала ±
+          &nbsp;&nbsp;&nbsp;</h3>
+        <div class="mt-0 px-1 py-1">
+          <div class="vert_spacer_big">.</div>
+          <div class="edit_att_btnf">
+            <div class="flex-container column">
+
+
+              <div class="flex-item">
+                <button type="button" data-tooltip-target="tooltip-cancel" id="editBtne_reject"
+                  class="hidden inline-block px-1 py-0.5 bg-gray-100 text-gray-900 font-medium text-sm leading-tight uppercase rounded shadow-md focus:shadow-lg focus:outline-none focus:ring-1 active:bg-gray-300 active:shadow-lg transition duration-150 ease-in-out">
+                  <div id="tooltipe-cancel" role="tooltip"
+                    class="inline-block absolute invisible z-10 py-3 px-4 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                    отказ от выполнения
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                  </div>
+                  <svg class="w-7 h-7 e_cancelBtn" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M9 13h6m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                    </path>
+                  </svg>
+                </button>
+              </div>
+
+
+              <div class="flex-item">
+                <button type="button" data-tooltip-target="tooltip-delele" id="editBtnej_del"
+                  class="hidden inline-block px-1 py-0.5 bg-gray-100 text-gray-900 font-medium text-sm leading-tight uppercase rounded shadow-md focus:shadow-lg focus:outline-none focus:ring-1 active:bg-gray-300 active:shadow-lg transition duration-150 ease-in-out">
+                  <div id="tooltipe-delele" role="tooltip"
+                    class="inline-block absolute invisible z-10 py-3 px-4 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                    удалить атлета
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                  </div>
+                  <svg class="w-12 h-12 e_delBtn" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                    </path>
+                  </svg>
+                </button>
+              </div>
+
+            </div>
+
+
+
+
+          </div>
+
+<div class="float-right w-1/6">
+<div class="relative">
+
+</div>
+<div class="vert_spacer">.</div>
+<div class="vert_spacer">.</div>
+<div class="hidden rounded-lg h-5">
+  <div>
+  <div class="inline-flex rounded-lg h-5">
+    <input type="radio" name="sex" onchange="change_sex_newatt('male')" value="1" id="male_j" checked/>
+    <label for="male_j" class="lbl radio text-center self-center py-1 px-4 rounded-lg cursor-pointer hover:opacity-95">муж</label>
+  </div>
+  <div class="inline-flex rounded-lg h-5">
+    <input type="radio" name="sex"  onchange="change_sex_newatt('female')" value="0" id="female_j" />
+    <label for="female_j" class="lbl radio text-center self-center py-1 px-4 rounded-lg cursor-pointer hover:opacity-95">жен</label>
+  </div>
+</div>
+  </div>
+</div>  
+
+          <div class="flex mt-0 w-1/6">
+
+              <!-- <p id="id_edit_" autocomplete="off" class="w-full ss-name-flow-edit-modal focus:border-gray-400 overflow-hidden overflow-y-auto" contenteditable>sname </p> -->
+            <!-- <p id="id_jnamez_" name="id_jnamez_"  onblur="handle_blur(event)"  autocomplete="off" class="w-full jname-edit-modal focus:border-gray-400 overflow-hidden overflow-y-auto" contenteditable>jname </p> -->
+            <span
+            class="inline-flex items-center px-3 text-lg text-gray-900 bg-gray-200 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+            Фамилия И.О.
+          </span>
+          <input inputmode="text" type="text" id="id_jnamez_" name="id_jnamez_" autocomplete="off"
+            class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-lg border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Палько А.А.">
+          </div>
+
+
+
+          <div class="vert_spacer">.....</div>
+
+          
+          
+
+
+<div class="flex mb-0.5 justify-start">
+
+<div id="addInfoDIV5" class="mb-6 w-1/6">
+
+  <div class="flex">
+    <span
+      class="inline-flex items-center px-3 text-lg text-gray-900 bg-gray-200 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+      Должность
+    </span>
+    <input inputmode="text" type="text" id="id_jpostruz_"
+      name="id_jpostruz_" autocomplete="off"
+      class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-12 w-full text-lg border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      placeholder="Судья">
+    <div class="vert_spacer">.....</div>
+    <span class="flex boolima">
+<select id="id_catz_" name="id_catz_"
+class="bg-gray-50 px-3 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ">
+<option hidden>Категория</option>
+<option id="jcat03" value="3К">⓷ категория</option>
+<option id="jcat04" value="2К">⓶ категория</option>
+<option id="jcat01" value="1К">⓵ категория</option>
+<option id="jcat02" value="ВК">ВК</option>
+<option id="jcat05" value="МК2">МК 2</option>
+<option id="jcat06" value="МК1">МК 1</option>
+
+</option>
+</select>
+</span>
+</div>
+<div class="vert_spacer">.....</div>
+<div class="flex">
+  <span
+    class="inline-flex items-center px-3 text-lg text-gray-900 bg-gray-200 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+    Город
+  </span>
+  <input inputmode="text" type="text" id="id_jcityz_"
+    name="id_jcityz_"
+    class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-lg border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+    placeholder="Лангепас" autocomplete="off">
+  <div class="vert_spacer">.....</div>
+  <span class="flex boolima">
+  <span
+  class="inline-flex items-center px-3 text-lg text-gray-900 bg-gray-200 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+  группа
+</span>
+<input inputmode="text" type="text" id="id_jgropz_" name="id_jgropz_"
+  class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-2 w-10 text-lg border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+  placeholder="?" autocomplete="off" disabled>
+</span>
+</div>
+
+
+
+  <div class="vert_spacer">.</div>
+
+  </div>
+</div>
+
+</div>
+
+
+
+
+
+          <div id="jgrp_ok_btn_div" class="items-center px-4 py-3">
+            <button id="jgrp_ok_btn" type="submit"
+              class="px-4 py-2 bg-green-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300">
+              ЗАПИСАТЬ / OK
+            </button>
+          </div>
+
+
+        </div>
+        <input inputmode="text" style="display: none;" type="text" id="jgrpid" name="jgrpid" autocomplete="off">
+        <!-- <button type="submit">submit</button>         -->
+      </form>
+    </div>
+  </div>
+
+
+
+
+
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+<!-- flow-editor-att-data-modal -->
+<!--30.12.2022 UPD date write / time 16:31:07  -->
+
+
+<!--Overlay Effect-->
+<div class="fixed hidden inset-0 bg-gray-800 bg-opacity-75 overflow-y-auto h-full w-full"
+  id="flow-editor-att-data-modal">
+
+  <!--modal edit app & edit info modal & del modal -->
+  <div class="relative top-5 mx-auto p-1.5 border w-1/2 shadow-lg rounded-md bg-white">
+    <button id="closee_edit-modal_data2" class="float-left text-gray-500 focus:outline-none hover:text-gray-900">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      </svg>
+    </button>
+
+    <!-- import uuid  -->
+<p class="pl-8 ml-8 p-12 text-gray-300">
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ {{uuidz}} ]
+</p>
+      <div class="hidden invisible flagZzz_div mb-0">
+        <a href="#" class="circleZzz mb-0">
+          <img id="flagz_att2" onclick="choosePic2();" height="69" width="69" src="{{url_for('static', filename = 'img/flags/ussr.png')}}" alt="USSR / РФРСР">
+        </a>   
+
+        {% for dataz in attdata  %}
+        <div class="inline-flex w-4 h-4 opacity-5"> <img rel="preload" class='opacity-10 w-4 h-4 py-0 object-cover rounded-full border-2 border-gray-500'
+            alt='User avatar' src='../static/img/flags/{{dataz.country.flag.lower()}}.png' />
+        </div>
+        {% endfor %}        
+        
+    </div>
+    
+    <div class="mt-1">
+      <div class="float-right flex items-center justify-center h-12 w-12 rounded-full bg-blue-200">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
+          </path>
+        </svg>
+      </div>
+      <form id="edite_weight_att_form" name="edite_weight_att_form_name" method="POST" onSubmit="return editigAttDataz();">
+        <h3 class="add_att_header_txt text-lg float-right leading-6 font-medium text-gray-900">Редактировать данные ±
+          &nbsp;&nbsp;&nbsp;</h3>
+        <div class="mt-0 px-1 py-1">
+          <div class="vert_spacer_big">.</div>
+          <div class="edit_att_btnf">
+            <div class="flex-container column">
+
+              
+
+              <div class="flex-item">
+                <button type="button" data-tooltip-target="tooltip-cancel" id="editBtne_reject"
+                  class="hidden inline-block px-1 py-0.5 bg-gray-100 text-gray-900 font-medium text-sm leading-tight uppercase rounded shadow-md focus:shadow-lg focus:outline-none focus:ring-1 active:bg-gray-300 active:shadow-lg transition duration-150 ease-in-out">
+                  <div id="tooltipe-cancel" role="tooltip"
+                    class="inline-block absolute invisible z-10 py-3 px-4 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                    отказ от выполнения
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                  </div>
+                  <svg class="w-7 h-7 e_cancelBtn" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M9 13h6m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                    </path>
+                  </svg>
+                </button>
+              </div>
+
+              <!-- <div class="flex">
+                {% include 'fe_att_opt.html' %}
+              </div> -->
+              <div class="hidden flex-item">
+                <button type="button" data-tooltip-target="tooltip-delele" id="editBtne_del"
+                  class="inline-block px-1 py-0.5 bg-gray-100 text-gray-900 font-medium text-sm leading-tight uppercase rounded shadow-md focus:shadow-lg focus:outline-none focus:ring-1 active:bg-gray-300 active:shadow-lg transition duration-150 ease-in-out">
+                  <div id="tooltipe-delele" role="tooltip"
+                    class="inline-block absolute invisible z-10 py-3 px-4 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                    удалить атлета
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                  </div>
+                  <svg class="w-12 h-12 e_delBtn" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                    </path>
+                  </svg>
+                </button>
+              </div>
+
+            </div>
+
+
+
+
+          </div>
+
+<div class="float-right w-1/6">
+<div class="relative">
+  <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+    <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
+      viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd"
+        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+        clip-rule="evenodd"></path>
+    </svg>
+  </div>
+  <input id="yearze" datepicker datepicker-language="ru" datepicker-autohide datepicker-buttons
+    datepicker-format="dd.mm.yyyy" datepicker-title="или день/дата рождения" name="yearz" type="text"
+    class="ml-6 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-min pl-10 p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+    placeholder="день явления:" size="13" autocomplete="off">
+</div>
+<div class="vert_spacer">.</div>
+<div class="vert_spacer">.</div>
+<div class=" rounded-lg h-5">
+  <div>
+  <div class="inline-flex rounded-lg h-5">
+    <input type="radio" name="sex" onchange="change_sex_newatt('male')" value="1" id="male_fe" checked/>
+    <label for="male_fe" class="lbl radio text-center self-center py-1 px-4 rounded-lg cursor-pointer hover:opacity-95">муж</label>
+  </div>
+  <div class="inline-flex rounded-lg h-5">
+    <input type="radio" name="sex"  onchange="change_sex_newatt('female')" value="0" id="female_fe" />
+    <label for="female_fe" class="lbl radio text-center self-center py-1 px-4 rounded-lg cursor-pointer hover:opacity-95">жен</label>
+  </div>
+</div>
+  </div>
+</div>
+
+</br>
+
+
+          <div class="flex mt-1 mb-4 w-1/6">
+            <div>
+
+      <!-- <form id="id_edit_namez" method="post">               -->
+            <!-- <p id="ides_edit_" autocomplete="off" class="w-full ss-name-flow-edit-modal focus:border-gray-400 overflow-hidden overflow-y-auto" contenteditable>sname </p> -->
+            <input type="text" id="ides_edit_" class="bg-gray-50 uppercase border border-gray-300 text-gray-900 text-3xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Фамилия" required>
+            </div>
+          </div>
+          <div class="flex mt-1 mb-4 w-1/6">         
+          <div>
+          <!-- <p id="idef_edit_" autocomplete="off" class="w-full fs-name-flow-edit-modal focus:border-gray-400 overflow-hidden overflow-y-auto" contenteditable>fname </p> -->
+          <!-- <p id="idef_edit_" autocomplete="off" class="w-full fs-name-flow-edit-modal focus:border-gray-400 overflow-hidden overflow-y-auto" contenteditable>fname </p> -->
+          <input value="" type="text" id="idef_edit_" class="bg-gray-50 border border-gray-300 text-gray-900 text-3xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Имя" required>
+          <!-- <input type="submit" class="hidden" value="EDIT"/>
+        </form> -->
+        </div>
+        <br/>
+        
+        </div>
+        
+
+
+
+          <div class="flex bg-green-50 w-11/12 justify-start tohidediv">
+
+
+            <div id="edte1_back_off">
+              <div class="flex items-center space-x-2 text-base">
+                <h5 id="ide_s1_en_" class="app_num font-semibold text-slate-900">рывок # 1</h5>
+
+              </div>
+              <div class="custom-number-input h-8 w-32">
+                <div class="flex flex-row h-6 w-min rounded-lg relative bg-transparent mt-1">
+                  <button id="s1_edite_dec-btn" type="button" data-tooltip-target="tooltip-dec" data-action="decrement"
+                    class=" bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none">
+                    <!-- <button disabled="disabled" type="button" data-tooltip-target="tooltip-dec" data-action="decrement" class=" bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none"> -->
+                    <div id="tooltipe-dec" role="tooltip" 
+                      class="inline-block absolute invisible z-10 py-3 px-4 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                      -1 kG
+                      <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                    <span style="position: relative; top:-12%;" class="inline-block align-text-top text-2xl font-bold" data-tooltip="-1 кг">−</span>
+                  </button>
+                  <input type="number" min="25" step="1" max="321" pattern="[0-9]{,3}" inputmode="numeric"
+                    data-tooltip-target="tooltip-edit" id="s1_weight"
+                    class="app_exnow outline-none focus:outline-none text-center w-full bg-transparent font-semibold text-2xl hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700  outline-none"
+                    name="custom-input-number"></input>
+                  <div id="tooltip-edit" role="tooltip"
+                    class="inline-block absolute invisible z-10 py-3 px-4 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                    вес заявки
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                  </div>
+
+                  <button id="s1_edite1_inc-btn" type="button" data-tooltip-target="tooltip-inc" data-action="increment"
+                    class="bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-r cursor-pointer">
+                    <div id="tooltipe-inc" role="tooltip"
+                      class="inline-block absolute invisible z-10 py-3 px-4 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                      +1 kG
+                      <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                    <span style="position: relative; top:-12%;" class="text-2xl font-bold"  data-tooltip="+1 кг">+</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="inline-block">
+                {% include 'fe_att_opt.html' %}
+              </div>
+              
+
+            </div>
+<div class="py-4 px-4">&nbsp;</div>
+            <div id="edte2_back_off">
+              <div class="flex items-center space-x-2 text-base">
+                <h5 id="ide_s2_en_" class="app_num font-semibold text-slate-900">рывок # 2</h5>
+
+              </div>
+              <div class="custom-number-input h-8 w-32">
+                <div class="flex flex-row h-6 w-min rounded-lg relative bg-transparent mt-1">
+                  <button id="s2_edite_dec-btn" type="button" data-tooltip-target="tooltip-dec" data-action="decrement"
+                    class=" bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none">
+                    <!-- <button disabled="disabled" type="button" data-tooltip-target="tooltip-dec" data-action="decrement" class=" bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none"> -->
+                    <div id="tooltipe-dec" role="tooltip"
+                      class="inline-block absolute invisible z-10 py-3 px-4 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                      -1 kG
+                      <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                    <span style="position: relative; top:-12%;" class="inline-block align-text-top text-2xl font-bold">−</span>
+                  </button>
+                  <input type="number" min="25" step="1" max="321" pattern="[0-9]{,3}" inputmode="numeric"
+                    data-tooltip-target="tooltip-edit" id="s2_weight"
+                    class="app_exnow outline-none focus:outline-none text-center w-full bg-transparent font-semibold text-2xl hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700  outline-none"
+                    name="custom-input-number"></input>
+                  <div id="tooltip-edit" role="tooltip"
+                    class="inline-block absolute invisible z-10 py-3 px-4 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                    вес заявки
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                  </div>
+
+                  <button id="s2_edite2_inc-btn" type="button" data-tooltip-target="tooltip-inc" data-action="increment"
+                    class="bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-r cursor-pointer">
+                    <div id="tooltipe-inc" role="tooltip"
+                      class="inline-block absolute invisible z-10 py-3 px-4 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                      +1 kG
+                      <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                    <span style="position: relative; top:-12%;" class="text-2xl font-bold">+</span>
+                  </button>
+                </div>
+              </div>
+              <span class="inline-block">
+                {% include 'fe_att_opt_1.html' %}
+              </span>
+            </div>
+
+<div class="py-4 px-4">&nbsp;</div>
+
+            <div id="edte3_back_off">
+              <div class="flex items-center space-x-2 text-base">
+                <h5 id="ide_s3_en_" class="app_num font-semibold text-slate-900">рывок # 3</h5>
+
+              </div>
+              <div class="custom-number-input h-8 w-32">
+                <div class="flex flex-row h-6 w-min rounded-lg relative bg-transparent mt-1">
+                  <button id="s3_edite_dec-btn" type="button" data-tooltip-target="tooltip-dec" data-action="decrement"
+                    class=" bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none">
+                    <!-- <button disabled="disabled" type="button" data-tooltip-target="tooltip-dec" data-action="decrement" class=" bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none"> -->
+                    <div id="tooltipe-dec" role="tooltip"
+                      class="inline-block absolute invisible z-10 py-3 px-4 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                      -1 kG
+                      <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                    <span style="position: relative; top:-12%;" class="inline-block align-text-top text-2xl font-bold">−</span>
+                  </button>
+                  <input type="number" min="25" step="1" max="321" pattern="[0-9]{,3}" inputmode="numeric"
+                    data-tooltip-target="tooltip-edit" id="s3_weight"
+                    class="app_exnow outline-none focus:outline-none text-center w-full bg-transparent font-semibold text-2xl hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700  outline-none"
+                    name="custom-input-number"></input>
+                  <div id="tooltip-edit" role="tooltip"
+                    class="inline-block absolute invisible z-10 py-3 px-4 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                    вес заявки
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                  </div>
+
+                  <button id="s3_edite3_inc-btn" type="button" data-tooltip-target="tooltip-inc" data-action="increment"
+                    class="bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-r cursor-pointer">
+                    <div id="tooltipe-inc" role="tooltip"
+                      class="inline-block absolute invisible z-10 py-3 px-4 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                      +1 kG
+                      <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                    <span style="position: relative; top:-12%;" class="text-2xl font-bold">+</span>
+                  </button>
+                </div>
+                
+              </div>
+              <div class="inline-flex">
+                {% include 'fe_att_opt_2.html' %}
+              </div>
+            </div>  
+              
+          </div>
+          
+          
+
+
+
+
+
+          <div class="flex mb-6 bg-red-50 justify-start w-11/12 tohidediv">
+
+
+            <div id="edte4_back_off">
+              <div class="flex items-center space-x-2 text-base">
+                <h5 id="ide_cj1_en_" class="app_num font-semibold text-slate-900">толчок # 1</h5>
+
+              </div>
+              <div class="custom-number-input h-8 w-32">
+                <div class="flex flex-row h-6 w-min rounded-lg relative bg-transparent mt-1">
+                  <button id="j1_edite_dec-btn" type="button" data-tooltip-target="tooltip-dec" data-action="decrement"
+                    class=" bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none">
+                    <!-- <button disabled="disabled" type="button" data-tooltip-target="tooltip-dec" data-action="decrement" class=" bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none"> -->
+                    <div id="tooltipe-dec" role="tooltip"
+                      class="inline-block absolute invisible z-10 py-3 px-4 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                      -1 kG
+                      <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                    <span style="position: relative; top:-12%;" class="inline-block align-text-top text-2xl font-bold">−</span>
+                  </button>
+                  <input type="number" min="25" step="1" max="321" pattern="[0-9]{,3}" inputmode="numeric"
+                    data-tooltip-target="tooltip-edit" id="j1_weight"
+                    class="app_exnow outline-none focus:outline-none text-center w-full bg-transparent font-semibold text-2xl hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700  outline-none"
+                    name="custom-input-number" value=""></input>
+                  <div id="tooltip-edit" role="tooltip"
+                    class="inline-block absolute invisible z-10 py-3 px-4 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                    вес заявки
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                  </div>
+
+                  <button id="j1_edite4_inc-btn" type="button" data-tooltip-target="tooltip-inc" data-action="increment"
+                    class="bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-r cursor-pointer">
+                    <div id="tooltipe-inc" role="tooltip"
+                      class="inline-block absolute invisible z-10 py-3 px-4 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                      +1 kG
+                      <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                    <span style="position: relative; top:-12%;" class="text-2xl font-bold">+</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="inline-block">
+                {% include 'fe_att_opt_3.html' %}
+              </div>
+            </div>
+          
+        <div class="py-4 px-4">&nbsp;</div>
+            <div id="edte5_back_off">
+              <div class="flex items-center space-x-2 text-base">
+                <h5 id="ide_cj2_en_" class="app_num font-semibold text-slate-900">толчок # 2</h5>
+
+              </div>
+              <div class="custom-number-input h-8 w-32">
+                <div class="flex flex-row h-6 w-min rounded-lg relative bg-transparent mt-1">
+                  <button id="j2_edite_dec-btn" type="button" data-tooltip-target="tooltip-dec" data-action="decrement"
+                    class=" bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none">
+                    <!-- <button disabled="disabled" type="button" data-tooltip-target="tooltip-dec" data-action="decrement" class=" bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none"> -->
+                    <div id="tooltipe-dec" role="tooltip"
+                      class="inline-block absolute invisible z-10 py-3 px-4 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                      -1 kG
+                      <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                    <span style="position: relative; top:-12%;" class="inline-block align-text-top text-2xl font-bold">−</span>
+                  </button>
+                  <input type="number" min="25" step="1" max="321" pattern="[0-9]{,3}" inputmode="numeric"
+                    data-tooltip-target="tooltip-edit" id="j2_weight"
+                    class="app_exnow outline-none focus:outline-none text-center w-full bg-transparent font-semibold text-2xl hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700  outline-none"
+                    name="custom-input-number" value=""></input>
+                  <div id="tooltip-edit" role="tooltip"
+                    class="inline-block absolute invisible z-10 py-3 px-4 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                    вес заявки
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                  </div>
+
+                  <button id="j2_edite5_inc-btn" type="button" data-tooltip-target="tooltip-inc" data-action="increment"
+                    class="bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-r cursor-pointer">
+                    <div id="tooltipe-inc" role="tooltip"
+                      class="inline-block absolute invisible z-10 py-3 px-4 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                      +1 kG
+                      <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                    <span style="position: relative; top:-12%;" class="text-2xl font-bold">+</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="inline-block">
+                {% include 'fe_att_opt_4.html' %}
+              </div>             
+            </div>
+
+<div class="py-4 px-4">&nbsp;</div>
+
+            <div id="edte6_back_off">
+              <div class="flex items-center space-x-2 text-base">
+                <h5 id="ide_cj3_en_" class="app_num font-semibold text-slate-900">толчок # 3</h5>
+
+              </div>
+              <div class="custom-number-input h-8 w-32">
+                <div class="flex flex-row h-6 w-min rounded-lg relative bg-transparent mt-0">
+                  <button id="j3_edite_dec-btn" type="button" data-tooltip-target="tooltip-dec" data-action="decrement"
+                    class=" bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none">
+                    <!-- <button disabled="disabled" type="button" data-tooltip-target="tooltip-dec" data-action="decrement" class=" bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none"> -->
+                    <div id="tooltipe-dec" role="tooltip"
+                      class="inline-block absolute invisible z-10 py-4 px-0 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                      -1 kG
+                      <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                    <span style="position: relative; top:-12%;" class="inline-block align-text-top text-2xl font-bold">−</span>
+                  </button>
+                  <input type="number" min="25" step="1" max="321" pattern="[0-9]{,3}" inputmode="numeric"
+                    data-tooltip-target="tooltip-edit" id="j3_weight"
+                    class="app_exnow outline-none focus:outline-none text-center w-full bg-transparent font-semibold text-2xl hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700  outline-none"
+                    name="custom-input-number" value=""></input>
+                  <div id="tooltip-edit" role="tooltip"
+                    class="inline-block absolute invisible z-10 py-3 px-4 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                    вес заявки
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                  </div>
+
+                  <button id="j3_edite6_inc-btn" type="button" data-tooltip-target="tooltip-inc" data-action="increment"
+                    class="bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-r cursor-pointer">
+                    <div id="tooltipe-inc" role="tooltip"
+                      class="inline-block absolute invisible z-10 py-3 px-4 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                      +1 kG
+                      <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                    <span style="position: relative; top:-12%;" class="text-2xl font-bold">+</span>
+                  </button>
+                </div>
+              </div>
+              <div class="inline-block">
+                {% include 'fe_att_opt_5.html' %}
+              </div>
+
+
+            </div>          
+
+
+          </div>
+
+
+<div class="flex mb-0.5 justify-start">
+<!-- ////// -->
+<!-- <span class="items-center px-6 py-0">
+  <a href="#more" id="href_addInfo2" onclick="showAddInfo()" class="float-right text-blue-500 underline">прочая
+    информация &#8659;</a>
+</span> -->
+
+<div id="addInfoDIV2" class="mb-6">
+
+  <div class="flex">
+    <span data-tooltip="Собственный вес атлета" 
+      class="inline-flex items-center px-3 text-lg text-gray-900 bg-gray-200 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+      С.В.
+    </span>
+    <!-- <input inputmode="decimal" step="0.01" min="11.1" pattern="\d{2}|\d{3}" type="tel"  id="ow" name="ow" class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-lg border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="74.7"> -->
+      <input inputmode="decimal" step="0.01" min="11.1" max="234.0" pattern="[0-9]+([\.,][0-9]+)?" type="number" id="ow_fe"
+      name="ow_fe" autocomplete="off"
+      class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-lg border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      placeholder="74.7">
+
+    <div class="vert_spacer">.</div>
+    <span class="inline-flex boolima" data-tooltip="Весовая категория атлета">
+
+
+      <select id="wcate" name="wcat"
+        class="bg-gray-50 px-3 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ">
+        <option hidden>Весовая кат-я</option>
+
+
+        {% for data in wcatdata__oz %}
+
+        {% if data.sex == 0 %}
+        <option id="optwce_f_{{data.id}}" class="ats0" att_sex1="0" att-sex="0" value="{{data.id}}">
+          {{data.lwcat}} (жен ♀)
+        {% elif data.sex == 1 %}
+        <option id="optwce_m_{{data.id}}" class="ats1" att_sex1="1" att-sex="1" value="{{data.id}}">
+          {{data.lwcat}} (муж)
+          {% endif %}
+
+
+        </option>
+        {%endfor%}
+
+
+
+
+
+      </select>
+    </span>
+  </div>
+  <div class="vert_spacer">.</div>
+  <div class="flex">
+    <span class="flex" data-tooltip="Страна Атлета">
+      <select id="countriese" name="countriesz" 
+        class="bg-gray-50 px-3 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        {% for datazzz in cntrydata_o %}
+        <option value="{{datazzz.country_id}}" id="optcntr_{{datazzz.country_id}}"> {{datazzz.name}} [
+          {{datazzz.flag}} ]</option>
+        {%endfor%}
+      </select>
+    </span>
+    <div class="vert_spacer">.</div>
+    <span class="inline-flex" data-tooltip="город Атлета / местность">
+      <input inputmode="text"  type="text" id="placesz2" name="placesz"
+      onkeyup="this.value=this.value.replace(/[^A-zА-я]/g,'');"
+      class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-lg border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      placeholder="город **" autocomplete="off">
+    </span>
+
+    <div class="div_avatar108">
+      <a href="#" class="circle">
+        <img id="ava_att2" onclick="choosePic2();" height="108" width="108" src="{{url_for('static', filename = 'img/avatars/defava0.png')}}" alt="Аватар / фото атлета">
+      </a>   
+  </div>
+  
+  </div>
+  
+  <!-- <div class="vert_spacer">.</div>
+  <div class="flex"> -->
+  </div>
+</div>
+
+</div>
+
+
+
+          <div style="display: none;" id="reappdive" class="hidden mb-6 float-left">
+            <label id="ide_sXdec_label" for="ide_sXdec_"
+              class="block mb-2 text-lg font-semibold dark:text-gray-400">перезаявки:</label>
+            <div class="flex">
+              <button data-tooltip="начальный подход" data-tooltip-target="tooltip-weightedit" type="button"
+                title="начальный вес" disabled id="ide_sXdec_"
+                class="cursor-default text-gray-900 text-xl font-semibold bg-gray-200 border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full px-2 py-2 mr-3 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">.</button>
+              <button data-tooltip="(I-ая) Первая перезаявка" type="button" disabled id="ide_sXch1_"
+                class="cursor-default text-gray-900 text-xl font-semibold bg-gray-200 border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full px-2 py-2 mr-3 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">.</button>
+              <button data-tooltip="(II-ая) Вторая перезаявка" type="button" disabled id="ide_sXch2_"
+                class="cursor-default text-gray-900 text-xl font-semibold bg-red-300 border border-gray-300 focus:outline-none hover:bg-red-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full px-2 py-2 mr-3 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">.</button>
+
+
+            </div>
+          </div>
+
+          <div id="reapp_ok_btn" style="display: none;" class="items-center px-4 py-3">
+            <button id="edite_att_ok_btn"
+              class="px-4 py-2 bg-green-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300">
+              ЗАПИСАТЬ / OK
+            </button>
+          </div>
+          <!-- </form> -->
+
+
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+
+
+
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+<!--Overlay Effect-->
+<div
+	class="fixed hidden inset-0 bg-gray-800 bg-opacity-75 overflow-y-auto h-full w-full"
+	id="edit-att-modal">
+
+<!--modal edit app & edit info modal & del modal -->
+<div
+	class="relative top-5 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white"
+>
+<button id="close_edit-modal_data" class="float-left  text-gray-500 focus:outline-none hover:text-gray-900">
+    <svg class="w-6 h-6 " fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+    
+    
+</button>
+	<div class="mt-1">
+		<div
+			class="float-right flex items-center justify-center h-12 w-12 rounded-full bg-blue-200"
+		>
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+		</div>   
+        <form id="edit_weight_att_form" method="POST" onSubmit="return change_tn_xXchX();">
+		<h3 class="add_att_header_txt text-lg float-right leading-6 font-medium text-gray-900">Перезаявка / изменить &nbsp;&nbsp;&nbsp;</h3>
+		<div class="mt-2 px-1 py-1">
+<div class="vert_spacer_big">.</div>
+<div class="edit_att_btnf">
+    <div class="flex-container column">
+        <div class="flex-item">
+
+            <button type="button" data-tooltip-target="tooltip-default" id="editBtn_edt" class="hidden inline-block px-1 py-0.5 bg-gray-100 text-gray-900 font-medium text-sm leading-tight uppercase rounded shadow-md focus:shadow-lg focus:outline-none focus:ring-1 active:bg-gray-300 active:shadow-lg transition duration-150 ease-in-out">
+                <div id="tooltip-default" role="tooltip" class="inline-block absolute invisible z-10 py-3 px-4 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                    редактировать данные атлета
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
+                <svg class="w-10 h-10 e_editBtn" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+            </button>            
+            
+        </div>
+
+
+        <div class="flex-item">
+            <button type="button" data-tooltip-target="tooltip-cancel" id="editBtn_cancel" class="inline-block px-1 py-0.5 bg-gray-100 text-gray-900 font-medium text-sm leading-tight uppercase rounded shadow-md focus:shadow-lg focus:outline-none focus:ring-1 active:bg-gray-300 active:shadow-lg transition duration-150 ease-in-out">
+                <div id="tooltip-cancel" role="tooltip" class="inline-block absolute invisible z-10 py-3 px-4 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                    отказ от выполнения
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
+                <svg class="w-10 h-10 e_cancelBtn" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+            </button>
+        </div>
+
+
+        
+        <div class="flex-item">
+            <button type="button" data-tooltip-target="tooltip-delele" id="editBtn_del" class="inline-block px-1 py-0.5 bg-gray-100 text-gray-900 font-medium text-sm leading-tight uppercase rounded shadow-md focus:shadow-lg focus:outline-none focus:ring-1 active:bg-gray-300 active:shadow-lg transition duration-150 ease-in-out">
+                <div id="tooltip-delele" role="tooltip" class="inline-block absolute invisible z-10 py-3 px-4 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                    удалить атлета
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>                
+                <svg class="w-10 h-10 e_delBtn" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+            </button>
+        </div>
+
+    </div>
+      
+          
+
+
+</div>
+            
+            
+</br>
+<div class="flex mt-1 mb-4 w-1/6">
+  <div>
+    <!-- <span class="text-gray-400 pl-20 ml-20 mb-4 pb-20 ">фамилия</span>   -->
+  <p id="id_fe_es_edit_" title="Фамилмя" autocomplete="off" class="uppercase w-full ss-name-edit-modal focus:border-gray-400 overflow-hidden overflow-y-auto" contenteditableZZZ>sname </p>
+  
+  </div>
+</div>
+<div class="flex mt-1 mb-4 w-1/6">         
+<div>
+  
+<p id="id_fe_ef_edit_" title="Имя атлета" autocomplete="off" class="w-full fs-name-edit-modal focus:border-gray-400 overflow-hidden overflow-y-auto" contenteditableZZZ>fname </p>
+<!-- <br><span class="text-gray-400">имя</span> -->
+</div>
+<br/>
+</div>
+
+            
+            <div class="flex mb-6 justify-center tohidediv">
+
+
+                <div id="edt_back_off">
+                    <div class="flex items-center space-x-2 text-base">
+                      <h5 id="id_en_" class="app_num font-semibold text-slate-900">Упра #</h5>
+                      
+                    </div>
+                    <div  class="custom-number-input h-10 w-32" >
+                        <div class="flex flex-row h-10 w-full rounded-lg relative bg-transparent mt-1">
+                          <button id="edit_dec-btn"  type="button" data-tooltip-target="tooltip-dec" data-action="decrement" class=" bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none">
+                            <!-- <button disabled="disabled" type="button" data-tooltip-target="tooltip-dec" data-action="decrement" class=" bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none"> -->
+                            <div id="tooltip-dec" role="tooltip" class="inline-block absolute invisible z-10 py-3 px-4 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                                -1 kG
+                                <div class="tooltip-arrow" data-popper-arrow></div>
+                            </div>                              
+                            <span class="m-auto text-2xl font-bold">−</span>
+                          </button>
+                          <input type="number" pattern="\d*" pattern="[0-9]*" inputmode="numeric" data-tooltip-target="tooltip-edit" id="id_wnow_" class="app_exnow outline-none focus:outline-none text-center w-full bg-transparent font-semibold text-2xl hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700" name="custom-input-number" value=""></input>
+                          <div id="tooltip-edit" role="tooltip" class="inline-block absolute invisible z-10 py-3 px-4 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                            вес заявки
+                            <div class="tooltip-arrow" data-popper-arrow></div>
+                        </div>
+                        
+                        <button id="edit_inc-btn" type="button" data-tooltip-target="tooltip-inc" data-action="increment" class="bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-r cursor-pointer">
+                            <div id="tooltip-inc" role="tooltip" class="inline-block absolute invisible z-10 py-3 px-4 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                                +1 kG
+                                <div class="tooltip-arrow" data-popper-arrow></div>
+                            </div>
+                          <span class="m-auto text-2xl font-bold">+</span>
+                        </button>
+                      </div>
+                      </div>
+                  </div>
+
+     
+
+
+            </div>
+
+            <div id="p2kg_hint" class="hidden">
+                <p class="p2kg py-4 text-3xl text-red-900 font-bold">
+                  <svg fill="none" height="48px" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                    Правило  20 кг
+                </p>
+            
+            </div>
+
+<div id="reappdiv" class="mb-6 mt-6 float-left">
+<label  id="id_sXdec_label"  for="id_sXdec_" class="block mb-4 mt-4 text-lg font-normal dark:text-gray-400">перезаявки:</label>
+<div class="inline-flex">
+    <button data-tooltip="начальный подход"  type="button" title="начальный вес" disabled id="id_sXdec_" class="cursor-default text-gray-900 text-xl font-semibold bg-gray-200 border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 rounded-full px-2 py-2 mr-3 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">.</button> 
+    <button data-tooltip="(I-ая) 1-Первая перезаявка" type="button" disabled id="id_sXch1_" class="cursor-default text-gray-900 text-xl font-semibold bg-gray-200 border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 rounded-full px-2 py-2 mr-3 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">.</button>
+    <button data-tooltip="(II-ая) 2-Вторая перезаявка" type="button" disabled id="id_sXch2_" class="cursor-default text-gray-900 text-xl font-semibold bg-gray-200 border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 rounded-full px-2 py-2 mr-3 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">.</button>
+
+
+</div>
+</div>
+
+
+<!-- <div id="p20kg_msg">    
+<p>fdsfdsfdsfsdfdsf</p>
+</div> -->
+
+
+
+                <div id="reapp_ok_btn" class="items-center px-4 py-3">
+                    <button
+                        id="edit_att_ok_btn"
+                        class="px-4 py-2 bg-green-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300"
+                    >
+                        ЗАПИСАТЬ / OK
+                    </button>
+                </div>
+              <!-- </form> -->
+            
+
+		</div>
+</form>
+	</div>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+
+
+
+
+
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+
+<!--Overlay Effect-->
+<div
+	class="fixed hidden inset-0 bg-gray-800 bg-opacity-70 overflow-y-auto h-full w-full"
+	id="add-att-modal">
+
+<!--modal add a new athlete-->
+<div
+	class="relative top-5 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white"
+>
+<button id="close_add-modal_data" class="float-left text-gray-500 focus:outline-none hover:text-gray-900">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+</button>
+	<div class="mt-1">
+		<div
+			class="float-right flex items-center justify-center h-12 w-12 rounded-full bg-blue-200"
+		>
+            <svg class="w-6 h-6"
+                 fill="none"
+                 stroke="currentColor" 
+                 iewBox="0 0 24 24" 
+                 xmlns="http://www.w3.org/2000/svg">
+                 <path stroke-linecap="round" 
+                 stroke-linejoin="round" 
+                 stroke-width="2" 
+                 d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z">
+                </path>
+            </svg>  
+		</div>
+		<h3 class="add_att_header_txt text-lg float-right leading-6 font-medium text-gray-900">ДОБАВИТЬ АТЛЕТА &nbsp;&nbsp;&nbsp;</h3>
+		<div class="mt-2 px-7 py-3">
+      
+<div class="vert_spacer_big">.</div>            
+            <form id="add_att_form" action="{{url_for('new_alhlete2')}}" method="POST">
+            <div class="mb-6">                
+                <div class="flex">
+                        <div class=" rounded-lg h-5">
+                      <div class="inline-flex rounded-lg h-5">
+                        <input type="radio" name="sex" onchange="change_sex_newatt('male')" value="1" id="male" checked/>
+                        <label for="male" class="lbl radio text-center self-center py-1 px-4 rounded-lg cursor-pointer hover:opacity-95">муж</label>
+                      </div>
+                      <div class="inline-flex rounded-lg h-5">
+                        <input type="radio" name="sex"  onchange="change_sex_newatt('female')" value="0" id="female" />
+                        <label for="female" class="lbl radio text-center self-center py-1 px-4 rounded-lg cursor-pointer hover:opacity-95">жен</label>
+                      </div>
+                      </div>
+                      <div>
+
+<!-- TEST                         -->
+<select id="wcate_" name="wcat" onchange="change_wcat_newatt()"
+class="bg-gray-50 px-3 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ">
+<option hidden>Весовая кат-я</option>
+
+
+{% for data in wcatdata__oz %}
+
+{% if data.sex == 0 %}
+<option id="optwce_f__{{data.wcat}}" name="flow_sex_f" class="ats0" att_sex1="0" att-sex="0" value="{{data.id}}">
+  {{data.lwcat}} / жен ♀
+{% elif data.sex == 1 %}
+<option id="optwce_m__{{data.wcat}}" name="flow_sex_m" class="ats1" att_sex1="1" att-sex="1" value="{{data.id}}">
+  {{data.lwcat}} / муж ♂
+  {% endif %}
+</option>
+{%endfor%}
+
+
+
+
+
+</select>
+<!-- TEST -->
+
+
+                      </div>        
+                  </div>
+
+
+
+            </div>
+
+<div class="mb-6">
+<div class="flex ">
+  <span id="sname_label" class="inline-flex items-center px-3 text-base text-gray-900 bg-gray-200 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+    Фамилия
+  </span>
+  <input type="text" id="sname-att" autocomplete="nope" name="snameadd" class="rounded-none rounded-r-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="{{sname_ph}}">  
+</div>
+
+<!-- <div>
+    <label for="username-error" class="block mb-2 text-sm font-medium text-red-700 dark:text-red-500">Your name</label>
+    <input type="text" id="username-error" class="bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-red-100 dark:border-red-400" placeholder="Bonnie Green">
+    <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Oops!</span> Username already taken!</p>
+  </div> -->
+
+<div class="vert_spacer">.</div>
+<div class="flex">
+    <span id="fname_label" class="inline-flex items-center px-3 text-base text-gray-900 bg-gray-200 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+      Имя&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>
+    <input type="text"  autocomplete="nope" id="fname-att" name="fnameadd" class="rounded-none rounded-r-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="{{fname_ph}}">
+  </div>
+</div>
+<div class="mb-6">
+<label for="snatch1" class="block mb-2 text-lg font-semibold text-gray-900 dark:text-gray-300">Начальные попытки (вес кг)</label>
+<div class="flex">
+  <span id="s-label" class="inline-flex items-center px-3 text-lg text-gray-900 bg-gray-200 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+    рывок
+  </span>
+  <input name="s1add" inputmode="numeric" step="1" min="1" pattern="" type="number"  id="snatch1" name="s1" class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="77" autocomplete="off">
+  <div class="vert_spacer">.</div>
+  <span id="j-label" class="inline-flex items-center px-3 text-lg text-gray-900 bg-gray-200 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+    толчок
+  </span>
+  <input name="j1add" inputmode="numeric" step="1" min="1" pattern="" type="number" id="jerk1" name="j1" class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="88" autocomplete="off">  
+</div>
+</div>
+
+<span class="items-center px-6 py-0 hidden">
+<a href="#more" id="href_addInfo" onclick="showAddInfo()" class="float-right text-blue-500 underline">прочая информация &#8659;</a>
+</span>
+
+<div id="addInfoDIV" class="mb-6 hidden">
+
+    <div class="flex">
+      <span class="inline-flex items-center px-3 text-lg text-gray-900 bg-gray-200 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+        С.В.
+      </span>
+      <input name="owadd" inputmode="numeric" step="0.01" min="0" pattern="\-?\d+(\.\d{0,})?" type="tel"  id="ow" name="ow" class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-lg border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="123" value="69.7">
+      <div class="vert_spacer">.</div>
+      <span class="inline-flex">
+      <select id="wcat" name="wcatadd" class="bg-gray-50 px-3 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        <option selected>Вес. категория</option>
+        <option value="US">29 KG</option>
+        <option value="CA">71 KG</option>
+        <option value="FR">89 KG</option>
+        <option value="DE">102+ KG</option>
+      </select>
+    </span>
+    </div>
+    <div class="vert_spacer">.</div>
+    <div class="flex">
+        <span class="flex">
+        <select id="countries" name="countrieszadd" class="bg-gray-50 px-3 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option selected>Субъект</option>
+            <option value="US">United States</option>
+            <option value="CA">Canada</option>
+            <option value="FR">France</option>
+            <option value="DE">Germany</option>
+          </select>
+        </span>
+          <div class="vert_spacer">.</div>
+          <span class="inline-flex">
+            <select id="cities" name="placeszadd" class="bg-gray-50 px-3 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              <option selected>&nbsp;Лангепас&nbsp;&nbsp;</option>
+              <!-- <option value="US">United States</option>
+              <option value="CA">Canada</option>
+              <option value="FR">France</option>
+              <option value="DE">Germany</option> -->
+            </select>
+          </span>
+    </div>
+    <div class="vert_spacer">.</div>
+    <div class="flex">
+
+        <div class="relative">
+            <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+              <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+            </div>
+            <input id="yearz" type="datetime" name="yearz" datepicker="" datepicker-autohide datepicker-format="yyyy" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input" placeholder="Год рождения:">
+          </div>
+          
+      </div>  
+
+</div>
+
+
+
+&nbsp;
+                <div class="items-center px-4 py-3">
+                    <button
+                        id="add_newatt_ok_btn"
+                        class="px-4 py-2 bg-green-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300"
+                    >
+                        OK
+                    </button>
+
+                </div>
+              </form>
+              <a href=""
+              id="close-btn"
+              class=" hidden px-4 py-2 bg-red-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-red-300"
+          >
+          XXXx
+            </a>
+            
+
+		</div>
+
+	</div>
+</div>
+
+</div>
+
+
+
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+
+
+
+<!--Overlay Effect-->
+<div
+	class="fixed hidden inset-0 bg-gray-800 bg-opacity-70 overflow-y-auto h-full w-full"
+	id="my-modal">
+
+<!--modal content-->
+<div
+	class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white"
+>
+	<div class="mt-3 text-center">
+		<div
+			class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100"
+		>
+			<svg
+				class="h-6 w-6 text-green-600"
+				fill="none"
+				stroke="currentColor"
+				viewBox="0 0 24 24"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M5 13l4 4L19 7"
+				></path>
+			</svg>
+		</div>
+		<h3 class="text-lg leading-6 font-medium text-gray-900">Успешно!</h3>
+		<div class="mt-2 px-7 py-3">
+			<p class="text-sm text-gray-500">
+				Атлет добавлен!
+			</p>
+		</div>
+		<div class="items-center px-4 py-3">
+			<button
+				id="ok-btn"
+				class="px-4 py-2 bg-green-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300"
+			>
+				OK
+			</button>
+		</div>
+	</div>
+</div>
+
+</div>
+
+
+
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+
+
+<!--Overlay Effect-->
+<div
+	class="fixed hidden inset-0 bg-gray-900 bg-opacity-70 overflow-y-auto h-full w-full"
+	id="del-att-modal">
+
+<!--modal DELETE athlete-->
+<div
+	class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white"
+>
+<button id="close_del-modal_data" class="float-left text-gray-500 focus:outline-none hover:text-gray-900">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+</button>
+
+	<div class="mt-3 text-center">
+		<div
+			class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-400"
+		>
+        <svg class="w-9 h-9" fill="none" stroke="#ffffff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+		</div>
+		<h2 class="text-lg pt-5 leading-5 font-bold text-gray-800">Удалить данного Атлета ?!?</h2>
+             <p id="id_del_id" class="py-1 font-family text-1xl text-gray-400">
+                (ID)
+            </p>
+            <p id="id_del_city" class="hidden py-3 font-family text-3xl text-gray-800">
+              (city)
+          </p>            
+        <!-- <form id="del_att_form" class="XXX"  method="POST" onSubmit="return submitcheck(this);"> -->
+             <form id="del_att_form" method="POST" onSubmit="return del_attByID();">
+		<div class="mt-0 px-0 py-0">
+			<h1 id="id_del_" class="p-5 leading-8 font-semibold text-3xl text-red-500">
+                #ID:
+            </h1>
+		</div>
+		<div class="items-center px-4 py-3">
+			<button
+				id="edit-del-ok-btn"
+				class="px-4 py-2 bg-green-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300">
+				ДА
+			</button>
+            <div class="vert_spacer">.</div>
+		</div>
+        </form>
+        <div class="items-center px-4 py-3">
+        <button id="edit-del-cancel-btn" class="modal-close px-4 py-2 bg-gray-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-300">ОТМЕНА</button>
+        </div>
+	</div>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+
+
+<!--Overlay Effect-->
+<div
+	class="fixed hidden inset-0 bg-gray-900 bg-opacity-70 overflow-y-auto h-full w-full"
+	id="yes-att-modalX">
+
+<!--modal YES VOTE athlete-->
+<div
+	class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white"
+>
+<button id="close_yes-modal_data" class="float-left text-gray-500 focus:outline-none hover:text-gray-900">
+  <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M6.633 10.5c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 00.322-1.672V3a.75.75 0 01.75-.75A2.25 2.25 0 0116.5 4.5c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 01-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 00-1.423-.23H5.904M14.25 9h2.25M5.904 18.75c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 01-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 10.203 4.167 9.75 5 9.75h1.053c.472 0 .745.556.5.96a8.958 8.958 0 00-1.302 4.665c0 1.194.232 2.333.654 3.375z"></path>
+  </svg>
+</button>
+
+	<div class="mt-3 text-center">
+		<div
+			class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-gray-400"
+		>
+        <!-- <svg class="w-9 h-9" fill="none" stroke="#ffffff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg> -->
+        <svg class="w-14 h-14" fill="none" stroke="#ffffff" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6.633 10.5c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 00.322-1.672V3a.75.75 0 01.75-.75A2.25 2.25 0 0116.5 4.5c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 01-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 00-1.423-.23H5.904M14.25 9h2.25M5.904 18.75c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 01-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 10.203 4.167 9.75 5 9.75h1.053c.472 0 .745.556.5.96a8.958 8.958 0 00-1.302 4.665c0 1.194.232 2.333.654 3.375z"></path>
+        </svg>
+		</div>
+		<h2 class="text-lg pt-5 leading-5 font-bold text-gray-800">Засчита́ть выполнение текущего упражнения <u>УСПЕШНЫМ</u> ?</h2>
+             <p id="id_yes_id" class="py-3 text-xl  text-gray-900">
+                (ID)
+            </p>
+             <form id="yes_att_form" method="POST" onSubmit="return jSET_yes();">
+		<div class="mt-0 px-0 py-0">
+			<h1 id="id_yes_" class="p-5 leading-8 font-semibold text-3xl text-gray-400">
+                #ID:
+            </h1>
+		</div>
+		<div class="items-center px-4 py-3">
+			<button
+				id="edit-yes-ok-btn"
+				class="px-4 py-2 bg-green-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300">
+				ДА
+			</button>
+            <div class="vert_spacer">.</div>
+		</div>
+        </form>
+        <div class="items-center px-4 py-3">
+        <button id="edit-yes-cancel-btn" onclick="location.reload();" class="modal-close px-4 py-2 bg-gray-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-300">ОТМЕНА</button>
+        </div>
+	</div>
+</div>
+
+</div>
+
+
+
+
+
+
+
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+
+
+<!--Overlay Effect-->
+<div
+	class="fixed hidden inset-0 bg-gray-900 bg-opacity-70 overflow-y-auto h-full w-full"
+	id="not-att-modalX">
+
+<!--modal YES VOTE athlete-->
+<div
+	class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white"
+>
+<button id="close_not-modal_data" class="float-left text-gray-500 focus:outline-none hover:text-gray-900">
+  <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M6.633 10.5c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 00.322-1.672V3a.75.75 0 01.75-.75A2.25 2.25 0 0116.5 4.5c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 01-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 00-1.423-.23H5.904M14.25 9h2.25M5.904 18.75c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 01-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 10.203 4.167 9.75 5 9.75h1.053c.472 0 .745.556.5.96a8.958 8.958 0 00-1.302 4.665c0 1.194.232 2.333.654 3.375z"></path>
+  </svg>
+</button>
+
+	<div class="mt-3 text-center">
+		<div
+			class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-gray-400"
+		>
+        <!-- <svg class="w-9 h-9" fill="none" stroke="#ffffff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg> -->
+        <svg class="w-14 h-14" fill="#ed0000" stroke="#000000" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 15h2.25m8.024-9.75c.011.05.028.1.052.148.591 1.2.924 2.55.924 3.977a8.96 8.96 0 01-.999 4.125m.023-8.25c-.076-.365.183-.75.575-.75h.908c.889 0 1.713.518 1.972 1.368.339 1.11.521 2.287.521 3.507 0 1.553-.295 3.036-.831 4.398C20.613 14.547 19.833 15 19 15h-1.053c-.472 0-.745-.556-.5-.96a8.95 8.95 0 00.303-.54m.023-8.25H16.48a4.5 4.5 0 01-1.423-.23l-3.114-1.04a4.5 4.5 0 00-1.423-.23H6.504c-.618 0-1.217.247-1.605.729A11.95 11.95 0 002.25 12c0 .434.023.863.068 1.285C2.427 14.306 3.346 15 4.372 15h3.126c.618 0 .991.724.725 1.282A7.471 7.471 0 007.5 19.5a2.25 2.25 0 002.25 2.25.75.75 0 00.75-.75v-.633c0-.573.11-1.14.322-1.672.304-.76.93-1.33 1.653-1.715a9.04 9.04 0 002.86-2.4c.498-.634 1.226-1.08 2.032-1.08h.384"></path>
+        </svg>
+		</div>
+		<h2 class="text-lg pt-5 leading-5 font-bold text-gray-800">Засчита́ть как <u>НЕ УСПЕШНОЕ</u> текущее упражнение ?</h2>
+             <p id="id_not_id" class="py-3 text-xl  text-gray-900">
+                (ID)
+            </p>
+             <form id="not_att_form" method="POST" onSubmit="return jSET_not();">
+		<div class="mt-0 px-0 py-0">
+			<h1 id="id_not_" class="p-5 leading-8 font-semibold text-3xl text-gray-400">
+                #ID:
+            </h1>
+		</div>
+		<div class="items-center px-4 py-3">
+			<button
+				id="edit-not-ok-btn"
+				class="px-4 py-2 bg-green-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300">
+				ДА
+			</button>
+            <div class="vert_spacer">.</div>
+		</div>
+        </form>
+        <div class="items-center px-4 py-3">
+        <button id="edit-not-cancel-btn" onclick="location.reload();" class="modal-close px-4 py-2 bg-gray-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-300">ОТМЕНА</button>
+        </div>
+	</div>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+<!--modal reject/refuse app athlete-->
+<div
+	class="fixed hidden inset-0 bg-gray-900 bg-opacity-70 overflow-y-auto h-full w-full"
+	id="cancel-att-modal">
+
+<!--modal setOP athlete-->
+<div
+	class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white"
+>
+<button id="close_cancel-modal_data" class="float-left text-gray-500 focus:outline-none hover:text-gray-900">
+  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+</button>
+
+	<div class="mt-3 text-center">
+		<div
+			class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-yellow-500"
+		>
+    <svg class="w-9 h-9" fill="none" stroke="#ffffff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+		</div>
+		<h2 class="text-lg pt-5 leading-5 font-bold text-gray-800">Отказ от выполнения упражнения???</h2>
+             <p id="id_cancel_id" class="py-1 font-family text-1xl text-gray-400">
+                (ID)
+            </p>
+            <p id="id_cancel_city" class="hidden  py-3 font-family text-2xl text-gray-800">
+              (city)
+          </p>            
+        <!-- <form id="del_att_form" class="XXX"  method="POST" onSubmit="return submitcheck(this);"> -->
+             <form id="cancel_att_form" method="POST" onSubmit="return reject_appByID();">
+		<div class="mt-0 px-0 py-0">
+			<h1 id="id_cancel_" class="p-5 leading-8 font-semibold text-3xl text-yellow-700">
+                athlete name
+            </h1>
+		</div>
+		<div class="items-center px-4 py-3">
+      <!-- <button
+      id="edit-cancel-ok1-btn"
+      class="px-4 py-2 bg-green-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300">
+      Отказ от рывка?
+    </button>
+          <div class="vert_spacer">.</div>       -->
+			<button
+				id="edit-cancel-ok-btn"
+				class="px-4 py-2 bg-green-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300">
+				Отказ от упражнения?
+			</button>
+            <div class="vert_spacer">.</div>
+		</div>
+        </form>
+        <div class="items-center px-4 py-3">
+        <button id="edit-cancel-cancel-btn" class="modal-close px-4 py-2 bg-gray-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-300">ОТМЕНА</button>
+        </div>
+	</div>
+</div>
+
+</div>
+
+
+
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+
+
+
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+<!--modal setOP athlete-->
+<div
+	class="fixed hidden inset-0 bg-gray-900 bg-opacity-70 overflow-y-auto h-full w-full"
+	id="setop-att-modal_lic">
+
+<!--modal setOP athlete-->
+<div
+	class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white"
+>
+<button id="close_setop-modal_data" class="float-left text-gray-500 focus:outline-none hover:text-gray-900">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+</button>
+
+	<div class="mt-3 text-center">
+		<div
+			class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-yellow-500">
+      <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path></svg>
+		</div>
+		<h2 class="text-lg pt-5 leading-5 font-bold text-gray-800">ТРЕНИРОВАЧНАЯ функция (по запросу)</h2>
+             <!-- <p id="id_setop_id" class="py-1 font-family text-1xl text-gray-400">
+                (ID)
+            </p> -->
+            <p id="id_setop_city_" class=" py-3 font-family text-2xl text-gray-800">
+              закрыть окно...
+          </p>            
+        <!-- <form id="del_att_form" class="XXX"  method="POST" onSubmit="return submitcheck(this);"> -->
+             <form id="setop_att_form" method="POST" onSubmit="return setOP_attByID();">
+		<div class="mt-0 px-0 py-0">
+		</div>
+		<div class="items-center px-4 py-3">
+
+            <div class="vert_spacer">.</div>
+		</div>
+        </form>
+        <div class="items-center px-4 py-3">
+        <button id="edit-setop-cancel-btn" class="modal-close px-4 py-2 bg-gray-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-300">ЗАКРЫТЬ</button>
+        </div>
+	</div>
+</div>
+
+</div>
+
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+<!--modal setOP athlete-->
+<div
+	class="fixed hidden inset-0 bg-gray-900 bg-opacity-70 overflow-y-auto h-full w-full"
+	id="setop-att-modal">
+
+<!--modal setOP athlete-->
+<div
+	class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white"
+>
+<button id="close_setop-modal_data" class="float-left text-gray-500 focus:outline-none hover:text-gray-900">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+</button>
+
+	<div class="mt-3 text-center">
+		<div
+			class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-400"
+		>
+    <svg class="w-9 h-9" fill="none" stroke="#ffffff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+		</div>
+		<h2 class="text-lg pt-5 leading-5 font-bold text-gray-800">Вызвать атлета на помост?</h2>
+             <p id="id_setop_id" class="py-1 font-family text-1xl text-gray-400">
+                (ID)
+            </p>
+            <p id="id_setop_city" class="hidden py-3 font-family text-2xl text-gray-800">
+              (city)
+          </p>            
+        <!-- <form id="del_att_form" class="XXX"  method="POST" onSubmit="return submitcheck(this);"> -->
+             <form id="setop_att_form" method="POST" onSubmit="return setOP_attByID();">
+		<div class="mt-0 px-0 py-0">
+			<h1 id="id_setop_" class="p-5 leading-8 font-semibold text-3xl text-green-900">
+                athlete name
+            </h1>
+		</div>
+		<div class="items-center px-4 py-3">
+			<button
+				id="edit-setop-ok-btn"
+				class="px-4 py-2 bg-green-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300">
+				ДА
+			</button>
+            <div class="vert_spacer">.</div>
+		</div>
+        </form>
+        <div class="items-center px-4 py-3">
+        <button id="edit-setop-cancel-btn" class="modal-close px-4 py-2 bg-gray-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-300">ОТМЕНА</button>
+        </div>
+	</div>
+</div>
+
+</div>
+
+
+
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+
+
+
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+
+
+<!--Overlay Effect-->
+<div
+	class="fixed hidden inset-0 bg-gray-800 bg-opacity-70 overflow-y-auto h-full w-full"
+	id="edit-att-data-modal">
+
+<!--modal EDIT ALL data of athlete-->
+<div
+	class="relative top-20 mx-auto p-5 border w-10/12 shadow-lg rounded-md bg-white"
+>
+<button id="close_edit_data" class="float-right text-gray-500 focus:outline-none hover:text-gray-900">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+</button>
+	<div class="mt-3 text-center">
+		<!-- <div
+		class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-blue-100"
+		>
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+		</div> -->
+		<h2 class="text-lg pt-5 leading-5 font-bold text-gray-800">Редактировать @@@ Атлета</h2>
+        <!-- <form id="del_att_form" class="XXX"  method="POST" onSubmit="return submitcheck(this);"> -->
+		<div class="mt-2 px-2 py-2">
+			<!-- <h1 id="id_defsdl_" class="py-7 leading-8 font-semibold text-2xl text-red-500">
+                #ID: dfssdfdsfdsfdsf
+            </h1> -->
+
+
+		</div>
+        
+
+        
+
+
+
+        <!-- --- -->
+        <!-- <h3 class="mb-4 font-semibold text-gray-900 dark:text-white">Identification</h3> -->
+        <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+            <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                <div class="flex items-center pl-3">
+                    <input id="sex-edit-female" type="radio" value="0" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                    <label for="sex-edit-female" class="py-3 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">Ж </label>
+                </div>
+            </li>
+            <li class="w-full dark:border-gray-600">
+                <div class="flex items-center pl-3">
+                    <input id="sex-edit-male" type="radio" value="1" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                    <label for="sex-edit-male" class="py-3 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">М</label>
+                </div>
+            </li>
+        </ul>
+        <!-- --- -->
+
+
+
+<div class="mb-6">
+<div class="flex ">
+<span class="inline-flex items-center px-3 text-base text-gray-900 bg-gray-200 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+Фамилия
+</span>
+<input type="text" id="sname-att-edit-data" name="sname" class="rounded-none rounded-r-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Блинчиков">
+</div>
+<div class="vert_spacer">.</div>
+<div class="flex">
+<span class="inline-flex items-center px-3 text-base text-gray-900 bg-gray-200 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+  Имя&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>
+<input type="text" id="fname-att-edit-data" name="fname" class="rounded-none rounded-r-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Сергей">
+</div>
+</div>
+
+        <div class="flex">
+            <span class="inline-flex items-center px-3 text-lg text-gray-900 bg-gray-200 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+              вес
+            </span>
+            <input type="text" id="ow_ed-edit-data" name="ow" class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-lg border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="26">
+            <div class="vert_spacer">.</div>
+            <span class="inline-flex">
+            <select id="at-wcat-edit-data" name="wcat" class="bg-gray-50 px-3 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              <option selected>Весовая категория:</option>
+              <option value="US">67 kG</option>
+              <option value="CA">99+ kG</option>
+              <option value="FR">112 kG</option>
+              <option value="DE">402 kG</option>
+            </select>
+          </span>
+        </div>
+
+
+		<div class="mt-2 px-1 py-1">
+            <div class="mt-1 flex">
+                <div class="vert_spacer">.</div>
+                <span class="block w-6/12 px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
+                <select id="wcat_edit_data" name="wcat" class="bg-gray-50 px-3 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                  <option selected>Весовая категория:</option>
+                  <option value="US">United States</option>
+                  <option value="CA">Canada</option>
+                  <option value="FR">France</option>
+                  <option value="DE">Germany</option>
+                </select>
+              </span>
+              <div class="vert_spacer">.</div>
+              <span class="block w-6/12 px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
+              <select id="wcat_edit_data3" name="wcat" class="bg-gray-50 px-3 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option selected>Весовая категория:</option>
+                <option value="US">United States</option>
+                <option value="CA">Canada</option>
+                <option value="FR">France</option>
+                <option value="DE">Germany</option>
+              </select>
+            </span>              
+
+                <!-- <input placeholder="arthurmelo@example.app" type="email" class="block w-6/12 px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
+                <input placeholder="arthurmelo@example.app" type="email" class="block w-6/12 px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40"> -->
+            </div>
+		</div>        
+		<div class="items-center px-4 py-3">
+			<button
+				id="edit-att-data-save-btn"
+				class="px-4 py-2 bg-green-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300">
+				СОХРАНИТЬ
+			</button>
+            <div class="vert_spacer">.</div>
+		</div>
+        </form>
+        <div class="items-center px-4 py-3">
+        <button id="edit-att-data-cancel-btn" class="modal-close px-4 py-2 bg-gray-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-300">ОТМЕНА</button>
+        </div>
+	</div>
+</div>
+
+</div>
+
+
+
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+
+
+
+
+<script>
+
+function change_wcat_newatt() {
+  var x_poop = document.getElementById("wcate_").value;
+  console.warn('chge WCAT: '+ x_poop);
+  localStorage.setItem("flow_wc", x_poop);
+}
+
+// document.getElementById("myCheck").checked = true;
+// genderflow
+//
+
+function change_sex_newatt(at_pol) {
+  if(at_pol == 'male') {   
+  /////////////////////////////////////
+  var elements = document.getElementsByClassName("ats1");
+  var i;
+  for(i=0; i<elements.length; i++) {
+    elements[i].style.display = 'block';
+  }  
+  var elements4 = document.getElementsByClassName("ats0");
+  var i4;
+  for(i4=0; i4<elements4.length; i4++) {
+    elements4[i4].style.display = 'none';
+  }
+  // variableOF = localStorage.getItem("f_Timer");
+  // localStorage.removeItem("f_Timer");
+  // localStorage.setItem("f_Timer", "hidden");
+  localStorage.setItem("flow_sex", at_pol);
+  
+ /////////////////////////////////////
+    console.warn(' set AT SET to: ' + at_pol);
+} if(at_pol == "female") {   
+  /////////////////////////////////////
+  var elements2 = document.getElementsByClassName("ats1");
+  var i2;
+  for(i2=0; i2<elements2.length; i2++) {
+    elements2[i2].style.display = 'none';
+  }  
+  var elements = document.getElementsByClassName("ats0");
+  var i;
+  for(i=0; i<elements.length; i++) {
+    elements[i].style.display = 'block';
+  }
+ /////////////////////////////////////
+      localStorage.setItem("flow_sex", at_pol);
+      // localStorage.setItem("flow_wc", at_pol);
+      console.warn(' set AT SET to: ' + at_pol);
+}  
+
+//   console.warn(genderchb.checked);
+// let elem = document.querySelector('sex');
+let mc = document.getElementById("male").checked;
+let fc = document.getElementById("female").checked;
+//let flow_sex_value = document.getElementById("").value;
+
+
+// const fontSize = elem.style.fontSize
+// console.log(fontSize) // 2em
+
+}
+
+
+
+function change_tn_xXchX()
+    {
+    function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+        vars[key] = value;
+    });
+        return vars;
+    }
+    var atid = getUrlVars()["id"];
+    var app_weight = document.getElementById("id_wnow_").value;
+    //if (atid==undefined) { atid = 0}
+    //var atid = 666;
+    //var atw = document.getElementById("id_wnow_").value;
+    document.getElementById('edit_weight_att_form').action = "/att/editapp/"+atid+"/"+app_weight;
+}
+
+function setOP_attByID()
+    {
+    function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+        vars[key] = value;
+    });
+        return vars;
+    }
+    var vpid = getUrlVars()["id"];
+    document.getElementById('setop_att_form').action = "/att/setop/"+vpid;
+}
+
+
+
+function del_attByID()
+    {
+    function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+        vars[key] = value;
+    });
+        return vars;
+    }
+    var vpid = getUrlVars()["id"];
+    document.getElementById('del_att_form').action = "/att/del/"+vpid;
+}
+ 
+function reject_appByID()
+    {
+    function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+        vars[key] = value;
+    });
+        return vars;
+    }
+    var vpid = getUrlVars()["id"];
+    document.getElementById('cancel_att_form').action = "/att/rejectapp/"+vpid;
+}
+
+// ADD-NEW-ATT Grabs all the Elements by their IDs which we had given them        
+let modal_del = document.getElementById("del-att-modal");
+let del_att_btn = document.getElementById("editBtn_del");
+let del_att_btn_fe = document.getElementById("editBtne_del");
+let del_att_btn_j = document.getElementById("editBtnej_del");
+let rej_att_btn = document.getElementById("editBtn_cancel");
+let button_del_ok = document.getElementById("edit-del-ok-btn");
+let button_del_cancel = document.getElementById("edit-del-cancel-btn");
+
+
+
+let edit_window = document.getElementById("edit-att-modal");
+
+// let edit_data_att = document.getElementById("edit-att-data-modal");
+// change on flow editor modal view | standarted! moce!
+
+// OLD, simple edit
+// let edit_data_att = document.getElementById("edit-att-data-modal");
+// edit_data_att
+// let edit_data_att = document.getElementById("flow-editor-att-data-modal");
+let edit_data_att = document.getElementById("flow-editor-att-data-modal");
+
+
+// let setop_modal = document.getElementById("setop-att-modal");
+// not have licence for uses this function...
+let setop_modal = document.getElementById("setop-att-modal_lic");
+
+
+
+let edite_window = document.getElementById("flow-editor-att-data-modal");
+let reject_window = document.getElementById("cancel-att-modal");
+
+let edit_data_att_btn = document.getElementById("editBtn_edt");
+
+let edit_data_att_save_btn = document.getElementById("edit-att-data-save-btn");
+let edit_data_att_cancel_btn = document.getElementById("edit-att-data-cancel-btn");
+let edit_data_att_close_btn = document.getElementById("close_edit_data");
+let cncl_data_att_close_btn = document.getElementById("close_cancel-modal_data");
+
+
+let edit_modal_att_close_btn = document.getElementById("close_edit-modal_data");
+let add_modal_att_close_btn = document.getElementById("close_add-modal_data");
+let edit_del_att_close_btn = document.getElementById("close_del-modal_data");
+let edit_yes_att_close_btn = document.getElementById("close_yes-modal_data");
+
+
+let setop_att_close_btn = document.getElementById("close_setop-modal_data");
+let cancel_att_modal = document.getElementById("cancel-att-modal");
+
+let fl_closee_edit_att_close_btn = document.getElementById("closee_edit-modal_data");
+let fl_closee_edit_att_close_btn2 = document.getElementById("closee_edit-modal_data2");
+let edit_setoop_cancel_btn = document.getElementById("edit-setop-cancel-btn");
+let edit_cancel_cancel_btn = document.getElementById("edit-cancel-cancel-btn");
+
+
+
+edit_data_att_btn.onclick = function() {
+    // edit_data_att.style.display = "block";
+    edit_data_att.style.display = "block";
+    edit_window.style.display = "none";
+    }
+edit_data_att_save_btn.onclick = function() {
+    edit_data_att.style.display = "none";
+    edit_window.style.display = "block";
+
+  
+
+
+
+    window.location.reload();
+    
+    //!!!!!!!!
+    // SHOW ALERT box & Hide!
+    }
+edit_data_att_cancel_btn.onclick = function() {
+    edit_data_att.style.display = "none";
+    edit_window.style.display = "block";
+    window.location.reload();
+    }
+edit_data_att_close_btn.onclick = function() {
+    edit_data_att.style.display = "none";
+    edit_window.style.display = "block";
+    window.location.reload();
+    }
+cncl_data_att_close_btn.onclick = function() {
+    cancel_att_modal.style.display = "none";
+    edit_window.style.display = "block";
+    window.location.reload();
+    }    
+edit_modal_att_close_btn.onclick = function() {
+    edit_window.style.display = "none";
+    add_modal_att_close_btn.style.display = "none";
+    window.location.reload();
+    }
+
+add_modal_att_close_btn.onclick = function() {
+    edit_window.style.display = "none";
+    add_modal_att_close_btn.style.display = "none";
+    edit_data_att.style.display = "none";
+    window.location.reload();
+}
+
+
+setop_att_close_btn.onclick = function() {
+    edit_window.style.display = "none";
+    setop_att_close_btn.style.display = "none";
+    setop_modal.style.display = "none";
+    window.location.reload();
+}
+fl_closee_edit_att_close_btn.onclick = function() {
+    edit_window.style.display = "none";
+    setop_att_close_btn.style.display = "none";
+    setop_modal.style.display = "none";
+    window.location.reload();
+}
+fl_closee_edit_att_close_btn2.onclick = function() {
+    edit_window.style.display = "none";
+    setop_att_close_btn.style.display = "none";
+    setop_modal.style.display = "none";
+    window.location.reload();
+}
+edit_setoop_cancel_btn.onclick = function() {
+    window.location.reload();
+}
+
+edit_cancel_cancel_btn.onclick = function() {
+    window.location.reload();
+}
+
+
+edit_del_att_close_btn.onclick = function() {
+    modal_del.style.display = "none";
+    edit_window.style.display = "block";
+    window.location.reload();
+    }       
+edit_yes_att_close_btn.onclick = function() {
+    modal_.style.display = "none";
+    edit_window.style.display = "block";
+    window.location.reload();
+    }
+
+// We want the modal to open when the Delete button is clicked
+del_att_btn.onclick = function() {
+    modal_del.style.display = "block";
+    edit_window.style.display = "none";
+}
+del_att_btn_fe.onclick = function() {
+    modal_del.style.display = "block";
+    edit_window.style.display = "none";
+}
+del_att_btn_j.onclick = function() {
+    modal_del.style.display = "block";
+    edit_window.style.display = "none";
+}
+// We want the modal to open when the Reject/Refuse button is clicked
+rej_att_btn.onclick = function() {
+    reject_window.style.display = "block";
+    edit_window.style.display = "none";
+    }
+        
+// // We want the modal to close when the OK button is clicked
+// button_del_ok.onclick = function() {
+//     modal_del.style.display = "none";
+//     // SHOW ALERT box & Hide!
+//     }
+button_del_cancel.onclick = function() {
+    modal_del.style.display = "none";
+    // edit_window.style.display = "block";
+    // ВАЖНАЯ ХУЕТАЦИЯ ))
+
+    }    
+// The modal will close when the user clicks anywhere outside the modal
+window.onclick = function(event) {
+    if (event.target == modal_del) {
+        window.location.reload();
+        modal_del.style.display = "none";
+        edit_data_att.style.display = "none";
+        edit_window.style.display = "none";
+        window.location.reload();
+        
+        }
+    }
+window.onclick = function(event) {
+    if (event.target == edit_window) {
+        // modal_del.style.display = "none";
+        // edit_data_att.style.display = "none";
+        // edit_window.style.display = "none";
+        // window.location.reload();
+        // console.warn('== XYZ');
+        
+        }
+    }
+
+
+    
+
+
+
+//////////////////////////////////
+document.onkeydown = function (event) {
+    event = event || window.event;
+    if (event.keyCode === 27) {
+        let modal_edit2close = document.getElementById("edit-att-modal");
+        modal_edit2close.style.display = "none";
+
+        modal_del.style.display = "none";
+        edit_data_att.style.display = "none";
+        edit_window.style.display = "none";
+
+        console.log(':ECS key DOWN');
+    }
+    if (event.keyCode === 32) {
+        console.log(':SPACE key DOWN');
+    }
+    if (event.keyCode === 13) {
+        console.log(':ENTER key DOWN');
+    }    
+    }
+</script>
+
+
+
+
+
+<script>
+
+    const box = document.getElementById('p2kg_hint');
+    const btn = document.getElementById('edit_dec-btn');
+    
+    btn.addEventListener('click', function handleClick() {
+      // localStorage.removeItem('need2refreshFlow');
+      // console.log('n2r: 1 -> refresh!');
+
+
+      // chkWeight();
+
+      if (box.style.visibility === 'hidden') {
+        //box.style.visibility = 'visible';
+    
+        // btn.textContent = 'Hide div';
+      } else {
+        //box.style.visibility = 'hidden';
+    
+        // btn.textContent = 'Show div';
+      }
+    });
+    
+
+
+  //   function getUrlVars() {
+  //       var vars = {};
+  //       var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+  //       vars[key] = value;
+  //   });
+  //       return vars;
+  //   }
+    
+    
+  //   // var wcnt = 0;
+  //   var vatid = getUrlVars()["id"];
+  //   console.warn(vatid);
+  //   var wcnt = 0;
+  //   let p20var = localStorage.getItem("p20kg");
+  //   let p20at_id = localStorage.getItem("p20atid");
+  // function chkWeight() {
+
+  //   if (p20var>=20) {
+  //     localStorage.removeItem("p20kg");
+  //       localStorage.addItem("p20kg", wcnt);
+  //       localStorage.addItem("p20atid", vatid);
+  //       // localStorage.removeItem("a");
+  //       // localStorage.getItem("a");
+  //         console.log('P 20 KG!!!');
+  //         document.getElementById('id_wnow_').disabled = true;
+  //         document.getElementById('edit_dec-btn').disabled = true;
+  //         document.getElementById('edit_inc-btn').disabled = true;
+  //         document.getElementById('edit_att_ok_btn').hidden = true;
+  //         document.getElementById('edit_att_ok_btn').visibility = false;
+  //         document.getElementById('reappdiv').visibility = false;
+  //         document.getElementById('reappdiv').hidden = true;
+  //         document.getElementById('p2kg_hint').visibility = true;
+  //         document.getElementById('p2kg_hint').hidden = false;
+  //         document.getElementById('p2kg_hint').classList.remove('hidden');      
+      
+  //   }
+  //   // localStorage.removeItem("a");
+  //   // localStorage.getItem("a");
+
+
+  //     val_weight = document.getElementById('id_wnow_').value;
+  //     wcnt = ++wcnt;
+  //     localStorage.removeItem("p20kg");
+  //     localStorage.removeItem("p20atid");
+  //     localStorage.addItem("p20kg", wcnt);
+  //     localStorage.addItem("p20atid", vatid);
+  //     // tmp_weight = document.getElementById('id_wnow_');
+  //     //val_weight = tmp_weight.value;
+  //     if (wcnt>=20) {
+  //       localStorage.removeItem("p20kg");
+  //       localStorage.removeItem("p20atid");
+  //       localStorage.addItem("p20kg", wcnt);
+  //       localStorage.addItem("p20atid", vatid);
+  //       // localStorage.removeItem("a");
+  //       // localStorage.getItem("a");
+  //         console.log('P 20 KG!!!');
+  //         document.getElementById('id_wnow_').disabled = true;
+  //         document.getElementById('edit_dec-btn').disabled = true;
+  //         document.getElementById('edit_inc-btn').disabled = true;
+  //         document.getElementById('edit_att_ok_btn').hidden = true;
+  //         document.getElementById('edit_att_ok_btn').visibility = false;
+  //         document.getElementById('reappdiv').visibility = false;
+  //         document.getElementById('reappdiv').hidden = true;
+  //         document.getElementById('p2kg_hint').visibility = true;
+  //         document.getElementById('p2kg_hint').hidden = false;
+  //         document.getElementById('p2kg_hint').classList.remove('hidden');
+  //     }
+  //     if (wcnt>20) { 
+  //       //  document.getElementById('edit_dec-btn').disabled = false;
+  //       //  document.getElementById('edit_inc-btn').disabled = false;
+  //       //  document.getElementById('edit_inc-btn').visibility = true;
+  //     }      
+      
+  //     console.log(' @ID= ' +p20at_id + ' @p20VAR= ' + p20var );
+  //   //   let  = localStorage.getItem("p20kg");
+  //   // let p20at_id = localStorage.getItem("p20atid");
+  //     console.log(val_weight + ' @DEC ' + wcnt );
+      
+  // }
+
+
+    </script>
+
+
+
+
+<script>
+
+    function save_fe_opt_s1(paramz) {
+      console.warn(paramz);
+      if(paramz=='1') {
+        // post_s1yes();
+        // post_s1not();
+        console.warn(paramz);
+        document.getElementById("s1id_caption").innerHTML = 'Да ⚪';
+        document.getElementById("s1id_caption").style.textShadow = '1px 1px 1px #000000';
+        document.getElementById("s1id_caption").style.color = '#ffffff';
+        document.getElementById("s2_weight").value = Number(document.getElementById("s1_weight").value)+1;
+        // document.getElementById("s1id_caption").innerHTML = '---';
+        // document.getElementById("s1id_caption").style.textShadow = '1px 1px 1px #000000';
+        // document.getElementById("s1id_caption").style.color = '#bebebe';  
+
+      }
+      if(paramz=='0') {
+        console.warn(paramz);
+        document.getElementById("s1id_caption").innerHTML = 'Нет 🔴';
+        document.getElementById("s1id_caption").style.textShadow = '1px 1px 1px #ffffff';
+        document.getElementById("s1id_caption").style.color = '#d50007';
+        document.getElementById("s2_weight").value = document.getElementById("s1_weight").value;
+      }
+      if(paramz=='-1') {
+        console.warn(paramz);
+        document.getElementById("s1id_caption").innerHTML = 'Отказ 🟠';
+        document.getElementById("s1id_caption").style.textShadow = '1px 1px 1px #000000';
+        document.getElementById("s1id_caption").style.color = '#e47e18';      
+      }    
+      if(paramz=='-2') {
+        console.warn(paramz);
+        document.getElementById("s1id_caption").innerHTML = '---';
+        document.getElementById("s1id_caption").style.textShadow = '1px 1px 1px #000000';
+        document.getElementById("s1id_caption").style.color = '#bebebe';      
+      }
+   }
+  
+   function save_fe_opt_s2(paramz) {
+      console.warn(paramz);
+      if(paramz=='1') {
+        console.warn(paramz);
+        document.getElementById("s2id_caption").innerHTML = 'Да ⚪';
+        document.getElementById("s2id_caption").style.textShadow = '1px 1px 1px #000000';
+        document.getElementById("s2id_caption").style.color = '#ffffff';
+        // document.getElementById("s3_weight").value = "88";
+        document.getElementById("s3_weight").value = Number(document.getElementById("s2_weight").value)+1;
+      }
+      if(paramz=='0') {
+        console.warn(paramz);
+        document.getElementById("s2id_caption").innerHTML = 'Нет 🔴';
+        document.getElementById("s2id_caption").style.textShadow = '1px 1px 1px #000000';
+        document.getElementById("s2id_caption").style.color = '#d50007';
+        // document.getElementById("s3_weight").value = "99";
+        document.getElementById("s3_weight").value = document.getElementById("s2_weight").value;
+      }
+      if(paramz=='-1') {
+        console.warn(paramz);
+        document.getElementById("s2id_caption").innerHTML = 'Отказ 🟠';
+        document.getElementById("s2id_caption").style.textShadow = '1px 1px 1px #000000';
+        document.getElementById("s2id_caption").style.color = '#e47e18';      
+      }    
+      if(paramz=='-2') {
+        console.warn(paramz);
+        document.getElementById("s2id_caption").innerHTML = '---';
+        document.getElementById("s2id_caption").style.textShadow = '1px 1px 1px #000000';
+        document.getElementById("s2id_caption").style.color = '#bebebe';      
+      }
+   }
+  
+   function save_fe_opt_s3(paramz) {
+      console.warn(paramz);
+      if(paramz=='1') {
+        console.warn(paramz);
+        document.getElementById("s3id_caption").innerHTML = 'Да ⚪';
+        document.getElementById("s3id_caption").style.textShadow = '1px 1px 1px #000000';
+        document.getElementById("s3id_caption").style.color = '#ffffff';
+      }
+      if(paramz=='0') {
+        console.warn(paramz);
+        document.getElementById("s3id_caption").innerHTML = 'Нет 🔴';
+        document.getElementById("s3id_caption").style.textShadow = '1px 1px 1px #000000';
+        document.getElementById("s3id_caption").style.color = '#d50007';
+      }
+      if(paramz=='-1') {
+        console.warn(paramz);
+        document.getElementById("s3id_caption").innerHTML = 'Отказ 🟠';
+        document.getElementById("s3id_caption").style.textShadow = '1px 1px 1px #000000';
+        document.getElementById("s3id_caption").style.color = '#e47e18';      
+      }    
+      if(paramz=='-2') {
+        console.warn(paramz);
+        document.getElementById("s3id_caption").innerHTML = '---';
+        document.getElementById("s3id_caption").style.textShadow = '1px 1px 1px #000000';
+        document.getElementById("s3id_caption").style.color = '#bebebe';      
+      }
+   }
+  
+   function save_fe_opt_cj1(paramz) {
+      console.warn(paramz);
+      if(paramz=='1') {
+        console.warn(paramz);
+        document.getElementById("cj1id_caption").innerHTML = 'Да ⚪';
+        document.getElementById("cj1id_caption").style.textShadow = '1px 1px 1px #000000';
+        document.getElementById("cj1id_caption").style.color = '#ffffff';
+        document.getElementById("j2_weight").value = Number(document.getElementById("j1_weight").value)+1;
+      }
+      if(paramz=='0') {
+        console.warn(paramz);
+        document.getElementById("cj1id_caption").innerHTML = 'Нет 🔴';
+        document.getElementById("cj1id_caption").style.textShadow = '1px 1px 1px #000000';
+        document.getElementById("cj1id_caption").style.color = '#d50007';
+        document.getElementById("j2_weight").value = document.getElementById("j1_weight").value;
+      }
+      if(paramz=='-1') {
+        console.warn(paramz);
+        document.getElementById("cj1id_caption").innerHTML = 'Отказ 🟠';
+        document.getElementById("cj1id_caption").style.textShadow = '1px 1px 1px #000000';
+        document.getElementById("cj1id_caption").style.color = '#e47e18';      
+      }    
+      if(paramz=='-2') {
+        console.warn(paramz);
+        document.getElementById("cj1id_caption").innerHTML = '---';
+        document.getElementById("cj1id_caption").style.textShadow = '1px 1px 1px #000000';
+        document.getElementById("cj1id_caption").style.color = '#bebebe';      
+      }    
+  
+   }
+   function save_fe_opt_cj2(paramz) {
+      console.warn(paramz);
+      if(paramz=='1') {
+        console.warn(paramz);
+        document.getElementById("cj2id_caption").innerHTML = 'Да ⚪';
+        document.getElementById("cj2id_caption").style.textShadow = '1px 1px 1px #000000';
+        document.getElementById("cj2id_caption").style.color = '#ffffff';
+        document.getElementById("j3_weight").value = Number(document.getElementById("j2_weight").value)+1;
+      }
+      if(paramz=='0') {
+        console.warn(paramz);
+        document.getElementById("cj2id_caption").innerHTML = 'Нет 🔴';
+        document.getElementById("cj2id_caption").style.textShadow = '1px 1px 1px #000000';
+        document.getElementById("cj2id_caption").style.color = '#d50007';
+        document.getElementById("j3_weight").value = document.getElementById("j2_weight").value;
+      }
+      if(paramz=='-1') {
+        console.warn(paramz);
+        document.getElementById("cj2id_caption").innerHTML = 'Отказ 🟠';
+        document.getElementById("cj2id_caption").style.textShadow = '1px 1px 1px #000000';
+        document.getElementById("cj2id_caption").style.color = '#e47e18';      
+      }    
+      if(paramz=='-2') {
+        console.warn(paramz);
+        document.getElementById("cj2id_caption").innerHTML = '---';
+        document.getElementById("cj2id_caption").style.textShadow = '1px 1px 1px #000000';
+        document.getElementById("cj2id_caption").style.color = '#bebebe';      
+      }        
+  
+   }
+   function save_fe_opt_cj3(paramz) {
+      console.warn(paramz);
+  
+      if(paramz=='1') {
+        console.warn(paramz);
+        document.getElementById("cj3id_caption").innerHTML = 'Да ⚪';
+        document.getElementById("cj3id_caption").style.textShadow = '1px 1px 1px #000000';
+        document.getElementById("cj3id_caption").style.color = '#ffffff';
+      }
+      if(paramz=='0') {
+        console.warn(paramz);
+        document.getElementById("cj3id_caption").innerHTML = 'Нет 🔴';
+        document.getElementById("cj3id_caption").style.textShadow = '1px 1px 1px #000000';
+        document.getElementById("cj3id_caption").style.color = '#d50007';
+      }
+      if(paramz=='-1') {
+        console.warn(paramz);
+        document.getElementById("cj3id_caption").innerHTML = 'Отказ 🟠';
+        document.getElementById("cj3id_caption").style.textShadow = '1px 1px 1px #000000';
+        document.getElementById("cj3id_caption").style.color = '#e47e18';      
+      }    
+      if(paramz=='-2') {
+        console.warn(paramz); 
+        document.getElementById("cj3id_caption").innerHTML = '---';
+        document.getElementById("cj3id_caption").style.textShadow = '1px 1px 1px #000000';
+        document.getElementById("cj3id_caption").style.color = '#bebebe';      
+      }        
+  
+  
+   }
+  
+  
+
+
+</script>
+
+<script>
+
+// Get the input field
+var input = document.getElementById("id_fe_es_edit_");
+var input2 = document.getElementById("id_fe_ef_edit_");
+
+var input4 = document.getElementById("ides_edit_"); 
+var input3 = document.getElementById("idef_edit_"); 
+
+// Get the input field AT weight & is_GET?
+
+// var s1w = document.getElementById("s1_weight");
+// var s2w = document.getElementById("s2_weight");
+// var s3w = document.getElementById("s3_weight");
+// var j1w = document.getElementById("j1_weight");
+// var j2w = document.getElementById("j2_weight");
+// var j3w = document.getElementById("j3_weight");
+
+
+
+
+
+//  document.getElementById("s1_weight");
+// var s2w = document.getElementById("s2_weight");
+// var s3w = document.getElementById("s3_weight");
+// var j1w = document.getElementById("j1_weight");
+// var j2w = document.getElementById("j2_weight");
+// var j3w = document.getElementById("j3_weight");
+
+
+input4.addEventListener("keypress", function(event) {
+  // If the user presses the "Enter" key on the keyboard
+  if (event.key === "Enter") {
+    // Cancel the default action, if needed
+    // SNAME
+    event.preventDefault();
+    if (input4.value != '' && input4.value != null && input4.value != 0 && input4.value != undefined) {
+      console.warn('input4.value!!!!!!!!!' + input4.value);
+      // zalupka
+      function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+        vars[key] = value;
+    });
+        return vars;
+    }
+      var atidz = getUrlVars()["id"];
+      postfName(input4.value,atidz);
+    }
+
+
+    //post_s3
+
+    // ????? Хуй Пойми че по чем бля тут... %)
+    // input4.value;
+
+
+    // Trigger the button element with a click
+    // document.getElementById("id_fe_es_edit_").click();
+    var tmp = document.createElement("input");
+    document.body.appendChild(tmp);
+    tmp.focus();
+    document.body.removeChild(tmp);    
+  }
+});
+
+
+
+input3.addEventListener("keypress", function(event) {
+  // If the user presses the "Enter" key on the keyboard
+  if (event.key === "Enter") {
+    // Cancel the default action, if needed
+    // FNAME
+    if (input3.value != '' && input3.value != null && input3.value != 0 && input3.value != undefined) {    
+    event.preventDefault();
+    console.warn('input3.value!!!!!!!!!' + input3.value);
+      // zalupka
+      function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+        vars[key] = value;
+    });
+        return vars;
+    }
+      var atidz = getUrlVars()["id"];
+      postsName(input3.value,atidz);
+    // Trigger the button element with a click
+    // document.getElementById("id_fe_es_edit_").click();
+    var tmp = document.createElement("input");
+    document.body.appendChild(tmp);
+    tmp.focus();
+    document.body.removeChild(tmp);    
+  }
+  }
+});
+
+
+
+
+var bdayz = document.getElementById("yearze");
+
+bdayz.addEventListener("blur", function(event) {
+    // event.preventDefault();
+    console.warn('bdayz.value!!!!!!!!!' + bdayz.value);
+      // zalupka
+      
+      // ????????????????
+      function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+        vars[key] = value;
+    });
+        return vars;
+    }
+      var atidz = getUrlVars()["id"];
+      post_bday(bdayz.value,atidz);
+    // Trigger the button element with a click
+    // document.getElementById("id_fe_es_edit_").click();
+    var tmp = document.createElement("input");
+    document.body.appendChild(tmp);
+    tmp.focus();
+    document.body.removeChild(tmp);    
+});
+
+
+bdayz.addEventListener("click", function(event) {
+    // event.preventDefault();
+    console.warn('bdayz.value!!!!!!!!!' + bdayz.value);
+      // zalupka
+      
+      // ????????????????
+      function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+        vars[key] = value;
+    });
+        return vars;
+    }
+      var atidz = getUrlVars()["id"];
+      post_bday(bdayz.value,atidz);
+    // Trigger the button element with a click
+    // document.getElementById("id_fe_es_edit_").click();
+    var tmp = document.createElement("input");
+    document.body.appendChild(tmp);
+    tmp.focus();
+    document.body.removeChild(tmp);    
+});
+
+
+
+bdayz.addEventListener("change", function(event) {
+    // event.preventDefault();
+    console.warn('bdayz.value!!!!!!!!!' + bdayz.value);
+      // zalupka
+      
+      // ????????????????
+      function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+        vars[key] = value;
+    });
+        return vars;
+    }
+      var atidz = getUrlVars()["id"];
+      post_bday(bdayz.value,atidz);
+    // Trigger the button element with a click
+    // document.getElementById("id_fe_es_edit_").click();
+    var tmp = document.createElement("input");
+    document.body.appendChild(tmp);
+    tmp.focus();
+    document.body.removeChild(tmp);    
+});
+
+
+var sexfemale = document.getElementById("female_fe");
+sexfemale.addEventListener("click", function(event) {
+    // event.preventDefault();
+    console.warn('sexFEmale.value!!!!!!!!!' + sexfemale.value);
+      // zalupka
+      // ????????????????
+      function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+        vars[key] = value;
+    });
+        return vars;
+    }
+      var atidz = getUrlVars()["id"];
+      post_sex(sexfemale.value,atidz);
+    // Trigger the button element with a click
+    // document.getElementById("id_fe_es_edit_").click();
+    var tmp = document.createElement("input");
+    document.body.appendChild(tmp);
+    tmp.focus();
+    document.body.removeChild(tmp);    
+});
+
+
+var sexmale = document.getElementById("male_fe");
+sexmale.addEventListener("click", function(event) {
+    // event.preventDefault();
+    console.warn('sexmale.value!!!!!!!!!' + sexmale.value);
+      // zalupka
+      // ????????????????
+      function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+        vars[key] = value;
+    });
+        return vars;
+    }
+      var atidz = getUrlVars()["id"];
+      post_sex(sexmale.value,atidz);
+    // Trigger the button element with a click
+    // document.getElementById("id_fe_es_edit_").click();
+    var tmp = document.createElement("input");
+    document.body.appendChild(tmp);
+    tmp.focus();
+    document.body.removeChild(tmp);    
+});
+
+
+
+var at_ow = document.getElementById("ow_fe");
+at_ow.addEventListener("keypress", function(event) {
+  // If the user presses the "Enter" key on the keyboard
+  if (event.key === "Enter") {
+    // Cancel the default action, if needed
+    // FNAME
+    if (at_ow.value != '' && at_ow.value != null && at_ow.value != 0 && at_ow.value != undefined) {    
+    event.preventDefault();
+    console.warn('at_ow.value!!!!!!!!!' + at_ow.value);
+      // zalupka
+      function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+        vars[key] = value;
+    });
+        return vars;
+    }
+      var atidz = getUrlVars()["id"];
+      post_ow(at_ow.value,atidz);
+    // Trigger the button element with a click
+    // document.getElementById("id_fe_es_edit_").click();
+    var tmp = document.createElement("input");
+    document.body.appendChild(tmp);
+    tmp.focus();
+    document.body.removeChild(tmp);    
+  }
+  }
+});
+
+
+var at_cp = document.getElementById("placesz2");
+at_cp.addEventListener("keypress", function(event) {
+  // If the user presses the "Enter" key on the keyboard
+  if (event.key === "Enter") {
+    // Cancel the default action, if needed
+    // FNAME
+    if (at_cp.value != '' && at_cp.value != null && at_cp.value != 0 && at_cp.value != undefined) {    
+    event.preventDefault();
+    console.warn('at_cp.value!!!!!!!!!' + at_cp.value);
+      // zalupka
+      function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+        vars[key] = value;
+    });
+        return vars;
+    }
+      var atidz = getUrlVars()["id"];
+      post_cp(at_cp.value,atidz);
+    // Trigger the button element with a click
+    // document.getElementById("id_fe_es_edit_").click();
+    var tmp = document.createElement("input");
+    document.body.appendChild(tmp);
+    tmp.focus();
+    document.body.removeChild(tmp);    
+  }
+  }
+});
+
+
+var dt_wcat = document.getElementById("wcate");
+dt_wcat.addEventListener("change", function(event) {
+    console.warn('WCAT WAS CHANGES!');
+    //post_countryz();
+    function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+        vars[key] = value;
+    });
+        return vars;
+    }
+      var atidz = getUrlVars()["id"];
+      console.warn(dt_wcat.value + ' $$$$$$$$$<<<');
+      post_wcat(dt_wcat.value,atidz);    
+
+    var tmp = document.createElement("input");
+    document.body.appendChild(tmp);
+    tmp.focus();
+    document.body.removeChild(tmp);    
+});
+
+
+//post_countryz
+var dt_cntryz = document.getElementById("countriese");
+
+
+dt_cntryz.addEventListener("change", function(event) {
+    console.warn('COUNTRES CHNGES!!!!');
+    //post_countryz();
+    function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+        vars[key] = value;
+    });
+        return vars;
+    }
+      var atidz = getUrlVars()["id"];
+      post_countryz(dt_cntryz.value,atidz);    
+    var tmp = document.createElement("input");
+    document.body.appendChild(tmp);
+    tmp.focus();
+    document.body.removeChild(tmp);    
+});
+
+// snatch
+var at_s1yes = document.getElementById("option-1");
+var at_s1not = document.getElementById("option-2");
+var at_s1rej = document.getElementById("option-3");
+var at_s1can = document.getElementById("option-4");
+var at_s2yes = document.getElementById("option-5");
+var at_s2not = document.getElementById("option-6");
+var at_s2rej = document.getElementById("option-7");
+var at_s2can = document.getElementById("option-8");
+var at_s3yes = document.getElementById("option-9");
+var at_s3not = document.getElementById("option-10");
+var at_s3rej = document.getElementById("option-11");
+var at_s3can = document.getElementById("option-12");
+// jerk
+var at_j1yes = document.getElementById("option-13");
+var at_j1not = document.getElementById("option-14");
+var at_j1rej = document.getElementById("option-15");
+var at_j1can = document.getElementById("option-16");
+var at_j2yes = document.getElementById("option-17");
+var at_j2not = document.getElementById("option-18");
+var at_j2rej = document.getElementById("option-19");
+var at_j2can = document.getElementById("option-20");
+var at_j3yes = document.getElementById("option-21");
+var at_j3not = document.getElementById("option-22");
+var at_j3rej = document.getElementById("option-23");
+var at_j3can = document.getElementById("option-24");
+
+      function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+        vars[key] = value;
+    });
+        return vars;
+    }
+
+
+
+
+at_s1not.addEventListener("click", function(event) {
+    // event.preventDefault();
+    console.warn('at_s1not.value!!!!!!!!!' + at_s1not.value);
+      // zalupka
+    //   function getUrlVars() {
+    //     var vars = {};
+    //     var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+    //     vars[key] = value;
+    // });
+    //     return vars;
+    // }
+      var atidz = getUrlVars()["id"];
+      post_s1not(0,atidz);
+    var tmp = document.createElement("input");
+    document.body.appendChild(tmp);
+    tmp.focus();
+    document.body.removeChild(tmp);    
+});
+
+at_s1yes.addEventListener("click", function(event) {
+    // event.preventDefault();
+    console.warn('at_s1yes.value!!!!!!!!!' + at_s1yes.value);
+      // zalupka
+      function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+        vars[key] = value;
+    });
+        return vars;
+    }
+      var atidz = getUrlVars()["id"];
+      post_s1yes(1,atidz);
+    var tmp = document.createElement("input");
+    document.body.appendChild(tmp);
+    tmp.focus();
+    document.body.removeChild(tmp);    
+});
+
+
+
+at_s1rej.addEventListener("click", function(event) {
+    console.warn('at_s1rej.value!!!!!!!!!' + at_s1rej.value);
+      var atidz = getUrlVars()["id"];
+      post_s1rej(-1,atidz);   
+});
+at_s1can.addEventListener("click", function(event) {
+    console.warn('at_s1can.value!!!!!!!!!' + at_s1can.value);
+      var atidz = getUrlVars()["id"];
+      post_s1can(1,atidz);   
+});
+
+
+
+at_s2yes.addEventListener("click", function(event) {
+    console.warn('at_s2yes.value!!!!!!!!!' + at_s2yes.value);
+      var atidz = getUrlVars()["id"];
+      post_s2yes(1,atidz);   
+});
+at_s2not.addEventListener("click", function(event) {
+      console.warn('at_s2not.value!!!!!!!!!' + at_s2not.value);
+      var atidz = getUrlVars()["id"];
+      post_s2not(0,atidz);   
+});
+at_s2rej.addEventListener("click", function(event) {
+    console.warn('at_s2rej.value!!!!!!!!!' + at_s2rej.value);
+      var atidz = getUrlVars()["id"];
+      post_s2rej(-1,atidz);   
+});
+at_s2can.addEventListener("click", function(event) {
+    console.warn('at_s2can.value!!!!!!!!!' + at_s2can.value);
+      var atidz = getUrlVars()["id"];
+      post_s2can(1,atidz);   
+});
+
+at_s3yes.addEventListener("click", function(event) {
+    console.warn('at_s3yes.value!!!!!!!!!' + at_s3yes.value);
+      var atidz = getUrlVars()["id"];
+      post_s3yes(1,atidz);   
+});
+at_s3not.addEventListener("click", function(event) {
+      console.warn('at_s3not.value!!!!!!!!!' + at_s3not.value);
+      var atidz = getUrlVars()["id"];
+      post_s3not(0,atidz);   
+});
+at_s3rej.addEventListener("click", function(event) {
+    console.warn('at_s3rej.value!!!!!!!!!' + at_s1rej.value);
+      var atidz = getUrlVars()["id"];
+      post_s3rej(-1,atidz);   
+});
+at_s3can.addEventListener("click", function(event) {
+    console.warn('at_s3can.value!!!!!!!!!' + at_s3can.value);
+      var atidz = getUrlVars()["id"];
+      post_s3can(1,atidz);   
+});
+
+
+
+
+at_s2yes.addEventListener("click", function(event) {
+    console.warn('at_s2yes.value!!!!!!!!!' + at_s2yes.value);
+      var atidz = getUrlVars()["id"];
+      post_s2yes(1,atidz);   
+});
+at_s2not.addEventListener("click", function(event) {
+      console.warn('at_s2not.value!!!!!!!!!' + at_s2not.value);
+      var atidz = getUrlVars()["id"];
+      post_s2not(0,atidz);   
+});
+at_s2rej.addEventListener("click", function(event) {
+    console.warn('at_s2rej.value!!!!!!!!!' + at_s2rej.value);
+      var atidz = getUrlVars()["id"];
+      post_s2rej(-1,atidz);   
+});
+at_s2can.addEventListener("click", function(event) {
+    console.warn('at_s2can.value!!!!!!!!!' + at_s2can.value);
+      var atidz = getUrlVars()["id"];
+      post_s2can(1,atidz);   
+});
+
+at_s3yes.addEventListener("click", function(event) {
+    console.warn('at_s3yes.value!!!!!!!!!' + at_s3yes.value);
+      var atidz = getUrlVars()["id"];
+      post_s3yes(1,atidz);   
+});
+at_s3not.addEventListener("click", function(event) {
+      console.warn('at_s3not.value!!!!!!!!!' + at_s3not.value);
+      var atidz = getUrlVars()["id"];
+      post_s3not(0,atidz);   
+});
+at_s3rej.addEventListener("click", function(event) {
+    console.warn('at_s3rej.value!!!!!!!!!' + at_s1rej.value);
+      var atidz = getUrlVars()["id"];
+      post_s3rej(-1,atidz);   
+});
+at_s3can.addEventListener("click", function(event) {
+    console.warn('at_s3can.value!!!!!!!!!' + at_s3can.value);
+      var atidz = getUrlVars()["id"];
+      post_s3can(1,atidz);   
+});
+
+
+
+
+// CLEAN & JERK!
+at_j1yes.addEventListener("click", function(event) {
+    console.warn('at_j1yes.value!!!!!!!!!' + at_j1yes.value);
+      var atidz = getUrlVars()["id"];
+      post_j1yes(1,atidz);   
+});
+at_j1not.addEventListener("click", function(event) {
+      console.warn('at_j1not.value!!!!!!!!!' + at_j1not.value);
+      var atidz = getUrlVars()["id"];
+      post_j1not(0,atidz);   
+});
+at_j2yes.addEventListener("click", function(event) {
+    console.warn('at_j2yes.value!!!!!!!!!' + at_j2yes.value);
+      var atidz = getUrlVars()["id"];
+      post_j2yes(1,atidz);   
+});
+at_j2not.addEventListener("click", function(event) {
+      console.warn('at_j2not.value!!!!!!!!!' + at_j2not.value);
+      var atidz = getUrlVars()["id"];
+      post_j2not(0,atidz);   
+});
+at_j3yes.addEventListener("click", function(event) {
+    console.warn('at_j3yes.value!!!!!!!!!' + at_j3yes.value);
+      var atidz = getUrlVars()["id"];
+      post_j3yes(1,atidz);   
+});
+at_j3not.addEventListener("click", function(event) {
+      console.warn('at_j3not.value!!!!!!!!!' + at_j3not.value);
+      var atidz = getUrlVars()["id"];
+      post_j3not(0,atidz);   
+});
+
+at_j1rej.addEventListener("click", function(event) {
+    console.warn('at_j1rej.value!!!!!!!!!' + at_j1rej.value);
+      var atidz = getUrlVars()["id"];
+      post_j1rej(-1,atidz);   
+});
+at_j1can.addEventListener("click", function(event) {
+    console.warn('at_j1can.value!!!!!!!!!' + at_j1can.value);
+      var atidz = getUrlVars()["id"];
+      post_j1can(1,atidz);   
+});
+
+at_j2rej.addEventListener("click", function(event) {
+    console.warn('at_j2rej.value!!!!!!!!!' + at_j2rej.value);
+      var atidz = getUrlVars()["id"];
+      post_j2rej(-1,atidz);   
+});
+at_j2can.addEventListener("click", function(event) {
+    console.warn('at_j2can.value!!!!!!!!!' + at_j2can.value);
+      var atidz = getUrlVars()["id"];
+      post_j2can(1,atidz);   
+});
+
+at_j3rej.addEventListener("click", function(event) {
+    console.warn('at_j3rej.value!!!!!!!!!' + at_j3rej.value);
+      var atidz = getUrlVars()["id"];
+      post_j3rej(-1,atidz);   
+});
+at_j3can.addEventListener("click", function(event) {
+    console.warn('at_j3can.value!!!!!!!!!' + at_j3can.value);
+      var atidz = getUrlVars()["id"];
+      post_j3can(1,atidz);   
+});
+
+
+
+
+input2.addEventListener("keypress", function(event) {
+  // If the user presses the "Enter" key on the keyboard
+  if (event.key === "Enter") {
+    // Cancel the default action, if needed
+    event.preventDefault();
+    // Trigger the button element with a click
+    // document.getElementById("id_fe_es_edit_").click();
+    var tmp = document.createElement("input");
+    document.body.appendChild(tmp);
+    tmp.focus();
+    document.body.removeChild(tmp);    
+  }
+});
+// Execute a function when the user presses a key on the keyboard
+input.addEventListener("keypress", function(event) {
+  // If the user presses the "Enter" key on the keyboard
+  if (event.key === "Enter") {
+    // Cancel the default action, if needed
+    event.preventDefault();
+    // Trigger the button element with a click
+    // document.getElementById("id_fe_es_edit_").click();
+    var tmp = document.createElement("input");
+    document.body.appendChild(tmp);
+    tmp.focus();
+    document.body.removeChild(tmp);    
+  }
+});
+
+
+
+
+
+
+var s1_weight_inp = document.getElementById("s1_weight");
+var s2_weight_inp = document.getElementById("s2_weight");
+var s3_weight_inp = document.getElementById("s3_weight");
+var j1_weight_inp = document.getElementById("j1_weight");
+var j2_weight_inp = document.getElementById("j3_weight");
+var j3_weight_inp = document.getElementById("j3_weight");
+
+s1_weight_inp.addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    if (s1_weight_inp.value != '' && s1_weight_inp.value != null && s1_weight_inp.value != 0 && s1_weight_inp.value != undefined) {
+      console.warn('s1_weight_inp.value!!!!!!!!!' + s1_weight_inp.value);
+      // zalupka
+      function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+        vars[key] = value;
+    });
+        return vars;
+    }
+      var atidz = getUrlVars()["id"];
+      post_s1(s1_weight_inp.value,atidz);
+    }
+  }
+});  
+
+s2_weight_inp.addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    if (s2_weight_inp.value != '' && s2_weight_inp.value != null && s2_weight_inp.value != 0 && s2_weight_inp.value != undefined) {
+      console.warn('s2_weight_inp.value!!!!!!!!!' + s2_weight_inp.value);
+      // zalupka
+      function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+        vars[key] = value;
+    });
+        return vars;
+    }
+      var atidz = getUrlVars()["id"];
+      post_s2(s2_weight_inp.value,atidz);
+    }
+  }
+});
+
+s3_weight_inp.addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    if (s3_weight_inp.value != '' && s3_weight_inp.value != null && s3_weight_inp.value != 0 && s3_weight_inp.value != undefined) {
+      console.warn('s3_weight_inp.value!!!!!!!!!' + s3_weight_inp.value);
+      // zalupka
+      function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+        vars[key] = value;
+    });
+        return vars;
+    }
+      var atidz = getUrlVars()["id"];
+      post_s3(s3_weight_inp.value,atidz);
+    }    
+
+    var tmp = document.createElement("input");
+    document.body.appendChild(tmp);
+    tmp.focus();
+    document.body.removeChild(tmp);    
+  }
+});
+
+
+
+</script>
+
+
+
+
+<script>
+    var elements2 = document.getElementsByClassName("ats0");
+    var i2;
+    for(i2=0; i2<elements2.length; i2++) {
+        elements2[i2].style.display = 'none';
+    }  
+
+  var mchk = document.getElementById("male");
+  var fchk = document.getElementById("female");
+  variableOFsex = localStorage.getItem("flow_sex");
+  variableOFwc = localStorage.getItem("flow_wc");
+  const selectz = document.querySelector('#wcate_');
+  selectz.value = variableOFwc;
+  
+
+  if (variableOFsex=="female") {
+      fchk.checked = true;
+      mchk.checked = false
+  }
+  // console.warn('###_'+ variableOFsex + '& '+ variableOFwc);
+</script>
+
+
+<script>
+ function sendData () {
+  // (A) GET FORM DATA
+  var data = new FormData();
+  data.append("name", document.getElementById("id_jnamez_").value);
+  data.append("city", document.getElementById("id_jcityz_").value);
+  data.append("postru", document.getElementById("id_jpostruz_").value);
+  data.append("cat", document.getElementById("id_catz_").value);
+  // (B) INIT FETCH POST
+  fetch("{{url_for('staff')}}", {
+    method: "POST",
+    body: data
+  })
+  // (C) RETURN SERVER RESPONSE AS TEXT
+  .then((result) => {
+    if (result.status != 200) { throw new Error("Bad Server Response"); }
+    return result.text();
+  })
+  // (D) SERVER RESPONSE
+  .then((response) => {
+    // console.log(response);
+    console.log('DATAz SAVED!');
+  })
+  // (E) HANDLE ERRORS - OPTIONAL
+  .catch((error) => { console.log(error); });
+  // (F) PREVENT FORM SUBMIT
+  // return false;
+}
+
+</script>
+
+
+<script>
+  document.onreadystatechange = () => {
+  if (document.readyState === 'complete') {
+    // document ready
+
+//$(document).ready(function() { 
+            
+  console.log( "DOM ready!" );
+  $('.chData').click(function () {
+    var serviceID = $(this).attr('id');
+    var sname = $(this).attr('data-sname');
+    var fname = $(this).attr('data-fname');
+    var city = $(this).attr('data-atcity');
+    var wnow = $(this).attr('data-wnow');
+    var en = $(this).attr('data-exnow');
+
+
+    var d_s1 = $(this).attr('data-s1');
+    var d_s1ch1 = $(this).attr('data-s1ch1');
+    var d_s1ch2 = $(this).attr('data-s1ch2');
+    var d_s2ch1 = $(this).attr('data-s2ch1');
+    var d_s2ch2 = $(this).attr('data-s2ch2');    
+    var d_s3ch1 = $(this).attr('data-s3ch1');
+    var d_s3ch2 = $(this).attr('data-s3ch2');        
+    
+    var d_j1ch1 = $(this).attr('data-j1ch1');
+    var d_j1ch2 = $(this).attr('data-j1ch2');
+    var d_j2ch1 = $(this).attr('data-j2ch1');
+    var d_j2ch2 = $(this).attr('data-j2ch2');    
+    var d_j3ch1 = $(this).attr('data-j3ch1');
+    var d_j3ch2 = $(this).attr('data-j3ch2');        
+
+    var d_s1ig = $(this).attr('data-s1ig');
+    var d_s2 = $(this).attr('data-s2');
+    var d_s2ig = $(this).attr('data-s2ig');
+    var d_s3 = $(this).attr('data-s3');
+    var d_s3ig = $(this).attr('data-s3ig'); 
+    var d_j1 = $(this).attr('data-j1');
+    var d_j1ig = $(this).attr('data-j1ig');
+    var d_j2 = $(this).attr('data-j2');
+    var d_j2ig = $(this).attr('data-j2ig');
+    var d_j3 = $(this).attr('data-j3');
+    var d_j3ig = $(this).attr('data-j3ig');     
+    var d_ow_fe = $(this).attr('data-ow');
+    var d_acity = $(this).attr('data-city');
+    var d_wcat = $(this).attr('data-wcat');
+    var d_cntry = $(this).attr('data-cntry');
+    var d_sex = $(this).attr('data-sex');
+    var d_birth = $(this).attr('data-birth');
+
+
+
+    var ent = "sj";
+    edit_att_btn = document.getElementById(serviceID);
+    console.log("serviceID :: " + serviceID);
+    document.getElementById("id_del_").innerHTML = sname +' '+ fname;
+    document.getElementById("id_del_id").innerHTML = "( # "+ serviceID+ " )";
+    document.getElementById("id_del_city").innerHTML = "( @ "+ en+ " )";
+
+    document.getElementById("id_cancel_").innerHTML = sname +' '+ fname;
+    document.getElementById("id_cancel_id").innerHTML = "( # "+ serviceID+ " )";
+    document.getElementById("id_cancel_city").innerHTML = "( @ "+ city+ " )";
+    document.getElementById("id_setop_").innerHTML = sname +' '+ fname;
+    document.getElementById("id_setop_id").innerHTML = "( # "+ serviceID+ " )";
+    document.getElementById("id_setop_city").innerHTML = "( @ "+ en+ " )";
+    
+  let s1_ = '';
+
+
+
+    
+    console.warn('d_s1ig #$#$#$#$#$- ' + d_s1ig + ':'+d_s1+ ':'+d_s1ch1+ ':'+d_s1ch2);
+    console.warn('d_s2ig #$#$#$#$#$- ' + d_s2ig + ':'+d_s2+ ':'+d_s2ch1+ ':'+d_s2ch2);
+    console.warn('d_s3ig #$#$#$#$#$- ' + d_s3ig + ':'+d_s3+ ':'+d_s3ch1+ ':'+d_s3ch2);
+    console.warn('d_j1ig #$#$#$#$#$- ' + d_j1ig + ':'+d_j1+ ':'+d_j1ch1+ ':'+d_j1ch2);
+    console.warn('d_j2ig #$#$#$#$#$- ' + d_j2ig + ':'+d_j2+ ':'+d_j2ch1+ ':'+d_j2ch2);
+    console.warn('d_j3ig #$#$#$#$#$- ' + d_j3ig + ':'+d_j3+ ':'+d_j3ch1+ ':'+d_j3ch2);
+
+
+    
+    // console.warn('ATT #$#$#$#$#$- ' + fname + ':'+sname+ ':'+d_birth+ ':'+d_ow_fe);
+
+
+    // document.getElementById("idef_edit_").innerHTML = "dsfdsfds";
+    // document.getElementById("idef_edit_").innerText = "dsfdsfds";
+    // document.getElementById("idef_edit_").value = "dsfdsfds";
+
+
+
+
+    if(d_s1ig==1) { 
+      document.getElementById("option-1").checked = true;
+      document.getElementById("s1id_caption").innerHTML = 'Да ⚪';
+      document.getElementById("s1id_caption").style.textShadow = '1px 1px 1px #000000';
+      document.getElementById("s1id_caption").style.color = '#ffffff';
+    }
+    if(d_s1ig==0) { 
+      document.getElementById("option-2").checked = true;
+      document.getElementById("s1id_caption").innerHTML = 'Нет 🔴';
+      document.getElementById("s1id_caption").style.textShadow = '1px 1px 1px #101010';
+      document.getElementById("s1id_caption").style.color = '#d50007';      
+    }
+    if(d_s1ig==-1) { 
+      document.getElementById("option-3").checked = true; 
+      document.getElementById("s1id_caption").innerHTML = 'Отказ 🟠';
+      document.getElementById("s1id_caption").style.textShadow = '1px 1px 1px #000000';
+      document.getElementById("s1id_caption").style.color = '#e47e18';      
+    }
+    if(d_s1ig=='None') { 
+      document.getElementById("option-1").checked = false;
+      document.getElementById("option-2").checked = false; 
+      document.getElementById("option-3").checked = false; 
+      document.getElementById("s1id_caption").innerHTML = '---';
+      document.getElementById("s1id_caption").style.textShadow = '1px 1px 1px #000000';
+      document.getElementById("s1id_caption").style.color = '#bebebe'; 
+    }    
+
+    if(d_s2ig==1) { 
+      document.getElementById("option-5").checked = true;
+      document.getElementById("s2id_caption").innerHTML = 'Да ⚪';
+      document.getElementById("s2id_caption").style.textShadow = '1px 1px 1px #000000';
+      document.getElementById("s2id_caption").style.color = '#ffffff';
+    }
+    if(d_s2ig==0) { 
+      document.getElementById("option-6").checked = true;
+      document.getElementById("s2id_caption").innerHTML = 'Нет 🔴';
+      document.getElementById("s2id_caption").style.textShadow = '1px 1px 1px #101010';
+      document.getElementById("s2id_caption").style.color = '#d50007';      
+    }
+    if(d_s2ig==-1) { 
+      document.getElementById("option-7").checked = true; 
+      document.getElementById("s2id_caption").innerHTML = 'Отказ 🟠';
+      document.getElementById("s2id_caption").style.textShadow = '1px 1px 1px #000000';
+      document.getElementById("s2id_caption").style.color = '#e47e18';      
+    }
+    if(d_s2ig=='None') { 
+      document.getElementById("option-5").checked = false;
+      document.getElementById("option-6").checked = false; 
+      document.getElementById("option-7").checked = false; 
+      document.getElementById("s2id_caption").innerHTML = '---';
+      document.getElementById("s2id_caption").style.textShadow = '1px 1px 1px #000000';
+      document.getElementById("s2id_caption").style.color = '#bebebe'; 
+    }        
+    
+    if(d_s3ig==1) { 
+      document.getElementById("option-9").checked = true;
+      document.getElementById("s3id_caption").innerHTML = 'Да ⚪';
+      document.getElementById("s3id_caption").style.textShadow = '1px 1px 1px #000000';
+      document.getElementById("s3id_caption").style.color = '#ffffff';
+    }
+    if(d_s3ig==0) { 
+      document.getElementById("option-10").checked = true;
+      document.getElementById("s3id_caption").innerHTML = 'Нет 🔴';
+      document.getElementById("s3id_caption").style.textShadow = '1px 1px 1px #101010';
+      document.getElementById("s3id_caption").style.color = '#d50007';      
+    }
+    if(d_s3ig==-1) { 
+      document.getElementById("option-11").checked = true; 
+      document.getElementById("s3id_caption").innerHTML = 'Отказ 🟠';
+      document.getElementById("s3id_caption").style.textShadow = '1px 1px 1px #000000';
+      document.getElementById("s3id_caption").style.color = '#e47e18';      
+    }    
+    if(d_s3ig=='None') { 
+      document.getElementById("option-9").checked = false;
+      document.getElementById("option-10").checked = false; 
+      document.getElementById("option-11").checked = false; 
+      document.getElementById("s3id_caption").innerHTML = '---';
+      document.getElementById("s3id_caption").style.textShadow = '1px 1px 1px #000000';
+      document.getElementById("s3id_caption").style.color = '#bebebe'; 
+    }    
+
+    if(d_j1ig==1) { 
+      document.getElementById("option-13").checked = true;
+      document.getElementById("cj1id_caption").innerHTML = 'Да ⚪';
+      document.getElementById("cj1id_caption").style.textShadow = '1px 1px 1px #000000';
+      document.getElementById("cj1id_caption").style.color = '#ffffff';
+    }
+    if(d_j1ig==0) { 
+      document.getElementById("option-14").checked = true;
+      document.getElementById("cj1id_caption").innerHTML = 'Нет 🔴';
+      document.getElementById("cj1id_caption").style.textShadow = '1px 1px 1px #101010';
+      document.getElementById("cj1id_caption").style.color = '#d50007';      
+    }
+    if(d_j1ig==-1) { 
+      document.getElementById("option-15").checked = true; 
+      document.getElementById("cj1id_caption").innerHTML = 'Отказ 🟠';
+      document.getElementById("cj1id_caption").style.textShadow = '1px 1px 1px #000000';
+      document.getElementById("cj1id_caption").style.color = '#e47e18';      
+    }    
+    if(d_j1ig=='None') { 
+      document.getElementById("option-13").checked = false;
+      document.getElementById("option-14").checked = false; 
+      document.getElementById("option-15").checked = false; 
+      document.getElementById("cj1id_caption").innerHTML = '---';
+      document.getElementById("cj1id_caption").style.textShadow = '1px 1px 1px #000000';
+      document.getElementById("cj1id_caption").style.color = '#bebebe'; 
+      // document.getElementById("cj1id_caption").innerHTML = '---';
+      // // id_sXch2_
+      // ****************** ???
+    }    
+    if(d_j2ig==1) { 
+      document.getElementById("option-17").checked = true;
+      document.getElementById("cj2id_caption").innerHTML = 'Да ⚪';
+      document.getElementById("cj2id_caption").style.textShadow = '1px 1px 1px #000000';
+      document.getElementById("cj2id_caption").style.color = '#ffffff';
+    }
+    if(d_j2ig==0) { 
+      document.getElementById("option-18").checked = true;
+      document.getElementById("cj2id_caption").innerHTML = 'Нет 🔴';
+      document.getElementById("cj2id_caption").style.textShadow = '1px 1px 1px #101010';
+      document.getElementById("cj2id_caption").style.color = '#d50007';      
+    }
+    if(d_j2ig==-1) { 
+      document.getElementById("option-19").checked = true; 
+      document.getElementById("cj2id_caption").innerHTML = 'Отказ 🟠';
+      document.getElementById("cj2id_caption").style.textShadow = '1px 1px 1px #000000';
+      document.getElementById("cj2id_caption").style.color = '#e47e18';      
+    }    
+    if(d_j2ig=='None') { 
+      document.getElementById("option-7").checked = false;
+      document.getElementById("option-18").checked = false; 
+      document.getElementById("option-19").checked = false; 
+      document.getElementById("cj2id_caption").innerHTML = '---';
+      document.getElementById("cj2id_caption").style.textShadow = '1px 1px 1px #000000';
+      document.getElementById("cj2id_caption").style.color = '#bebebe'; 
+    }        
+    if(d_j3ig==1) { 
+      document.getElementById("option-21").checked = true;
+      document.getElementById("cj3id_caption").innerHTML = 'Да ⚪';
+      document.getElementById("cj3id_caption").style.textShadow = '1px 1px 1px #000000';
+      document.getElementById("cj3id_caption").style.color = '#ffffff';
+    }
+    if(d_j3ig==0) { 
+      document.getElementById("option-22").checked = true;
+      document.getElementById("cj3id_caption").innerHTML = 'Нет 🔴';
+      document.getElementById("cj3id_caption").style.textShadow = '1px 1px 1px #101010';
+      document.getElementById("cj3id_caption").style.color = '#d50007';      
+    }
+    if(d_j3ig==-1) { 
+      document.getElementById("option-23").checked = true; 
+      document.getElementById("cj3id_caption").innerHTML = 'Отказ 🟠';
+      document.getElementById("cj3id_caption").style.textShadow = '1px 1px 1px #000000';
+      document.getElementById("cj3id_caption").style.color = '#e47e18';      
+    }        
+    if(d_j3ig=='None') { 
+      document.getElementById("option-21").checked = false;
+      document.getElementById("option-22").checked = false; 
+      document.getElementById("option-23").checked = false; 
+      document.getElementById("cj3id_caption").innerHTML = '---';
+      document.getElementById("cj3id_caption").style.textShadow = '1px 1px 1px #000000';
+      document.getElementById("cj3id_caption").style.color = '#bebebe'; 
+    }        
+
+    
+
+    var s1app_end = document.getElementById("id_sXch2_").innerHTML;
+    //if 
+    console.log('### - =====', s1app_end);
+    // console.log(s1app_end.value,"++++");
+    if(s1app_end!=="&nbsp;&nbsp;.&nbsp;&nbsp;") {
+        console.log("changes app is ends ZZZzzzz");
+        var disable_dec = document.getElementById("edit_dec-btn");
+        var disable_inc = document.getElementById("edit_inc-btn");
+        var disable_edt = document.getElementById("id_wnow_");
+        var back_edit_app_back_off = document.getElementById("edt_back_off");
+        var show_hint2kg = document.getElementById("p2kg_hint");
+        
+        // show_hint2kg.classList.add("visible");
+        // show_hint2kg.classList.remove("invisible");
+        // show_hint2kg.classList.add("block");
+        // show_hint2kg.classList.remove("hidden");
+
+        //back_edit_app_back_off.classList.add("");
+        //back_edit_app_back_off.className += " bg-gray-400";
+        
+        // disable_dec.classList.add("hidden");
+        // disable_inc.classList.add("hidden");
+        
+        // document.getElementById("id_sXdec_label").innerHTML = "*=> перезаявки закончились";
+        document.getElementById("id_sXdec_label").classList.add('bg-pink-700');
+        document.getElementById("id_sXdec_label").classList.add('text-gray-200');
+        document.getElementById("id_sXdec_label").classList.add('drop-shadow-2xl');
+        document.getElementById("id_sXdec_label").classList.add('text-xl');
+        document.getElementById("id_sXdec_label").classList.add('font-bold');
+        //document.getElementById("id_sXdec_label").classList.add('pulse_op_now_square');
+      
+        
+
+        
+        document.getElementById("edt_back_off").classList.add('clear-both');
+        // document.getElementById("edt_back_off").classList.add('invisible');
+
+
+        document.getElementById("id_sXdec_label").classList.add('border-rose-400');
+        document.getElementById("edt_back_off").style.opacity = "0.3";
+        document.getElementById("id_sXdec_label").style.opacity = "0.9";
+        document.getElementById("reappdiv").style.opacity = "0.8"; 
+        document.getElementById("reapp_ok_btn").style.opacity = "0.0";
+        //document.getElementById("reapp_ok_btn").style.visibility = hidden;
+    
+          
+        // document.getElementById("reappdiv").innerHTML=".";
+
+        document.getElementById("id_sXdec_label").innerHTML = "&nbsp;&nbsp;перезаявки исчерпаны...&nbsp;&nbsp;";
+        
+        
+        
+  
+
+        //button_edit_att_ok.classList.add("disabled");
+        // document.getElementById("edit_att_ok_btn").style.display = "none";
+        document.getElementById("edit_att_ok_btn").disabled = true;
+        document.getElementById("edit_att_ok_btn").classList.remove('hover:bg-green-600');
+        document.getElementById("edit_att_ok_btn").classList.add('cursor:default');
+        document.getElementById("edit_att_ok_btn").style.cursor = "default"; 
+
+        
+        document.getElementById("edit_dec-btn").disabled = true;
+        document.getElementById("edit_inc-btn").disabled = true;
+        document.getElementById("id_wnow_").disabled = true;
+
+        //disable_dec.style.top = 9999;
+        // show_hint2kg.style.removeProperty("invisible");
+        // show_hint2kg.style.removeProperty("hidden");
+        // show_hint2kg.removeAttribute('style');
+        // show_hint2kg.removeAttribute('hidden');
+        // show_hint2kg.removeAttribute('invisible');
+
+
+
+
+        console.log("change app is endZzzzzz");
+    }
+    if(s1app_end=="&nbsp;&nbsp;.&nbsp;&nbsp;") {
+      console.warn('&nbsp;&nbsp;.&nbsp;&nbsp; !!!!!!!! ');
+      document.getElementById("id_sXdec_label").classList.remove('bg-pink-700');
+        document.getElementById("id_sXdec_label").classList.add('text-gray-900');
+        document.getElementById("id_sXdec_label").classList.add('drop-shadow-2xl');
+        document.getElementById("id_sXdec_label").classList.add('text-xl');
+        document.getElementById("id_sXdec_label").classList.remove('font-bold');
+        document.getElementById("id_sXdec_label").classList.remove('pulse_op_now_square');
+      
+        document.getElementById("edt_back_off").classList.add('clear-both');
+        // document.getElementById("edt_back_off").classList.add('invisible');
+
+
+        document.getElementById("id_sXdec_label").classList.add('border-rose-400');
+        document.getElementById("edt_back_off").style.opacity = "1";
+        document.getElementById("id_sXdec_label").style.opacity = "1";
+        document.getElementById("reappdiv").style.opacity = "1"; 
+        document.getElementById("reapp_ok_btn").style.opacity = "1"; 
+        document.getElementById("edit_att_ok_btn").disabled = false;
+
+      
+        
+        
+
+
+
+        document.getElementById("edt_back_off").style.opacity = "1";
+        document.getElementById("id_sXdec_label").innerHTML = "&nbsp;&nbsp;  перезаявки:";
+        document.getElementById("id_sXdec_label").classList.add('bg-gray-200');
+        document.getElementById("id_sXdec_label").classList.add('text-gray-700');
+        document.getElementById("id_sXdec_label").classList.add('drop-shadow-2xl');
+        document.getElementById("id_sXdec_label").classList.add('text-xl');
+        document.getElementById("id_sXdec_label").classList.add('font-bold');
+
+        document.getElementById("edit_dec-btn").disabled = false;
+        document.getElementById("edit_inc-btn").disabled = false;
+        document.getElementById("id_wnow_").disabled = false;
+        document.getElementById("edit_att_ok_btn").disabled = false;
+        document.getElementById("edit_att_ok_btn").classList.add('hover:bg-green-600');
+        document.getElementById("edit_att_ok_btn").classList.remove('cursor-not-allowed');        
+    }
+//sss
+    
+
+    // document.getElementById("id_edit_").innerHTML = sname +' '+ fname[0]+'.';
+    //document.getElementById("id_edit_").innerHTML = sname +' '+ fname;
+    document.getElementById("ides_edit_").innerHTML = sname;
+    document.getElementById("idef_edit_").innerHTML = fname;
+    document.getElementById("ides_edit_").value = sname;
+    document.getElementById("idef_edit_").value = fname;
+    
+    // document.getElementById("ides_edit_").innerText = sname;
+    // document.getElementById("idef_edit_").innerText = fname;    
+
+    document.getElementById("id_fe_es_edit_").innerHTML = sname;
+    document.getElementById("id_fe_ef_edit_").innerHTML = fname;
+    // Om Shree Krishna Arpanam Astu
+    // Это подношение Шри Кришне! Господу Вседержителю Волшебному )
+
+
+    
+    document.getElementById("id_sXdec_").innerHTML = $("id_sXdec_").attr('data-wnow');
+    // document.getElementById("id_sXdec_").innerHTML = $("id_sXdec_").attr('data-s2dec');
+    // document.getElementById("id_sXdec_").innerHTML = $("id_sXdec_").attr('data-s3dec');
+    /////////////
+    ////// ?????
+    ////////////
+
+
+
+    
+    let xdec = $(this).attr('data-s1dec');
+    let xch1 = $(this).attr('data-s1ch1');
+    let xch2 = $(this).attr('data-s1ch2');
+        // var en = $(this).attr('data-exnow');
+    switch (en) {
+        case "s1":
+        ent = "рывок # 1";
+        xdec = $(this).attr('data-s1dec');
+        xch1 = $(this).attr('data-s1ch1');
+        xch2 = $(this).attr('data-s1ch2');
+        break;
+    case "s2":
+        xdec = $(this).attr('data-s2dec');
+        xch1 = $(this).attr('data-s2ch1');
+        xch2 = $(this).attr('data-s2ch2');        
+        ent = "рывок # 2";
+        break;
+    case "s3":
+        xdec = $(this).attr('data-s3dec');
+        xch1 = $(this).attr('data-s3ch1');
+        xch2 = $(this).attr('data-s3ch2'); 
+        ent = "рывок # 3";
+        break;
+    case "j1":
+        xdec = $(this).attr('data-j1dec');
+        xch1 = $(this).attr('data-j1ch1');
+        xch2 = $(this).attr('data-j1ch2');      
+        ent = "толчок # 1";
+        break;
+    case "j2":
+        xdec = $(this).attr('data-j2dec');
+        xch1 = $(this).attr('data-j2ch1');
+        xch2 = $(this).attr('data-j2ch2');        
+        ent = "толчок # 2";
+        break;
+    case "j3":
+        xdec = $(this).attr('data-j3dec');
+        xch1 = $(this).attr('data-j3ch1');
+        xch2 = $(this).attr('data-j3ch2');        
+        ent = "толчок # 3";
+        break;
+  default:
+    console.log("Can not get data-sXd...")
+}
+
+    //console.log('===='+wnow)
+    // ????????????????????????????????
+    // document.getElementById("id_wnow_").value = wnow;
+    // ????????????????????????????????
+    document.getElementById("id_en_").innerHTML = ent;
+            console.log(xdec+'===###==='+ent);
+
+
+
+            
+    if  ((xdec)&&(xdec!== undefined)) {
+    document.getElementById("id_sXdec_").innerHTML = xdec;
+    if (xdec=="None") 
+    document.getElementById("id_sXdec_").innerHTML = "&nbsp;&nbsp;.&nbsp;&nbsp;";    
+    // document.getElementById("id_sXch1_").innerHTML = xch1;
+    // document.getElementById("id_sXch2_").innerHTML = xch2;
+    } else {
+    document.getElementById("id_sXdec_").innerHTML = "&nbsp;&nbsp;.&nbsp;&nbsp;";
+    // document.getElementById("id_sXch1_").innerHTML = "&nbsp;&nbsp;.&nbsp;&nbsp;";
+    // document.getElementById("id_sXch2_").innerHTML = "&nbsp;&nbsp;.&nbsp;&nbsp;";
+    // ???????? j1dec
+    
+    }
+    if  ((xch1)&&(xch1!== undefined)) {
+    document.getElementById("id_sXch1_").innerHTML = xch1;
+    console.warn('.innerHTML = xch1;');
+    if (xch1=="None") 
+    document.getElementById("id_sXch1_").innerHTML = "&nbsp;&nbsp;.&nbsp;&nbsp;"
+    } else {
+      console.warn('xch1 undefined!!!');
+     document.getElementById("id_sXch1_").innerHTML = "&nbsp;&nbsp;.&nbsp;&nbsp;";
+    }
+    if ((xch2)&&(xch2!== undefined)) {
+    document.getElementById("id_sXch2_").innerHTML = xch2;
+    console.warn('.innerHTML = xch2;');
+    if (xch2=="None")
+    document.getElementById("id_sXch2_").innerHTML = "&nbsp;&nbsp;.&nbsp;&nbsp;"
+    } else {
+        if (xch2=="None") 
+     document.getElementById("id_sXch2_").innerHTML = "&nbsp;&nbsp;.&nbsp;&nbsp;";        
+    }
+
+    // document.getElementById("id_sXdec_").innerHTML = xdec;
+    // document.getElementById("id_sXch1_").innerHTML = xch1;
+    // document.getElementById("id_sXch2_").innerHTML = xch2;
+
+    
+
+
+/* add GET param */
+    var queryParams = new URLSearchParams(window.location.search);
+    queryParams.set("id", serviceID);
+    queryParams.set("wn", wnow);
+    queryParams.set("sn", sname);
+    queryParams.set("fn", fname);
+    queryParams.set("city", city);
+    queryParams.set("en", en);
+
+    queryParams.set("xd", xdec);
+    queryParams.set("ch1", xch1);
+    queryParams.set("ch2", xch2);
+
+
+    //queryParams.set("wn", wn);
+    // queryParams.set("en", en);
+    /////
+    //queryParams.set("edit_weight", serviceID);
+    history.replaceState(null, null, "?"+queryParams.toString());
+/* add GET param */
+
+    edit_att_btn.onclick = function() {
+        edit_att.style.display = "block";
+
+    }    
+  })
+
+
+}};  
+// });
+
+
+
+const atop  = document.querySelector('[data-op]');
+
+if(atop)  {
+
+if(!atop.dataset.sname) {
+
+}
+if(!atop.dataset.sname) {atop.dataset.sname;  
+}
+}
+
+
+// *************** ERROR 
+
+
+if(atop)  {
+
+switch (atop.dataset.exnow) {
+  case "s1":
+    text = "Рывок № 1";
+    break;
+  case "s2":
+  text = "Рывок № 2";
+    break;
+  case "s3":
+    text = "Рывок № 3";
+    break;    
+  case "j1":
+    text = "Толчок № 1";
+    break;
+  case "j2":
+  text = "Толчок № 2";
+    break;
+  case "j3":
+    text = "Толчок № 3";
+    break;        
+  default:
+  text = "Закончил свои попытки...";
+}
+
+
+    // document.getElementById("id_yes_").innerHTML = text + ' <br>'+  atop.dataset.sname +'<br> '+ atop.dataset.fname.substring(0, 1);  
+    document.getElementById("id_yes_").innerHTML =  atop.dataset.sname +'<br> '+ atop.dataset.fname;  
+    document.getElementById("id_not_").innerHTML =  atop.dataset.sname +'<br> '+ atop.dataset.fname;
+    // document.getElementById("id_not_").innerHTML = text + ' <br>'+  atop.dataset.sname +'<br> '+ atop.dataset.fname.substring(0, 1);
+    document.getElementById("id_yes_id").innerHTML = text + '<br>#: ' +document.querySelector('[data-op]').id;
+    document.getElementById("id_not_id").innerHTML = text + '<br>#: ' +document.querySelector('[data-op]').id;
+
+    
+  }
+  else {
+    console.error('NOT HAVE OP/NOP || LAST 1 AT ?! ||  ');
+    console.warn('NOT HAVE atop, data-op attr >>>>');
+    // fetch('http://10.0.0.8:4848/resetNOP');
+    // console.error('http://10.0.0.8:4848/resetNOP');
+    // fetch('http://10.0.0.8:4848/chk3last');
+    // console.error('http://10.0.0.8:4848/chk3last');    
+    
+    document.getElementById("flow_endz").style.display = "flex";
+    
+
+
+
+//     var en = $(this).attr('data-exnow');
+//     switch (en) {
+//         case "s1":
+//         ent = "рывок # 1";
+//         xdec = $(this).attr('data-s1dec');
+//         xch1 = $(this).attr('data-s1ch1');
+//         xch2 = $(this).attr('data-s1ch2');
+//         break;
+//     case "s2":
+//         xdec = $(this).attr('data-s2dec');
+//         xch1 = $(this).attr('data-s2ch1');
+//         xch2 = $(this).attr('data-s2ch2');        
+//         ent = "рывок # 2";
+//         break;
+//     case "s3":
+//         xdec = $(this).attr('data-s3dec');
+//         xch1 = $(this).attr('data-s3ch1');
+//         xch2 = $(this).attr('data-s3ch2'); 
+//         ent = "рывок # 3";
+//         break;
+//     case "j1":
+//         xdec = $(this).attr('data-j1dec');
+//         xch1 = $(this).attr('data-j1ch1');
+//         xch2 = $(this).attr('data-j1ch2');      
+//         ent = "толчок # 1";
+//         break;
+//     case "j2":
+//         xdec = $(this).attr('data-j2dec');
+//         xch1 = $(this).attr('data-j2ch1');
+//         xch2 = $(this).attr('data-j2ch2');        
+//         ent = "толчок # 2";
+//         break;
+//     case "j3":
+//         xdec = $(this).attr('data-j3dec');
+//         xch1 = $(this).attr('data-j3ch1');
+//         xch2 = $(this).attr('data-j3ch2');        
+//         ent = "толчок # 3";
+//         break;
+//   default:
+//     console.log("Can not get data-sXd...")
+// }
+
+
+
+
+  }
+
+</script>
+
+    
+
+
+
+<script>
+  // var form=document.getElementById('id_edit_namez')
+  
+  // form.addEventListener('submit', function(e){
+  //  e.preventDefault()
+  
+  //  var edsname=document.getElementById('ides_edit_').value
+  //  var edfname=document.getElementById('idef_edit_').value
+  
+  //  fetch('http://10.0.0.8:4848/edit_idef_edit_/35/'+edfname, {
+  //   method: 'POST',
+  //   body: JSON.stringify({
+  //     sname:edsname,
+  //     fname:edfname,
+  
+  //   }),
+  //   headers: {
+  //     'Content-type': 'application/json; charset=UTF-8',
+  //   }
+  //   })
+  //   .then(function(response){ 
+  //   return response.json()})
+  //   .then(function(data)
+  //   {console.log(data)
+  //   title=document.getElementById("title")
+  //   body=document.getElementById("bd")
+  //   title.innerHTML = data.title
+  //   body.innerHTML = data.body  
+  // }).catch(error => console.error('Error:')); 
+  // });
+  function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+        vars[key] = value;
+    });
+        return vars;
+    }
+    var atidz = getUrlVars()["id"];
+
+    
+  async function postsName(sname,atidz) {
+  let isname = sname;
+  let isid = atidz; 
+  const object = { isname: sname, isid: atidz };
+  const response = await fetch('/edit_ides_edit_/'+isid+'/'+isname, {
+    method: 'POST', 
+    body: JSON.stringify(object)
+  });
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'
+}
+
+async function postfName(fname,atidz) {
+  let isname = fname;
+  let isid = atidz; 
+  const object = { isname: fname, isid: atidz };
+  const response = await fetch('/edit_idef_edit_/'+isid+'/'+isname, {
+    method: 'POST',
+    body: JSON.stringify(object)
+  });
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'
+}
+
+async function post_s1(s1,atidz) {
+  let isname = s1;
+  let isid = atidz; 
+  const object = { isname: s1, isid: atidz };
+  const response = await fetch('/post_s1/'+isid+'/'+s1, {
+    method: 'POST',
+    body: JSON.stringify(object)
+  });
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'
+}
+
+async function post_s2(s2,atidz) {
+  let isname = s2;
+  let isid = atidz; 
+  const object = { isname: s2, isid: atidz };
+  const response = await fetch('/post_s2/'+isid+'/'+s2, {
+    method: 'POST',
+    body: JSON.stringify(object)
+  });
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'
+}
+
+async function post_s3(s3,atidz) {
+  let isname = s3;
+  let isid = atidz; 
+  const object = { isname: s3, isid: atidz };
+  const response = await fetch('/post_s3/'+isid+'/'+s3, {
+    method: 'POST',
+    body: JSON.stringify(object)
+  });
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'
+}
+
+
+
+
+
+
+async function post_j1(j1,atidz) {
+  let isname = j1;
+  let isid = atidz; 
+  const object = { isname: j1, isid: atidz };
+  const response = await fetch('/post_j1/'+isid+'/'+j1, {
+    method: 'POST',
+    body: JSON.stringify(object)
+  });
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'
+}
+
+async function post_j2(j2,atidz) {
+  let isname = j2;
+  let isid = atidz; 
+  const object = { isname: j2, isid: atidz };
+  const response = await fetch('/post_j2/'+isid+'/'+j2, {
+    method: 'POST',
+    body: JSON.stringify(object)
+  });
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'
+}
+
+async function post_j3(j3,atidz) {
+  let isname = j3;
+  let isid = atidz; 
+  const object = { isname: 3, isid: atidz };
+  const response = await fetch('/post_j3/'+isid+'/'+j3, {
+    method: 'POST',
+    body: JSON.stringify(object)
+  });
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'
+}
+
+async function post_s1yes(s1,atidz) {
+  let isname = s1;
+  let isid = atidz; 
+  const object = { isname: s1, isid: atidz };
+  const response = await fetch('/post_s1yes/'+isid+'/'+s1, {
+    method: 'POST',
+    body: JSON.stringify(object)
+  });
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'
+}
+
+async function post_s1not(s1,atidz) {
+  let isname = s1;
+  let isid = atidz; 
+  const object = { isname: s1, isid: atidz };
+  const response = await fetch('/post_s1not/'+isid+'/'+s1, {
+    method: 'POST',
+    body: JSON.stringify(object)
+  });
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'
+}
+
+
+async function post_s2yes(s2,atidz) {
+  let isname = s2;
+  let isid = atidz; 
+  const object = { isname: s2, isid: atidz };
+  const response = await fetch('/post_s2yes/'+isid+'/'+s2, {
+    method: 'POST',
+    body: JSON.stringify(object)
+  });
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'
+}
+
+async function post_s2not(s2,atidz) {
+  let isname = s2;
+  let isid = atidz; 
+  const object = { isname: s2, isid: atidz };
+  const response = await fetch('/post_s2not/'+isid+'/'+s2, {
+    method: 'POST',
+    body: JSON.stringify(object)
+  });
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'
+}
+
+
+
+async function post_s3yes(s3,atidz) {
+  let isname = s3;
+  let isid = atidz; 
+  const object = { isname: s3, isid: atidz };
+  const response = await fetch('/post_s3yes/'+isid+'/'+s3, {
+    method: 'POST',
+    body: JSON.stringify(object)
+  });
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'
+}
+
+async function post_s3not(s3,atidz) {
+  let isname = s3;
+  let isid = atidz; 
+  const object = { isname: s3, isid: atidz };
+  const response = await fetch('/post_s3not/'+isid+'/'+s3, {
+    method: 'POST',
+    body: JSON.stringify(object)
+  });
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'
+}
+
+
+async function post_countryz(cnntryID,atidz) {
+  let isname = cnntryID;
+  let isid = atidz; 
+  const object = { isname: cnntryID, isid: atidz };
+  const response = await fetch('/post_country/'+isid+'/'+cnntryID, {
+    method: 'POST',
+    body: JSON.stringify(object)
+  });
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'
+}
+
+async function post_wcat(wcatID,atidz) {
+  let isname = wcatID;
+  let isid = atidz; 
+  const object = { isname: wcatID, isid: atidz };
+  const response = await fetch('/post_wcat/'+isid+'/'+wcatID, {
+    method: 'POST',
+    body: JSON.stringify(object)
+  });
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'
+}
+
+async function post_cp(cp,atidz) {
+  let isname = cp;
+  let isid = atidz; 
+  const object = { isname: cp, isid: atidz };
+  const response = await fetch('/post_cityplace/'+isid+'/'+cp, {
+    method: 'POST',
+    body: JSON.stringify(object)
+  });
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'
+}
+
+async function post_ow(ow,atidz) {
+  let isname = ow;
+  let isid = atidz; 
+  const object = { isname: ow, isid: atidz };
+  const response = await fetch('/post_ow/'+isid+'/'+ow, {
+    method: 'POST',
+    body: JSON.stringify(object)
+  });
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'
+}
+
+async function post_sex(sex,atidz) {
+  let isname = sex;
+  let isid = atidz; 
+  const object = { isname: sex, isid: atidz };
+  const response = await fetch('/post_sex/'+isid+'/'+sex, {
+    method: 'POST',
+    body: JSON.stringify(object)
+  });
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'
+}
+
+async function post_bday(bday,atidz) {
+  let isname = bday;
+  let isid = atidz; 
+  const object = { isname: bday, isid: atidz };
+  const response = await fetch('/post_bday/'+isid+'/'+bday, {
+    method: 'POST',
+    body: JSON.stringify(object)
+  });
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'
+}
+
+async function post_s1rej(rej,atidz) {
+  let isname = rej;
+  let isid = atidz; 
+  const object = { isname: rej, isid: atidz };
+  const response = await fetch('/post_s1rej/'+isid+'/'+rej, {
+    method: 'POST',
+    body: JSON.stringify(object)
+  });
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'
+}
+async function post_s1can(canc,atidz) {
+  let isname = canc;
+  let isid = atidz; 
+  const object = { isname: canc, isid: atidz };
+  const response = await fetch('/post_s1reset/'+isid, {
+    method: 'POST',
+    body: JSON.stringify(object)
+  });
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'
+}
+
+
+
+
+async function post_s2rej(rej,atidz) {
+  let isname = rej;
+  let isid = atidz; 
+  const object = { isname: rej, isid: atidz };
+  const response = await fetch('/post_s2rej/'+isid+'/'+rej, {
+    method: 'POST',
+    body: JSON.stringify(object)
+  });
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'
+}
+async function post_s2can(canc,atidz) {
+  let isname = canc;
+  let isid = atidz; 
+  const object = { isname: canc, isid: atidz };
+  const response = await fetch('/post_s2reset/'+isid, {
+    method: 'POST',
+    body: JSON.stringify(object)
+  });
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'
+}
+
+async function post_s3rej(rej,atidz) {
+  let isname = rej;
+  let isid = atidz; 
+  const object = { isname: rej, isid: atidz };
+  const response = await fetch('/post_s3rej/'+isid+'/'+rej, {
+    method: 'POST',
+    body: JSON.stringify(object)
+  });
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'
+}
+async function post_s3can(canc,atidz) {
+  let isname = canc;
+  let isid = atidz; 
+  const object = { isname: canc, isid: atidz };
+  const response = await fetch('/post_s3reset/'+isid, {
+    method: 'POST',
+    body: JSON.stringify(object)
+  });
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'
+}
+
+// CLEAN&JERK ::
+// CLEAN&JERK ::
+// CLEAN&JERK ::
+
+async function post_j1rej(rej,atidz) {
+  let isname = rej;
+  let isid = atidz; 
+  const object = { isname: rej, isid: atidz };
+  const response = await fetch('/post_j1rej/'+isid+'/'+rej, {
+    method: 'POST',
+    body: JSON.stringify(object)
+  });
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'
+}
+async function post_j1can(canc,atidz) {
+  let isname = canc;
+  let isid = atidz; 
+  const object = { isname: canc, isid: atidz };
+  const response = await fetch('/post_j1reset/'+isid, {
+    method: 'POST',
+    body: JSON.stringify(object)
+  });
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'
+}
+
+
+
+async function post_j2rej(rej,atidz) {
+  let isname = rej;
+  let isid = atidz; 
+  const object = { isname: rej, isid: atidz };
+  const response = await fetch('/post_j2rej/'+isid+'/'+rej, {
+    method: 'POST',
+    body: JSON.stringify(object)
+  });
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'
+}
+async function post_j2can(canc,atidz) {
+  let isname = canc;
+  let isid = atidz; 
+  const object = { isname: canc, isid: atidz };
+  const response = await fetch('/post_j2reset/'+isid, {
+    method: 'POST',
+    body: JSON.stringify(object)
+  });
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'
+}
+
+
+
+async function post_j3rej(rej,atidz) {
+  let isname = rej;
+  let isid = atidz; 
+  const object = { isname: rej, isid: atidz };
+  const response = await fetch('/post_j3rej/'+isid+'/'+rej, {
+    method: 'POST',
+    body: JSON.stringify(object)
+  });
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'
+}
+async function post_j3can(canc,atidz) {
+  let isname = canc;
+  let isid = atidz; 
+  const object = { isname: canc, isid: atidz };
+  const response = await fetch('/post_j3reset/'+isid, {
+    method: 'POST',
+    body: JSON.stringify(object)
+  });
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'
+}
+
+
+
+
+
+
+
+
+async function post_j1yes(j1,atidz) {
+  let isname = j1;
+  let isid = atidz; 
+  const object = { isname: j1, isid: atidz };
+  const response = await fetch('/post_j1yes/'+isid+'/'+j1, {
+    method: 'POST',
+    body: JSON.stringify(object)
+  });
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'
+}
+
+async function post_j1not(j1,atidz) {
+  let isname = j1;
+  let isid = atidz; 
+  const object = { isname: j1, isid: atidz };
+  const response = await fetch('/post_j1not/'+isid+'/'+j1, {
+    method: 'POST',
+    body: JSON.stringify(object)
+  });
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'
+}
+
+
+async function post_j2yes(j2,atidz) {
+  let isname = j2;
+  let isid = atidz; 
+  const object = { isname: j2, isid: atidz };
+  const response = await fetch('/post_j2yes/'+isid+'/'+j2, {
+    method: 'POST',
+    body: JSON.stringify(object)
+  });
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'
+}
+
+async function post_j2not(j2,atidz) {
+  let isname = j2;
+  let isid = atidz; 
+  const object = { isname: j2, isid: atidz };
+  const response = await fetch('/post_j2not/'+isid+'/'+j2, {
+    method: 'POST',
+    body: JSON.stringify(object)
+  });
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'
+}
+
+
+
+async function post_j3yes(j3,atidz) {
+  let isname = j3;
+  let isid = atidz; 
+  const object = { isname: j3, isid: atidz };
+  const response = await fetch('/post_j3yes/'+isid+'/'+j3, {
+    method: 'POST',
+    body: JSON.stringify(object)
+  });
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'
+}
+
+async function post_j3not(j3,atidz) {
+  let isname = j3;
+  let isid = atidz; 
+  const object = { isname: j3, isid: atidz };
+  const response = await fetch('/post_j3not/'+isid+'/'+j3, {
+    method: 'POST',
+    body: JSON.stringify(object)
+  });
+  const responseText = await response.text();
+  console.log(responseText); // logs 'OK'
+}
+
+
+  </script>
+

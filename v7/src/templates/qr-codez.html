@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ru" class="antialiased">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v7pro: QR-Коды</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <!-- <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel=" stylesheet"> -->
+    <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/production_v7.css') }}">
+    
+
+    <!-- <script src="{{url_for('static', filename = 'js/faker.min.js')}}"></script> -->
+
+    <script src="{{url_for('static', filename = 'js/flowbite.js')}}"></script>
+    
+    <!-- <script src="{{url_for('static', filename = 'js/datepicker.js')}}"></script> -->
+
+    <script src="{{url_for('static', filename = 'js/socket.io.min.js')}}"></script>
+    
+    <script src="{{url_for('static', filename = 'js/ovmenu.js')}}"></script>
+    <!-- <script defer src="{{url_for('static', filename = 'js/alpine3.10.2.min.js')}}"></script> -->
+
+    <script src="{{url_for('static', filename = 'js/jquery-3.6.0.min.js')}}"></script>
+
+        
+
+    <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/ovmenu.css') }}">
+    <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/flow.css') }}">
+    <!-- <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/jquery-editable.css') }}"> -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <!--Replace with your tailwind.css once created-->
+
+
+    <style>
+      .zoom-qr-wifi {
+        opacity: 0.5;
+        background-color: transparent;
+        transition: transform .2s;
+        width: 12%;
+        height: 12%;
+        background-image: url("../static/img/qr/v7pro - WI-FI network connecting QR-code.png ");
+        padding: 7%;
+        margin-right:7%;
+        background-repeat: no-repeat;
+        background-size: contain;        
+      }
+      .zoom-qr-j1 {
+        opacity: 0.5;
+        background-color: transparent;
+        transition: transform .2s;
+        width: 12%;
+        height: 12%;
+        background-image: url("../static/img/qr/v7pro_10.0.0.8-J1.png ");
+        padding: 7%;
+        margin-right:7%;
+        background-repeat: no-repeat;
+        background-size: contain;        
+      }
+      .zoom-qr-j2 {
+        opacity: 0.5;
+        background-color: transparent;
+        transition: transform .2s;
+        width: 12%;
+        height: 12%;
+        background-image: url("../static/img/qr/v7pro_10.0.0.8-J2.png ");
+        padding: 7%;
+        margin-right:7%;
+        background-repeat: no-repeat;
+        background-size: contain;        
+      }
+      .zoom-qr-j3 {
+        opacity: 0.5;
+        background-color: transparent;
+        transition: transform .2s;
+        width: 12%;
+        height: 12%;
+        background-image: url("../static/img/qr/v7pro_10.0.0.8-J3.png ");
+        padding: 7%;
+        margin-right:7%;
+        background-repeat: no-repeat;
+        background-size: contain;
+      }                  
+      .zoom-qr-wifi:hover, .zoom-qr-j1:hover,.zoom-qr-j2:hover,.zoom-qr-j3:hover {
+        transform: scale(2.0); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+      }
+      .c7 {
+        display: flex;
+        justify-content: center;
+      }
+      .qr-laber {
+        color: #ffffff;
+        padding-top: 110px;
+        margin-left: -140px;
+        font-size: x-large;
+        font-weight: bold;
+      }
+      </style>
+
+</head>
+
+<body class="bg-opacity-25 leading-normal h-full w-full">
+  
+
+
+
+
+    <!-- Sudarshana Chkra-->
+    <span class="f7_main_sc">
+      <a href="/quit">
+        <div id="pica" class="pica">
+            <img src="static/img/v7-tilaka-white.png" alt="f7v-logo"
+                class="shadow rounded-full mt-4 ml-4 h-9 align-middle border-none" />
+        </div>
+      </a>
+    </span>
+
+
+
+
+
+
+
+
+    <!-- Slider MENU-->
+    {% include 'nav.html' %}
+    <!-- Slider MENU-->
+
+
+
+
+
+
+
+
+
+
+
+
+<div>
+    <!-- Rest of the HTML -->
+
+  </div>
+
+
+
+
+
+
+
+
+<div class="min-h-screen bg-gray-900 py-5 topper">
+
+
+
+
+  
+    <div class='overflow-x-auto w-full'>
+
+        </div>
+<br><br><br><br><br>
+
+<div class="inline c7">
+        <div onmouseover="hideAll(this)" onmouseout="showAll(this)"  class="zoom-qr-wifi inline-flex"><div class="qr-laber">Wi-Fi Сеть</div></div>
+        <div onmouseover="hideAll(this)" onmouseout="showAll(this)"  class="zoom-qr-j1 inline-flex"><div class="qr-laber">Судья № 1</div></div>
+        <div onmouseover="hideAll(this)" onmouseout="showAll(this)"  class="zoom-qr-j2 inline-flex"><div class="qr-laber">Судья № 2</div></div>
+        <div onmouseover="hideAll(this)" onmouseout="showAll(this)"  class="zoom-qr-j3 inline-flex"><div class="qr-laber">Судья № 3</div></div>
+</div>
+
+
+
+
+    
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+    <script>
+      function hideAll(x) {
+        x.style.opacity = 1;
+        x.style.opacity = 1;
+      }
+      
+      function showAll(x) {
+        x.style.opacity = 0.1;
+        x.style.opacity = 0.1;
+      }
+      </script>
+</body>
+
+</html>

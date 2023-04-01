@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" class="antialiased">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>DataTables </title>
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel=" stylesheet">
+
+<script src="{{url_for('static', filename = 'js/ovmenu.js')}}"></script>
+<link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/ovmenu.css') }}">
+
+<link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/double.css') }}">
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+	<!--Replace with your tailwind.css once created-->
+
+
+
+</head>
+
+
+<body class="bg-opacity-25 leading-normal">
+
+<!-- Slider MENU-->
+<span class="navi_wrapper">
+<div id="myNav" class="overlay">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <div class="overlay-content">
+      <a class="main_sidebar_link" href="#">f7v &#8962;</a>
+      <a class="main_sidebar_link" href="#">маршал &#10682;</a>
+      <a class="main_sidebar_link" href="#">табло &#10687;</a>
+      <a class="main_sidebar_link" href="/dbl">дубль &#12930;</a>
+      <a class="main_sidebar_link" href="#">сигнал &#9863;</a>
+      <a class="main_sidebar_link" href="#">хронограф &#9716;</a>
+      <a class="main_sidebar_link" href="#">настройки &#9881;</a>
+    </div>
+  </div>
+  <span class="burger_btn" onclick="openNav()">&#9776;&nbsp;&nbsp;</span>
+</span>
+<!-- Slider MENU-->
+
+
+<div class="min-h-screen bg-blue-800 py-5">
+    <div class='overflow-x-auto w-full ' >
+        <table
+            class='mx-auto max-w-4xl w-full whitespace-nowrap rounded-lg bg-gray-200 divide-y overflow-hidden table-auto shadow-md'>
+            <thead class="bg-gray-500">
+                <tr class="text-white text-center">
+                    <th class="font-semibold text-sm lowercase px-6 py-0"> Name </th>
+                    <th class="font-semibold text-sm lowercase px-6 py-0"> s1 </th>
+                    <th class="font-semibold text-sm lowercase px-6 py-0"> s2 </th>
+                    <th class="font-semibold text-sm lowercase px-6 py-0"> s3 </th>
+                    <th class="font-semibold text-sm lowercase px-6 py-0"> result </th>
+                    <th class="font-semibold text-sm lowercase px-6 py-0"> cj1 </th>
+                    <th class="font-semibold text-sm lowercase px-6 py-0"> cj2 </th>
+                    <th class="font-semibold text-sm lowercase px-6 py-0"> cj3 </th>
+                    <th class="font-semibold text-sm lowercase px-6 py-0"> result </th>
+                    <th class="font-semibold text-sm lowercase px-6 py-0"> sum</th>
+                </tr>
+            </thead>
+            {% for data in attdata %} 
+            <tbody class="divide-y divide-gray-100">
+                {% if data.op == 1 %}
+                <tr class="isOP_tr pulse-op-now-square hover:bg-gray-300 dark:hover:bg-gray-700">
+                {% elif data.nextop == 1 %}
+                <tr class="isNOP_tr hover:bg-gray-300 dark:hover:bg-gray-700">                    
+                {% else %}
+                <tr class="ttr border-b border-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700">
+                {% endif %}
+                    <td class="px-7 py-0.5">
+                        <div class="idAtti">
+                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold mr-1 px-1.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">
+                            {{data.id}} <span class="counrty3Code"> ${{data.country.flag}}</span>
+                            </span>
+
+                        </div>
+                        <div class="flagDiv flex items-center space-x-3">
+                            <div class="inline-flex w-10 h-10"> <img class='w-10 h-10 py-0 object-cover rounded-full'
+                                    alt='User avatar' src='../static/img/flags/am.png' /> </div>
+                            <div>
+                                
+
+                                    <span class="att_name"> {{data.sname}} {{data.fname}} 
+                                        #{{data.country.flag}}!!
+                                        <!-- {% for datar in aacntr %} 
+                                        {{datar.name}}
+                                        {% endfor%} -->
+                                    </span>
+                                    <span class="justify-end indent">
+                                        {% if data.sex == 1 %}
+                                        <span class="bg-blue-400 text-white text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800  mr-px">{{data.wcat}}</span>
+                                        {% else %}
+                                        <span class="bg-red-400 text-white text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900  mr-px">{{data.wcat}}</span>
+                                        {% endif %}
+                                    </span>
+                                <p class="text-gray-500 text-sm font-semibold tracking-wide"> 
+                                    <span class="bg-gray-100 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">{{data.ownweight}} kG</span>
+                                    <span class="text-ellipsis overflow-hidden bg-gray-100 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-400">{{data.cityplace}}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </td>
+                    {% if data.s1ig == 1 %}
+                    <td class="px-6 text-center app_isget_c">
+                    {% elif data.s1ig == 0 %}
+                    <td class="px-6 text-center app_isnotget_c">
+                    {% elif data.s1ig == -1 %}
+                    <td class="px-6 text-center app-refused">
+                    {% elif data.s1ig is none and data.op == 1 %}
+                    <td class="px-6 text-center pulse-op-now">
+                    {% else %}
+                    <td class="px-6 text-center app">
+                    {% endif %}
+                        <p class="cntr"> {{data.s1 if data.s1 is not none}} </p> 
+                    </td>
+                    <td class="px-6 text-center">
+                        <p> {{data.s2 if data.s2 is not none}} </p> 
+                    </td>
+                    <td class="px-6 text-center">
+                        <p> {{data.s3 if data.s3 is not none}} </p>
+                    </td>
+                    <td class="px-6 py-1 text-center">
+                        <p><u> {{data.sres}} </u></p> 
+                    </td>
+                    <td class="px-6 text-center">
+                        <p> {{data.j1 if data.j1 is not none}} </p> 
+                    </td>
+                    <td class="px-6 py-1 text-center">
+                        <p> {{data.j1 if data.j2 is not none}} </p> 
+                    </td>
+                    <td class="px-6 text-center">
+                        <p> {{data.j3 if data.j3 is not none}} </p> 
+                    </td>
+                    <td class="px-6 text-center">
+                        <p><u> {{data.jres}} </u></p> 
+                     </td>
+                    <td class="px-6 text-center">
+                        <p><b> {{data.summa}} </b></p> 
+                    </td>                    
+                </tr>
+                
+            </tbody>
+            {% endfor%}
+        </table>
+    </div>
+</div>
+
+
+
+<table>
+    <thead>
+       <th>Id</th>
+       <th>First Name</th>
+       <th>Last Name</th>
+       <th>Age</th>
+       <th>#</th>
+    </thead>
+    {% for data in att %}
+    <tbody>
+       <td>{{data.id}}</td>
+       <td>{{data.firstname}}</td>
+       <td>{{data.op}}</td>
+       <td>{{data.snatch1}}</td>
+       <td><a href="/delete/{{data.id}}" type="button">Delete</a></td>
+    </tbody>
+    {% endfor%}
+ </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
