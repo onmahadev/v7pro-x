@@ -1,5 +1,5 @@
 <div id="header" align="center">
-  <img src="http://v7pro.ru/img/v7-main-logo-01.png" width="148"/>
+  <img src="v7-main-logo-01.png" width="148"/>
 </div>
 
 
