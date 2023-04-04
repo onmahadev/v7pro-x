@@ -3,10 +3,6 @@
 </div>
 
 
-
-[![Vkontakte](https://img.shields.io/badge/-Vkontakte-003f5c?style=for-the-badge&logo=Vk)](https://vk.com/web.step)
-
-
 <div id="badges" align="center">
   <a href="https://vk.com/v7proru">
     <img src="https://img.shields.io/badge/-Vkontakte-003f5c?style=for-the-badge&logo=Vk" alt="VK"/>
