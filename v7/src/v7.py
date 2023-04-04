@@ -6179,11 +6179,14 @@ def get_id_min_w_s2(exclude_id=0):
         try:
             azzxd0 = list(s1_dict.keys())[0]
             azzxd1 = list(s1_dict.keys())[1]
+            azzxd2 = list(s1_dict.keys())[2]
             azzxd0w = list(s1_dict.values())[0]
-            azzxd1w = list(s1_dict.values())[1]            
+            azzxd1w = list(s1_dict.values())[1]
+            azzxd2w = list(s1_dict.values())[2]
         except:
             azzxd0 = 1
-            azzxd1 = 2        
+            azzxd1 = 2   
+            azzxd2 = 3        
         if(len(s2_dict)==2):
             if( azzxd1w < azzxd0w ):
                 print(f's1_dict[x] < s2_dict[4] !!  :::{azzxd1}:{azzxd1w} <  {azzxd0}:{azzxd0w} |=  ')
@@ -6208,13 +6211,25 @@ def get_id_min_w_s2(exclude_id=0):
                 print(f's1_dict[4]<VRADJENDRA PR KI JAY!!!!  !!  ::: {azzxd0} <  {azzxd1} ')
                 rez = azzxd1
             if( azzxd1w > azzxd0w ):
-                print(f's1_dict[4]<s2_dict[4] !!  :::{azzxd1}:{azzxd1w} <  {azzxd0}:{azzxd0w} |=  ')
-                print(f's1_dict[4]<VRADJENDRA PR KI JAY!!!!  !!  ::: {azzxd0} <  {azzxd1} ')
+                print(f's1_dict[4]<s2_dict[4] !!  :::{azzxd1}:{azzxd1w} >  {azzxd0}:{azzxd0w} |=  ')
+                print(f's1_dict[4]<VRADJENDRA PR KI JAY!!!!  !!  ::: {azzxd0} >  {azzxd1} ')
                 rez = azzxd0
             if( azzxd1w == azzxd0w ):
-                print(f's1_dict[4]<s2_dict[4] !!  :::{azzxd1}:{azzxd1w} <  {azzxd0}:{azzxd0w} |=  ')
-                print(f's1_dict[4]<VRADJENDRA PR KI JAY!!!!  !!  ::: {azzxd0} <  {azzxd1} ')
-                rez = azzxd0                                
+                print(f's1_dict[4]<s2_dict[4] !!  :::{azzxd1}:{azzxd1w} ==  {azzxd0}:{azzxd0w} |=  ')
+                print(f's1_dict[4]<VRADJENDRA PR KI JAY!!!!  !!  ::: {azzxd0} ==  {azzxd1} ')
+                rez = azzxd0  
+
+
+# chk all THREE!
+            if( azzxd2w < azzxd0w and azzxd2w < azzxd1w):
+                print(f' azzxd2w < azzxd0w and azzxd2w < azzxd1w !!  :::{azzxd2}:{azzxd1w} <  {azzxd0}:{azzxd0w} |=  ')
+                print(f'<<<<< ]<VRADJENDRA PR KI JAY!!!!  !!  ::: {azzxd0} ==  {azzxd1} ')
+                rez = azzxd2
+            if( azzxd1w < azzxd0w and azzxd1w < azzxd2w):
+                print(f' azzxd1w < azzxd0w and azzxd1w < azzxd1w !!  :::{azzxd2}:{azzxd1w} <  {azzxd0}:{azzxd0w} |=  ')
+                print(f'<<<<< !!! <VRADJENDRA PR KI JAY!!!!  !!  ::: {azzxd0} ==  {azzxd1} ')
+                rez = azzxd1                  
+                                          
             # print(f'******___ len(s2_dict)==2  ::: {len(s2_dict)}')
             print(f'SNATCH 2 == 3 DOUBLE WEIGHT !!!  ::: {len(s2_dict)}')            
 
