@@ -4850,7 +4850,7 @@ def sel_op_id(s1,s2,s3):
             else:
                 minest = s3w
                 set_op(s3)
-                print(f"op= s3 id:{s3} w:{s3w}")
+                print(f"op= s3 #### :{s3}:{s3w} :@: {s2}:{s2w}")
 
 
                 return s3
@@ -6527,14 +6527,87 @@ def get_id_min_w_s3(exclude_id=0):
         # print(f"rezNOW ##################### !! : {rez} len: {len(rez)}")
         # print(f"rezNOW ##################### !@@@! : {rez[0]['id']}")
         # rez = rez[0]['id']
+
+
+
+
+# NEED CHECK on DOUBLE weight S3=S3, S2=S2, S1= < > etc.......
+
+
+        if not rez:
+            print("------==")
+            rez = 0
+        if (isinstance(rez, dict)):
+            # if len(rez)==1:
+            #     rez = rez[0]['id']
+            #     print(f"11111  @ !!!!!!!!!!!!!! ±±± REZZZŽ {rez}")
+            #     # clear_op()
+            #     # set_op(5)
+
+            #     # WOW нахуй ПИЗДЕЦ! ) 
+            #     # сработало
+            #     # if((get_w_s2_ex(rez)) == (get_w_s3_ex(rez)) ):
+            #     #     print(f'....... ::: get_w_s2_ex(rez) :::: {rez} = {get_w_s2_ex(rez)}')
+            #     clear_op()
+            #     set_op(rez)
+
+            try:                    
+                if len(rez)==1:
+                    rez = rez[0]['id']         
+                    print(f"1111111  @ !!!!!!!!!!!!!! ±±± REZZZŽ {rez}")
+                    clear_op()
+                    set_op(rez)                    
+            except:
+                  print(f"An exception occurred {KeyError}")
+
+            try:                    
+                if len(rez)==2:
+                    rez = rez[0]['id']         
+                    print(f"2222222  @ !!!!!!!!!!!!!! ±±± REZZZŽ {rez}")
+            except:
+                  print(f"An exception occurred {KeyError}")
+
+            try:                
+                if len(rez)==3:
+                    rez0 = rez[0]['id']
+                    rez0w = rez[0]['s3']
+                    rez1 = rez[1]['id']
+                    rez1w = rez[1]['s3']
+                    rez2 = rez[2]['id']
+                    rez2w = rez[2]['s3']
+                    print(f"3333333  @ !!!!!!!!!!!!!! ±±± REZZZŽ ID3/w :{rez0} / {rez0w}")
+                    print(f"3333333  @ !!!!!!!!!!!!!! ±±± REZZZŽ ID2/w : {rez1} / {rez1w}")
+                    print(f"3333333  @ !!!!!!!!!!!!!! ±±± REZZZŽ ID3/w :{rez2} / {rez2w}")
+
+
+
+            except:
+                  print(f"An exception occurred {KeyError}")                
+            
+            try:
+                if len(rez)==4:
+                    rez = rez[0]['id']         
+                    print(f"4444444  @ !!!!!!!!!!!!!! ±±± REZZZŽ {rez}")
+            except:
+                  print(f"An exception occurred {KeyError}")
+            
+            try:
+                if len(rez)==5:
+                    rez = rez[0]['id']         
+                    print(f"5555555  @ !!!!!!!!!!!!!! ±±± REZZZŽ {rez}")                                
+            except:
+                  print(f"An exception occurred {KeyError}")                
+
+
+
         try:
             rez = rez[0]['id']
             print(f"rezNOW <1 !! : {rez} len: {len(rez)}")
             print(f"rezNOW <1 !@@@! : {rez[0]['id']}")            
         except:
             # rez = 0
-            print(f"r&*&*&*&*&*&*&##### !! : {rez}")
-            print("@@@ An exception occurred")
+            print(f"___r&*&*&*&*&*&*&##### !! : {rez} ")
+            print("@@@ An exception occurred XYZ")
             #  И С П Р А В Л Е Н О !!!!!!!!!!!!!!!!!
             # ПИЗДЕЦ! ПРИЕХАЛИ! error errorzzz - DONE!!!
             #  И С П Р А В Л Е Н О !!!!!!!!!!!!!!!!!
