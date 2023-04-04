@@ -1,11 +1,11 @@
 <div id="header" align="center">
-  <img src="https://media.giphy.com/media/xT5LMpfLOGZ3o4ghMs/giphy.gif" width="48"/>
+  <img src="http://v7pro.ru/img/v7-main-logo-01.png" width="48"/>
 </div>
 
 
 <div id="badges" align="center">
   <a href="your-linkedin-URL">
-    <img src="https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn Badge"/>
+    <img src="https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=linkedin&logoColor=white" alt="VK Badge"/>
   </a>
   <a href="your-youtube-URL">
     <img src="https://img.shields.io/badge/YouTube-red?style=for-the-badge&logo=youtube&logoColor=white" alt="Youtube Badge"/>
@@ -35,3 +35,7 @@ v7pro (спортивная система) - это программно-апп
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" title="vscode" alt="vscode" width="40" height="40"/>&nbsp;
 </div>
 
+
+<div id="header" align="center">
+  <img src="https://media.giphy.com/media/xT5LMpfLOGZ3o4ghMs/giphy.gif" width="48"/>
+</div>
