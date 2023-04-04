@@ -291,7 +291,11 @@ transform: scale(1.2, 1.2);
   width: 48px;
   margin-left: 0px;
   margin-right: 0px;
-
+}
+.pp_exnow_j_nbsp {
+  width: 100px;
+  margin-left: -40%;
+  margin-right: 0px;
 }
 
 
