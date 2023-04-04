@@ -22,6 +22,10 @@ v7pro (спортивная система) - это программно-апп
 
 
 
+
+![](http://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=onmahadev&theme=default)
+
+
 ### Languages and Tools:
 <div>
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" title="python" alt="python" width="40" height="40"/>&nbsp;
