@@ -1,14 +1,18 @@
 <div id="header" align="center">
-  <img src="http://v7pro.ru/img/v7-main-logo-01.png" width="48"/>
+  <img src="http://v7pro.ru/img/v7-main-logo-01.png" width="148"/>
 </div>
 
 
+
+[![Vkontakte](https://img.shields.io/badge/-Vkontakte-003f5c?style=for-the-badge&logo=Vk)](https://vk.com/web.step)
+
+
 <div id="badges" align="center">
-  <a href="your-linkedin-URL">
-    <img src="https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=linkedin&logoColor=white" alt="VK Badge"/>
+  <a href="https://vk.com/v7proru">
+    <img src="https://img.shields.io/badge/-Vkontakte-003f5c?style=for-the-badge&logo=Vk" alt="VK"/>
   </a>
-  <a href="your-youtube-URL">
-    <img src="https://img.shields.io/badge/YouTube-red?style=for-the-badge&logo=youtube&logoColor=white" alt="Youtube Badge"/>
+  <a href="http://t.me/v7krsh">
+    <img src="https://patrolavia.github.io/telegram-badge/chat.png" alt="tg"/>
   </a>
   <a href="your-twitter-URL">
     <img src="https://img.shields.io/badge/Twitter-blue?style=for-the-badge&logo=twitter&logoColor=white" alt="Twitter Badge"/>
