@@ -3834,9 +3834,10 @@ def set_op_now(id='0'):
         
         sop_j_id = sel_op_id(jj1, jj3, jj3)
 
+
         print(f'JJ1= {jj1} | JJ2= {jj2} | JJ3= {jj3} ||| JOP_ID::: {sop_j_id} ')
-        clear_op()
-        oid = set_op(5)
+        # clear_op()
+        # oid = set_op(5)
 
 
 # ?????????????????????
@@ -3858,6 +3859,8 @@ def set_op_now(id='0'):
             oid = sop_j_id
             clear_op()
             set_op(oid)
+        else:
+            oid = 9865
         return oid
         
 
@@ -4911,11 +4914,13 @@ def sel_op_id(s1,s2,s3):
 
             # ############
             
-            j1=get_min_w_j1()
-            j2=get_min_w_j2()
-            j3=get_min_w_j3()
-            wr_sel_nop_id_cj(j1,j2,j3)
-            print(f"wr_sel_nop_id_cj: {j1}, {j2}, {j3}") 
+            # j1=get_min_w_j1()
+            # j2=get_min_w_j2()
+            # j3=get_min_w_j3()
+            # sopid2 = wr_sel_nop_id_cj(j1,j2,j3)
+            # sopid = sel_op_id(j1,j2,j3)
+            # # wr_sel_nop_id_cj(j1,j2,j3)
+            # print(f"wr_sel_nop_id_cj @@@: {j1}, {j2}, {j3} :: SOPID: {sopid}, {sopid2}") 
         # if(SN is False):
         #     print('SN is None, now CLEAN&JERK !!!######')
 
@@ -4948,6 +4953,172 @@ def sel_op_id(s1,s2,s3):
             SN,CJ= False, False
             print(f"Snatch is:  {SN}")
             print(f"Clear&Jerk is:  {CJ}")
+
+
+
+
+
+
+    if(CJ!=False):
+                # ############
+        j1=get_min_w_j1()
+        j2=get_min_w_j2()
+        j3=get_min_w_j3()
+        # wr_sel_nop_id_cj(j1,j2,j3)
+        print(f'CJ!=CJ!=CJ!=CJ!=CJ!=CJ {j1} :: {j2} :: {j3}')
+
+        if(s1>0 and s2==0 and s3==0):
+            print(f"op= s1@@, id:{s1} weight:{get_w_j1_ex(s1)}")
+            clear_op()
+            set_op(s1)
+            return s1
+############################## only s2
+        if(s1==0 and s2>0 and s3==0):
+            print(f"op= s2**, id:{s2} weight:{get_w_s2(s2)}")
+            clear_op()
+            set_op(s2)
+            return s2
+############################## only s3
+        if(s1==0 and s2==0 and s3>0):
+            print(f"op= s3_+_, id:{s3} weight:{get_w_s3_ex(s3)}")
+
+            clear_op()
+            set_op(s3)   
+            
+
+            return s3
+############################## s1 && s2
+        if(s1>0 and s2>0 and s3==0):
+            if(get_w_s1(s1))<=(get_w_s2(s2)):
+                print(f"op= s1##, id:{s1} weight:{get_w_s1(s1)}")
+                clear_op()
+                set_op(s1)
+                return s1
+            elif(get_w_s1(s1))>(get_w_s2(s2)):
+                print(f"op= s2*ZZZZZ, id:{s2} weight:{get_w_s2(s2)}")
+                print(f'{get_w_s1(s1)} >>>>>>  {get_w_s2(s2)}')
+                clear_op()
+                set_op(s2)
+            elif(get_w_s1(s1))>=(get_w_s2(s2)):
+                print(f"op= s1 == SUCK!!!!, id:{s1} weight:{get_w_s1(s1)}")
+                clear_op()
+                set_op(s1)            
+                return s1
+############################## s1 && s3
+        if(s1>0 and s2==0 and s3>0):
+            if(get_w_s1(s1))<=(get_w_s3(s3)):
+                print(f"op= s1__, id:{s1} weight:{get_w_s1(s1)}")
+                clear_op()
+                set_op(s1)
+                return s1
+            elif(get_w_s1_ex(s1))>(get_w_s3_ex(s3)):
+                print(f"op= s3_)(, id:{s3} weight:{get_w_s3_ex(s3)}")
+                clear_op()
+                set_op(s3)
+                return s3
+############################## s2 && s3
+        if(s1==0 and s2>0 and s3>0):
+            if(get_w_s2_ex(s2))<=(get_w_s3_ex(s3)):
+                print(f"op= s2%%, id:{s2} weight:{get_w_s2_ex(s2)}")
+                clear_op()
+                set_op(s2)
+                return s2
+            elif(get_w_s1(s2))>(get_w_s3(s3)):
+                print(f"op= s3____, id:{s3} weight:{get_w_s3(s3)}")
+                clear_op()
+                set_op(s3)
+                return s3
+############################## s1 && s2 && s3
+        if(s1>0 and s2>0 and s3>0):
+            s1w,s2w,s3w = get_w_s1_ex(s1),get_w_s2_ex(s2),get_w_s3_ex(s3)
+            # s1w,s2w,s3w = get_w_s1_ex(s1),get_w_s2_ex(s2),get_w_s3_ex(s3)
+            # ?????
+            clear_op()
+            minest = 0
+            app = [] # approach=подход s1 ? s2 ? s3
+            if(s1w is None):
+                s1w = 0
+            if(s2w is None):
+                s2w = 0
+            if(s3w is None):
+                s3w = 0                                
+            if s1w <= s2w and s1w <= s3w:
+                minest = s1w
+                set_op(s1)
+                print(f"op= s1** id:{s1} w:{s1w}")
+                return s1
+            elif s2w <= s3w:
+                minest = s2w
+                set_op(s2)
+                # set_op(4) ?????????????????
+                print(f"op ::= s2 id:{s2} w:{s2w}")
+
+
+
+                # ********** ????****
+                
+                return s2
+            else:
+                minest = s3w
+                set_op(s3)
+                print(f"op= s3 #### :{s3}:{s3w} :@: {s2}:{s2w}")
+
+
+                return s3
+
+### If all weight = 0 - The END of flow!            
+        if(s1==0 and s2==0 and s3==0):
+            print(f"(1-st) SNATCH THE END!!! ids: {s1}, {s2}, {s3}")
+            SN,CJ= False, True
+            print(f"Snatch is:  {SN}")
+            print(f"Clear&Jerk is:  {CJ}")
+
+
+
+            # ############
+            
+            j1=get_min_w_j1()
+            j2=get_min_w_j2()
+            j3=get_min_w_j3()
+            sopid2 = wr_sel_nop_id_cj(j1,j2,j3)
+            sopid = sel_op_id(j1,j2,j3)
+            # wr_sel_nop_id_cj(j1,j2,j3)
+            print(f"wr_sel_nop_id_cj @@@: {j1}, {j2}, {j3} :: SOPID: {sopid}, {sopid2}") 
+        # if(SN is False):
+        #     print('SN is None, now CLEAN&JERK !!!######')
+
+        #     # ############
+        #     j1=get_min_w_j1()
+        #     j2=get_min_w_j2()
+        #     j3=get_min_w_j3()
+        #     wr_sel_nop_id_cj(j1,j2,j3)
+        #     print(f"wr_sel_nop_id_cj: {j1}, {j2}, {j3}")
+            
+    #    !!!!!!!!!!!!!!!!!!        
+    
+        else:
+    #print(f"a1={s1w} s2={s2w} s3={s3w}, min={minest} app={app}")
+    #get_w_s2(s2) = 0
+            print(f"ids-ZZZXXXX: {s1}, {s2}, {s3}")
+            # return s2 ?????
+            if(SN is False):
+                print('SN is None, now CLEAN&JERK !!!######')
+
+            # ############
+                j1=get_min_w_j1()
+                j2=get_min_w_j2()
+                j3=get_min_w_j3()
+                wr_sel_nop_id_cj(j1,j2,j3)
+                print(f"wr_sel_nop_id_cj: {j1}, {j2}, {j3}")        
+
+        if(s1 is None or s2 is None or s3 is None):
+            print(f"(s1 is None or s2 is None or s3 is None !!!!!!!!!!!!")
+            SN,CJ= False, False
+            print(f"Snatch is:  {SN}")
+            print(f"Clear&Jerk is:  {CJ}")
+
+
+
 
 
 
@@ -5294,7 +5465,7 @@ def wr_sel_nop_id_cj(j1,j2,j3):
     print('###### START C&J _NOP!')
     print('####### ERROR ########')
     print('######################')
-    print(f"{j1} {j2} {j3} ____=========+++++++ j1-j2-j3")
+    print(f"{j1} /  {j2} // {j3} /// :  ____=========+++++++ j1-j2-j3")
 
 
     # НАДО ПРАВИТЬ ЭТО ⤵ ⤵ ⤵
@@ -5579,20 +5750,20 @@ def get_min_w_j1():
     ma = att.alias()
     rez = {}
     i=0
-    subq = ma.select(fn.MIN(ma.j1))
-    query = (att.select(att.id, att.j1).where(att.j1 == subq))
+    # subq = ma.select(fn.MIN(ma.j1))
+    query = (att.select(att.id, att.j1))#.where(att.s1 == subq))
     for item in query.dicts().execute():
         i+=1
         rez[i]=item
 
-    if 'rez[1]' in locals():
-        rez=rez[1]
-        print('Variable j1 exist.')
-    else:
-        rez=0
-        print('Variable j1 don\'t exist.')
-                
-    return rez
+    min_w_dict = {}
+    for key in rez:
+        min_w_dict[rez[key]['id']]=rez[key]['j1']
+    j1min_id_w = min(min_w_dict, key=min_w_dict.get,default=0)           
+
+
+    print(f'~Z~~  get_min_w_j1 ::: REZ: // {j1min_id_w}')
+    return j1min_id_w
     # return jsonify({'get_min_w_j1': rez})
 
 
@@ -5817,8 +5988,159 @@ def get_id_min_w_s1(exclude_id=0):
 ##### get id with min weight in j1 w/o doubles (op id j1)
 #####  -> id, one id with min weight in j1
 def get_id_min_w_j1(exclude_id=0):
-#    if exclude_id is None:
-#        exclude_id=-1    
+# #    if exclude_id is None:
+# #        exclude_id=-1    
+#     if exclude_id>0:
+#         print('*** EXCLUDE j1 OP ID: [ ', exclude_id, ' ]')
+#         ma = att.alias()
+#         rez = {}
+#         i=0
+#         subq = ma.select(fn.MIN(ma.j1)).where(ma.j1ig.is_null(True) &
+#         (ma.id!=exclude_id)
+#         )
+#         query = (att.select(att.id, att.j1).where(
+#             (att.j1 == subq) &
+#             (att.id!=exclude_id) &
+#             (att.j1ig.is_null(True)))
+#         )
+#         for item in query.dicts().execute():
+#             print(item,'*****_________')
+#             i+=1
+#             rez[i]=item
+#         min_w_dict = {}
+#         for key in rez:
+#             min_w_dict[rez[key]['id']]=rez[key]['j1']
+#         j1min_id_w = min(min_w_dict, key=min_w_dict.get,default=0)
+#         return j1min_id_w
+# # INCLUDE al ID
+#     else:
+#         ma = att.alias()
+#         rez = {}
+#         i=0
+#         subq = ma.select(fn.MIN(ma.j1)).where(ma.j1ig.is_null(True))
+#         query = (att.select(att.id, att.j1).where(
+#             (att.j1 == subq) &
+#             (att.j1ig.is_null(True)))
+#         )
+#         for item in query.dicts().execute():
+#             #print(item)
+#             i+=1
+#             rez[i]=item
+#         min_w_dict = {}
+#         for key in rez:
+#             min_w_dict[rez[key]['id']]=rez[key]['j1']
+#         j1min_id_w = min(min_w_dict, key=min_w_dict.get,default=0)
+#         return j1min_id_w
+    # try:
+    #     print(x)
+    # except:
+    #     print("An exception occurred")
+    #     exclude_id=0
+
+
+
+#     if exclude_id is None:
+#         exclude_id=-1
+#         ma = att.alias()
+#         rez = {}
+#         i=0
+#         subq = ma.select(fn.MIN(ma.j1)).where(ma.j1ig.is_null(True))
+#         query = (att.select(att.id, att.j1).where(
+#             (att.j1 == subq) &
+#             (att.j1ig.is_null(True)))
+#         )
+#         for item in query.dicts().execute():
+#             #print(item)
+#             i+=1
+#             rez[i]=item
+#         min_w_dict = {}
+#         for key in rez:
+#             min_w_dict[rez[key]['id']]=rez[key]['j1']
+#         s1min_id_w = min(min_w_dict, key=min_w_dict.get,default=0)        
+
+
+
+
+
+
+
+
+#     if exclude_id>0:
+#         print('*** EXCLUDE j1 OP ID: [ ', exclude_id, ' ]')
+#         ma = att.alias()
+#         rez = {}
+#         i=0
+#         subq = ma.select(fn.MIN(ma.j1)).where(ma.j1ig.is_null(True) &
+#         (ma.id!=exclude_id)
+#         )
+#         query = (att.select(att.id, att.j1).where(
+#             (att.j1 == subq) &
+#             (att.id!=exclude_id) &
+#             (att.j1ig.is_null(True)))
+#         )
+#         for item in query.dicts().execute():
+#             print(item,'******---*******%#####')
+#             i+=1
+#             rez[i]=item
+#         min_w_dict = {}
+#         for key in rez:
+#             min_w_dict[rez[key]['id']]=rez[key]['j1']
+#         s1min_id_w = min(min_w_dict, key=min_w_dict.get,default=0)
+#         return s1min_id_w
+# # INCLUDE al ID
+#     else:
+#         ma = att.alias()
+#         rez = {}
+#         i=0
+#         subq = ma.select(fn.MIN(ma.j1)).where(ma.j1ig.is_null(True))
+#         query = (att.select(att.id, att.j1).where(
+#             (att.j1 == subq) &
+#             (att.j1ig.is_null(True)))
+#         )
+#         for item in query.dicts().execute():
+#             #print(item)
+#             i+=1
+#             rez[i]=item
+#         min_w_dict = {}
+#         for key in rez:
+#             min_w_dict[rez[key]['id']]=rez[key]['j1']
+#         s1min_id_w = min(min_w_dict, key=min_w_dict.get,default=0)
+#         return s1min_id_w
+
+
+# def get_id_min_w_s1(exclude_id=0):
+    # try:
+    #     print(x)
+    # except:
+    #     print("An exception occurred")
+    #     exclude_id=0
+    if exclude_id is None:
+        exclude_id=-1
+        ma = att.alias()
+        rez = {}
+        i=0
+        subq = ma.select(fn.MIN(ma.j1)).where(ma.j1ig.is_null(True))
+        query = (att.select(att.id, att.j1).where(
+            (att.j1 == subq) &
+            (att.j1ig.is_null(True)))
+        )
+        for item in query.dicts().execute():
+            #print(item)
+            i+=1
+            rez[i]=item
+        min_w_dict = {}
+        for key in rez:
+            min_w_dict[rez[key]['id']]=rez[key]['j1']
+        s1min_id_w = min(min_w_dict, key=min_w_dict.get,default=0)
+        return min_w_dict      
+
+
+
+
+
+
+
+
     if exclude_id>0:
         print('*** EXCLUDE j1 OP ID: [ ', exclude_id, ' ]')
         ma = att.alias()
@@ -5833,14 +6155,14 @@ def get_id_min_w_j1(exclude_id=0):
             (att.j1ig.is_null(True)))
         )
         for item in query.dicts().execute():
-            print(item,'*****_________')
+            print(item,'**##****---*******%#####')
             i+=1
             rez[i]=item
         min_w_dict = {}
         for key in rez:
             min_w_dict[rez[key]['id']]=rez[key]['j1']
-        j1min_id_w = min(min_w_dict, key=min_w_dict.get,default=0)
-        return j1min_id_w
+        s1min_id_w = min(min_w_dict, key=min_w_dict.get,default=0)
+        return s1min_id_w
 # INCLUDE al ID
     else:
         ma = att.alias()
@@ -5858,8 +6180,8 @@ def get_id_min_w_j1(exclude_id=0):
         min_w_dict = {}
         for key in rez:
             min_w_dict[rez[key]['id']]=rez[key]['j1']
-        j1min_id_w = min(min_w_dict, key=min_w_dict.get,default=0)
-        return j1min_id_w
+        s1min_id_w = min(min_w_dict, key=min_w_dict.get,default=0)
+        return s1min_id_w
 
 
 ### NEW ПИЗДЕЦ ОК! ДОБРО!
