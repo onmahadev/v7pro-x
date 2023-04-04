@@ -6178,34 +6178,49 @@ def get_id_min_w_s2(exclude_id=0):
         # И ВЫБИРАЕМ ПО р1 (1.min весе snatch1, 1.по мандатке )
         try:
             azzxd0 = list(s1_dict.keys())[0]
+        except:
+            azzxd0 = 1            
+        try:            
             azzxd1 = list(s1_dict.keys())[1]
+        except:
+            azzxd1 = 1            
+        try:            
             azzxd2 = list(s1_dict.keys())[2]
+        except:
+            azzxd2 = 1            
+        try:            
             azzxd0w = list(s1_dict.values())[0]
+        except:
+            azzxd0w = 1            
+        try:            
             azzxd1w = list(s1_dict.values())[1]
+        except:
+            azzxd1w = 1            
+        try:                        
             azzxd2w = list(s1_dict.values())[2]
         except:
-            azzxd0 = 1
-            azzxd1 = 2   
-            azzxd2 = 3        
-            azzxd0w = 11
-            azzxd1w = 22
-            azzxd2w = 33
+            azzxd2w = 1            
+
         if(len(s2_dict)==2):
             if(azzxd1w and azzxd0w):
                 if( azzxd1w < azzxd0w ):
                     print(f's1_dict[x] < s2_dict[4] !!  :::{azzxd1}:{azzxd1w} <  {azzxd0}:{azzxd0w} |=  ')
                     print(f's1_dict[x] < VRADJENDRA PR KI JAY!!!!  !!  ::: {azzxd0} <  {azzxd1} ')
                     rez = azzxd1
+                    return rez
                 if( azzxd1w > azzxd0w ):
                     print(f's1_dict[x] > s2_dict[4] !!  :::{azzxd1}:{azzxd1w} >  {azzxd0}:{azzxd0w} |=  ')
                     print(f's1_dict[x] > VRADJENDRA PR KI JAY!!!!  !!  ::: {azzxd0} >  {azzxd1} ')
                     rez = azzxd0
+                    return rez
                 if( azzxd1w == azzxd0w ):
                     print(f's1_dict[x]==s2_dict[4] !!  :::{azzxd1}:{azzxd1w} ==  {azzxd0}:{azzxd0w} |=  ')
                     print(f's1_dict[x]==VRADJENDRA PR KI JAY!!!!  !!  ::: {azzxd0} == {azzxd1} ')
                     rez = azzxd0                                
+                    return rez
             # print(f'******___ len(s2_dict)==2  ::: {len(s2_dict)}')
             print(f'SNATCH 2 == 2 DOUBLE WEIGHT !!!  ::: {len(s2_dict)}')
+
 
 
 
@@ -6215,14 +6230,17 @@ def get_id_min_w_s2(exclude_id=0):
                     print(f's1_dict[4]<s2_dict[4] !!  :::{azzxd1}:{azzxd1w} <  {azzxd0}:{azzxd0w} |=  ')
                     print(f's1_dict[4]<VRADJENDRA PR KI JAY!!!!  !!  ::: {azzxd0} <  {azzxd1} ')
                     rez = azzxd1
+                    return rez
                 if( azzxd1w > azzxd0w ):
                     print(f's1_dict[4]<s2_dict[4] !!  :::{azzxd1}:{azzxd1w} >  {azzxd0}:{azzxd0w} |=  ')
                     print(f's1_dict[4]<VRADJENDRA PR KI JAY!!!!  !!  ::: {azzxd0} >  {azzxd1} ')
                     rez = azzxd0
+                    return rez
                 if( azzxd1w == azzxd0w ):
                     print(f's1_dict[4]<s2_dict[4] !!  :::{azzxd1}:{azzxd1w} ==  {azzxd0}:{azzxd0w} |=  ')
                     print(f's1_dict[4]<VRADJENDRA PR KI JAY!!!!  !!  ::: {azzxd0} ==  {azzxd1} ')
                     rez = azzxd0  
+                    return rez
 
 
 # chk all THREE!
@@ -6514,7 +6532,7 @@ def get_id_min_w_s3(exclude_id=0):
         i=0
         # subq = ma.select(fn.MIN(ma.s3)).where(ma.s3ig.is_null(True))
 
-        query = (att.select(att.id, att.s3).where(
+        query = (att.select(att.id, att.s3,att.s2,att.s1).where(
             (att.s3ig.is_null(True)) &
             (att.s2ig.is_null(False)) &
             (att.s1ig.is_null(False))
@@ -6561,28 +6579,227 @@ def get_id_min_w_s3(exclude_id=0):
                   print(f"An exception occurred {KeyError}")
 
             try:                    
+                # if len(rez)==2:
+                #     rez = rez[0]['id']         
+                #     print(f"2222222  @ !!!!!!!!!!!!!! ±±± REZZZŽ {rez}")
+
+
                 if len(rez)==2:
-                    rez = rez[0]['id']         
-                    print(f"2222222  @ !!!!!!!!!!!!!! ±±± REZZZŽ {rez}")
+                    rez0 = rez[0]['id']
+                    rez0w = rez[0]['s3']
+                    rez0w_s2 = rez[0]['s2']
+                    rez0w_s1 = rez[0]['s1']
+                    rez1 = rez[1]['id']
+                    rez1w = rez[1]['s3']
+                    rez1w_s2 = rez[1]['s2']
+                    rez1w_s1 = rez[1]['s1']
+                    # rez2 = rez[2]['id']
+                    # rez2w = rez[2]['s3']
+                    # rez2w_s2 = rez[2]['s2']
+                    # rez2w_s1 = rez[2]['s1']
+                    print(f"3333333  @@ !!!!!!!!!!!!!! ±±± REZZZŽ ID3/w :{rez0} / {rez0w} & {rez0w_s1} & {rez0w_s2}")
+                    print(f"3333333  @@ !!!!!!!!!!!!!! ±±± REZZZŽ ID2/w : {rez1} / {rez1w} & {rez1w_s1} & {rez1w_s2}")
+                    # print(f"3333333  @ !!!!!!!!!!!!!! ±±± REZZZŽ ID3/w :{rez2} / {rez2w} & {rez2w_s1} & {rez2w_s2}")
+                    
+                    # сравниваем веса в snatch1
+                    if(rez0w==rez1w and rez1w_s2==rez0w_s2 and rez1w_s1==rez0w_s1):
+                        print(f's1 ==.== EQ 2 AT!!!! {rez0w,rez1w}')
+                        return rez0
+                    if(rez1w_s2==rez0w_s2 and rez1w==rez0w):
+                        print(f's1 ==..== EQ 2 AT!!!! {rez0w,rez1w}')
+                        if(rez0w_s1==rez1w_s1):
+                            print(f'rez0w_s1  EQ 2 AT!!!! {rez0w,rez1w}')                        
+                            return rez0
+                        if(rez0w_s1<=rez1w_s1):
+                            print(f'rez0w_s1  EQ 2 AT!!!! {rez0w,rez1w}')  
+                            return rez0
+                        if(rez0w_s1>rez1w_s1):
+                            print(f'rez0w_s1  EQ 2 AT!!!! {rez0w,rez1w}')    
+                            return rez1                                                                      
+                        # return rez1
+                                        
+
+
+
+
+
+                    
+                    if(rez0w_s2==rez1w_s2 and rez0w_s2<rez2w_s2):
+                        print(f'{rez0w_s2} 1__@# s2 === EQ 3 AT!!!! {rez0w,rez1w,rez2w}')
+                        if(rez1w_s1<rez0w_s1 and rez1w_s1<rez2w_s1):
+                            print(f'{rez1w_s1} 1_%%%_@# s2 === EQ 3 AT!!!! {rez0w,rez1w,rez2w}')
+                            return rez1
+                        return rez0
+                    if(rez0w_s2<=rez1w_s2 and rez0w_s1<=rez2w_s1):
+                        print(f'{rez0w_s2} 2___@# s2 === EQ 3 AT!!!! {rez0w,rez1w,rez2w}')                            
+                        if(rez0w_s1<=rez1w_s1 and rez0w_s1<=rez2w_s1):
+                            print(f'{rez0w_s1} 2##___@# s2 === EQ 3 AT!!!! {rez0w,rez1w,rez2w}')                            
+                            return rez0
+                        if(rez1w_s1<rez1w_s1 and rez1w_s1<=rez2w_s1):
+                            print(f'{rez1w_s1} 2##_((((__@# s2 === EQ 3 AT!!!! {rez0w,rez1w,rez2w}')                            
+                            return rez1                            
+                            # return rez0
+                        if(rez0w_s2<=rez1w_s2 and rez1w_s1<rez2w_s1 and rez1w_s1<rez0w_s1):
+                            print(f'{rez0w_s2} 2_***__@# s2 === EQ 3 AT!!!! {rez0w,rez1w,rez2w}')                            
+                            return rez0                        
+                        if(rez2w_s2<rez0w_s2 and rez2w_s2<rez1w_s2):
+                            print(f'{rez2w_s2} 0___@# s2 === EQ 3 AT!!!! {rez0w,rez1w,rez2w}')                                                        
+                            return rez2
+
+                        # сравниваем веса в snatch2
+
+# ++
+                        # сравниваем веса в snatch2
+                        if(rez1w_s2<rez0w_s2 and rez1w_s2<rez2w_s2):
+                            print(f'{rez1w_s2} 1_ s2 === EQ 3 AT!!!! {rez0w,rez1w,rez2w}')
+                            return rez1
+                        if(rez2w_s2<rez0w_s2 and rez2w_s2<rez1w_s2):
+                            print(f'{rez2w_s2} 2_ s2 === EQ 3 AT!!!! {rez0w,rez1w,rez2w}')                            
+                            return rez2
+                        if(rez0w_s2<rez1w_s2 and rez0w_s2<rez1w_s2):
+                            print(f'{rez0w_s2} 0_ s2 === EQ 3 AT!!!! {rez0w,rez1w,rez2w}')                                                        
+                            return rez0
+                        # сравниваем веса в snatch2
+
+
+
+
+
+                        if(rez0w_s2==rez1w_s2 and rez0w_s2==rez2w_s2):
+                            print(f's3 & s2 weight === EQ 3 AT!!!! {rez0w_s2,rez1w_s2,rez2w_s2}')
+                            
+                            print(f's3 & s2 & s1 weight! {rez0w_s1,rez1w_s1,rez2w_s1}')
+
+
+                            # сравниваем веса в snatch1
+
+                            if(rez0w_s1==rez1w_s1 and rez0w_s1==rez2w_s1):
+                                print(f's3 & s2 & s1 !!! weight === EQ 3 AT!!!! {rez0w_s1,rez1w_s1,rez2w_s1}')
+                                return rez0
+
+                            # сравниваем веса в snatch1 <= 0 
+                            if(rez0w_s1<=rez1w_s1 and rez0w_s1<=rez2w_s1):
+                                print(f'rez0w_s1 <=  weight === EQ 3 AT!!!! {rez0w_s1,rez1w_s1,rez2w_s1}')                                
+                                return rez0
+                            # сравниваем веса в snatch1 <= 1 
+                            if(rez1w_s1<=rez0w_s1 and rez1w_s1<=rez2w_s1):
+                                print(f'rez1w_s1 <=  weight === EQ 3 AT!!!! {rez0w_s1,rez1w_s1,rez2w_s1}')                                
+                                #SET OP / НА ПОМОСТ! ???????
+                                return rez1
+                            # сравниваем веса в snatch1 <= 2
+                            if(rez2w_s1<rez0w_s1 and rez2w_s1<rez1w_s1):
+                                print(f'rez2w_s1 <  weight === EQ 3 AT!!!! {rez0w_s1,rez1w_s1,rez2w_s1}')                                
+                                #SET OP / НА ПОМОСТ!
+                                # print(f's3 & s2 & s1 weight! {rez0w_s1,rez1w_s1,rez2w_s1}')
+                                # 40 38 37
+                                return rez2
+
+
             except:
-                  print(f"An exception occurred {KeyError}")
+                  print(f"An exception occurred ZEERTZ#  {KeyError}")
 
             try:                
                 if len(rez)==3:
                     rez0 = rez[0]['id']
                     rez0w = rez[0]['s3']
+                    rez0w_s2 = rez[0]['s2']
+                    rez0w_s1 = rez[0]['s1']
                     rez1 = rez[1]['id']
                     rez1w = rez[1]['s3']
+                    rez1w_s2 = rez[1]['s2']
+                    rez1w_s1 = rez[1]['s1']
                     rez2 = rez[2]['id']
                     rez2w = rez[2]['s3']
-                    print(f"3333333  @ !!!!!!!!!!!!!! ±±± REZZZŽ ID3/w :{rez0} / {rez0w}")
-                    print(f"3333333  @ !!!!!!!!!!!!!! ±±± REZZZŽ ID2/w : {rez1} / {rez1w}")
-                    print(f"3333333  @ !!!!!!!!!!!!!! ±±± REZZZŽ ID3/w :{rez2} / {rez2w}")
+                    rez2w_s2 = rez[2]['s2']
+                    rez2w_s1 = rez[2]['s1']
+                    print(f"3333333  @ !!!!!!!!!!!!!! ±±± REZZZŽ ID3/w :{rez0} / {rez0w} & {rez0w_s1} & {rez0w_s2}")
+                    print(f"3333333  @ !!!!!!!!!!!!!! ±±± REZZZŽ ID2/w : {rez1} / {rez1w} & {rez1w_s1} & {rez1w_s2}")
+                    print(f"3333333  @ !!!!!!!!!!!!!! ±±± REZZZŽ ID0/w :{rez2} / {rez2w} & {rez2w_s1} & {rez2w_s2}")
+                    # сравниваем веса в snatch3
+                    if(rez0w==rez1w and rez0w==rez2w):
+                        print(f's3 === EQ 3 AT!!!! {rez0w,rez1w,rez2w}')
+                        # сравниваем веса в snatch2
+
+
+
+
+# ++
+                        # сравниваем веса в snatch2
+                        if(rez0w_s2==rez1w_s2 and rez0w_s2<rez2w_s2):
+                            print(f'{rez0w_s2} 1__@# s2 === EQ 3 AT!!!! {rez0w,rez1w,rez2w}')
+                            if(rez1w_s1<rez0w_s1 and rez1w_s1<rez2w_s1):
+                                print(f'{rez1w_s1} 1_%%%_@# s2 === EQ 3 AT!!!! {rez0w,rez1w,rez2w}')
+                                return rez1
+                            return rez0
+                        if(rez0w_s2<=rez1w_s2 and rez0w_s1<=rez2w_s1):
+                            print(f'{rez0w_s2} 2___@# s2 === EQ 3 AT!!!! {rez0w,rez1w,rez2w}')                            
+                            if(rez0w_s1<=rez1w_s1 and rez0w_s1<=rez2w_s1):
+                                print(f'{rez0w_s1} 2##___@# s2 === EQ 3 AT!!!! {rez0w,rez1w,rez2w}')                            
+                                return rez0
+                            if(rez1w_s1<rez1w_s1 and rez1w_s1<=rez2w_s1):
+                                print(f'{rez1w_s1} 2##_((((__@# s2 === EQ 3 AT!!!! {rez0w,rez1w,rez2w}')                            
+                                return rez1                            
+                            # return rez0
+                        if(rez0w_s2<=rez1w_s2 and rez1w_s1<rez2w_s1 and rez1w_s1<rez0w_s1):
+                            print(f'{rez0w_s2} 2_***__@# s2 === EQ 3 AT!!!! {rez0w,rez1w,rez2w}')                            
+                            return rez0                        
+                        if(rez2w_s2<rez0w_s2 and rez2w_s2<rez1w_s2):
+                            print(f'{rez2w_s2} 0___@# s2 === EQ 3 AT!!!! {rez0w,rez1w,rez2w}')                                                        
+                            return rez2
+
+                        # сравниваем веса в snatch2
+
+# ++
+                        # сравниваем веса в snatch2
+                        if(rez1w_s2<rez0w_s2 and rez1w_s2<rez2w_s2):
+                            print(f'{rez1w_s2} 1_ s2 === EQ 3 AT!!!! {rez0w,rez1w,rez2w}')
+                            return rez1
+                        if(rez2w_s2<rez0w_s2 and rez2w_s2<rez1w_s2):
+                            print(f'{rez2w_s2} 2_ s2 === EQ 3 AT!!!! {rez0w,rez1w,rez2w}')                            
+                            return rez2
+                        if(rez0w_s2<rez1w_s2 and rez0w_s2<rez1w_s2):
+                            print(f'{rez0w_s2} 0_ s2 === EQ 3 AT!!!! {rez0w,rez1w,rez2w}')                                                        
+                            return rez0
+                        # сравниваем веса в snatch2
+
+
+
+
+
+                        if(rez0w_s2==rez1w_s2 and rez0w_s2==rez2w_s2):
+                            print(f's3 & s2 weight === EQ 3 AT!!!! {rez0w_s2,rez1w_s2,rez2w_s2}')
+                            
+                            print(f's3 & s2 & s1 weight! {rez0w_s1,rez1w_s1,rez2w_s1}')
+
+
+                            # сравниваем веса в snatch1
+
+                            if(rez0w_s1==rez1w_s1 and rez0w_s1==rez2w_s1):
+                                print(f's3 & s2 & s1 !!! weight === EQ 3 AT!!!! {rez0w_s1,rez1w_s1,rez2w_s1}')
+                                return rez0
+
+                            # сравниваем веса в snatch1 <= 0 
+                            if(rez0w_s1<=rez1w_s1 and rez0w_s1<=rez2w_s1):
+                                print(f'rez0w_s1 <=  weight === EQ 3 AT!!!! {rez0w_s1,rez1w_s1,rez2w_s1}')                                
+                                return rez0
+                            # сравниваем веса в snatch1 <= 1 
+                            if(rez1w_s1<=rez0w_s1 and rez1w_s1<=rez2w_s1):
+                                print(f'rez1w_s1 <=  weight === EQ 3 AT!!!! {rez0w_s1,rez1w_s1,rez2w_s1}')                                
+                                #SET OP / НА ПОМОСТ! ???????
+                                return rez1
+                            # сравниваем веса в snatch1 <= 2
+                            if(rez2w_s1<rez0w_s1 and rez2w_s1<rez1w_s1):
+                                print(f'rez2w_s1 <  weight === EQ 3 AT!!!! {rez0w_s1,rez1w_s1,rez2w_s1}')                                
+                                #SET OP / НА ПОМОСТ!
+                                # print(f's3 & s2 & s1 weight! {rez0w_s1,rez1w_s1,rez2w_s1}')
+                                # 40 38 37
+                                return rez2
+
 
 
 
             except:
-                  print(f"An exception occurred {KeyError}")                
+                  print(f"An exception occurred XBCGGGTY677# {KeyError}")                
             
             try:
                 if len(rez)==4:
