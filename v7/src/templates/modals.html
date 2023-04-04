@@ -411,19 +411,19 @@ class="bg-gray-50 px-3 border border-gray-300 text-gray-900 text-lg rounded-lg f
               <div class="custom-number-input h-8 w-32">
                 <div class="flex flex-row h-6 w-min rounded-lg relative bg-transparent mt-1">
                   <button id="s2_edite_dec-btn" type="button" data-tooltip-target="tooltip-dec" data-action="decrement"
-                    class=" bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none">
+                    class="opa bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none">
                     <!-- <button disabled="disabled" type="button" data-tooltip-target="tooltip-dec" data-action="decrement" class=" bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none"> -->
-                    <!-- <div id="tooltipe-dec" role="tooltip"
+                    <!-- <div id="tooltipe-dec" role="tooltip" 
                       class="inline-block absolute invisible z-10 py-3 px-4 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
                       -1 kG
                       <div class="tooltip-arrow" data-popper-arrow></div>
                     </div> -->
-                    
                     <span  class="text-2xl py-9 m-10  font-bold" data-tooltip="-1 кг">&nbsp;-&nbsp;</span>
                   </button>
+                  
                   <input type="number" min="25" step="1" max="321" pattern="[0-9]{,3}" inputmode="numeric"
                     data-tooltip-target="tooltip-edit" id="s2_weight"
-                    class="app_exnow outline-none focus:outline-none text-center w-full bg-transparent font-semibold text-2xl hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700  outline-none"
+                    class="pp_exnow_s2 app_exnow outline-none focus:outline-none text-center w-full bg-transparent font-semibold text-2xl hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700  outline-none"
                     name="custom-input-number"></input>
                   <div id="tooltip-edit" role="tooltip"
                     class="inline-block absolute invisible z-10 py-3 px-4 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
@@ -431,7 +431,7 @@ class="bg-gray-50 px-3 border border-gray-300 text-gray-900 text-lg rounded-lg f
                     <div class="tooltip-arrow" data-popper-arrow></div>
                   </div>
 
-                  <button id="s2_edite2_inc-btn" type="button" data-tooltip-target="tooltip-inc" data-action="increment"
+                  <button id="s2_edite1_inc-btn" type="button" data-tooltip-target="tooltip-inc" data-action="increment"
                     class="bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-r cursor-pointer">
                     <!-- <div id="tooltipe-inc" role="tooltip"
                       class="inline-block absolute invisible z-10 py-3 px-4 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
@@ -442,6 +442,8 @@ class="bg-gray-50 px-3 border border-gray-300 text-gray-900 text-lg rounded-lg f
                   </button>
                 </div>
               </div>
+
+
               <span class="inline-block">
                 {% include 'fe_att_opt_1.html' %}
               </span>
@@ -3242,6 +3244,7 @@ s3_weight_inp.addEventListener("keypress", function(event) {
       document.getElementById("s1id_caption").innerHTML = '---';
       document.getElementById("s1id_caption").style.textShadow = '1px 1px 1px #000000';
       document.getElementById("s1id_caption").style.color = '#bebebe'; 
+      
     }    
 
     if(d_s2ig==1) { 

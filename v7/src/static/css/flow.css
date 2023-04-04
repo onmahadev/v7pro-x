@@ -285,6 +285,13 @@ transform: scale(1.2, 1.2);
   font-weight: bold;
   text-shadow: 2px 3px 4px var(--gray_back);
   color: var(--kblueg);
+  
+}
+.pp_exnow_s2 {
+  width: 48px;
+  margin-left: 0px;
+  margin-right: 0px;
+
 }
 
 
