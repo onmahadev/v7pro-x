@@ -22,7 +22,7 @@ v7pro (спортивная система) - это программно-апп
 
 
 
-## Languages and Tools:
+### Languages and Tools:
 <div>
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" title="python" alt="python" width="40" height="40"/>&nbsp;
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"  title="mysql" alt="mysql" width="40" height="40"/>&nbsp;
