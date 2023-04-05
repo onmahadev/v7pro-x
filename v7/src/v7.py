@@ -3822,8 +3822,8 @@ def set_op_now(id='0'):
 
 
     # IF SNATCH is END??!?!
-    if(sop_id is None):
-        print(f'sop_id is None {sop_id}')
+    # if(sop_id is None):
+    #     print(f'sop_id is None {sop_id}')
 
         
         # j1=get_min_w_j1()
@@ -3831,17 +3831,17 @@ def set_op_now(id='0'):
         # j3=get_min_w_j3()        
         # wr_sel_nop_id_cj(1,2,5)
         # ??????????????????
-        if(appnow_=='CJ'):
-            print(f'APPNOW::: {appnow_}')
+    if(appnow_=='CJ'):
+        print(f'APPNOW::: {appnow_}')
         
-            jj1 = get_id_min_w_j1()
-            jj2 = get_id_min_w_j2()
-            jj3 = get_id_min_w_j3()
+        jj1 = get_id_min_w_j1()
+        jj2 = get_id_min_w_j2()
+        jj3 = get_id_min_w_j3()
         
-            sop_j_id = sel_op_id(jj1, jj3, jj3)
+        sop_j_id = sel_op_id(jj1, jj3, jj3)
 
 
-            print(f'JJ1= {jj1} | JJ2= {jj2} | JJ3= {jj3} ||| JOP_ID::: {sop_j_id} ')
+        print(f'JJ1= {jj1} | JJ2= {jj2} | JJ3= {jj3} ||| JOP_ID::: {sop_j_id} ')
         # clear_op()
         # oid = set_op(5)
 
@@ -6986,6 +6986,7 @@ def get_id_min_w_s3(exclude_id=0):
                     # print(f"3333333  @ !!!!!!!!!!!!!! ±±± REZZZŽ ID3/w :{rez2} / {rez2w} & {rez2w_s1} & {rez2w_s2}")
                     
                     # сравниваем веса в snatch1
+
                     if(rez0w==rez1w and rez1w_s2==rez0w_s2 and rez1w_s1==rez0w_s1):
                         print(f's1 ==.== EQ 2 AT!!!! {rez0w,rez1w}')
                         return rez0
@@ -7001,6 +7002,28 @@ def get_id_min_w_s3(exclude_id=0):
                             print(f'rez0w_s1  EQ 2 AT!!!! {rez0w,rez1w}')    
                             return rez1                                                                      
                         # return rez1
+                    if(rez0w==rez1w):
+                        print(f'rez0w==rez1w  EQ 2 AT!!!! {rez0w,rez1w}')
+                        if(rez0w_s2<rez1w_s2):
+                            print(f'rez0w_s2<rez1w_s2  EQ 2 AT!!!! {rez0w,rez1w}')
+                            return rez0
+                        if(rez0w_s2==rez1w_s2):
+                            print(f'rez0w_s2 == rez1w_s2  EQ 2 AT!!!! {rez0w,rez1w}')
+                            if(rez0w_s1==rez1w_s1):
+                                print(f'rez0w_s1==rez1w_s1  EQ 2 AT!!!! {rez0w,rez1w}')
+                                return rez0
+                            if(rez0w_s1<rez1w_s1):
+                                print(f'rez0w_s1<rez1w_s1  EQ 2 AT!!!! {rez0w,rez1w}')
+                                return rez0
+                            if(rez1w_s1<rez0w_s1):
+                                print(f'rez1w_s1<rez0w_s1  EQ 2 AT!!!! {rez0w,rez1w}')
+                                return rez1                                                     
+                        #return rez0
+                        if(rez1w_s2<rez0w_s2):
+                            print(f'rez1w_s2<rez0w_s2 <  EQ 2 AT!!!! {rez0w,rez1w}')
+                            return rez1s
+
+                    
                                         
 
 
