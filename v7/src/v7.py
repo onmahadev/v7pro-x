@@ -3804,17 +3804,21 @@ def set_op_now(id='0'):
     #     print(f'***-> APP NOW IS: {x}, type: {type(x)}')
     #     print(f'****-> APP NOW COUNT IS: {y}, type: {type(y)}')
         
-    s1 = get_id_min_w_s1()
-    s2 = get_id_min_w_s2()
-    s3 = get_id_min_w_s3()
-    ic(s1)
-    ic(s2)
-    ic(s3) #12,24,0
-    ic('################# sop_id = sel_op_id(s1, s2, s3) ######################')
-    sop_id = sel_op_id(s1, s2, s3)
-    ic(sop_id)
-    ic('################# sop_id = sel_op_id(s1, s2, s3) ######################')
-    ex_upd = sop_id
+    appnow_,oppidz = get_approach()
+    ic(appnow_,oppidz)
+    if(appnow_=='SN'):
+        print(f'APPNOW::: {appnow_}')
+        s1 = get_id_min_w_s1()
+        s2 = get_id_min_w_s2()
+        s3 = get_id_min_w_s3()
+        ic(s1)
+        ic(s2)
+        ic(s3)
+        ic('################# sop_id = sel_op_id(s1, s2, s3) ######################')
+        sop_id = sel_op_id(s1, s2, s3)
+        ic(sop_id)
+        ic('################# sop_id = sel_op_id(s1, s2, s3) ######################')
+        ex_upd = sop_id
 
 
     # IF SNATCH is END??!?!
@@ -3827,15 +3831,17 @@ def set_op_now(id='0'):
         # j3=get_min_w_j3()        
         # wr_sel_nop_id_cj(1,2,5)
         # ??????????????????
+        if(appnow_=='CJ'):
+            print(f'APPNOW::: {appnow_}')
         
-        jj1 = get_id_min_w_j1()
-        jj2 = get_id_min_w_j2()
-        jj3 = get_id_min_w_j3()
+            jj1 = get_id_min_w_j1()
+            jj2 = get_id_min_w_j2()
+            jj3 = get_id_min_w_j3()
         
-        sop_j_id = sel_op_id(jj1, jj3, jj3)
+            sop_j_id = sel_op_id(jj1, jj3, jj3)
 
 
-        print(f'JJ1= {jj1} | JJ2= {jj2} | JJ3= {jj3} ||| JOP_ID::: {sop_j_id} ')
+            print(f'JJ1= {jj1} | JJ2= {jj2} | JJ3= {jj3} ||| JOP_ID::: {sop_j_id} ')
         # clear_op()
         # oid = set_op(5)
 
@@ -3854,13 +3860,15 @@ def set_op_now(id='0'):
 # ?????????????????????
 # ПИЗДЕЦ РЫВКУ ???
 
-
-        if(sop_j_id):
-            oid = sop_j_id
-            clear_op()
-            set_op(oid)
-        else:
-            oid = 9865
+        try:
+            if(sop_j_id):
+                oid = sop_j_id
+                clear_op()
+                set_op(oid)
+            else:
+                oid = 9865
+        except:
+            oid = 9898
         return oid
         
 
@@ -4959,7 +4967,7 @@ def sel_op_id(s1,s2,s3):
 
 
 
-    if(CJ!=False):
+    if(CJ!=False and SN is False):
                 # ############
         j1=get_min_w_j1()
         j2=get_min_w_j2()
